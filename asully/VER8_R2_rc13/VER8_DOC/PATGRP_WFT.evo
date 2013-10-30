@@ -1,0 +1,139 @@
+enVision:"bl8:R10.3.2.WW0104:S3.0"; /* 5.7 */
+// These are extracted from the aliasmap.h file.
+// Updated 01/17/2010
+
+WaveformTable PolMod8PatGrp PolMod8PatGrp {
+    Cell "PolMod8PatGrp.Pins" L/H InputDriveD1 {
+        Data 6/7;
+        Color 3/6;
+    }
+    Cell "PolMod8PatGrp.Pins" l/h InputDriveD0 {
+        Data 6/7;
+        Color 3/6;
+    }
+    Cell "PolMod8PatGrp.Pins" c/C MUXCLK {
+        Data 6/7;
+        Color 3/6;
+    }
+    Cell "PolMod8PatGrp.Pins" 2/3/m/M EdgeWndwStrobeD1 {
+        Data 0/1/2/3;
+        Color 8/6;
+    }
+    Cell "PolMod8PatGrp.Pins" 0/1/x/X EdgeWndwStrobeD0 {
+        Data 0/1/2/3;
+        Color 6;
+    }
+    Cell "PolMod8PatGrp.Pins" e/k/x/X/y/z driveoffstrobeoffD0 {
+        Data 0/1/2/3/6/7;
+        Color 3/6;
+    }
+    Cell "PolMod8PatGrp.Pins" E/K/m/M/Y/Z driveoffstrobeoffD1 {
+        Data 0/1/2/3/6/7;
+        Color 3/6;
+    }
+    Cell "PolMod8PatGrp.Pins" F FloatStrobe_D0 {
+        Data 0;
+        Color 8/6;
+    }
+    Cell "PolMod8PatGrp.Pins" f FloatStrobe_D1 {
+        Data 0;
+        Color 8/6;
+    }
+    Cell "PolMod8PatGrp.Pins" G FloatOff_D1 {
+        Data 0;
+        Color 8/6;
+    }
+    Cell "PolMod8PatGrp.Pins" g FloatOff_D0 {
+        Data 0;
+        Color 8/6;
+    }
+    Cell "PolMod8PatGrp.Pins" S ScanOut {
+        Data 6 Serial;
+        Color 3;
+    }
+    Cell "PolMod8PatGrp.Pins" D ScanIn {
+        Data 6 Serial;
+        Color 3;
+    }
+    Cell "PolMod8PatGrp.Pins" d CPMDPM {
+        Data 3 Other;
+        Color 6;
+    }
+    Cell "PolMod8PatGrp.Pins" _/- ContinueStrobeWF {
+        Data 0/1;
+        Color 6;
+    }
+    Cell "PolMod8PatGrp.Pins" > ContinueWFDRV {
+        Data 6;
+        Color 6;
+    }
+    Cell "PolMod8PatGrp.Pins" . DO_NOTHING_PADCYC {
+        Data 6;
+        Color 6;
+    }
+    Cell "PolMod8PatGrp.Pins" a/A PUSHBACK_OFF1 {
+        Data 0/1;
+        Color 6;
+    }
+    Cell "PolMod8PatGrp.Pins" b/B PUSHBACK_OFF2 {
+        Data 0/1;
+        Color 6;
+    }
+    Cell "PolMod8PatGrp.Pins" c/C PUSHBACK_OFF3 {
+        Data 0/1;
+        Color 6;
+    }
+    Cell "PolMod8PatGrp.Pins" d/D PUSHBACK_OFF4 {
+        Data 0/1;
+        Color 6;
+    }
+    Cell "PolMod8PatGrp.Pins" e/E PUSHBACK_OFF5 {
+        Data 0/1;
+        Color 6;
+    }
+    Cell "PolMod8PatGrp.Pins" f/F PUSHBACK_OFF6 {
+        Data 0/1;
+        Color 6;
+    }
+    Cell "PolMod8PatGrp.Pins" g/G PUSHBACK_OFF7 {
+        Data 0/1;
+        Color 6;
+    }
+    Cell "PolMod8PatGrp.Pins" h/H PUSHBACK_OFF8 {
+        Data 0/1;
+        Color 6;
+    }
+    Cell "PolMod8PatGrp.Pins" i/I PUSHBACK_OFF9 {
+        Data 0/1;
+        Color 6;
+    }
+    Cell "PolMod8PatGrp.Pins" j/J PUSHBACK_OFF10 {
+        Data 0/1;
+        Color 6;
+    }
+    Cell "PolMod8PatGrp.Pins" k/K PUSHBACK_OFF11 {
+        Data 0/1;
+        Color 6;
+    }
+    Cell "PolMod8PatGrp.Pins" l/L PUSHBACK_OFF12 {
+        Data 0/1;
+        Color 6;
+    }
+    Cell "PolMod8PatGrp.Pins" m/M PUSHBACK_OFF13 {
+        Data 0/1;
+        Color 6;
+    }
+    Cell "PolMod8PatGrp.Pins" n/N PUSHBACK_OFF14 {
+        Data 0/1;
+        Color 6;
+    }
+    Cell "PolMod8PatGrp.Pins" o/O PUSHBACK_OFF14 {
+        Data 0/1;
+        Color 6;
+    }
+}
+
+
+PatternGroup PolMod8PatGrp {
+    SignalHeader SH0;
+}

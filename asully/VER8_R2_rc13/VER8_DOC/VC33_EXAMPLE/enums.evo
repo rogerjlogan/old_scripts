@@ -1,0 +1,38 @@
+enVision:"bl8:R11.1.0.WW1111:S3.5"; /* 5.7 */
+
+
+
+enum TITestTemp
+{
+	Temp_N40_Degrees_C,
+	Temp_0_Degrees_C,
+	Temp_25_Degrees_C,
+	Temp_90_Degrees_C,
+	Temp_92_Degrees_C,
+	Temp_105_Degrees_C
+};
+enum TIDeviceType
+{
+	TMS320VC33PGE100,
+	TMS320VC33PGE,
+	TMS320VC33PGE75,
+	TMS320VC33PGE60,
+	TMS320VC33_Probe,
+	TMS320VC33_SWR,
+	SMVC33PGEA12EP
+};
+enum TITestType
+{
+	Probe,
+	PRE_Burnin_Handler,
+	PRE_Burnin_Handtest,
+	Final_Handler,
+	Final_Handtest,
+	QA_Handler,
+	QA_Handtest
+};
+enum SPECIAL_SHMOO
+{
+	schmoo_on,
+	schmoo_off
+};

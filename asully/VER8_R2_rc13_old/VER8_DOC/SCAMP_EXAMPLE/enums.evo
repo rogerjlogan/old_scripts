@@ -1,0 +1,42 @@
+enVision:"bl8:R11.1.0.WW1111:S3.5"; /* 5.7 */
+
+
+
+enum TITestTemp
+{
+	Temp_N40_Degrees_C,
+	Temp_0_Degrees_C,
+	Temp_25_Degrees_C,
+	Temp_125_Degrees_C
+};
+enum TIDeviceType
+{
+	PX3F16D28PJQ,
+	PX3F16D28HEQ,
+	PX3F16D28APJQ,
+	PX3F16D28AHEQ,
+	PX3F16D28BPJQ,
+	PX3F16D28BHEQ,
+	Z1F281FxxPJM,
+	S4D27FxxPJQ,
+	S4D27FxxHEQ,
+	S4D26CSFxxPJQ,
+	S4D26CSFxxHEQ,
+	S4D27RFxxPJM,
+	HS4D27FxxIN,
+	HS4D27RFxxIN,
+	HS4D26CSFxxIN,
+	PJQPack
+};
+enum TITestType
+{
+	Probe,
+	Final,
+	FT2,
+	FT3,
+	Q100_FT1,
+	Q100_FT2,
+	Q100_FT3,
+	QA,
+	Engineering
+};

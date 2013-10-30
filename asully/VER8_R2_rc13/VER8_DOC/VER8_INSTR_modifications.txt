@@ -1,0 +1,764 @@
+**************************************************************
+*                                                            *
+* Overall instructions for generating waveforms and patterns *
+*                                                            *
+**************************************************************
+
+Disclaimers:
+
+Note that all testing has been done on a Linux box with at least
+1Gbyte of ram. No testing has yet been done on Solaris boxes.
+
+Also, the best efforts have been made to translate patterns and
+waveforms correctly. However, it is the user's responsiblity to
+validate that the translation is correct.
+Please see the LSLv1.2.txt file in this directory.
+
+================================
+Script Stuff:
+cd /YOUR_SCRIPT_LOCATION/VER8/
+make clean
+make
+=================================
+Setup Stuff:
+
+cd /YOUR_PROG_DIR/p_files/
+ln -s /YOUR_SCRIPT_LOCATION/VER8/GCT_GEN_MOD8
+ln -s /YOUR_SCRIPT_LOCATION/VER8/BUILD_INHERIT_MENU
+ln -s /YOUR_SCRIPT_LOCATION/PYTHON/ENUMS.py 
+ln -s /YOUR_SCRIPT_LOCATION/PYTHON/POL2FUS_APS.py
+
+
+cd /YOUR_PROG_DIR/Vectors/
+ln -s /YOUR_SCRIPT_LOCATION/VER8/DESUB
+ln -s /YOUR_SCRIPT_LOCATION/VER8/PRE_PROC_NEW
+# the following can be used to force CPM:
+ln -s /YOUR_SCRIPT_LOCATION/VER8/PRE_PROC_NEW PRE_PROC_CPM
+ln -s /YOUR_SCRIPT_LOCATION/VER8/VCP_NEW
+ln -s /YOUR_SCRIPT_LOCATION/VER8/VCS_AUTOGEN8
+=================================
+Quick description:
+------------------
+GCT_GEN_MOD8:
+	Creates the mod file used to map characters and waveform references in patterns.
+	Creates waveforms.
+	Creates waveform selection files.
+	Figures out scan pins
+	Eventually, it will be able to extract timing parameters from actable_mod.p and acdata_mod.p
+BUILD_INHERIT_MENU:
+	This uses the waveform file and menu driven selections to create a specific set of WaveformTables 
+		for the conditions requested.
+	Also, if both actable_markers.p and acdata_markers.p have been processed it will create a acspec2.evo
+ENUMS.py:
+	A python script to extract enums.evo from actable.p and Global.h
+POL2FUS_APS.py:
+	A python script to convert adapterboard objects to the appropriate fusion mapping.
+DESUB:
+	A short routine to routine to patch subroutines into patterns.
+PRE_PROC_NEW/PRE_PROC_CPM:
+	The front end to the pattern converters. This routine does field to binary vectors, works 
+		out microinstructions, and does various things to precondition the vectors. It then selects
+		which of the converters (VCP or VCS) to run.
+VCP_NEW:
+	The parallel pattern converter, usually called automatically by PRE_PROC_NEW.
+VCS_AUTOGEN8:
+	The scan converter, usually called automatically by PRE_PROC_NEW.
+
+===================================
+Basic Syntax and usage:
+-----------------------
+GCT_GEN_MOD8 -fpda cycletbl_mod.p pinlist.txt device_mod.p actable_mod.p
+	or
+GCT_GEN_MOD8 -fpda empty_file.p pinlist.txt device_mod.p acdata_mod.p
+	(this is to parse specifically for acdata parameters for BUILD_INHERIT_MENU to create a spec).
+
+BUILD_INHERIT_MENU
+	(no parameters required). You will be prompted based on what is in enums.evo
+
+python ENUMS.py actable.p Global.h
+	(don't forget the python command in front)
+
+python POL2FUS_APS.py device_mod.p
+	(again don't forget the python command in front)
+	This can also take device_mod.evo instead to map an envision board to a differently mapped envision board.
+	
+DESUB normal_pat.vpl.Z my_subroutines.vpl.Z
+	Note that this command can read straight ".vpl" files, compressed "vpl.Z" files, and gzipped ".vpl.gz" files.
+	
+PRE_PROC_NEW pattern_file.vpl.Z cycletbl_mod.mod8
+	Note that this command can read straight ".vpl" files, compressed "vpl.Z" files, and gzipped ".vpl.gz" files.
+	This should convert the pattern to an .evo file.
+	If you rename VCP_NEW or VCS_AUTOGEN8 (to VCPX for example) PRE_PROC_NEW will create the intermediate "*.proc"
+	file which you can examine and fix (either the source vpl or the proc) and then hand to the second stage translator
+	(VCP_NEW or VCS_AUTOGEN8).
+PRE_PROC_CPM pattern_file.vpl.Z cycletbl_mod.mod8
+	Use this to force Cpm patterns (primarily in the case of big loops that you don't want expanded).
+
+VCP_NEW -fgrz pattern_file.proc cycletbl_mod.mod8
+	Use this to translate the intermediate proc file to .evo for parallel patterns. 
+	(normally called automatically from PRE_PROC_NEW)
+
+VCS_AUTOGEN -fgza pattern_file.proc cycletbl_mod.mod8
+	Use this to translate the intermediate proc file to .evo for scan patterns.
+	(normally called automatically from PRE_PROC_NEW)
+
+===============================================
+
+The following environment control variables exist for the various scripts:
+DEBUG_PROC              if set to something it will enable additional debug prints
+PROC_NO_BACKGROUND_GZIP if set it will not push the gzips into the background
+                        this will slow the translation down with multiple processors
+                        but will save on disk space. For single processors it will
+                        just save disk space.
+
+===============================================
+
+General translation procedure
+-----------------------------
+
+Program stuff:
+(1) Create the pinlist.txt file from the APEXALLPINS group or the fields groups
+	 from VectorMapSet, one pin per line, in order. NOTE: pinlist.txt should !NOT! contain
+	 the mux pins!!! Note: In some cases VectorMap does not have all pins listed in the
+	 cycletbl waveform files. In other words sometimes waveforms are provided for pins
+	 which don't exist in patterns. These pins may or may not exist in the reduced device.p.
+	 If you get errors about cycletbl pingroups, add these pins at the !END! of the 
+	 pinlist.txt file. They'll get transferred into the *.mod8 file but won't get used in
+	 pattern translation.
+
+(2) Create the cycletbl_mod.p file. If you have two or more cycletable
+    entries you'll have to decide which one you need or if there is no overlap,
+    whether they can be combined together.
+    From F240: 
+    CycleTableOpen( cycletable );
+    CycleTableSpeedSet  ( StdSpeed );
+    CycleTableMDModeSet ( StdMDMode );
+    or:
+    CycleTableOpen( cycletable );
+    CycleTableSpeedSet  ( FastSpeed );
+    CycleTableMDModeSet ( ExtMDMode );
+    When you compare these two tables they appear to be the same....
+    Hopefully they are not major differences.
+    You may also end up with some cyclesets from one file/section and some
+    from another. As long as there are no overlaps you are ok. The code now
+    accepts both CycleSetMD() and CycleSet() statements so you no longer need
+    to fix the CycleSet statments. Note: comments are now removed. There may
+    be some situations where comments confuse things. If you have difficulty
+    try removing the comments. Be sure to add in any #include files!
+
+(3) Create the device_mod.p file by removing comments and reducing to the
+    section you need for your package. Be sure to add in any #include files!
+
+(4) Create the actable_markers.p file pulling in any includes and by adding
+    START/STOP marker lines.  Be sure to add in any #include files!
+	 See also HOWTO Section.
+    For any "case" or "if (actable in [...] )" statements
+      add the appropriate START() and STOP() markers.
+      You can use the shortcuts:
+      ALLDEVICE, ALLTEMP, ALLTEST as subset descriptors.
+      ALLENUMS covers all the three types.
+      ALLTABLES refers to all possible ACTables/categories.
+      The ACTableOpen() should start with:
+      START(ALLENUMS,ALLTABLES);
+      and end with:
+      STOP(ALLENUMS,ALLTABLES);
+      A typical example would be: 
+      START(ALLENUMS,TIChipx4_025ACTable);
+
+   Note: if you have syntax like:
+	"if ( actable in [TIlofrqloosACTable..TIPMT100ACTable] ) then begin"
+	consult Global.h to see the ordered list of actables:
+		ACTable = (
+			TIlofrqACTable,
+			TIlofrqpllACTable,
+				TIhifrqACTable,
+				TIveryhifrqACTable,
+				TIsearchACTable,
+			TIlofrqloosACTable, (* <- HERE *)
+				TIhifrqloosACTable,
+				TIveryhifrqloosACTable,
+				TIsearchloosACTable,
+				TIsearchloosACTable2, (* for char *)
+				TIscanACTable,
+				TIserialscanACTable,
+				TIPMT100ACTable, (* <- to HERE *)
+				TIallACTable);
+
+    See example file created from F240...
+    
+    Other suggestions if it has problems with "case actable of"
+    put a semicolon on the end: ""case actable of;".
+    Same goes for some of the case statements 
+    "case actable of
+     TIhifrqloose10ACTable:"  change to:
+     
+    "case actable of;
+     TIhifrqloose10ACTable:;"
+
+    See the notes at the bottom "troubleshooting START/STOP and resolve problems".
+     
+(5) The following line will create enums.evo needed for the START/STOP processing:
+
+python ENUMS.py actable.p Global.h 
+
+(6) Create waveforms and lookup table:
+
+GCT_GEN_MOD8 -fpda cycletbl_std_mod.p pinlist.txt device_mod.p actable_markers.p
+
+    You will get:
+    Waveforms_trace_actions_del.evo    (You can ignore this, its the info before optimization).
+    Waveforms_TRACEABLE_LINES_del.evo  (You can ignore this, its useful for tracing the Inherit control lines).
+    Waveforms_actable_unpurged_del.evo (You can ignore this, this shows the waveforms before they are compressed
+                                        together).
+    Waveforms_actable.evo           (Effectively, actable.evo, include this in your program).
+    Waveforms_Master_Inherits.evo   (Effectively, cycletable.evo, used by BUILD_INHERIT_MENU to create
+                                     condtion specific waveform tables, if you have no conditions you can use
+                                     this file directly in your program).
+    Waveforms_Cat_Inherit_([A-Z,a-z,0-9]*).evo
+                                    (Specific variations created by the BUILD_INHERIT_MENU, for conditional
+                                     waveforms, discussed later. You should include these with the
+                                     appropriate pattern sequences. You can combine these into
+                                     one file if you want).
+    InheritControl.ggm              (This is used by BUILD_INHERIT_MENU. It contains the category mapping).
+    cycletbl_std_mod.mod8           (The file which figures out pattern alias choices for pattern conversion).
+    ACTDATATBL_WFMS.evo             (This is a "Spec" of all the parameters in the actable_markers.p file,
+                                    separated by the "cdtcode". Use it if you wish.)
+    translation_status.txt          (This logs "interesting" information from the waveform processing, and 
+                                     later pattern conversions).
+    translation_errors.txt          (This logs the problems with the waveform conversion, and later pattern
+                                     conversions).
+    
+    You include Waveforms_actable.evo and Waveforms_Master_Inherits.evo in your program.
+
+    My intent is the user will create an additional file called Waveforms_user.evo
+    where any flow modified waveforms can be placed. The inherit file can then be
+    modified to pick up the user waveforms from those tables instead. More details on
+    the inherits are in section (12) below. I think this will give us a more structured
+    way to deal with the problems we've encountered.
+
+(7) run "zgrep -i subroutine * >subr_list.txt" to identify if you have subroutines. If so you'll need to run
+	DESUB on the files first (see basic syntax above).
+
+(8) See if you can translate a pattern:
+
+   PRE_PROC_NEW sync_pg31.vpl.Z cycletbl_std_mod.mod8 
+
+(9) Check translation_errors.txt for problems and translation_status.txt for warnings
+    and look for left over *.proc files (in the case of a crash). See notes in the HOWTO
+	 section also.
+    
+    In F240 we get:
+    FYI_align_FOUND:found align Polaris instruction in sync_pg31.vpl.Z! skipping. This
+    is not a major problem (read the manual on Polaris align instruction if you want
+    details).
+    
+    The interesting part of translation_status.txt to mention here is:
+
+    +    FileStat:First begin at     14  in [sync_pg31.vpl.Z]
+    +    FileStat:Got        133 lines from [sync_pg31.vpl.Z]
+    +    FileStat:vectors             84 in [sync_pg31.vpl.Z]
+    +    FileStat:Max loop depth       1 in [sync_pg31.vpl.Z]
+    +    FileStat:Max RPT depth count  0 in [sync_pg31.vpl.Z]
+    +    FileStat:Match?              NO in [sync_pg31.vpl.Z]
+    +    FileStat:Scan?               NO in [sync_pg31.vpl.Z]
+    +    FileStat:Repeat forever?     NO in [sync_pg31.vpl.Z]
+    
+    Note that you can sort the status file to group similar advisories. The other
+    information in translation_status.txt can be helpful if there are problems/crashes/
+    etc.
+    
+(10) If all looks good then create a script to repeat this for the entire directory.
+	 (Don't forget DESUB first	if necessary).
+
+(11) See if all patterns will compile. (again see the HOWTO section for problem patterns).
+
+(12) Run the BUILD_INHERIT_MENU program for one of your selections. See HOWTO section below.
+
+(13) Add a pingroup for MUXPRIMARYPINS which are the primary pins of the muxpins and
+		another pingroup for MUXSECONDARYPINS (formerly MUXSECPINS) which is the secondary
+		pin for each muxed-pin-pairs, if used. Note that the polaris begins with ch1 (not
+		zero) so a "MUXSECONDARYPIN" would be even. This could create problems on the
+		adapters which map one-to-one on the mixed signal and odd-to-odd/even-to-even on
+		the digital.
+
+(14) Create the timing parameter "tPeriodEND" = "tperiod" to close open windows, if used.
+
+(15) Load up and Check for "orange" waveforms in Waveform tool. Then check for resolve issues.
+     See the note in the "HOW TO" section if your waveforms start with close window.
+     
+(16) If you have scan patterns the file "scan_signalheaders.evo" will be created.
+     You should sort the entries in this file and then run uniq on them. Once you
+     have the "no duplicate" list include this in your program.
+-----------------------------------------------------------------------------------------------
+Still to be resolved:
+
+1) Multicycle strobes - work in progress. Primarily 'C40... Submitted an SPR.
+   Windows which are left open are currently forced to close at the end of the period.
+   This is not 100% correct. This will be addressed later. Close at the beginning of the
+   cycle are not currently removed. (See the "HOW TO" section below).
+
+2) Edge5 (or higher) - not verified yet. One clkout waveform in F240 appeared to get
+    the open/close/open/close correct, it correctly dropped the front driveoff. This
+    is ok for output only pins (driver always off). I need to try some other scenarios
+    and add error checking.
+
+3) CPM patterns do not check against the 65535 counter limit. The decision was that it
+   was better for the user to make this decision. (See notes in the problem section above).
+
+4) Big patterns are limited to 500000 vectors. Bigger source files will need to be split.
+
+5) Shutdowns in scan patterns????
+
+6) Create 'c/C' waveforms for mux pins with mixed data. Add code to modify the pattern translation.
+
+7) complete acdata.p/actable.p parameter processing.
+
+8) look at hexfields assigned with binary pins in 'c022'.
+
+9) There are also a bunch of minor bugs that also need to be implemented.
+
+10) ChannelSecond waveforms (See note on how to fix manually in HOWTO section).
+
+11) This is generally a work in progress so things may change requiring you to re-spin
+    Waveforms and patterns until I have a proper release. Ideally create a log file of
+    any changes you need to make to the files so you can patch them into newer versions.
+	 
+======================================================
+"HOW TO" SECTION
+======================================================
+
+Futher DESUB intstructions:
+---------------------------
+	You need to gather all the subroutines into one file (in this case my_subroutines.vpl.Z) so they can all be
+	processed together. If you need different copies of the same subroutines, you need to run the command separately.
+	my_subroutines.vpl.Z should also have any nested subroutines manually expanded.
+	It will take the "normal_pat.vpl.Z" file and create "normal_pat.vpl_.gz" (note the "vpl_") which can then be
+	passed to PRE_PROC_NEW. You can do a "zgrep -i subroutine * >subr_list.txt" to identify if you have subroutines,
+	which files call subroutines ("BusOscB_20MHz_F_PLL.vpl.Z:  external subroutine PLLResetMC5v();") and where the
+	subroutines exist ("EEaddress_F_PLL.vpl.Z:subroutine writearray(v1,v2,v3,v4)").
+	Note that the subroutine replace can only replace subroutines that are provided to it. If
+	you don't give it the subroutine in the "my_subroutines.vpl.Z" file it won't know to look for
+	it and it won't replace it.
+
+	Match subroutines:
+	The DESUB program happily adds subroutines containing match microinstructions. Note however, that
+	any patterns which use these will be forced into CPM. A note along those lines is written into
+	translation_errors.txt. If the pattern fits into CPM then you can happily use it that way. Otherwise,
+	you may want to address those patterns by removing the match subroutine call (assuming its something
+	like an initial sync), and building a custom CPM pattern which can be combined the the "normal"
+	pattern in the thread (after its subroutine call is removed). If there are only a couple of these
+	you could also make a few copies of the cpm and have it source the specific DPM patterns.
+
+Pattern translation problems????
+--------------------------------
+     Look for proc files left over and review translation_errors.txt and 
+     translation_status.txt. 
+     a) If you have problems with PRE_PROC_NEW expanding huge loops you can re-run
+        with PRE_PROC_CPM and it will force CPM. 
+     b) If you have problems rename VCP_NEW and VCS_AUTOGEN8 so it can't call them. This
+        will leave the *.proc file behind so you can review that. You can fix the proc file
+        in some situations and launch that with:
+         VCS_AUTOGEN8 -fgza file.proc cyctbl.mod8 or 
+         VCP_NEW -fgrz file.proc cyctbl.mod8
+     c) Check for comments closing correctly. 
+     d) Check for no vectors converted/small *.evo size. This could be a problem with
+        the first "begin" missing or comments opening and not closing in a recognizable way.
+     e) Check for "funny" control characters in the source.
+     f) The maximum number of vectors that can be translated in one pattern is 500000.
+        If you have a pattern that writes a "FATAL_S" statement to translation_errors.txt
+        you may need to split it into separate patterns and piece them together in the thread.
+        Be sure to copy the MSET/DSET ISET into both and make sure both have the overall
+        begin and end; statements.
+     g) Note that CPM counters are not checked against the 65535 limit. If you get
+        errors on compile you will need to examine these loops and decide the best
+        way to fix the loops. You will need to either 'multiply' the internal loop
+        enough times and fix the loop counts or add a nested loop outside the existing
+        loop.
+     h) At the moment there is no support for subroutines. Each pattern is translated
+        individually and there is no way to know which file contains the external subroutines
+        (or in some cases, multiple definitions of the subroutine exist in different files).
+        Also, there are two uses of subroutines, one is a block of vectors, the other is
+        a vector data modifier (which takes one or more parameters). The intent is to add
+        a separate program for the "block of vectors" subroutines. That has not been
+        implemented yet but could be implemented manually with macros and search and replace.
+        The second, vector substitution, is more challenging.
+
+======================================================
+
+Need acspec based on START/STOP????
+-----------------------------------
+Special Note: The GCT_GEN_MOD8 script can also be used to process the acdata.p file with
+markers as the actable_markers.p. 
+
+To do this do the following:
+
+1) touch dummycyctbl    This will create an empty file to pass in as the cycletbl.p file.
+2) add START/STOP markers to the acdata.p file and save it as acdata_markers.p
+3) GCT_GEN_MOD8 -fpda dummycyctbl pin_list.txt device_mod.p acdata_markers.p
+you will get multiple files, two of which are important:ACDATADATA_WFMS.evo and 
+DataControl.ggm. DataControl.ggm shows the letter mapping for reference for the category lists.
+!!This mapping is DIFFERENT than the actable mapping!!!
+
+=======================================================
+
+How to add waveforms in a file like sync.p to the conversion set...
+--------------------------------------
+1) Add an enum to enums.evo:
+enum SPECIAL_RUN_SYNC
+{
+    DONT_RUN_SYNC,
+    RUN_SYNC
+};
+   Hopefully these are unique from all other enum definitions. If not adjust the names.
+   ** Note ** Any extra enums added here will probably need to be moved into a spec later since
+   tpfusion should not be prompting for something like "SPECIAL_RUN_SYNC"! 
+
+2) Copy the section from sync.p which are the modified WaveSet/EdgeSet... definitions only into
+   your actable_mod.p file !BEFORE! the ACTableSet sections. Copying it before the rest of
+   the normal tables will cause envision to pick the sync waveforms if sync is chosen.
+   Don't include the EdgeSet binary searches or the EdgeGets. In the case of c40 there is
+   a procedure called RstCustomWF, this is what would get copied.
+   For best results put the sync section at the top of the file just after the
+   START(ALLENUMS,ALLTABLES) statement. By putting it at the top any waveforms
+   defined in the sync section will take precedence over the "normal" version
+   further down. Obviously, if you choose the non-sync enum you shouldn't get
+   any waveforms from the sync section and you should get the "normal" waveform
+   only.
+   
+3) Add the RUNSYNC START STOPS:
+   START(RUNSYNC,ALLDEVICE,ALLTEMP,ALLTEST,ALLTABLES);
+   or filter appropriately if there are conditions in the sync selections...
+
+======================================================
+
+How to deal with Waveforms using chanSecond...
+----------------------------------------------
+The following example was taken from 320X240D1. There is a CLKIN drive waveform and a CLKOUT compare waveform.
+For a Chanfirst waveform those entries get their data from the primary pin (i.e. the even pin, ch0).
+In the case of a ChanSecond EdgeSet, the data is determined by the mux pin (i.e. the odd pin). 
+---------
+Example1:
+//ESD[1]:EdgeSetDelayData(CLKINdriveWF,Edge1,ChanFirst,DriveData,ThreshVITL,t[tref]+t[tH],0,DriveData,ThreshVITH,t[tref]+t[tH],0)
+//ESD[1]:EdgeSetDelayData(CLKINdriveWF,Edge2,ChanSecond,DriveData,ThreshVITL,t[tref]+t[tper],0,DriveData,ThreshVITH,t[tref]+t[tper],0)
+Cell "CLKIN+CLKINm-MUXSECPINS" L CLKINdriveWF_ADSET1DD_cat_A {
+   Data 6;   Drive {      Waveform {
+         DriveData  @"  tref +  tH +0*  tper  +orgclkin";
+         DriveData  @"  tref +  tper +0*  tper  +orgclkin";
+      }}}
+Cell "CLKIN+CLKINm-MUXSECPINS" H CLKINdriveWF_BDSET1DD_cat_A {
+   Data 7;   Drive {      Waveform {
+         DriveData  @"  tref +  tH +0*  tper  +orgclkin";
+         DriveData  @"  tref +  tper +0*  tper  +orgclkin";
+      }}}
+Cell "(CLKIN+CLKINm)*MUXSECPINS" L/H CLKINdriveWF_DSETMUX1DD_cat_A {
+   Data 0/2;   Drive {
+      EntryState DriveOn;}
+}
+----------
+In the first example the ChanFirst is DriveData and the ChanSecond is DriveData. Assuming the pattern data is
+always '10' or '01', you could change the second DriveData to DriveDataNot and combine the L & H waveform cells:
+
+Cell "CLKIN+CLKINm-MUXSECPINS" L/H CLKINdriveWF_ADSET1DD_cat_A {
+   Data 6/7;   Drive {      Waveform {
+         DriveData  @"  tref +  tH +0*  tper  +orgclkin";
+         DriveDataNot  @"  tref +  tper +0*  tper  +orgclkin";
+      }}}
+
+In this case the MUXSECPINS cell can stay no action. Polaris can nominally only do three edges, Fusion can do four,
+so we can push these events onto the primary pin.
+-----------
+If you have patterns with all four combinations '00', '01', '10', '11'. Then a special patch script will be needed to
+post-process the *.evo patterns (TBD). In this case change the cells to:
+
+Cell "CLKIN+CLKINm-MUXSECPINS" L/H CLKINdriveWFstatic_ADSET1DD_cat_A {
+   Data 6/7;   Drive {      Waveform {
+         DriveData  @"  tref +  tH +0*  tper  +orgclkin";
+//         DriveDataNot  @"  tref +  tper +0*  tper  +orgclkin";
+      }}}
+Cell "CLKIN+CLKINm-MUXSECPINS" c/C CLKINdriveWFcompl_ADSET1DD_cat_A {
+   Data 6/7;   Drive {      Waveform {
+         DriveData  @"  tref +  tH +0*  tper  +orgclkin";
+         DriveDataNot  @"  tref +  tper +0*  tper  +orgclkin";
+      }}}
+
+In this case we can still source the data on the primary pin and leave the "MUXSECPINS" no action.
+-------------
+
+In the next case we have double window strobes:
+
+//ESD[1]:EdgeSetDelayData(CLKINdriveWF,Edge1,ChanFirst,DriveData,ThreshVITL,t[tref]+t[tH],0,DriveData,ThreshVITH,t[tref]+t[tH],0)
+//ESD[1]:EdgeSetDelayData(CLKINdriveWF,Edge2,ChanSecond,DriveData,ThreshVITL,t[tref]+t[tper],0,DriveData,ThreshVITH,t[tref]+t[tper],0)
+//ESD[4]:EdgeSetDelayData(CLKOUT1strobeWF,Edge2,ChanFirst,StrobeLow,ThreshVITL,t[tref]+t[tQ]-4ns,0,StrobeHigh,ThreshVITL,t[tref]+t[tQ]-4ns,0)
+//ESD[4]:EdgeSetDelayData(CLKOUT1strobeWF,Edge3,ChanFirst,StrobeOffLow,ThreshVITL,t[tref]+t[tQ]+0ns,0,StrobeOffHigh,ThreshVITL,t[tref]+t[tQ]+0ns,0)
+//ESD[4]:EdgeSetDelayData(CLKOUT1strobeWF,Edge4,ChanSecond,StrobeLow,ThreshVITL,t[tref]+t[tH]+t[tQ]-4ns,0,StrobeHigh,ThreshVITL,t[tref]+t[tH]+t[tQ]-4ns,0)
+//ESD[4]:EdgeSetDelayData(CLKOUT1strobeWF,Edge5,ChanSecond,StrobeOffLow,ThreshVITL,t[tref]+t[tH]+t[tQ]+0ns,0,StrobeOffHigh,ThreshVITL,t[tref]+t[tH]+t[tQ]+0ns,0)
+Cell "CLKOUT1+CLKOUT1m-MUXSECPINS" 0/x CLKOUT1strobeWF_ADSET0_WkWk_cat_BC {
+   Data 0/2; Compare {
+      Waveform {
+         CompareOpenLow @"  tref +  tQ -4ns+0*  tper  +orgclkoutef";
+         CompareClose @"  tref +  tQ +0ns+0*  tper  +orgclkoutef";
+         CompareOpenLow @"  tref +  tH +  tQ -4ns+0*  tper  +orgclkouter";
+         CompareClose @"  tref +  tH +  tQ +0ns+0*  tper  0.000ps";
+      }}}
+Cell "CLKOUT1+CLKOUT1m-MUXSECPINS" 1/X CLKOUT1strobeWF_BDSET0_WkWk_cat_BC {
+   Data 1/3;Compare {Waveform {
+         CompareOpenHigh @"  tref +  tQ -4ns+0*  tper  +orgclkoutef";
+         CompareClose @"  tref +  tQ +0ns+0*  tper  +orgclkoutef";
+         CompareOpenHigh @"  tref +  tH +  tQ -4ns+0*  tper  +orgclkouter";
+         CompareClose @"  tref +  tH +  tQ +0ns+0*  tper  0.000ps";
+      }}}
+Cell "(CLKOUT1+CLKOUT1m)*MUXSECPINS" 0/1 CLKOUT1strobeWF_DSETMUX0_WkWk_cat_BCD {
+   Data 0/2;Drive {
+      EntryState DriveOn;}
+}
+----------
+In this case the data is probably either '01' or '10' because it is a clock.
+For this case combine the two '0/x' and '1/X' cells:
+
+Cell "CLKOUT1+CLKOUT1m-MUXSECPINS" 0/x CLKOUT1strobeWF_ADSET0_WkWk_cat_BC {
+   Data 0/2; Compare {
+      Waveform {
+         CompareOpenData @"  tref +  tQ -4ns+0*  tper  +orgclkoutef";
+         CompareClose @"  tref +  tQ +0ns+0*  tper  +orgclkoutef";
+         CompareOpenDataNot @"  tref +  tH +  tQ -4ns+0*  tper  +orgclkouter";
+         CompareClose @"  tref +  tH +  tQ +0ns+0*  tper  0.000ps";
+      }}}
+
+and leave the MUXSECPINS as no action.
+-------------------
+If you have data pin muxing you may need to use the script above (TBD) and create separate
+cells to use the adapter.
+-------------------
+Don't forget to modify the Waveforms_actable.evo file and the Waveforms_Master_Inherits.evo file appropriately
+before using the BUILD_INHERIT_MENU program.
+
+==============================================
+
+Troubleshooting START/STOP setups and resolve problems.
+------------------------------------------------------
+In general the InheritControl.ggm file is the best place to start looking. In general there should not be
+more than on contiguous pair of letters in the category decoder section (lines starting with '//b' or '//e').
+
+If you get something like "*** BAD START/STOP data for ACTABLES ***" or
+=================================================
+** Mismatched START/STOP[2]!!! (+START-STOP) ***
+================================================
+you should look at the UC[] codes. If you get a sudden string where all the UC[] codes are the same this is
+a good place to look. Generally this might be due to using a START where it should have been a STOP or a
+START without a STOP or an unterminated line. (All lines should end with a semicolon). Also look for
+misplaced START/STOP, like inserted in the middle of a multiline definition.
+
+*** Be careful with if/then/else statements which don't have begin/end. Normally the expression between the
+then and else doesn't have a semicolon. Add a ';' on these statements. 
+***
+
+NOTE: You should make sure any OriginSets occur within their own block and you may need to copy the origins
+up if there are multiple conditions followed by a common originset afterwards. You generally won't get error
+messages for these cases so BE CAREFUL!!
+
+You should also make sure that any idle Edge/WaveSet lines get bounded by START/STOP otherwise they won't
+get processed. 
+
+If you have the same letter listed more than twice in a row, check the START/STOP statements at the end of
+each line. These should be "pure" START STOP expressions only. If there is space or other junk in the line
+then check that lines in actable_markers.p has semicolons after each statement. This might not happen in the
+case of a single if-then-else section. You may need to add a semicolon after case definitions, especially if
+its a 'case NNN: wave1 others wave2' sort of statement. Next you can use the L[] statements in 
+InheritControl.ggm and see if the line is what you anticipate in ACTABLE_TRACEABLE_LINES.evo. These should
+indicate the matching line within +/-1 line. 
+
+The most difficult START/STOP combinations are the ones near a multi-conditional if statement. In general
+you may need to make multiple copies of the cell information to separately condition the and/or logic. 
+See the 'C40' example in this DOC directory. 
+
+Of course every START should have a matching STOP and each START/STOP should end with a semicolon. Also,
+make sure that the multiple Edge statements have all edges definited in each block. For example you might
+have an Edge1-DriveOff, but then Edge2 is conditionally StrobeData (window) or EdgeStrobe. In these cases
+move & copy the Edge1-DriveOff statement into each block. Also, the same applies to origins. Make sure the
+origin statements for that edge are specified in each block. Also, look for extraneous statements in between
+each Edge definition of a multi-Edge waveform. The general rule is that nothing except comments, assignments
+(sp:=t[1]-t[2];) should occur between the individual Edges.
+
+Also, we have seen issues where enums.evo has been transfered over (from an email) and it ends up with a
+<CR> (windows/dos) instead of the standard unix format. nedit will usually show these red. If this happens,
+either re-gen the enums.evo file or do a dos2unix on the file.
+
+You can look at Waveforms_actable_unpurged.evo to see what each waveform "code" definition is separately. 
+Now, that the major issues have been resolved in processing the compression this should be less of an issue.
+Make sure you've included any separate enums used for addition selection (shmoo,sync,etc) are included in
+enums.evo. You can look at translation_status.txt for the SSb/SSe statements, no fields should be listed as
+missing. Any conditionals not used won't show up in this list, for example if category(actable), testtype,
+and a "special" control enum are used but temptype & devicetype aren't then the SSb/SSe statement might look
+like: "SSb2 071:  cat:0   test:0   otherenum:1  cdt=P", here otherenum is not its default setting.
+The statement in translation_status.txt "There are 41 unique category/device/temp combinations" should not
+exceed 62 ([A-Z][a-z][0-9]) as the coding scheme uses a single letter to build a search string. If you get
+more than that see if you can reduce the number of combinations by combining things (same format, different
+timing - can be combined into a new acspec parameter for each category).
+
+Orange Cells in waveform table indicate enVision can't resolve the cell properly. Things like windows left open
+with no close, or cells that do a close window (StrobeOff) first should get "modified". The waveform cell
+modification algorithm uses format specifiers from aliasmap.h (FC_nn) to decide if edges need modification.
+In translation_status.txt you'll see statements like:
+'PC=Wk///    FOUND [ABUSstrobeWF_DRDCycle_C]0 WINDOWOPEN-WINDOWCLOSE [chk_problem_type,0,0,0]'
+This means 'W' -> windowOPEN, k->windowCLOSE, and the codes at the end indicate no changes are needed. A
+window open with no close would have got a code [1,0,0].
+If it doesn't recognize the format feed the information back to myself and I'll add the code and any
+modifications needed. Thus far these codes have been determined by running several programs (c40,VC33,F240)
+through the code and fixing any rejects. It could be your waveforms are "different".
+
+==========================
+How to deal with waveforms which start with close window.
+-----------------------------
+Envision will complain if a waveform starts with a close window "CompareClose". In polaris 
+these could be due to multicycle strobe windows where the window is opened at the end of one
+cycle and closed at some unknown time in the future.
+
+(1) In Waveforms_actable.evo do the following regular expression search and replace:
+    Search for  : Waveform \{\n\t\t\tCompareClose
+    Replace with: Waveform {\n\t\t\t
+   
+    This will remove the CompareClose even and it will become an "EdgeMarker" i.e. a place holder.
+
+(2) The tricky part is some of these waveforms may follow with a compare windows but others may
+    only have the compare close event. If all your waveforms do follow up with additional compare
+    edges you are done. Otherwise if you have solitary CompareClose events continue with step 3.
+    
+(3) Usually the CompareClose only events will be "e/k/x/X" aliases. This "e/k" part means 
+    "end/kill window". "e/k" is defined with data 0/1 which means strobe but we just removed any
+    event which might be considered a strobe. What needs to happen is that the "e/k" needs to be
+    replaced with a dummy alias so "e/k/x/X" -> "8/9/x/X". This will keep the place holders but
+    now the pattern won't be able to resolve an "e/k".
+   
+(4) To fix this "e/k" resolve waveform problem go up to COMMON_WFT and add a cell:
+    Cell "(X2CLKIN+X2CLKINm)*MUXSECPINS" e/k DUMMY_CLOSEWIN {
+   Data 6/7; Drive {EntryState DriveOn;} }
+
+(5) Now open Waveforms_Master_Inherits.evo. In this file do a global search and replace:
+    Replace :e/k/x/X
+    With    :8/9/x/X
+
+=========================================================================================
+Using BUILD_INHERIT_MENU:
+-------------------------
+   This program will let you enter the category and enum selection (like tpfusion propmts)
+   and build the category specific inherit table. This will create/append to 
+   'Waveforms_cat_Inherit_([A-Z][a-z][0-9]).evo'. If you have conditional waveforms 
+   (like 'F240' and 'C40') you should use these files in place of 'Waveforms_Master_Inherits.evo'
+   in your program. DO NOT delete 'Waveforms_Master_Inherits.evo' as it is the master source
+   and will be used any time you you need to generate another category selection.
+   
+   Here's an example from 'F240':
+
+    bash-3.1$ ./BUILD_INHERIT_MENU
+    
+    ./BUILD_INHERIT_MENU:build_inherit_menu.c, by Anthony Sully
+     covered by GNU GPL license, see the file COPYING.gz in the source directory
+    (000) TIsearchACTable           (001) TIsearchlooseACTable      (002) TIsearchlooseACTable2
+    (003) TIlofrqACTable            (004) TIlofrqpllACTable         (005) TIhifrqACTable       
+    (006) TIveryhifrqACTable        (007) TIsearchACTable           (008) TIlofrqlooseACTable  
+    (009) TIhifrqlooseACTable       (010) TIveryhifrqlooseACTable   (011) TIsearchlooseACTable 
+    (012) TIsearchlooseACTable2     (013) TIPMT100ACTable           
+    Cat?2
+    
+    (000) F240_Probe           (001) F240_132QFP          (002) C240_Probe           
+    (003) C240_132QFP          
+    Device?1
+    
+    (000) Temp_N40_Degrees_C   (001) Temp_0_Degrees_C     (002) Temp_5_Degrees_C     
+    (003) Temp_25_Degrees_C    (004) Temp_70_Degrees_C    (005) Temp_90_Degrees_C    
+    (006) Temp_85_Degrees_C    (007) Temp_105_Degrees_C   (008) Temp_125_Degrees_C   
+    (009) Temp_135_Degrees_C   
+    Temp?3
+    
+    (000) Probe                (001) Final                (002) FT2                  
+    (003) FT3                  (004) Q100_FT1             (005) Q100_FT2             
+    (006) Q100_FT3             (007) QA                   (008) Engineering          
+    
+    Test?1
+    
+    Enum?CAT:  (2) TIsearchlooseACTable2
+    DEV:  (1,11) F240_132QFP
+    TEMP: (3,3) Temp_25_Degrees_C
+    TEST: (1,15) Final
+    Is this correct?(Y/n)y
+    
+    catstr:[AD]
+
+    Note the catstr statement indicating [AD]. This may overlap with other menu selections. 
+    For example for 'F240' temperature, device, and testype do not affect waveforms. Therefore
+    you can pick any of the options and it will not affect the results. The program will then
+    parse Waveforms_Master_Inherit.evo for any cell entries that contain any of these letters
+    and create a customized WaveformTable with Inherits specific to that condition.
+    
+    The categories for 'F240' (or actables in polaris) reduce to four common sets:
+    (These strings were pulled from Waveforms_actable.evo, the [A] is from the UC[A] lines
+    further down).
+
+    //b1[11111111111111]E[11111111111111111111111]<000>UC[A] all sets. called [A]
+    //b2[10011111000000]E[11111111111111111111111]<001>UC[B] menu options: 0,3,4,5,6,7 called [B]
+    //b2[01000000111101]E[11111111111111111111111]<002>UC[C] menu options: 1,8,9,10,11,13 called[C]
+    //b2[00100000000010]E[11111111111111111111111]<003>UC[D] menu options: 3,12 called[D]
+         ^0   ^5      ^13 <- these are the category numbers from the menu. It starts at zero. 
+         
+    The enums are the E[111...] numbers, they also start counting from zero. Note that 
+    dev/temp/test are treated as one string these are the second numbers indicated in the
+    confirmation prompt above: TEMP: (3,3) Temp_25_Degrees_C
+    
+    Note that B,C, and D are mutually exclusive but A overlaps will all of them. In this case
+    you need only need three different runs of 'BUILD_INHERIT_MENU'. After running for the
+    above case [2,1,3,1]<D> you will need [0,1,3,1]<B>  and  [1,1,3,1]<C>. Other devices 
+    (such as 'C40') will have more combinations. Note that if you pick an overlapping case
+    you'll get duplicate WaveformTables in the file and envision will complain. Be sure to
+    validate if your menu selection returns one of the prior selected conditions. 
+    
+    The InheritControl.ggm file has an actable list of what codes apply to each actable.
+    These don't include the reductions due to other conditions. For example (from C40):
+    //ABCYa:CAT[TIlofrqminACTable]
+    //ABCYa:CAT[TIlofrqmaxACTable]
+    You can see that lofrqmin and lofrqmax use the same codes "ABCYa". Other "enum" values
+    may reduce the length of this "code". It basically means the selected condition is "TRUE"
+    between the START & STOP of 'A','B','C','Y', or 'a'. Any waveforms containing these
+    characters after the "_cat" are valid. Use the list in InheritControl.ggm to determine
+    the unique list of menu choices. In reference to C6203, there are several hundered 
+    actables. However, when you review InheritControl.ggm you'll find that most of the
+    actables fall under the same condition and there are only four unique letter combinations.
+    Again, the other enums may separate these into more that four program settings but there
+    is no point in rerunning for TIChipx8_025ACTable and TIChipx8_400ACTable separately as
+    there is nothing different between them formatwise (i.e. the period is all that changes).
+    
+    You may want to compare the WaveformTables variations when you are done. Some individual
+    variations will not have any differences. One will give you an empty table (those you can
+    delete). Based on how the waveformTables get used some variations may be mutually exclusive
+    and may never get referenced. You can use ObjectManager to find out to see which tables
+    are referenced zero times. You can remove these before releasing the program.
+    
+    You will need to make appropriate patternsequences for each of these unique combinations.
+    The zipper entries will use the unique combinations.
+    
+    You may want to modify the name of the file to include the condition (loosenom for example) 
+    in addition to the code so it is easy to identify. 
+
+==================
+Pattern sequence example showing use of COMMON_WFT:
+----------------------------------------
+(Note that the BUILD_INHERIT_MENU code was replaced with the appropriate
+name to make it meaningful).
+
+PatternSequence loos_Sync_PatSeq {
+    Thread[0] = Sync_Thread;
+    Zipper = Zipper {
+        Row { TDLStdPatGrp, RESETCMPCycle = { RESETCMPCycle_SyncTInomlooseACTable, COMMON_WFT } }
+        Row { TDLStdPatGrp, LRDDGRDDCycle = { LRDDGRDDCycle_SyncTInomlooseACTable, COMMON_WFT } }
+        Row { TDLStdPatGrp, LWRBGRDDCycle = { LWRBGRDDCycle_SyncTInomlooseACTable, COMMON_WFT } }
+        Row { TDLStdPatGrp, LWRCGRDDCycle = { LWRCGRDDCycle_SyncTInomlooseACTable, COMMON_WFT } }
+        Row { TDLStdPatGrp, LWEAGRDDCycle = { LWEAGRDDCycle_SyncTInomlooseACTable, COMMON_WFT } }
+        Row { TDLStdPatGrp, LRDDGWRBCycle = { LRDDGWRBCycle_SyncTInomlooseACTable, COMMON_WFT } }
+        Row { TDLStdPatGrp, LRDDGWRCCycle = { LRDDGWRCCycle_SyncTInomlooseACTable, COMMON_WFT } }
+        Row { TDLStdPatGrp, LRDDGWEACycle = { LRDDGWEACycle_SyncTInomlooseACTable, COMMON_WFT } }
+        Row { TDLStdPatGrp, LWWBGRDDCycle = { LWWBGRDDCycle_SyncTInomlooseACTable, COMMON_WFT } }
+        Row { TDLStdPatGrp, SYNCFIFOCycle = { SYNCFIFOCycle_SyncTInomlooseACTable, COMMON_WFT } }
+        Row { TDLStdPatGrp, ALLOFFCycle = { ALLOFFCycle_SyncTInomlooseACTable, COMMON_WFT } }
+    }
+    evAutoBasePeriod = True;
+}
+===========================================================

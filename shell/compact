@@ -1,0 +1,14 @@
+#!/bin/bash
+
+#NOT SURE WHY THIS DOESN'T WORK
+#for FILE in *vpl; do
+##    echo $(expr length FILE)
+#  NEWFILE=`echo ${FILE}|sed 's/\.vpl/_mod\.vpl/g'`
+#  sed '/^\s*$/d' ${FILE}  > ${NEWFILE}
+#  awk '{ gsub(/[\n]+/,"\n",$0); print }' ${FILE}  > ${NEWFILE}
+#done
+
+for file in "$@"; do
+    echo $file
+    perl -i.bak -pe 's/^\s*\n//g;' $file
+done

@@ -1,0 +1,3227 @@
+#!/usr/bin/perl
+# /opt/GNUperl5/bin/perl
+#   !/usr/bin/perl           (for SunOS/R5.7.x)
+#   !/opt/GNUperl5/bin/perl  (for Solaris/R6.0.x, R7.0.x, R10.x)
+# static char *SCCS = "@(#) 11/11/94 8.9 VSeriesTranslator LTX";
+#
+#   File name : VSeriesTranslator
+#   Purpose   : To convert : TI V-Series ITP files (.itp) into enVision++ R10.x .eva objects and,
+#                          : TI V-Series vector files (.vvs) into enVision++ R10.x pattern .evo syntax.
+#   History   :
+#   990401 wmk R0.1  Initial development.
+#   990414           Initial .itp processing.
+$rev =          "R2.0";  # 070813 wmk  Added PatternMap output.
+#
+#   Limitations:
+#       o  
+#       o
+#
+#====== Fixed ========================================================================
+#   F721843E_certpg01.itp       ==> becomes f721843E_certpg01.eva         (lower-case)
+#   program F711754B_75146502;  ==> becomes TestProg F711754B_75146502
+#   f721843e_55026g02.vgs       ==> becomes SignalHeader f721843e_55026g02_SH
+#   
+#   
+#   
+#   990429  After discussion with Layne, decided to abandon using CategoryDefine(s) as
+#           enVision Bin objects. Although providing less granularity, will use BinDefine
+#           arguments as SoftwareBinNames, SWBinNumbers and HWBinNumbers.
+#   
+#   990505  Simplify PatternGroup and default WaveformTable names to "FuncTDLPatGrp".
+#           Default WaveformTable is added by "TI_VSeriesTemplate".
+#   
+#   990510  Discussed with Layne the pros/cons of using TDL-like alias characters. It
+#           was decided to NOT use TDL nomenclature as too much work is involved to
+#           rename the hand-generated Params, WFTs, etc. already created.
+#   
+#   990511  For the AC_SpecTable Spec object, no longer using Categories defined by the
+#           Temp_Limit_Type enumerations. Will use just one Category, ACCat.
+#   
+#   990517  Due to the number of Parameters created (~1413 for Fender) and the subsequent
+#           .eva load time, the Parameter naming scheme was re-vamped. Now, only unique 
+#           .itp timing values are converted into enVision Parameters, and these are shared
+#           amongst all WFTs.
+#           
+#   
+#   
+#   
+#   
+#   
+#====== .itp stuff ToDo ==============================================================
+#   
+#   if invocation is wrong, message to correct
+#   -all instead of .vvs pattern, process all patterns in PatternLoad, else only User specified
+#   create Threads
+#   V-SeriesTemplate checksum/revision control
+#   
+#   common code to process MZDI from .vgs and .vvs
+#   .act file
+#   .ast file. Recheck code, faster, valid_alias_char, DeviceLUT where/when executed
+#   TDL aliases
+#   format C for RZ and RO
+#   5/6
+#   changes in default WFT for aliases, format, color
+#   Flow changes?
+#   5/7
+#   subroutine as much as possible
+#   
+#   L/H color was 10, makes white. Changed to color 6. Better color?
+#   rename Test FocusCal Title from FocusCalTest to ??
+#   Breaker has no Good/Fail/Open/Short(?) Bin names, causes problem in Cont.Subflow
+#   5/11
+#   :list of pattern files to translate
+#   $VVSFilesToTranslate has .evo in it, not .vvs, change name?
+#   if T3=T1, create and use only T1 for INS, else create/use T1+T3   T3=T1=>T31
+#   5/13
+#   Change DC/AC_SpecTable to DC/ACSpecTable?
+#   5/19
+#   .ast file, in TDL or Layne's aliases?
+#   Breaker - ...hp2_rev3.vvs.gz commented out, but has sources. Trap for this - error to User, don't translate
+#   on abort, gzip file back up
+#   5/25
+#   Breaker, PatternLoad vs pattern sources
+#   5/26
+#   in WFT, inherit default WFT. Maybe a problem, default has 2 aliases (L/H), zippered WFT has 4 (x/X/L/H)
+#   put Misc objects in template - parse like bins
+#   6/4
+#   varied scan lengths within same pattern - check consistency w/ Gary
+#   
+#   7/20
+#   losing remarks - Shinola stomp_scld @ Match. 
+#   
+#   Created xxx.itp.NoComments. Not sure it helps.
+#           xxx.itp.FormatSetups
+#           xxx.itp.ModifyWFTRef
+#           xxx.itp.ProcData
+#   
+#   ExternalRef and Threads for User patterns
+#   
+#   7/29
+#   output t5 Params if S_WINDOW, else suppress
+#   output t2 Params if RZ/RO, else suppress
+#   better sort for AC Params in AC_Spec
+#   write out AC Params in AC_Spec order
+#   DCSetups using DCTable's background ?
+#   FormatSetups using FormatTable's background ?
+#   ACSetups using ACTable's background ?
+#   flag (***) Timing/FormatSet* run-time changes in ProcData file (screen is OK)
+#   document VSeriesTranslator with remarks in code
+#   Clean up AC Specs code ($ParamA/B/etc.)
+#   
+#   8/3
+#   Breaker - Load error, no defined bin (BinDefine) Short, so no Bin_ object created. But used in Template. 
+#   creating ScanTDLPatGrp - decision on which SH to use, whether scan pattern or not, -itp vs -vvs.
+#   
+#   8/5
+#   Add 'tee' example in Usage
+#   output cache name in remark of ModifyWFTRef, format spacing
+#   Breaker has problem with last entry in ModifyWFTRef
+#   
+#   8/17
+#   Build arrays for DC tests 
+#   -itp                              -vvs
+#   read .itp                         read .itp (PatternLoads)
+#   read .vgs                         read .vgs (MZDI)
+#   read Template                     
+#   parse/process .itp statements     pattern translate
+#   output .eva                       output .eva (ExtRef/Thread)
+#   
+#   t3 is DriveOn for IO pins? 
+#   
+#   9/9
+#   Breaker_C7 timing_29 RTZ pins are not correct NRZ s/b RZ
+#     IN1_TS29 PinListSet of multiple pins, rather than single pin
+#     
+#   
+#   
+#   
+#   
+#   
+#====== Pattern stuff ToDo ===========================================================
+#   
+#   get alias coding correct
+#   process vector bits with MZDI data
+#   if .vvs files are in another directory, strip directory name
+#   bring in format information
+#   if LOOP, go back and change pattern to Cpm and add microcode -or- expand ? ask TI
+#            add < LC2 #-1 > prior to $Loop label, add < CJMP LoopLabel, DC2 > at prior to end;
+#   scan  and flag to User to generate Cpm pattern. Output stats like TDL.
+#   
+#   #include 'more.mzdi_sets'
+#
+#   <Option list>
+#   DPSWindow, DPSWindowST, DSPWindowSP, APS, Convert, ResetPatOver, Runoff
+#   OK
+#      - Sync as label, starting with (pattern_name)_Sync_1, (pattern_name)_Sync2, ...
+#      - TMU as label, starting with TMU_1, then TMU2, TMU3, ... to match up with .itp code TMUSetDelayCycle(S_CYCLES, 1); (?)
+#      - PMEX as label, starting with PMEX_1, then PMEX_2, PMEX_3, ... to match up with .itp code PMEXSetDelay(S_PFLAGS, 1);
+#   Vector Definitions
+#   SHUTDOWN, FILL
+#   Statement sections
+#   LOOP 3 BEGIN ... END;, MATCH PASS|FAIL|CLKIN 10, DPSWindowFlag(Enable|Disable)
+#   OK
+#      - Label:
+#      - REPEAT 2..65536
+#      - scan for 3000 ...
+#      - ScanPath
+#      - EXIT as last vector label.
+#   
+#   time each pattern conversion?
+#   
+#   
+#   if individual patterns, lookup cache name for .vvs files from PatternLoads
+#   
+#   stats to some info file on pattern name, CPM/DPM, vectors, PMEX/TMU labels
+#   scan pattern - Thread has CPM and DPM - Ref,  ExternalRef for CPM
+#   create scan CPM pattern
+#   Match vectors result in "", and also drops vectors (shinola). 990716: Doesn't miss any vectors, but back-to-back
+#       remarks result in ** vector.  Added else { return; } to fix, but dumps 2nd remark.
+#   
+#   8/17
+#   create CPM patterns for LOOPs/MATCHs/Scan
+#   
+#   
+#   
+#   
+#=====================================================================================
+
+($module_path, $module_name) = $0 =~ /(.*\/)*(.*)/;
+$module_path !~ s,/[^/]*$,, && ($module_path = '.');            # extract the path of this Perl script
+push(@INC, join('', $_, $module_path));                         # add this path to look for 'require'd' Perl files
+use File::Path;
+require "ctime.pl";
+
+#$gz_path = "/net/viper1/kordes/bin";
+$gz_path = "/usr/bin";
+
+# --------------------------------- global data structures ---------------------------------
+local (
+       $SignalHeader,                      # buffer for SignalHeader statements
+       $PatternGroup,                      # buffer for PatternGroup statement
+       $ExternalRef,                       # buffer for ExternalRef statements
+       %Cell,                              # array of WaveformTable Cells
+       $buffer,                            # buffer used by &get_line (must be global)
+       $line_buf,                          # line returned by &get_line (must be global)
+       %pin_groups                         # names of pins in each group
+);
+
+$VecNumCount = 100;
+
+# enVision:"baseline:system_revision:syntax_revision";
+# enVisionObject:"baseline:revision:syntax_revision";
+$baseline        = "bl8";                   # current baseline
+# /usr/local/envision/R5.7.5/sun4/D50/customer/data/RevisionData -> 'R5.7.5   Compiled as R5.7.5.D   Mon Mar 16 19:04:59 PST 1998'
+# $ENVISION/$1/sun4/$TESTER/customer/data/RevisionData    <- trbd checks these paths for file 'RevisionData'
+# $CUSTOMER_DIR/data/RevisionData
+# $ENVISION/$TARGET/customer/data/RevisionData
+$system_revision = `trbd`;                  # get the current enVision revision
+chop($system_revision);
+if ($system_revision !~ /^R/) { $system_revision = "R14.4.0"; }
+#d print "enVisionRev:$system_revision\n";
+$syntax_revision = "S2.0";                  # set the current syntax revision
+
+$enVisionRevNumber = 14040000;
+    
+$DefaultPath            = "../Evos";
+#070813 $DefaultCachePath       = sprintf("../%s/\$TESTER", "Flexes");
+$DefaultCachePath       = sprintf("../%s/\$TESTER", "Epfs");
+$cmd_opt{'sourcepath'}  = $DefaultPath;
+$cmd_opt{'cachepath'}   = $DefaultCachePath;
+$cmd_opt{'epf_Format'}  = 1;                                    # default : Use .epf (vs .flex/.cpg) format of pattern files
+
+@invalid_alias_chars = ('!', '@', '$', '^', '&', '*', '(', ')', '_', '+', '\\', '\|', '\`', '~', '[', ']', '\'', '\"', '/', '?');
+# can't use the following alias characters :  @ ( ^ \ ~   -> Tom Wolfe found these)
+# can use : a-z A-Z 0-9 , { } % ; . : # = < > -  _ !   # from $ms/4gl_tools/ObjectManager/pio.yxx
+@valid_alias_chars = ('L','H','l','h','k','K','y','Y','z','Z','t','T','e','E','v','V','x','X','.','-','0','1','i','I','m','M','n','N','a','A','b','B');
+$MAX_DPM_RPT = 2047;                        # Fusion Max DPM RPT count  (Help Docs indicate 32767 - STE?)
+$MAX_CPM_RPT = 65536;
+
+# --------------------------------- main ---------------------------------
+print "\n------  V-SeriesTranslator,  Rev. $rev  ----------------------\n";
+
+$start_conversion_time = $^T;
+$start_time = &ctime($start_conversion_time);
+$start_time =~ s/\n//;
+
+$SIG{'SEGV'} = 'handler';
+$cmd_opt{'itp'} = 1;        # Default settings, process .itp and .vvs files.
+$cmd_opt{'vvs'} = 1;
+$cmd_opt{'CompressEVO'} = 0;
+                        
+# Establish common environment conditions
+$; = '.';		    # Define array separator
+$SigHeadNum = 0;            # index used to number SignalHeaders i.e., SH1, SH2, ...
+$SigBusNum = 0;	            # index used to number signal buses i.e,. SB1, SB2, ...
+
+# Determine Flexes or Epfs
+if (($enVisionRevNumber >= 10090000) ||
+    (($enVisionRevNumber >= 10080000) && ($ENV{'PATTERN_FORMAT'} eq 'EPF'))) {
+    $cmd_opt{'epf_Format'} = 1;
+}
+
+# Command line processing
+$command_line = join(' ', @ARGV);
+$command_line =~ (s/-all//i) && ($cmd_opt{'all'}++);                # if -all, process all patterns referenced via PatternLoad(s)
+$command_line =~ (s/-itp//i) && do {                                # if -itp, suppress .vvs processing
+    $cmd_opt{'itp'} = 1;
+    $cmd_opt{'vvs'} = 0;
+};
+$command_line =~ (s/-vvs//i) && do {                                # if -vvs, suppress .itp processing
+    $cmd_opt{'itp'} = 0;
+    $cmd_opt{'vvs'} = 1;
+};
+$command_line =~ (s/-path ([^-]*)//i) && do {
+    $cmd_opt{'path'} = $1;
+    $cmd_opt{'path'} =~ s/\s*//g;                                   # remove all spaces
+};
+$command_line =~ (s/-cachepath ([^-]*)//i) && do {
+    $cmd_opt{'cachepath'} = $1;
+    $cmd_opt{'cachepath'} =~ s/\s*//g;                              # remove all spaces
+};
+$command_line =~ (s/-CompressEVO//i) && do {
+    $cmd_opt{'CompressEVO'} = 1;                                    # compress .evo files after translation
+};
+$command_line =~ (s/-debug\s*(\d*)//i) && do {
+    $debug = $1;
+    if ($debug eq '') { $debug = 1; }
+};
+@cmd_line = split(' ', $command_line);
+
+if (scalar(@cmd_line) == 0) { &Usage; }
+if ((scalar(@cmd_line) < 2) || ($cmd_line[0] !~ /.*\.itp/)
+                            || ($cmd_line[1] !~ /.*\.vvs/)) { &Usage; }
+
+for ($arg_num = 1; $arg_num <= $#cmd_line; $arg_num++) {
+    $vvs_file = $cmd_line[$arg_num];
+    $vvs_file =~ s/.gz$//;                                   # strip off .gz of gzip'd files
+    $vvs_file =~ s/.Z$//;                                    # strip off .Z of compress'd files
+    $vvs_file =~ s/(\w+)\.vvs$/$1\.evo/;
+    $VVSFilesToTranslate[$NumVVSFiles++] = $vvs_file;
+}
+
+#   Read in complete ITP file into array @itp_prog
+    $itp_file = $cmd_line[0];
+    print "V-Series ITP File     : $itp_file\n";
+    open(ITP_FILE, $itp_file) || die "\n*** Error : Couldn't open VSeries file: \'$itp_file\'\n";
+
+#   Create and open .eva
+    $itp_file =~ /(\w+)\.itp/ && ($main_eva_file = "\L$1" . ".eva");
+    print ">>>  Creating/Opening : $main_eva_file\n";
+    open(EVA, ">$main_eva_file") || die "\n*** Error : Couldn't open .eva file: $main_eva_file for output\n";
+    #          enVision:"baseline:system_revision:syntax_revision";
+    #      ex. enVision:"bl8:R10.2:S2.0"; /* 5.7 */
+    if ($cmd_opt{'itp'}) { print EVA "enVision:\"$baseline:$system_revision:$syntax_revision\";\n\n"; } else 
+                         { print EVA "enVisionObject:\"$baseline:$system_revision:$syntax_revision\";\n\n"; }
+    $/ = '__!!__';
+    $_ = <ITP_FILE>;
+
+#    $action_file = "$itp_program\.act";
+
+#   If #define, open named file and substitute file content for #define
+    while (s/\#define\s+\$TYPES\s+\'([^\']+)\'/temp_define/i) {
+        open(DEFINE, $1) || ((print "WARNING: Couldn't open \#define file '$1'\n") && (s/temp_define//) && (next));
+        print "--> \#define file: $1\n";
+        $define_file = <DEFINE>;
+        $define_file =~ s/\(\*/{/g;                    # change (*comments*) into {comments}
+                                $define_file =~ s/\*\)/}/g;
+        $define_file =~ s/\{[^\}]*\}//g;               # delete all comments
+        s/temp_define/$define_file/;
+        close(DEFINE);
+    }
+
+    $itp_prog = $_;
+    close ITP_FILE;
+
+    $itp_prog =~ s/\(\*/{/g;                       # change (*comments*) into {comments}
+    $itp_prog =~ s/\*\)/}/g;
+    while ($itp_prog =~ s/\{[^\}\{]*\}//g) {}      # remove comments (and any nested) from $itp_prog
+
+    $itp_prog_temp = $itp_prog;
+    undef($itp_prog);
+    $itp_prog = $itp_prog_temp;
+    undef($itp_prog_temp);
+
+    # Write out the .itp program minus the comments (for ease of manual data extraction)
+    $compact_itp_file = $itp_file . ".NoComments";
+    open(COMPACT_ITP, ">$compact_itp_file") || die "\n*** Error : Couldn't open compact .itp file: $compact_itp_file for output\n";
+    print COMPACT_ITP $itp_prog;
+    close COMPACT_ITP;
+
+    # Parse for PatternLoadGlobal, open .vgs file.
+#   PatternLoadGlobal( 'f711754b_55146g02.vgo' );
+    $itp_prog =~ /PatternLoadGlobal\s*\(\s*\'(\w+)\.vgo\'/ && ($PatternLoadGlobal = $1);
+
+    $PatternLoadGlobalSource = "$PatternLoadGlobal" . ".vgs";
+    open(VGS_FILE, $PatternLoadGlobalSource) || die "\n*** Error : Couldn't open PatternLoadGlobal file: \'$PatternLoadGlobalSource\'";
+
+    $vgs_file = <VGS_FILE>;
+    close(VGS_FILE);
+    print ">>>  Loading in V-Series PatternLoadGlobal file \"$PatternLoadGlobalSource\"\n";
+
+    if ($cmd_opt{'itp'}) { &LoadInVSeriesTemplate; }
+                        
+    # Parse .vgs file for:
+    #   parse cycle
+    #   parse VectorFieldSet
+    #   parse ScanPath
+    #   parse M/Z/D/ISets
+                        
+    $SignalHeader = "$PatternLoadGlobal" . "_SH";
+
+    # Parse Cycle names
+#Type
+#  cycle = (normal, shutdowncycle);
+    $vgs_file =~ /cycle\s*\=\s*\((.+)\)\s*;/i && ($CycleData = "\L$1");
+    $CycleData =~ s/\s//g;
+    @CycleNames = split(/,/, $CycleData);
+
+    # Parse VectorFieldSet
+    $/ = ");";
+#VectorFieldSet (1,binary,124,123,127,118,47,46,170,159,113,117,36,38,32
+#,27,23,20,13,9,7,12,16,22,24,31,34,39,41,28,33,43,42,11,5,19,26,15,8,18
+#,4,29,37,147,146,145,144,142,141,140,139,137,136,135,134,131,130,129,128
+#,126,152,150,149,168,166,165,161,160,163,153,115,109,162,69,68,72,71,75
+#,77,80,82,84,83,81,78,76,74,49,51,54,56,59,61,64,66,65,63,60,58,55,53,50
+#,48,87,86,70,175,174,173,172,171,2,157,156,155,121,3,169,98,96,94,111
+#,107,106,116,92,93,102,101,100,99,104,112,91,90,120,167);
+    $vgs_file =~ /VectorFieldSet\s*\(([\w\,\s]+)\)\s*;/ && ($VectorFieldSet = $1);
+    $VectorFieldSet =~ s/\s//g;
+    @signal_order = split(/,/, $VectorFieldSet);
+    $vgs_field = shift(@signal_order);              # first number is VectorFieldSet field#
+    $vgs_base  = shift(@signal_order);              # second number is VectorFieldSet base
+    if ($vgs_base =~ /Octal|Decimal|Hex/i) {
+        print "\n     *** Warning : The VectorFieldSet definition has <base> of $vgs_base. Only 'Binary' is supported.\n";
+        print "                   The following may contain errors: SignalHeader $SignalHeader, the \n";
+        print "                   AliasSymbolTable(.ast) file, and any converted pattern data (in the .evo files)\n";
+        print "                   that use these un-supported bases.\n\n";
+        $WarningCount++;
+    };
+    $FuncPinCount = $#signal_order + 1;
+    #d print "# of FuncPins : $FuncPinCount\n";
+    foreach $ii (0..$#signal_order) { $DevicePinToSignalOrderLUT{$signal_order[$ii]} = $ii; }
+
+    # Parse ScanPath
+#ScanPath( 1, 154, 151);
+    while ($vgs_file =~ /\s*ScanPath\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*/ig) {
+	$path       = $1;
+	$ScanInPin  = $2;
+	$ScanOutPin = $3;
+	#d print "Path# $1 with ScanInPin $2, ScanOutPin $3\n";
+	$SerialPath{$path} = join(':', $ScanInPin, $ScanOutPin);
+        $SerialPinLUT{join(':', $path, 'scanin')}  = $ScanInPin;
+        $SerialPinLUT{join(':', $path, 'scanout')} = $ScanOutPin;
+	++$MaxPathNumber;
+    }
+
+    &initialize_global_arrays;                                          # Initialize arrays for this conversion session
+
+    if ($cmd_opt{'vvs'}) {
+        # Process MZDI Sets 
+        print ">>>  Processing any MZDI Sets in the .vgs file ...\n";
+        print "     ";
+        # Read in MZDI data
+        $/ = "\n";                                      # Use new line as the line delimiter
+        #while ($vgs_file =~ /([M|Z|D|I]Set)\s*\[\s*(\d+)\s*\]\s*\[([01\s]*)\]\s*;/ig) {
+        # To allow Commented MZDI vectors.  wmk 011029
+        while ($vgs_file =~ /([M|Z|D|I]Set)\s*\[\s*(\d+)\s*\]\s*\(*\**.*\**\)*\s*\[([01\s]*)\]\s*;/ig) {
+            #d /^(MSet|ZSet|DSet|ISet)\s*\[\s*(\d+)\s*\]\s*\[([01]*)\]\s*;/ && (print "$1\[$2\]:$3\n");
+            $MZDIReg   = "\U$1";
+            $MZDIIndex = $2;
+            $MZDIData  = $3;
+            $MZDIData  =~ s/\s//g;                      # remove any white space from data
+
+            # Take care of incomplete groupings by initializing both sets in group to all '0's
+            if      (($MZDIReg eq "MSET") || ($MZDIReg eq "ZSET")) {
+                if ($MSetData[$MZDIIndex] eq "") { $MSetData[$MZDIIndex] = $InitMZDISet; }
+                if ($ZSetData[$MZDIIndex] eq "") { $ZSetData[$MZDIIndex] = $InitMZDISet; }
+            } elsif (($MZDIReg eq "DSET") || ($MZDIReg eq "ISET")) {
+                if ($DSetData[$MZDIIndex] eq "") { $DSetData[$MZDIIndex] = $InitMZDISet; }
+                if ($ISetData[$MZDIIndex] eq "") { $ISetData[$MZDIIndex] = $InitMZDISet; }
+            }
+
+            if    ($MZDIReg eq "MSET") { $MSetData[$MZDIIndex] = $MZDIData; }
+            elsif ($MZDIReg eq "ZSET") { $ZSetData[$MZDIIndex] = $MZDIData; }
+            elsif ($MZDIReg eq "DSET") { $DSetData[$MZDIIndex] = $MZDIData; }
+            elsif ($MZDIReg eq "ISET") { $ISetData[$MZDIIndex] = $MZDIData; }
+            #d print "$MZDIReg\[$MZDIIndex\]:$MZDIData\n";
+            if (!($MZDICount++ % 200)) { print "\."; }
+        }
+        print "\n";
+        print "     -  Number of MZ Sets defined: ";  print ($#MSetData > 0 ? $#MSetData : 0);  print "\n";
+        print "     -  Number of DI Sets defined: ";  print ($#DSetData > 0 ? $#DSetData : 0);  print "\n";
+        if (($#MSetData > 2000) || ($#DSetData > 2000)) { print "        Holy Moly !!??!!!\n"; } elsif
+           (($#MSetData > 800)  || ($#DSetData > 800))  { print "        Whew !\n"; }
+    }
+
+
+
+#$/ = ");";
+
+
+
+#if ($cmd_opt{'itp'}) {
+                            
+    $* = 1;                 # enable multi line matching
+#    $/ = ");";
+
+    # Parse program declaration
+    $itp_prog =~ /program\s+(\w+)\s*;/i && ($TestProg = $1);
+    $itp_program = $TestProg;
+    $itp_program = "\L$itp_program";
+
+    # Check for AutoGen Version
+# AUTOGEN VERSION      = 4.2.7
+    $itp_prog =~ /AUTOGEN VERSION\s*=\s*([\d\.]+)/ && ($AutoGen = $1);
+
+    # Parse ITP PinSet, create enVision AdapterBoard
+
+    # Parse for multiple Pin_map names
+#  #define $PinScrambleEnabled 'true'
+#  Pin_maps_type = ( FT_PBL_176_L180_5, PB_6 );
+    if ($itp_prog =~ /\#define\s+\$PinScrambleEnabled\s+\'true\'/i) {
+        $itp_prog =~ /Pin_maps_type\s*\=\s*\(([\w\s\,]+)\)\s*;/i && ($PinMapData = $1); 
+	$PinMapData =~ s/\s//g;
+	@pin_map_names = split(/,/, $PinMapData);
+    } else {
+	push(@pin_map_names, "$itp_program" . "_AdaptBd");
+    }
+
+#      PinSet( XTLINP1   , 124, s_IOpin, -1V, 8V, -60mA, 60mA );
+    while ($itp_prog =~ /PinSet\s*\(([\w\s\-\,]+)\)/ig) {
+        $PinSetData = $1;
+        $PinSetData =~ s/\s//g;
+        ($Plist, $Pin, $Pdir, $Vmin, $Vmax, $Imin, $Imax) = split(/,/, $PinSetData);
+	$Plist = "\U$Plist";                                 # uppercase PinNames and PinDir
+	$Pdir  = "\U$Pdir";
+        $ListOfPinNames{$Plist}++;                           # keep a list of PinNames
+        $DevicePinNumberToPinNameLUT{$Pin} = $Plist;         # generate a LookUpTable (LUT), pass in device pin number, get PinName
+	$PinTypes{$Pdir}++;                                  # keep track of PinTypes used
+        $AdapterBoardPins[$Pin] = join(':', $Plist, $Pin, $Pdir);
+        $PinCount++;
+    }
+    print "     -  Number of Signal Pins    : $PinCount\n";
+
+    # Capture all Patterns used in this program
+#    PatternLoad( F721843E_55026012, 'f721843e_55026012.vvo' );
+#    if LongPattern then                            {rev99ae}
+#        PatternLoad( F721843E_CORE_LONGFUNC, 'f721843e_core_longfunc.vvo' )    <<--- No ';'
+#    else
+#
+    while ($itp_prog =~ /\s*PatternLoad\s*\(\s*(\w+)\s*,\s*\'\s*([\w\,\.]+)\s*\'\s*\)\s*;*/ig) {
+        $Pat      = $1;
+        $FileName = $2;
+        $cache  = "\L$Pat";
+        $source = $FileName;
+        $source =~ s/(\w+)\.vvo$/$1\.evo/;
+        #d print "$cache\t$source\n";
+        $PatternCacheToSourceLUT{$cache}  = $source;              # generate PatternCacheToSourceLUT, enter cache name, get pattern source file
+        $PatternLoadStatement{$cache}++;
+        $PatternSourceToCacheLUT{$source} = $cache;               # generate PatternSourceToCacheLUT, enter pattern source file, get cache name
+        $PatternLoadArray[$PatternLoadCount++] = $cache;
+    }
+
+
+if ($cmd_opt{'itp'}) {
+
+#procedure SET_POWER( V_3V : treal; I_3V : treal;
+#                     V_5V : treal; I_5V : treal;
+#                     WAIT_TIME : treal );
+#(*
+#**********************************************************************
+#****            POWER SUPPLY SETUP                                ****
+#**********************************************************************
+#*)
+#  begin
+# 
+#        SupplySet( PS_VDDS, V_5V, I_5V );
+#        SupplySet( PS_VDD, V_3V, I_3V );
+# 
+#        Enable( PS_VDDS );
+#        Enable( PS_VDD );
+# 
+#        wait( WAIT_TIME );
+# 
+#  end;  (* SET_POWER *)
+    $itp_prog =~ s/end\s*\;/!/g;                                        # replace 'end;' with '!' for match
+    $itp_prog =~ /procedure\s+SET_POWER\b([^!]*)!/i && ($SetPowerData = $1);
+    #d print "$SetPowerData\n";
+    $itp_prog =~ s/!/end\;/g;
+    while ($SetPowerData =~ /Enable\s*\(\s*(\w+)\s*\)\s*;/ig) {
+        $PowerPinName = "\U$1";
+        $PowerPins{$PowerPinName}++;
+        ($PowerPins{$PowerPinName} <= 1) && $PowerPinCount++;
+    }
+    print "     -  Number of Power Pins     : $PowerPinCount\n";
+
+
+    &createPinTypeObjects;
+    &createAdapterBoardObjects;
+
+    &generateContinuityPattern($PinCount);
+    &generateBasePattern($PinCount);
+
+    &createPinGroupObjects;
+    
+    
+    $itp_prog_temp = $itp_prog;
+    undef($itp_prog);
+    $itp_prog = $itp_prog_temp;
+    undef($itp_prog_temp);
+
+
+    &GenerateBins;
+
+    # Parse .itp for Temp_Limit_Type. Used as DC_Spec category names.
+#    Temp_Limit_Type   = ( HOT, ROOM, TEMP, COLD, HOT_CHUCKS );
+    $itp_prog =~ /Temp_Limit_Type\s*\=\s*\(([\w\s\,]+)\)\s*;/i && ($TempLimitData = $1);    # "\U$1" ? # Temp_Limit_Type is used to set arrayed values to each test variable
+    $TempLimitData =~ s/\s//g;
+    @TempLimit_Cats = split(/,/, $TempLimitData);
+
+    # Parse .itp for Test_Limit_Type. Used as OpVar to select DC_Spec categories.
+#    Test_Limit_Type   = ( FT_HOT, FT_ROOM, QC, QC_COLD, HOT_CHUCK, PROBE );
+    $itp_prog =~ /Test_Limit_Type\s*\=\s*\(([\w\s\,]+)\)\s*;/ && ($TestLimitData = $1);
+    $TestLimitData =~ s/\s//g;
+    @TestLimits = split(/,/, $TestLimitData);
+
+
+    # goto Bypass;                                # to bypass the (extremely!) slow parsing of the .itp file
+
+    # Parse Table and Setup statements
+    $itp_prog =~ s/\n/!/g;                        # replace '\n' with '!' for matches
+    $itp_prog =~ s/(DCTableOpen\b|FormatTableOpen\b|ACTableOpen\b|CycleTableOpen\b|PeriodTableOpen\b|DCSetupOpen\b|FormatSetupOpen\b|ACSetupOpen\b|procedure\b)/__block__$1/ig;
+    $itp_prog =~ s/end\./end\.__block__/i;        # replace 'end.' of program with 'end.__block__'
+    $itp_prog =~ s/__block__/__start__/;          # replace first '__block__xxx' with '__start__xxx'
+    while ($itp_prog =~ s/__block__/__end__/) {   # replace '__block__xxx' with '__end__xxx', repeat
+        if ($itp_prog =~ /__start__DCTableOpen\b(.*)__end__/i) {
+            $DCTableData = $1;
+            #print "$DCTableData   ---\n\n";
+            $DCTableData =~ s/(.*)DCTableClose.*/$1/i;
+            $DCTableData =~ s/[\s\!]//g;
+            $DCTableData =~ s/\((\w+)\);// && ($DCTableName = "\U$1");
+            $DCTableArray{$DCTableName} = $DCTableData;
+
+            print "DCTable     : $DCTableName\n";
+            #print "$DCTableArray{$DCTableName}\n";
+
+            $DCTableCount++;
+            $itp_prog =~ s/__start__/__done__/;   # replace '__start__xxx' with '__done__xxx'
+            $itp_prog =~ s/__end__/__start__/;    # replace next '__end__xxx' with '__start__xxx'
+        }
+        elsif ($itp_prog =~ /__start__FormatTableOpen\b(.*)__end__/i) {
+            $FormatTableData = $1;
+            #print "$FormatTableData   ---\n\n";
+            $FormatTableData =~ s/(.*)FormatTableClose.*/$1/i;
+            $FormatTableData =~ s/[\s\!]//g;
+            $FormatTableData =~ s/\((\w+)\);// && ($FormatTableName = "\U$1");
+            $FormatTableArray{$FormatTableName} = $FormatTableData;
+
+            print "FormatTable : $FormatTableName\n";
+            #print "$FormatTableArray{$FormatTableName}   ---\n\n";
+
+            $FormatTableCount++;
+            $itp_prog =~ s/__start__/__done__/;
+            $itp_prog =~ s/__end__/__start__/;
+        }
+        elsif ($itp_prog =~ /__start__ACTableOpen\b(.*)__end__/i) {
+            $ACTableData = $1;
+            #print "$ACTableData   ---\n\n";
+            $ACTableData =~ s/(.*)ACTableClose.*/$1/i;
+            $ACTableData =~ s/[\s\!]//g;
+            $ACTableData =~ s/\((\w+)\);// && ($ACTableName = "\U$1");
+            $ACTableArray{$ACTableName} = $ACTableData;
+
+            print "ACTable     : $ACTableName\n";
+            #print "$ACTableArray{$ACTableName}   ---\n\n";
+
+            $ACTableCount++;
+            $itp_prog =~ s/__start__/__done__/;
+            $itp_prog =~ s/__end__/__start__/;
+        }
+        elsif ($itp_prog =~ /__start__CycleTableOpen\b(.*)__end__/i) {
+            $CycleTableData = $1;
+            #print "$CycleTableData   ---\n\n";
+            $CycleTableData =~ s/(.*)CycleTableClose.*/$1/i;
+            $CycleTableData =~ s/[\s\!]//g;
+            $CycleTableData =~ s/\((\w+)\);// && ($CycleTableName = "\U$1");
+            $CycleTableArray{$CycleTableName} = $CycleTableData;
+
+            print "CycleTable  : $CycleTableName\n";
+            #print "$CycleTableArray{$CycleTableName}   ---\n\n";
+
+            $CycleTableCount++;
+            $itp_prog =~ s/__start__/__done__/;
+            $itp_prog =~ s/__end__/__start__/;
+        }
+        elsif ($itp_prog =~ /__start__PeriodTableOpen\b(.*)__end__/i) {
+            $PeriodTableData = $1;
+            #print "$PeriodTableData   ---\n\n";
+            $PeriodTableData =~ s/(.*)PeriodTableClose.*/$1/i;
+            $PeriodTableData =~ s/[\s\!]//g;
+            $PeriodTableData =~ s/\((\w+)\);// && ($PeriodTableName = "\U$1");
+            $PeriodTableArray{$PeriodTableName} = $PeriodTableData;
+
+            print "PeriodTable : $PeriodTableName\n";
+            #print "$PeriodTableArray{$PeriodTableName}   ---\n\n";
+
+            $PeriodTableCount++;
+            $itp_prog =~ s/__start__/__done__/;
+            $itp_prog =~ s/__end__/__start__/;
+        }
+        elsif ($itp_prog =~ /__start__DCSetupOpen\b(.*)__end__/i) {
+            $DCSetupData = $1;
+            #print "$DCSetupData   ---\n\n";
+            $DCSetupData =~ s/(.*)DCSetupClose.*/$1/i;
+            $DCSetupData =~ s/[\s\!]//g;
+            $DCSetupData =~ s/\((\w+),(\w+)\);// && ($DCSetupName = $1) && ($DCTableName = "\U$2");
+            $DCSetupArray{$DCSetupName} = join(':', $DCTableName, $DCSetupData);
+
+            print "DCSetup     : $DCSetupName\t$DCTableName\n";
+            #print "$DCSetupArray{$DCSetupName}   ---\n\n";
+
+            $DCSetupCount++;
+            $itp_prog =~ s/__start__/__done__/;
+            $itp_prog =~ s/__end__/__start__/;
+        }
+        elsif ($itp_prog =~ /__start__FormatSetupOpen\b(.*)__end__/i) {
+            $FormatSetupData = $1;
+            #print "$FormatSetupData   ---\n\n";
+            $FormatSetupData =~ s/(.*)FormatSetupClose.*/$1/i;
+            $FormatSetupData =~ s/[\s\!]//g;
+            $FormatSetupData =~ s/\((\w+),(\w+)\);// && ($FormatSetupName = $1) && ($FormatTableName = "\U$2");
+            $FormatSetupArray{$FormatSetupName} = join(':', $FormatTableName, $FormatSetupData);
+
+            print "FormatSetup : $FormatSetupName\t$FormatTableName\n";
+            #print "$FormatSetupArray{$FormatSetupName}   ---\n\n";
+
+            $FormatSetupCount++;
+            $itp_prog =~ s/__start__/__done__/;
+            $itp_prog =~ s/__end__/__start__/;
+        }
+        elsif ($itp_prog =~ /__start__ACSetupOpen\b(.*)__end__/i) {
+            $ACSetupData = $1;
+            #print "$ACSetupData   ---\n\n";
+            $ACSetupData =~ s/(.*)ACSetupClose.*/$1/i;
+            $ACSetupData =~ s/[\s\!]//g;
+                               # ACSetupName,
+                               #       ACTableName,
+                               #             CycleTableName,
+                               #                   PeriodTableName,
+                               #                         BasePeriod,
+                               #                                   DCSetupName,
+                               #                                         FormatSetupName
+            $ACSetupData =~ s/\((\w+),(\w+),(\w+),(\w+),([\w\.]+),(\w+),(\w+)\);// &&
+                ($ACSetupName = $1) && ($ACTableName = "\U$2") && ($CycleTableName = "\U$3") &&
+                ($PeriodTableName = "\U$4") && ($BasePeriod = $5) && ($DCSetupName = $6) &&
+                ($FormatSetupName = $7);
+	    $ACSetups[$ACSetupCount] = $ACSetupName;
+            $ACSetupArray{$ACSetupName} = join(':', $ACTableName, $CycleTableName, $PeriodTableName,
+                                                    $BasePeriod,  $DCSetupName,    $FormatSetupName,
+                                                    $ACSetupData);
+
+            print "ACSetup     : $ACSetupName\t$ACTableName\t$CycleTableName\t$PeriodTableName\t$BasePeriod\t$DCSetupName\t$FormatSetupName\n";
+            #print "$ACSetupArray{$ACSetupName}   ---\n\n";
+
+            $ACSetupCount++;
+            $itp_prog =~ s/__start__/__done__/;
+            $itp_prog =~ s/__end__/__start__/;
+        }
+        elsif ($itp_prog =~ /__start__procedure\b(.*)__end__/i) {
+            $procedureData = $1;
+            $procedureData =~ s/[\s\!]//g;
+            $procedureData =~ s/\s*(\w+)\s*[\;\(]// && ($procedureName = $1);
+            print "Procedure   : $procedureName\n";
+
+            $procedureData =~ s/\;/\;\n/g;
+
+            ($procedureName =~ /SetSupplyVars/i) && &createDCParams($procedureData);
+            ($procedureName =~ /INITIALIZE_TEST_LIMIT_ARRAYS/i) && &createDCParams($procedureData);
+            
+            #$procedureData !~ s/SetUpSelect.*\;|PatternExecute.*\;//ig;
+            $SetUpSelectFlag = 0;                               # reset SetUpSelect flag
+            $procData = "";
+            @procDataArray = ();
+            @procData_PatternInfo = ();
+            #while($procedureData =~ /SetUpSelect|PatternExecute/i){
+            #    $procedureData =~ s/(SetUpSelect.*\;)//i    && ($procData .= "$1\n");
+            #    $procedureData =~ s/(PatternExecute.*\;)//i && ($procData .= "$1\n");
+            #}
+            @procDataArray = split(/\n/, $procedureData);
+
+            # Process through the Procedure, keeping only the 'SetUpSelect', 'PatternExecute' and 'FormatSetInOut'
+            #    statements and any 'SET_POWER' procedure calls.
+            foreach $ProcStatement (@procDataArray) {
+                # DCSet(UPMU|PMU|PMURng|Res|Dyn|Force|LDOFF|OPEN|PMURelay|Relay|RCTerm|DynRCTerm)
+                # FormatSet(In|Out|InOut|Delay|DelayDirect|Force|Exit|Mux|DiffCmp)
+                # TimingSet(In|Out|InOut|IOWidth)
+                # TMUSet(Pin|T0|Delay|Delay1|DelayCycle|DelayEdge|Enable|Stop|Counter|SMA|VarDelay)
+                # PMExSet(Delay)
+                $ProcStatement =~ /(SetUpSelect.+|PatternExecute.+|DCSet.+|FormatSet.+|TimingSet.+|TMUSet.+|PMExSet.+|SET_POWER.+)/i && do {
+                    $SaveThisStatement = $1;
+                    $SaveThisStatement =~ s/\,/\, /g;
+                    $SaveThisStatement =~ s/:=/ := /g;
+                    push(@procData_PatternInfo, $SaveThisStatement);
+                };
+            }
+            # Iterate through remaining pertinent Procedure statements
+            foreach $ProcStatement (@procData_PatternInfo) {
+                $ProcStatement =~ /SetUpSelect\((\w+), (\w+), (\w+)\)/i && do {
+                    $DCSU  = $1;
+                    $FMTSU = $2;
+                    $ACSU  = $3;
+
+                    ($ACTableName, $CycleTableName,  $PeriodTableName, $BasePeriod,
+                     $DCSetupName, $FormatSetupName, $ACSetupData) = split(/:/, $ACSetupArray{$ACSU});  # Is this all set by this time??
+                    if ($FMTSU ne $FormatSetupName) {
+                        print "\n              *** Warning : SetUpSelect FMTSU ($FMTSU) does not correspond to\n";
+                        print "                            SetUpSelect ACSU's ($ACSU) specified FormatSetupName ($FormatSetupName)\n\n";
+                        $WarningCount++;
+                    }
+                    $SetUpSelectFlag++;
+                    if ($SetUpSelectFlag > 1) {
+                        print "\n              *** Warning : Multiple SetUpSelect statements have occurred prior to a PatternExecute.\n";
+                        print "                            Possible test flow or complex setup considerations.\n\n";
+                        $WarningCount++;
+                    }
+                };
+                $ProcStatement =~ /PatternExecute2*\((\w+), (\w+)\)/i && do {    # allow PatternExecute2, 991020
+                    $Status = $1;
+                    $Pat    = "\L$2";
+
+                    if ($PatternToTimingLUT{$Pat} !~ /$ACSU/) {
+                        $PatternToTimingLUT{$Pat} .= "_$ACSU";
+                        $PatternToTimingComments{$Pat} .= ", $FMTSU:$ACSU";
+
+                        if ($FMTSU ne $FormatSetupName) {
+                            $PatternToTimingComments{$Pat} .= "\(*** $FormatSetupName ***\)";
+                        }
+                    }
+                    $SetUpSelectFlag = 0;                               # reset SetUpSelect flag
+                };
+                $ProcStatement =~ /FormatSetIn|FormatSetOut|FormatSetInOut/i && do {
+                    print "\n              *** Warning : Runtime Format Change : $ProcStatement\n\n";
+                    $WarningCount++;
+                };
+                $ProcStatement =~ /TimingSetIn|TimingSetOut|TimingSetInOut/i && do {
+                    print "\n              *** Warning : Runtime Timing Change : $ProcStatement\n\n";
+                    $WarningCount++;
+                };
+            }
+
+            $procData = join('', @procData_PatternInfo);
+            $procData =~ s/\;/\;\n/g;
+            $procArray{$procedureName} = $procData;
+
+            $itp_prog =~ s/__start__/__done__/;
+            $itp_prog =~ s/__end__/__start__/;
+        }
+            
+
+    }
+    print "     -  Number of DCTable(s)     : $DCTableCount\n";
+    print "     -  Number of FormatTable(s) : $FormatTableCount\n";
+    print "     -  Number of ACTable(s)     : $ACTableCount\n";
+    print "     -  Number of CycleTable(s)  : $CycleTableCount\n";
+    print "     -  Number of PeriodTable(s) : $PeriodTableCount\n";
+    print "     -  Number of DCSetup(s)     : $DCSetupCount\n";
+    print "     -  Number of FormatSetup(s) : $FormatSetupCount\n";
+    print "     -  Number of ACSetup(s)     : $ACSetupCount\n";
+
+    # Write out ManualDataExtraction files
+    $FormatSetup_itp_file = $itp_file . ".FormatSetups";
+    open(FormatSetup_ITP, ">$FormatSetup_itp_file") || die "\n*** Error : Couldn't open FormatSetup .itp file: $FormatSetup_itp_file for output\n";
+    print FormatSetup_ITP "FormatSetup(s)\n_______________________________________________________________________________\n\n";
+    foreach (sort keys %FormatSetupArray) {
+        ($FormatTableName, $FormatSetupData) = split(/:/, $FormatSetupArray{$_});
+        $FormatSetupData =~ s/\;/\;\n/g;
+        $FormatSetupData =~ s/\,/\, /g;
+        print FormatSetup_ITP "$_ :\n$FormatTableName\n$FormatSetupData\n\n";
+    }
+    close FormatSetup_ITP;
+
+    $ProcData_itp_file = $itp_file . ".ProcData";
+    open(ProcData_ITP, ">$ProcData_itp_file") || die "\n*** Error : Couldn't open ProcData .itp file: $ProcData_itp_file for output\n";
+    print ProcData_ITP "ProcData\n_______________________________________________________________________________\n\n";
+    foreach (sort keys %procArray) {
+        print ProcData_ITP "$_ :\n$procArray{$_}\n\n";
+    }
+    close ProcData_ITP;
+
+    $PatternTiming_itp_file = $itp_file . ".ModifyWFTRef";
+    open(PatternTiming_ITP, ">$PatternTiming_itp_file") || die "\n*** Error : Couldn't open PatternTimingXref .itp file: $PatternTiming_itp_file for output\n";
+    print PatternTiming_ITP "# Pattern/Timing X-Reference\n";
+    print PatternTiming_ITP "# ____________________________________________________________________________________________________________________________\n# \n";
+    print PatternTiming_ITP "# Script Name  Pattern File Name               Orig WFTRef  New WFTRef                     SetUpSelect Format:TimingSetups     \n";
+    print PatternTiming_ITP "# -----------  ------------------------------  -----------  -----------------------------  -----------------------------------\n";
+
+    select(PatternTiming_ITP);
+    foreach (sort keys %PatternToTimingLUT) {
+        $evoToModify = "./$PatternCacheToSourceLUT{$_}";
+        $PatternToTimingLUT{$_} =~ s/^_//;                 # remove leading "_"
+        $PatternToTimingComments{$_} =~ s/^, //;           # remove leading ", "
+        $CommentText = "\# CacheName = $_,  $PatternToTimingComments{$_}";
+        $~ = 'PatternTiming_data';
+        write(PatternTiming_ITP);
+        #print PatternTiming_ITP "$_ :\t$PatternToTimingLUT{$_}\n";
+    }
+    close PatternTiming_ITP;
+    select(STDOUT);
+
+    format PatternTiming_data =
+change_patt    @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<  normal       @<<<<<<<<<<<<<<<<<<<<<<<<<<<<  @<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+               $evoToModify                                 $PatternToTimingLUT{$_}        $CommentText
+.
+    
+
+    foreach $ACTableName (sort keys %ACTableArray) {
+# ACTableOpen( DEFAULT_AC_TABLE );
+#   ACSetInOut( DEFAULT_TIMING, 0nS, 0nS, 5nS, 0nS, 5nS );
+# ACTableClose;
+        $ACTableArray{$ACTableName} =~ /ACSetInOut\((\w+),([\w\.]+),([\w\.]+),([\w\.]+),([\w\.]+),([\w\.]+)\)/i &&
+            ($TimingEdgeGroupName = $1) && ($t3 = $2) && ($t1 = $3) && ($t2 = $4) && ($t4 = $5) && ($t5 = $6);
+        #d print "$TimingEdgeGroupName  $t3  $t1  $t2  $t4  $t5\n";
+
+        # Output default timing
+    }
+
+
+    # Force a t0 Parameter
+    $ParamName = "t0";
+    $param = "Param $ParamName {\n" .
+             "\tType = s;\n" .
+             "\tSpec = AC_Specs;\n" .
+             "\tACCat {\n" .
+             "\t\tTyp = Expr { String = \"0ns\"; Type = s; }\n" .
+             "\t}\n}\n";
+    #d print $param;
+    $ParamDefined{$ParamName} = "0ns";
+    $ACParams{$ParamName} = $param;
+    $ParamLUT{"0ns"} = $ParamName;
+    $ACParam_recs .= $param;
+                            
+    foreach $PeriodTableName (sort keys %PeriodTableArray) {
+# PeriodTableOpen( DEFAULT_PERIOD_TABLE );
+#   PeriodSet( 1, NORMAL );
+# PeriodTableClose;
+        $PeriodTableArray{$PeriodTableName} =~ /PeriodSet\((\d+),(\w+)\)/i &&
+	    ($PeriodMultiplier = $1) && ($CycleName = $2);
+        $ParamName = "PeriodMultiplier_$CycleName";
+        $param = "Param $ParamName {\n" .
+                 "\tType = SCALAR;\n" .
+                 "\tSpec = AC_Specs;\n" .
+                 "\tACCat {\n" .
+                 "\t\tTyp = Expr { String = \"$PeriodMultiplier\"; Type = SCALAR; }\n" .
+                 "\t}\n}\n";
+        #d print $param;
+	$ACParam_recs .= $param;
+        $ACParams{$ParamName} = $param;
+        $PeriodMultiplierParamName = $ParamName;
+    }
+
+
+    # Generate WFTs
+    %TG_LUT = ('0', 't3',
+               '1', 't1',
+               '2', 't2',
+               '3', 't4',
+               '4', 't5');
+    foreach $ACSetupName (@ACSetups) {
+        $#ACSetupRow     = 0;
+        $ACSetupRowCount = 0;
+# ACSetupOpen( TIMING_1, DEFAULT_AC_TABLE, DEFAULT_CYCLE_TABLE,
+#              DEFAULT_PERIOD_TABLE, 200.00NS, SLOW_MAX_DC, FORMAT_1 );
+#   ACSetInOut( IN0_TS1_ACG, 0NS, 0NS, 195.000NS, 0NS, 5NS);
+#   ACSetInOut( IN1_TS1_ACG, 0.0NS, 0.0NS, 60.000NS, 0NS, 5NS);
+#   ACSetInOut( IO1_TS1_ACG, 24.00NS, 24.00NS, 195.000NS, 190.00NS-TGB,
+#               195.000NS+TGB);
+#   ACSetInOut( OUT1_TS1_ACG, 0NS, 0NS, 195.000NS, 190.00NS-TGB, 195.000NS+TGB);
+#  
+#   CycleSet( NORMAL, IN0_TS1_ACG, IN0_TS1);
+#   CycleSet( NORMAL, IO7_TS1_ACG, IO7_TS1);
+#   CycleSet( NORMAL, OUT1_TS1_ACG, OUT1_TS1);
+# ACSetupClose;
+        ($ACTableName, $CycleTableName,  $PeriodTableName, $BasePeriod,
+         $DCSetupName, $FormatSetupName, $ACSetupData) = split(/:/, $ACSetupArray{$ACSetupName});
+
+        # Get Format information for this ACSetup
+        $FormatData = $FormatSetupArray{$FormatSetupName};
+        ($FormatTableName, $FormatSetData) = split(/:/, $FormatData);
+        @FormatSetDataArray = split(/;/, $FormatSetData);
+
+        undef %PinNameFormatArray;
+	foreach $FormatSet (@FormatSetDataArray) {
+	    $FormatSet =~ /FormatSetInOut\((\w+),(\w+),(\w+),(\w+)\)/ && ($DFMT0 = "\U$1") && ($DFMT1 = "\U$2") && ($RFMT = "\U$3") && ($Plist = $4);
+	    foreach (keys %PinGroupArray) {
+	        if ($PinGroupArray{$_} eq $Plist) {
+		    $PinNameFormatArray{$_} = join(':', $_, $PinGroupArray{$_}, $DFMT0, $DFMT1, $RFMT);
+		}
+	    }
+	}
+
+        # Create WFT object
+        $WFTObject = "WaveformTable $ACSetupName" . "_WFT" . " {\n";
+
+        $BasePeriod =~ s/(\d+)(\.?)(\d*)([MUNPS]+)/$1$2$3\L$4/i;        # change 100NS to 100ns
+        if ($BasePeriod =~ /(\d+)(\.?)(\d*)([munps]+)/i) {
+            $NanoSec = $1;
+            $Dot     = $2;
+            $PicoSec = $3;
+            $Scale   = $4;
+            $ParamA  = "$NanoSec$Dot$PicoSec";
+            if ($Scale =~ /m/) { $ParamB = $ParamA*1000000; }
+            if ($Scale =~ /u/) { $ParamB = $ParamA*1000; }
+            if ($Scale =~ /n/) { $ParamB = $ParamA*1; }
+            if ($Scale =~ /p/) { $ParamB = $ParamA*001; }
+            $ParamB =~ s/\./_/;                             # replace '.' with '_'
+            $ParamName  = "p$ParamB";
+            $ParamValue = $BasePeriod;
+
+            if (!$ParamDefined{$ParamName}) {
+                $param = "Param $ParamName {\n" .
+                         "\tType = s;\n" .
+                         "\tSpec = AC_Specs;\n" .
+                         "\tACCat {\n" .
+                         "\t\tTyp = Expr { String = \"$BasePeriod\*$PeriodMultiplierParamName\"; Type = s; }\n" .
+                         "\t}\n}\n";
+                $ACParam_recs .= $param;
+                $ParamDefined{$ParamName} = "$ParamValue";
+                $ACParams{$ParamName} = $param;
+            }
+                             
+            $PeriodLUT{$ParamValue} = $ParamName;                       # update PeriodLUT, given ParamValue, get ParamName
+        } else {
+            $ParamName = $BasePeriod;
+        }
+        
+
+#        $ParamName = "$ACSetupName" . "_Period";
+        $param = "Param $ParamName {\n" .
+                 "\tType = s;\n" .
+                 "\tSpec = AC_Specs;\n" .
+                 "\tACCat {\n" .
+                 "\t\tTyp = Expr { String = \"$BasePeriod\*$PeriodMultiplierParamName\"; Type = s; }\n" .
+                 "\t}\n}\n";
+        #d print $param;
+#	$ACParam_recs .= $param;
+#        $ACParams{$ParamName} = $param;
+#        $WFTPeriod{$ACSetupName} = $BasePeriod;        # needed?
+
+
+
+
+
+
+
+        $WFTObject .= "\tPeriod \"$ParamName\";\n";
+
+        # Extract timing (values/expressions) in ACSetInOut statements, store in $TimingEdgeValues{$TimingEdgeGroupName}
+        while ($ACSetupData =~ s/ACSetInOut\((\w+),([\w\.\-\+\*]+),([\w\.\-\+\*]+),([\w\.\-\+\*]+),([\w\.\-\+\*]+),([\w\.\-\+\*]+)\)//i) {
+            $TimingEdgeGroupName = "\U$1";
+            $t3 = $2;
+            $t1 = $3;   
+            $t2 = $4;
+            $t4 = $5;
+            $t5 = $6;
+            $t3 =~ s/(\d+)(\.?)(\d*)([MUNPS]+)/$1$2$3\L$4/i;           # change 50.25NS to 50.25ns
+            $t1 =~ s/(\d+)(\.?)(\d*)([MUNPS]+)/$1$2$3\L$4/i;
+            $t2 =~ s/(\d+)(\.?)(\d*)([MUNPS]+)/$1$2$3\L$4/i;
+            $t4 =~ s/(\d+)(\.?)(\d*)([MUNPS]+)/$1$2$3\L$4/i;
+            $t5 =~ s/(\d+)(\.?)(\d*)([MUNPS]+)/$1$2$3\L$4/i;
+            #d print "$TimingEdgeGroupName  $t3  $t1  $t2  $t4  $t5\n";
+            $TimingEdgeValues{$TimingEdgeGroupName} = join(':', $t3, $t1, $t2, $t4, $t5);
+	}
+	while ($ACSetupData =~ s/CycleSet\((\w+),(\w+),(\w+)\)//i) {
+            $CycleName           = $1;
+            $TimingEdgeGroupName = "\U$2";
+            $PinName             = "\L$3";                             # set lower case, as this will match a PinGroup name
+            #d print "$CycleName  $TimingEdgeGroupName  $PinName\n";
+
+            $ACSetupRow[$ACSetupRowCount++] = join(':', $TimingEdgeGroupName, $PinName);
+
+            # Check Format for this TimingEdgeGroupName, if not DFMT = ..., then supress t2, if not RFMT = ..., then supress t5
+            $DFMT1 = "S_NR";                    # set default drive format
+            $RFMT  = "S_EDGE";                  # set default strobe format
+            if ($PinNameFormatArray{$PinName}) {
+                ($Plist, $Pin_, $DFMT0, $DFMT1, $RFMT) = split(/:/, $PinNameFormatArray{$PinName});
+            }
+            
+            (@tgValues) = split(/:/, $TimingEdgeValues{$TimingEdgeGroupName});   # $t3, $t1, $t2, $t4, $t5
+            for $tgIndex (0..4) {
+#                $ParamName = "$ACSetupName" . "_" . "$PinName" . "_" . $TG_LUT{$tg};
+                #print "$param = $tgValues[$tgIndex],  ";
+
+#                if ((($TimingEdgeGroupName =~ /^IN/)  && ($TG_LUT{$tg} =~ /t3|t1/))    ||
+#                    (($TimingEdgeGroupName =~ /^IO/)  && ($TG_LUT{$tg} =~ /t3|t1|t4/)) ||
+#                    (($TimingEdgeGroupName =~ /^OUT/) && ($TG_LUT{$tg} =~ /t4/))) {
+#
+#                    if (($tg == 0) && ($tgValues[0] eq $tgValues[1])) {
+#                        $skipped++;
+#                        next;
+#                    }
+#
+                #if (($RFMT eq "S_EDGE") && ($tgIndex == 4)) { next; }  # later ...
+                #if (($DMFT1 eq "S_NR") && ($tgIndex == 2)) { next; }
+                if ($tgIndex == 4) { next; }                            # no S_WNDW modes, drop t5 values
+
+                $tg_expression = $tgValues[$tgIndex];
+                # print "$tg_expression >> ";
+                $tg_expression =~ s/[\+|\-|\*]/\:/g;
+                @expression_elements = split(/\:/, $tg_expression);
+                foreach $Element (@expression_elements) {
+                    # ($Element =~ /(\d+)(\.?)(\d*)([munps]+)/i) ? ($ParamName = "t$1$2$3$4") : ($ParamName = $Element);
+                    if ($Element =~ /(\d+)(\.?)(\d*)([munps]+)/i) {
+                        $NanoSec = $1;
+                        $Dot     = $2;
+                        $PicoSec = $3;
+                        $Scale   = $4;
+                        $ParamA  = "$NanoSec$Dot$PicoSec";
+                        if ($Scale =~ /m/) { $ParamB = $ParamA*1000000; }
+                        if ($Scale =~ /u/) { $ParamB = $ParamA*1000; }
+                        if ($Scale =~ /n/) { $ParamB = $ParamA*1; }
+                        if ($Scale =~ /p/) { $ParamB = $ParamA*001; }
+                        $ParamB =~ s/\./_/;                             # replace '.' with '_'
+                        $ParamName  = "t$ParamB";
+                        $ParamValue = $Element;
+
+                        if (!$ParamDefined{$ParamName}) {
+                            $param = "Param $ParamName {\n" .
+                                     "\tType = s;\n" .
+                                     "\tSpec = AC_Specs;\n" .
+                                     "\tACCat {\n" .
+                                     "\t\tTyp = Expr { String = \"$ParamValue\"; Type = s; }\n" .
+                                     "\t}\n}\n";
+                            $ACParam_recs .= $param;
+                            $ParamDefined{$ParamName} = "$ParamValue";
+                            $ACParams{$ParamName} = $param;
+                        }
+                        
+                        $ParamLUT{$ParamValue} = $ParamName;            # update ParamLUT, given ParamValue, get ParamName
+                    } else {
+                        $ParamName = $Element;
+                    }
+                    # print " $ParamName  ";
+                }
+                # print "\n";
+            }      # end of tgIndex
+	}
+
+        # Complete the WFT Cell definitions
+        for ($ACSetupRowIndex = $#ACSetupRow; $ACSetupRowIndex > -1; $ACSetupRowIndex--) {
+            #print "$ACSetupRow[$ACSetupRowIndex]\n";
+
+            ($TimingEdgeGroupName, $PinName) = split(/:/, $ACSetupRow[$ACSetupRowIndex]);
+            (@tgValues) = split(/:/, $TimingEdgeValues{$TimingEdgeGroupName});    # $t3, $t1, $t2, $t4, $t5
+
+            foreach (@tgValues){ $_ =~ s/(\d+\.?\d*[munps]+)/$ParamLUT{$1}/g; }   # replace timing values with Spec Param
+            
+            if ($TimingEdgeGroupName =~ /^IN/) {
+                $WFTObject .= "\tCell \"$PinName\" L\/H $TimingEdgeGroupName" ."_LH {\n";
+                $WFTObject .= "\t\tData 6/7;\n";
+                $WFTObject .= "\t\tColor 3/6;\n";
+                &AddWFTCellComment($PinName);
+                &AddWFTCellDrive($PinName, "t0", $tgValues[1], $tgValues[2]);
+                $WFTObject .= "\t}\n";
+            }
+            if ($TimingEdgeGroupName =~ /^IO/) {
+                $WFTObject .= "\tCell \"$PinName\" L\/H $TimingEdgeGroupName" ."_LH {\n";
+                $WFTObject .= "\t\tData 6/7;\n";
+                $WFTObject .= "\t\tColor 3/6;\n";
+                &AddWFTCellComment($PinName);
+                # &AddWFTCellDrive($PinName, "t0", $tgValues[1], $tgValues[2]);
+                &AddWFTCellDrive($PinName, $tgValues[0], $tgValues[1], $tgValues[2]);
+                $WFTObject .= "\t}\n";
+
+                $WFTObject .= "\tCell \"$PinName\" 0\/1\/m\/M $TimingEdgeGroupName" . "_01mM {\n";
+                $WFTObject .= "\t\tData 0\/1\/2\/3;\n";
+                $WFTObject .= "\t\tColor 8/6/7/7;\n";
+                $WFTObject .= "\t\tDrive {\n";
+                $WFTObject .= "\t\t\tWaveform { DriveOff @ \"$tgValues[0]\"; }\n";
+                $WFTObject .= "\t\t}\n";
+                $WFTObject .= "\t\tCompare {\n";
+                $WFTObject .= "\t\t\tWaveform { CompareData @ \"$tgValues[3]\"; }\n";
+                $WFTObject .= "\t\t}\n";
+                $WFTObject .= "\t}\n";
+
+                $WFTObject .= "\tCell \"$PinName\" z\/Z\/x\/X $TimingEdgeGroupName" . "_zZxX {\n";
+                $WFTObject .= "\t\tData 0\/1\/2\/3;\n";
+                $WFTObject .= "\t\tColor 4/4/7/7;\n";
+                $WFTObject .= "\t\tDrive {\n";
+                $WFTObject .= "\t\t\tWaveform { DriveOff @ \"$tgValues[0]\"; }\n";
+                $WFTObject .= "\t\t}\n";
+                $WFTObject .= "\t\tCompare {\n";
+                $WFTObject .= "\t\t\tWaveform { CompareFloat @ \"$tgValues[3]\"; }\n";
+                $WFTObject .= "\t\t}\n";
+                $WFTObject .= "\t}\n";
+            }
+            if ($TimingEdgeGroupName =~ /^OUT/) {
+                $WFTObject .= "\tCell \"$PinName\" 0\/1\/m\/M $TimingEdgeGroupName" . "_01mM {\n";
+                $WFTObject .= "\t\tData 0\/1\/2\/3;\n";
+                $WFTObject .= "\t\tColor 8/6/7/7;\n";
+                $WFTObject .= "\t\tDrive {\n";
+                $WFTObject .= "\t\t\tWaveform { DriveOff @ \"t0\"; }\n";
+                $WFTObject .= "\t\t}\n";
+                $WFTObject .= "\t\tCompare {\n";
+                $WFTObject .= "\t\t\tWaveform { CompareData @ \"$tgValues[3]\"; }\n";
+                $WFTObject .= "\t\t}\n";
+                $WFTObject .= "\t}\n";
+
+                $WFTObject .= "\tCell \"$PinName\" z\/Z\/x\/X $TimingEdgeGroupName" . "_zZxX {\n";
+                $WFTObject .= "\t\tData 0\/1\/2\/3;\n";
+                $WFTObject .= "\t\tColor 4/4/7/7;\n";
+                $WFTObject .= "\t\tDrive {\n";
+                $WFTObject .= "\t\t\tWaveform { DriveOff @ \"t0\"; }\n";
+                $WFTObject .= "\t\t}\n";
+                $WFTObject .= "\t\tCompare {\n";
+                $WFTObject .= "\t\t\tWaveform { CompareFloat @ \"$tgValues[3]\"; }\n";
+                $WFTObject .= "\t\t}\n";
+                $WFTObject .= "\t}\n";
+            }
+        }
+        $WFTObject .= "}\n";
+        print EVA $WFTObject;
+    }   # foreach $ACSetupName (@ACSetups)
+
+
+    print ">>>  Creating AC Specs\n";
+
+#Spec AC_Specs {
+#    Category[0] = ACCat;
+#}
+    $ACSpec = "Spec AC_Specs {\n";
+    $ACSpec .= "\tCategory[0] = ACCat;\n";
+
+    $ACMask = "Mask ACTypMask {\n";
+
+    $ACSpecParams = "";
+    $ACSpecParamCount = 0;
+
+    foreach (sort keys %ACParams) {
+        $ACSpecParams .= "\tParam[" . $ACSpecParamCount++ . "] = $_;\n";
+        $ACMask       .= "\t$_ = Typ;\n";
+    }
+    $ACSpec .= $ACSpecParams;
+    $ACSpec .= "}\n";
+    print EVA $ACSpec;
+
+    print EVA $ACParam_recs;
+
+    $ACMask .= "}\n";
+    print EVA $ACMask;
+    print "     -  Number of AC_Specs       : $ACSpecParamCount\n";
+
+
+    &GenerateDCSpecs;
+    &GenerateLevels;
+
+Bypass:
+
+    &createSignalHeader;
+
+
+# Create the PatternGroup and default WFT objects
+    print ">>>  Creating PatternGroup\n";
+
+    $PatGrp = "FuncTDLPatGrp";                         # as defined in "TI_VSeriesTemplate"
+
+    $PatternGroup = "PatternGroup $PatGrp {\n";
+    $PatternGroup .= "\tCache;\n";
+    $PatternGroup .= "\tCachePath \"$cmd_opt{'cachepath'}\";\n";
+    $SignalHeaderDef = '';
+    $sh_count = 0;
+    foreach (@SignalHeaders) {
+        $SignalHeaderDef .= $_;
+        if (sh_count < $#SignalHeaders) { $SignalHeaderDef .= " "; }
+        $sh_count++;
+    }
+    $PatternGroup .= "\tSignalHeader $SignalHeaderDef;\n}\n";
+    print EVA $PatternGroup;
+
+    $PatGrp = "ScanTDLPatGrp";                         # as defined in "TI_VSeriesTemplate"
+
+    $PatternGroup = "PatternGroup $PatGrp {\n";
+    $PatternGroup .= "\tCache;\n";
+    $PatternGroup .= "\tCachePath \"$cmd_opt{'cachepath'}\";\n";
+    $SignalHeaderDef = '';
+    $sh_count = 0;
+    foreach (@SignalHeaders) {
+        $SignalHeaderDef .= $_;
+        if (sh_count < $#SignalHeaders) { $SignalHeaderDef .= " "; }
+        $sh_count++;
+    }
+    $PatternGroup .= "\tSignalHeader $SignalHeaderDef;\n}\n";
+    print EVA $PatternGroup;
+
+
+    # if ($debug) { &write_AdapterBoard; }
+
+
+    &GenerateThreadAndExternalRefs;
+
+
+    $TemplateData =~ s/\n\}\n/\!/g;
+    # Replace __TemplateSH__ with $SignalHeader
+    $TemplateData =~ s/(SignalHeader )__TemplateSH__/$1$SignalHeader/i;
+    # Replace __TemplateFocusCalObject__ with $itp_program.FocusCalObject
+    $TemplateData =~ s/__TemplateFocusCalObject__/$itp_program\FocusCalObject/ig;
+    # Replace __TemplateFocusCal__ with $itp_program.FocusCal
+    $TemplateData =~ s/__TemplateFocusCal__/$itp_program\FocusCal/ig;
+    $TemplateData =~ s/\!/\n\}\n/g;
+
+    print EVA $TemplateData;
+
+    &AddMiscObjects;
+}   # end of $cmd_opt{'itp'}
+
+if (!($cmd_opt{'itp'})) {
+    $PatGrp = "FuncTDLPatGrp";
+    &GenerateThreadAndExternalRefs;
+}
+
+if ($cmd_opt{'vvs'}) {
+    # Process each of the .vvs files
+    #$VVSFilesToTranslate[$NumVVSFiles++] = $vvs_file;
+    for ($arg_num = 1; $arg_num <= $#cmd_line; $arg_num++) {
+	$vvs_file = $cmd_line[$arg_num];
+
+        # check for UserSelectedPattern against patterns in PatternLoad
+        
+	&do_vvs_file($vvs_file);                           # Convert .vvs pattern file
+    }
+}   # end of $cmd_opt{'vvs'}
+
+
+if ($cmd_opt{'itp'}) {
+    foreach $ScanHeader (sort keys %ScanHeadersUsed) {
+        print "     -  SignalHeader $ScanHeader\n";
+        $ScanSignalHeader = "SignalHeader $ScanHeader {\n" .
+                            "\tSignals {\n";
+        # ScanHeader Scan_f721843e_55026g02_105_1_SH
+        # ScanHeader Scan_f721843e_55026g02_33_1_SH
+        # ScanHeader Scan_f721843e_55026g02_38_1_SH
+        $ScanHeader =~ /\w+_(\d+)_(\d+)_SH$/ && ($ChainLength = $1) && ($Pathes = $2);
+        @ScanPaths = split(//, $Pathes);
+        for ($ii = 0; $ii <= $#ScanPaths; $ii++) {
+            ($ScanInPin, $ScanOutPin) = split(/:/, $SerialPath{$ScanPaths[$ii]});
+            if ($ii == 0) { 
+                $ScanSignalHeader .= "\t\t$DevicePinNumberToPinNameLUT{$ScanInPin} { Scan, ChainLength = $ChainLength, Fill = 0, PostFill; }\n";
+            } else {
+                $ScanSignalHeader .= "\t\t\%$DevicePinNumberToPinNameLUT{$ScanInPin} { Scan, ChainLength = $ChainLength, Fill = 0, PostFill; }\n";
+            }
+            # $ScanSignalHeader .= "\t\t\%$DevicePinNumberToPinNameLUT{$ScanOutPin} { Scan, ChainLength = $ChainLength, Fill = M, PostFill; }\n";
+            $ScanSignalHeader .= "\t\t\%$DevicePinNumberToPinNameLUT{$ScanOutPin} { Scan, ChainLength = $ChainLength, Fill = x, PostFill; }\n";    # per Layne, 990617
+        }
+         $ScanSignalHeader .= "\t}\n}\n";
+        print EVA $ScanSignalHeader;
+
+    }
+
+    &GenerateTestProgObject;
+}   # end of $cmd_opt{'itp'}
+
+close(EVA);
+
+
+$stop_conversion_time = time;
+$stop_time = &ctime($stop_conversion_time);
+$stop_time =~ s/\n//;
+
+print "\n";
+($ErrorCount != 0)     && print "Errors: $ErrorCount    ";
+($WarningCount != 0)   && print "Warnings: $WarningCount    ";
+($UserInfoCount != 0)  && print "UserInfo: $UserInfoCount";
+print "\n";
+#print "\nErrors: $error_count    Warnings: $warning_count    UserInfo: $user_info_count\n";
+
+print "------  V-Series Conversion Done    \@ $stop_time   \(Conversion time ", ($stop_conversion_time = time-$start_conversion_time), "sec.\)\n";
+# end of main program
+
+
+# --------------------------------------------------------------------------
+sub AddWFTCellComment {
+    local ($PinName) = @_;
+    local ($Plist, $Pin_, $DFMT0, $DFMT1, $RFMT);
+    if ($PinNameFormatArray{$PinName}) {
+        ($Plist, $Pin_, $DFMT0, $DFMT1, $RFMT) = split(/:/, $PinNameFormatArray{$PinName});
+        $WFTObject .= "\t\tComment = \"$Plist ($Pin_) : $DFMT1\";\n";
+    }
+}
+
+# --------------------------------------------------------------------------
+sub AddWFTCellDrive {
+    local ($PinName, $t3tg, $t1tg, $t2tg) = @_;
+    local ($Plist, $Pin_, $DFMT0, $DFMT1, $RFMT);
+    $WFTObject .= "\t\tDrive {\n";
+    if ($PinNameFormatArray{$PinName}) {
+        ($Plist, $Pin_, $DFMT0, $DFMT1, $RFMT) = split(/:/, $PinNameFormatArray{$PinName});
+        #d print "$ACSetupName:$PinName:$TimingEdgeGroupName: $Plist, $Pin_, $DFMT1\n";
+        if ($DFMT1 eq "S_NR") {          # non return
+            $WFTObject .= "\t\t\tWaveform { DriveOn @ \"$t3tg\"; DriveData @ \"$t1tg\"; }\n";
+        } elsif ($DFMT1 eq "S_SBC") {    # surround by complement  (not correct)
+            $WFTObject .= "\t\t\tWaveform { DriveOn @ \"$t3tg\"; DriveData @ \"$t1tg\"; DriveDataNot @ \"$t2tg\"; }\n";
+        } elsif ($DFMT1 eq "S_SB3") {    # surround by 3-state     (not correct)
+            $WFTObject .= "\t\t\tWaveform { DriveOn @ \"$t3tg\"; DriveData @ \"$t1tg\"; DriveOff @ \"$t2tg\"; }\n";
+        } elsif ($DFMT1 eq "S_SBZ") {    # surround by zero        (not correct)
+            $WFTObject .= "\t\t\tWaveform { DriveOn @ \"$t3tg\"; DriveData @ \"$t1tg\"; DriveLow @ \"$t2tg\"; }\n";
+        } elsif ($DFMT1 eq "S_SBO") {    # surround by one         (not correct)
+            $WFTObject .= "\t\t\tWaveform { DriveOn @ \"$t3tg\"; DriveData @ \"$t1tg\"; DriveHigh @ \"$t2tg\"; }\n";
+        } elsif ($DFMT1 eq "S_RTZ") {    # return to zero
+            $WFTObject .= "\t\t\tWaveform { DriveOn @ \"$t3tg\"; DriveData @ \"$t1tg\"; DriveLow @ \"$t2tg\"; }\n";
+        } elsif ($DFMT1 eq "S_RTO") {    # return to one
+            $WFTObject .= "\t\t\tWaveform { DriveOn @ \"$t3tg\"; DriveData @ \"$t1tg\"; DriveHigh @ \"$t2tg\"; }\n";
+        } elsif ($DFMT1 eq "S_RTC") {    # return to complement
+            $WFTObject .= "\t\t\tWaveform { DriveOn @ \"$t3tg\"; DriveData @ \"$t1tg\"; DriveDataNot @ \"$t2tg\"; }\n";
+        } elsif ($DFMT1 eq "S_OFF") {    # driver disabled
+            $WFTObject .= "\t\t\tWaveform { DriveOn @ \"$t3tg\"; DriveData @ \"$t1tg\"; DriveHigh @ \"$t1tg\"; }\n";
+        }
+    } else {
+        $WFTObject .= "\t\t\tWaveform { DriveOn @ \"$t3tg\"; DriveData @ \"$t1tg\"; }\n";
+    }
+    # $WFTObject .= "\t\t\tWaveform { DriveOn @ \"$t3tg\"; DriveData @ \"$t1tg\"; }\n";
+    $WFTObject .= "\t\t}\n";
+}
+
+
+# --------------------------------------------------------------------------
+sub LoadInVSeriesTemplate {
+#       ----> in TI_VSeriesTemplate:
+#       PinType                 Ground
+#       Mask
+#       WaveformTable           TDL_patterns
+#       Test OpenShorts
+    $include = $0;                            # VSeriesTranslator executable and pathname
+    # $include =~ s/VSeriesTranslator$//;       # remove executable name, leaving path to template
+    $include =~ s/VSeriesTranslator$//;
+    open(TEMPLATE, "$include" . "TI_VSeriesTemplate") || die "Couldn't open the \"TI_VSeriesTemplate\" file.\n";
+    $/ = "__!!__";
+    $* = 1;
+    $TemplateData = <TEMPLATE>;
+    close TEMPLATE;
+
+    # Check rev of Template
+    $TemplateData =~ s/^Rev\:\s*(.+)\s*\n// && ($TemplateRev = $1);
+    # Remove comments
+    $TemplateData =~ s/^\#.*\n//g;
+    print ">>>  Loading in V-Series Template file \"TI_VSeriesTemplate\", Rev: $TemplateRev\n";
+}
+
+
+# --------------------------------- do_vvs_file  ---------------------------------
+sub do_vvs_file {
+    local ($vvs_file) = @_;
+    local ($header, $pattern_name);
+
+    $file_compressed = 0;
+    $vvs_file =~ /\w*.vvs.gz/ && do {
+        $file_compressed = 1;
+        system "$gz_path/gunzip $vvs_file";
+        $vvs_file =~ s/.gz$//;
+    };
+    $vvs_file =~ /\w*.vvs.Z/ && do {
+        $file_compressed = 2;
+        system "/usr/bin/uncompress $vvs_file";
+        $vvs_file =~ s/.Z$//;
+    };
+
+    while ($vvs_file =~ s/\$(\w+)/$ENV{$1}/) {}     # evaluate environment variables ($)
+
+    print "\nVSeries Pattern    : $vvs_file";
+    if ($file_compressed == 1) { print "  (.gz)\n"; } elsif
+       ($file_compressed == 2) { print "  (.Z)\n"; } else
+                               { print "\n"; }
+
+
+    $vvs_file =~ /(\w+).vvs/ && ($evo_file_name = $1 . ".evo");
+    if ($PatternSourceToCacheLUT{$evo_file_name}) {} else {
+        print "\n\t*** Error : User specified pattern \'$vvs_file\' is not a valid/current .itp PatternLoad entry.\n\n";
+        return;
+    }
+    
+
+    $/ = "\n";                                      # Use new line as the line delimiter, read line at a time
+    #$/ = "\;";                                      # Use new line as the line delimiter, read line at a time
+    open(VVS_FILE, $vvs_file) || die "\n*** Error : Couldn't open VSeries pattern file: $vvs_file \n";
+
+    # Create a separate .evo file for each .vvs pattern
+    $vvs_file =~ /(\w+).vvs/ && ($pattern_name = $1);
+    $evo_file_name = $pattern_name . '.evo';
+    open(EVO, ">$evo_file_name") || &terminate ("Couldn't open destination file: $evo_file_name\n");
+    print "Creating .evo file : $evo_file_name\n"; #:$pattern_name\n";
+
+    $UserSelectedPatterns{$evo_file_name}++;
+    if ($PatternLoadName{$evo_file_name}) { print "User selected pattern matches a PatternLoad\n"; }
+
+    $pattern_name   = $PatternSourceToCacheLUT{$evo_file_name};
+    $pattern_source = "Dpm";
+    &write_pattern_intro($pattern_name, $pattern_source);
+
+    &initialize_arrays;
+
+    # Read in MZDI data
+    do {$_ = &get_line;
+        #d /^(MSet|ZSet|DSet|ISet)\s*\[\s*(\d+)\s*\]\s*\[([01]*)\]\s*;/ && (print "$1\[$2\]:$3\n");
+        /^MSet\s*\[\s*(\d+)\s*\]\s*\[([01]*)\]\s*;/ && ($MSetData[$1] = $2);
+        /^ZSet\s*\[\s*(\d+)\s*\]\s*\[([01]*)\]\s*;/ && ($ZSetData[$1] = $2);
+	/^DSet\s*\[\s*(\d+)\s*\]\s*\[([01]*)\]\s*;/ && ($DSetData[$1] = $2);
+	/^ISet\s*\[\s*(\d+)\s*\]\s*\[([01]*)\]\s*;/ && ($ISetData[$1] = $2);
+    } while (!(/^\s*begin/i));
+ 
+    # Initialize WFTRef to first-defined cycle name in Cycle TYPE
+    $WFTRef = $CycleNames[0];                                           # "normal";
+
+    # Read in and process each .vvs vector
+    while (($_ = &get_line) !~ /^END\./i) { &do_vector($_); }
+
+    ($ParallelVectorCount) && push(@conv_status, join(',', 'Parallel', $ParallelVectorCount));
+    
+    print EVO "}\n";
+    close (EVO);
+
+    if ($cmd_opt{'CompressEVO'}) { system "$gz_path/gzip $evo_file_name"; }     # Per Layne (990518), gzip the .evo file.
+
+    print "\nTotal vectors converted : $vec_count\n";
+
+    #d foreach $Path (sort numerically keys %ScanPathUsed) { print "Scan Path $Path\n"; }
+    #d foreach $ScanLength (sort numerically keys %ScanLengthUsed) { print "Scan Length $ScanLength\n"; }
+    #d foreach $ScanHeader (sort keys %ScanHeadersUsed) { print "ScanHeader $ScanHeader\n"; }
+
+    close (VVS_FILE);
+    if ($file_compressed == 1) { system "$gz_path/gzip $vvs_file"; } elsif
+       ($file_compressed == 2) { system "/usr/bin/compress $vvs_file"; }
+    
+    &write_AS_Table;
+    ($ScanVectorCount) && &output_CPM_FlowReport;
+} # end do_vvs_file
+
+# --------------------------------- write_pattern_intro  -----------------------
+sub write_pattern_intro {
+    local ($PatternName, $PatternSource) = @_;
+    #          enVisionObject:"baseline:revision:syntax_revision";
+    #      ex. enVisionObject:"bl8:R5.6";
+    print EVO "enVisionObject:\"$baseline:$system_revision:$syntax_revision\";\n\n";
+    print EVO "Pattern $PatternName {\n";
+    print EVO "Type $PatternSource;\n";
+    print EVO "Default SignalHeader $SignalHeader;\n";
+    print EVO "\$" . $PatternName . "_st\n";
+}
+
+# --------------------------------- do_vector  ---------------------------------
+sub do_vector {
+    local ($vector_data) = @_;
+    local ($first_vector_header_num,
+           $references,
+           $micro,
+           $vector,
+           @labels);
+    $label        = "";
+    $microcode    = "";
+    $repeat_count = "";
+    $comment      = "";
+    $User_comment = "";
+
+#        # Remove (*comments*) - Note: delimiters changed from (* to {, and *) to }
+#        if ($buffer =~ /\(\*/) {
+#                $buffer =~ s/\(\*/{/g;
+#                $buffer =~ s/\*\)/}/g;
+#                while ($buffer =~ s/\{[^\{]*\}//) {}
+#                while ($buffer =~ /\{/) {
+#                        $buffer .= &get_line;
+#                        $buffer =~ s/\(\*/{/g;
+#                        $buffer =~ s/\*\)/}/g;
+#                        while ($buffer =~ s/\{[^\{]*\}//) {}
+#                }
+#        }
+    if (length($vector_data) == 0) { $vector_data .= &get_line; }
+    
+    if ($vector_data =~ /\{/) {
+        while ($vector_data !~ /\}/) { $vector_data .= &get_line; }
+        $vector_data =~ s/\{[^\{]*\}//;
+        if ($vector_data !~ /\[[01\s]+\]/) { $vector_data .= &get_line; }   # this fixed Breaker_C7, f731704d_dieid.vvs with commented MZDI spanning 2 lines (991001)
+    }
+    if ($vector_data =~ /^\s*\(\*/) {
+        while ($vector_data !~ /\*\)/) { $vector_data .= &get_line; }
+        $vector_data =~ s/\(\*([^\(\*]*)\*\)// && ($User_comment = $1);
+        $vector_data .= &get_line;
+    }
+
+
+    if ($vector_data =~ s/(\w+)\://i) {                                 # process Labels
+        $label .= "\$" . $1 . "\n";
+    }
+    if ($vector_data =~ s/\s*Sync\s*//i) {
+        $SyncLabel = $pattern_name . "_Sync_" . ++$SyncIndex;
+        $label .= "\$" . $SyncLabel . "\n";
+        $vvs_vector = $vec_count + 1;
+        #d print "Sync label : $SyncLabel at $vvs_vector, Offset = $vec_count\n";
+    }
+    if ($vector_data =~ s/\s*TMU\s*//i) {
+        $TMULabel = "TMU_" . ++$TMUIndex;
+        $label .= "\$" . $TMULabel . "\n";
+        $vvs_vector = $vec_count + 1;
+        #d print "TMU label  : $TMULabel at $vvs_vector, Offset = $vec_count\n";
+    }
+    if ($vector_data =~ s/\s*PMEX\s*//i) {
+        $PMEXLabel = "PMEX_" . ++$PMEXIndex;
+        $label .= "\$" . $PMEXLabel . "\n";
+        $vvs_vector = $vec_count + 1;
+        #d print "PMEX label : $PMEXLabel at $vvs_vector, Offset = $vec_count\n";
+    }
+    if ($vector_data =~ s/\s*REPEAT\s+(\d+)\s*//i) {
+        $repeat_count = $1;
+        $microcode = "RPT";
+        $vvs_vector = $vec_count + 1;
+        #d print "Repeat $repeat_count at $vvs_vector, Offset = $vec_count\n";
+	if ($vector_data !~ /\s*\(*\s*(\d*)\s*,*\s*(\d*)\s*\)*\s*\[([01]*)\]\s*;(.*)/) { $vector_data = &get_line; }
+    }
+    if ($vector_data =~ s/\s*LOOP\s+(\d+)\s*//i) {
+        $LoopMode = 1;
+        $loop_count = $1;
+        $microcode = "COND NZC2";
+        $LoopLabel = $pattern_name . "_Loop_" . "$loop_count" . "_" . ++$LoopIndex;
+        $label .= "\$" . $LoopLabel . "\n";
+        if ($pattern_source eq "Dpm") {
+            print "!!!  Found a LOOP option/microcode that is not correctly processed.\n";
+            print "     The following CPM micro_instructions need to be manually added at label \"\$$LoopLabel\" :\n";
+            $LC2Count = $loop_count - 1;
+            print "\t- Append to vector just prior to the LOOP  : < LC2 $LC2Count >\n";
+            # print "\t                                             < COND NZC2 >\n";
+            print "\t- Append to last vector in the LOOP        : < CJMP $LoopLabel, DC2 >\n";
+            #print "\n\nDanger, Danger, Will Robinson!  A Loop micro-instruction was encountered\n";
+            #print "    in pattern \'$evo_file_name\'. Need to make this a CPM pattern. \n\n";
+        }
+# 
+#Danger, Danger, Will Robinson!  A Loop micro-instruction was encountered
+#    in pattern 'ds_at_speed.evo'. Need to make this a CPM pattern. 
+# 
+#Loop 4000 at 2640, Offset = 2639
+        $vvs_vector = $vec_count + 1;
+        #d print "Loop $loop_count at $vvs_vector, Offset = $vec_count\n";
+        while ($vector_data !~ /\s*\(*\s*(\d*)\s*,*\s*(\d*)\s*\)*\s*\[([01]*)\]\s*;(.*)/) { $vector_data .= &get_line; }
+    }
+    if ($vector_data =~ s/\s*SCAN\s+FOR\s+(\d+)//i) {
+        $scan_length = $1;
+        #d print "Scan for $scan_length\n";
+        $vector_data .= &get_line;
+        if (!$ScanPattern) {
+            $vvs_file =~ /(\w+).vvs/ && ($CPM_pattern_file = $1 . "_CPM.evo");
+            open(CPM_EVO, ">$CPM_pattern_file") || &terminate ("Couldn't open destination file: $CPM_pattern_file\n");
+            $ScanPattern = 1;
+        }
+	$scan_mode = 1;
+    }
+    if ($vector_data =~ s/\s*END\s*\;//i) {
+        if ($LoopMode) {
+            $microcode = "CJMP $LoopLabel, DC2";                        # issue! : vector this is associated with is already written out
+            #d print "Loop end encountered\n";
+            $label .= "\$" . $LoopLabel . "_sp\n";
+            $LoopMode = 0;
+        } elsif ($MatchMode) {
+            $label .= "\$" . $MatchLabel . "_sp\n";
+            $MatchMode = 0;
+            $vector_data .= &get_line;
+            $vector_data .= &get_line;
+        }
+    }
+    if ($vector_data =~ s/\s*EXIT\s*//i) {
+        $ExitLabel = $pattern_name . "_Exit";
+        $label .= "\$" . $ExitLabel . "\n";
+        $vvs_vector = $vec_count + 1;
+        #d print "Exit label : $ExitLabel at $vvs_vector, Offset = $vec_count\n";
+    }
+
+
+
+
+    
+    if ($vector_data =~ /(DPSWindow|DPSWindowST|DSPWindowSP|APS|Convert|ResetPatOver|Runoff|SHUTDOWN|FILL|DPSWindowFlag)/i) {
+        print "!!!  Found a $1 option/microcode that is not correctly processed.\n";
+    }
+    if ($vector_data =~ s/\s*(MATCH)\s*//i) {
+        print "!!!  Found a $1 option/microcode that is not correctly processed.\n";
+        $MatchMode = 1;
+        $MatchLabel = $pattern_name . "_Match_" . ++$MatchIndex;
+        $label .= "\$" . $MatchLabel . "_st\n";
+        $vvs_vector = $vec_count + 1;
+        #d print "Match label : $MatchLabel at $vvs_vector, Offset = $vec_count\n";
+        $vector_data .= &get_line;
+        #return; #$vector_data .= &get_line;
+    }
+
+    $vector_data =~ s/BEGIN//i;                                         # remove 'BEGIN' of any statement sections
+
+    if ($label) { print EVO "$label"; }
+
+    if ($scan_mode) {
+        if ($vector_data =~ /\s*\(\s*(\#)\s*,\s*(\d+)\s*\)\s*\[([01M]*)\]\s*;(.*)/) {
+            #print "Scan Mode : hold vector\n";
+            $MZIndex = $1;
+            $DIIndex = $2;
+            $background_vector = $3;
+            $User_comment = $4;
+
+            $MZDI_comment = $MZIndex . "/" . $DIIndex;
+        
+            $vector_length = length($background_vector);
+            for ($nth_bit = 0; $nth_bit < $vector_length; $nth_bit++) {
+                $MaskBit = '1';
+
+
+                
+                substr($background_vector, $nth_bit, 1) = $MZDI_LUT{$MaskBit,
+                                                                    '0',                                      # pre-defined to '0'
+                                                                    substr($DSetData[$DIIndex], $nth_bit, 1),
+                                                                    substr($ISetData[$DIIndex], $nth_bit, 1),
+                                                                    substr($background_vector, $nth_bit, 1)};
+            }
+            print CPM_EVO "$MZDI_comment:$background_vector\n"
+
+            
+        }
+
+        $/ = ";";
+        $SerialPinCount = 0;
+#begin
+#scanin  (1)    [LLLHLHHHHLLLLLLHHLHHHHLHHHHLHLHHHLLLHHLHLHLLLHHHLHHLLHLL
+#HHHHHLHHLLHLLHLHLHHHHLLLHLLHLLLLLLHLHHLLHLH];
+#scanout (1)    [10110001111011100100010110000000000000000001111111000000
+#0MMMM00010110M010001000MMMMMMM001M1MM00000M];
+#end;
+#begin
+#scanin  (1)    [LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLHHLHLLHLHLHHLLHLLHLHHHLLHHHLHLLHHHLHLHL];
+#scanin  (3)    [LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLHLLHHLHLLLHHLHHHLLHLLLHHLHLHHHLHHLHHHHLLLHHHHHLLLLLLLLHLLHHLLLHLL];
+#scanin  (2)    [LLLLLLLLLLLLLLLLLLLLLLLLLHLLHLLLLLHLHHHLLLLHHLLHLHHLLHLLHHLLLLLHHLHLHLLLLLHLLHLLHLLHLLHHHLLHLLLLHL];
+#scanin  (4)    [HHHLLHHHHHHLLLLLLLHLLLHLLLHLHHHLLHLHHHLHLLHHHHHHHHLLHLLLLHLLLLLLHHHHHLHHHLLHLLLLLLHHHLHHHHHHLLHLLH];
+#scanout (2)    [1101111101000111100110100110110110011000111001110100111010110001101111011MMMMMMMMMMMMMMMMMMMMMMMMM];
+#scanout (3)    [1010010111011100000111010100100000111000000100010111110010000100010MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM];
+#scanout (1)    [00101100000001010011001000101100010000111011001101110100MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM];
+#scanout (4)    [00110000001111111011101110100011010001011000000001101111011101111111111110110111110010000001101101];
+#end;
+        # Read in all scanin/scanout data, for all pathes, store in %scan_data_array
+	do { $_ = &get_line;
+	     /(SCANIN|SCANOUT)\s*\(\s*(\d+)\s*\)\s*\[\s*([LH_01Mm\s\t\n]+)\s*\]\s*;/i && do {
+	         $scan_dir  = "\L$1";
+		 $path      = $2;
+		 $scan_data = $3;
+		 $scan_data =~ s/[\_\s\t\n]//g;                   # remove '_' place holders, whitespace and newlines
+		 #d print "$scan_dir for $path : $scan_data\n";
+
+                 # change TDL aliases to Layne's aliases
+                 #if ($scan_dir eq 'scanin')  { $scan_data =~ tr/LH/01/; }
+                 #if ($scan_dir eq 'scanout') { $scan_data =~ tr/01Mm/LHxx/; }    # per Layne, 990617
+
+                 $scan_data_array{$path, $scan_dir} = $scan_data;
+                 $ScanPathUsed{$path}++;
+                 $ScanLengthUsed{$scan_length}++;
+                 $SerialPinCount++;
+	     }
+	     #print "$_\n";
+        } while (!(/\s*end\s*;/i));
+
+	$/ = "\n";
+
+        # Add in scan_data for un-defined scan pins
+#scan for 1610
+#                                 11111111111111111111111111111111111111         111111111   11111111111 11         
+#                      8889999999900000000111111222222223333333344444443888877777555555566  16566777767617612 2
+#                      689013456890234578934678902345679123467890135679543219876541536272812390010124364456603745679
+#       (    #,  410) [0000000000000100000000000000000000000000000000000000000MM00M111000000010001101M10010010000000000000100100000
+#                                                                                11                1     1   
+#                                                                             77 55                7     7  2
+#                                                                             76 41                2     5  0
+
+#                                                                             MM 0M                0     1  1
+
+#                                                                             MM 0M                0     1  1
+#
+#00000000000000000000000000000010010100];(*      10       12       110 *)
+#        for ($ScanPath = 1; $ScanPath <= $MaxPathNumber; $ScanPath++) {
+#            ($ScanInPin, $ScanOutPin) = split(/:/, $SerialPath{$ScanPath});
+#            push(@SerialPins, $ScanInPin, $ScanOutPin);
+#        }
+        foreach $Path (sort numerically keys %ScanPathUsed) {
+            for $ScanInOut ('scanin', 'scanout') {
+                if (!($scan_data_array{$Path, $ScanInOut})) {
+                    #d print "Missing scan data for $Path : $ScanInOut\n";
+                    #d print "Background vector : $background_vector\n";
+
+                    $ParallelVectorAlias = substr($background_vector, $DevicePinToSignalOrderLUT{$SerialPinLUT{"$Path".":"."$ScanInOut"}}, 1);
+
+                    if ($ScanInOut eq 'scanin') {
+                        $ParallelVectorAlias =~ tr/01/LH/;  # TDL aliases
+                        # $ParallelVectorAlias =~ tr/01/01/;    # Layne's aliases
+                    }
+                    if ($ScanInOut eq 'scanout') {
+                        $ParallelVectorAlias =~ tr/01M/??M/;  # TDL aliases ?
+                        # $ParallelVectorAlias =~ tr/01M/??x/;    # per Layne, 990617
+                    }
+
+                    for (1..$scan_length) { $scan_data_array{$Path, $ScanInOut} .= $ParallelVectorAlias; }
+                    $SerialPinCount++;
+                }
+            }
+        }
+
+        ++$ScanVectorCount;
+        
+        # Output label indicating nth ScanVector
+        $label = "\$" . $pattern_name . "_ScanVec" . "_$ScanVectorCount" . "\n";
+        print EVO "$label";
+        
+        # Format and output scan vector
+        $BitsPerRow    = 100;
+        $NumRows       = $scan_length/$BitsPerRow;
+        $BitsInLastRow = $scan_length % $BitsPerRow;
+        
+        $scan_vector = "*";
+        $nthSerialPin = 0;
+        foreach $Path (sort numerically keys %ScanPathUsed) {
+            for $ScanInOut ('scanin', 'scanout') {
+                $nthSerialPin++;
+                #d print "$Path : $ScanInOut  > $scan_data_array{$Path, $ScanInOut}\n";
+
+#                if ($nthSerialPin == 1) { $scan_vector .= "$scan_data_array{$Path, $ScanInOut}\;"; } else
+#                                        { $scan_vector .= " $scan_data_array{$Path, $ScanInOut}\;"; }
+#                if ($nthSerialPin < $SerialPinCount) { $scan_vector .= "\n"; }
+
+                $bit_offset = 0;
+                if ($nthSerialPin == 1) {
+                    for $nthRow (1..$NumRows) {
+                        $ScanBits = substr($scan_data_array{$Path, $ScanInOut}, $bit_offset, $BitsPerRow);
+                        #$scan_vector .= "$scan_data_array{$Path, $ScanInOut}\;";
+                        if ($nthRow == 1) { $scan_vector .= "$ScanBits"; } else
+                                          { $scan_vector .= " $ScanBits"; } 
+                        $bit_offset += $BitsPerRow;
+                        if ($BitsPerRow == $scan_length) { $scan_vector .= ";"; } 
+                        elsif ($BitsInLastRow) { $scan_vector .= "\n"; }
+                    }
+                    if ($BitsInLastRow) {
+                        $ScanBits = substr($scan_data_array{$Path, $ScanInOut}, $bit_offset, $BitsInLastRow);
+                        if ($NumRows < 1) { $scan_vector .= "$ScanBits\;"; } else
+                                          { $scan_vector .= " $ScanBits\;"; } 
+                    }
+                } else {
+                    for $nthRow (1..$NumRows) {
+                        $ScanBits = substr($scan_data_array{$Path, $ScanInOut}, $bit_offset, $BitsPerRow);
+                        #$scan_vector .= "$scan_data_array{$Path, $ScanInOut}\;";
+                        $scan_vector .= " $ScanBits";
+                        $bit_offset += $BitsPerRow;
+                        if ($BitsPerRow == $scan_length) { $scan_vector .= ";"; } 
+                        elsif ($BitsInLastRow) { $scan_vector .= "\n"; }
+                    }
+                    if ($BitsInLastRow) {
+                        $ScanBits = substr($scan_data_array{$Path, $ScanInOut}, $bit_offset, $BitsInLastRow);
+                        $scan_vector .= " $ScanBits\;";
+                    }
+                }
+                if ($nthSerialPin < $SerialPinCount) { $scan_vector .= "\n"; }
+#                $bit_offset = 0;
+#                for $nthRow (1..$NumRows) {
+#                    $ScanBits = substr($scan_data_array{$Path, $ScanInOut}, $bit_offset, $BitsPerRow);
+#                    if ($nthRow == 1 && $Path == 1) { $scan_vector .= "$ScanBits"; } else
+#                                                    { $scan_vector .= " $ScanBits"; }
+#                    $bit_offset += $BitsPerRow;
+#                    if ($BitsInLastRow || ($Path < 4)) { $scan_vector .= "\n"; }
+#                }
+#                if ($BitsInLastRow) {
+#                    $ScanBits = substr($scan_data_array{$Path, $ScanInOut}, $bit_offset, $BitsInLastRow);
+#                    $scan_vector .= " $ScanBits\;";
+#                }
+#                if ($Path < 4) { $scan_vector .= "\n"; }
+            }
+        }
+        # Create Scan SignalHeader based on 'Scan', 'PatternLoadGlobal', ScanLength, and ScanPathes used
+        $ScanHeader = "Scan_$PatternLoadGlobal" . "_$scan_length" . "_";
+        foreach $Path (sort numerically keys %ScanPathUsed) { $ScanHeader .= "$Path"; }
+        $ScanHeader .= "_SH";
+        $ScanHeadersUsed{$ScanHeader}++;
+
+        # Comment indicating ScanLength
+        $ScanComment = "\"Scan length : $scan_length\"";
+        $scan_vector .= "* $WFTRef $ScanHeader;  $ScanComment\n";
+        #print "$scan_vector\n";
+        print EVO "$scan_vector";
+
+        %scan_data_array = '';                        # clear %scan_data_array
+	$scan_mode = 0;
+        # ($pattern_set_type =~ /SCAN/) && ($vector_count) && push(@conv_status, join(',', 'PARALLEL', $vector_count));
+        #push(@conv_status, join(',', 'PARALLEL', $vector_count));
+        #$vector_count = 0;
+        push(@conv_status, join(',', 'Parallel', $ParallelVectorCount));
+        $ParallelVectorCount = 0;
+        push(@conv_status, join(',', 'Serial', $scan_length, $ScanVectorCount));
+
+    } else {
+        if ($vector_data =~ /\s*(\w*)\s*\(\s*(\d*)\s*,*\s*(\d*)\s*\)\s*\[([01]*)\]\s*;(.*)/) {  # ($vector_data =~ /\s*\(\s*(\d+)\s*,\s*(\d+)\s*\)\s*\[([01]*)\]\s*;(.*)/)
+            $Cycle   = $1;
+            $MZIndex = $2;
+            $DIIndex = $3;
+            $vector  = $4;
+            $User_comment = $5;
+
+            if ($Cycle) { $WFTRef = $Cycle; }                           # if new Cycle defined, change $WFTRef
+            
+            $MZDI_comment = $MZIndex . "/" . $DIIndex;
+        
+            $vector_length = length($vector);
+            for ($nth_bit = 0; $nth_bit < $vector_length; $nth_bit++) {
+                substr($vector, $nth_bit, 1) = $MZDI_LUT{substr($MSetData[$MZIndex], $nth_bit, 1),
+                                                         substr($ZSetData[$MZIndex], $nth_bit, 1),
+                                                         substr($DSetData[$DIIndex], $nth_bit, 1),
+                                                         substr($ISetData[$DIIndex], $nth_bit, 1),
+                                                         substr($vector, $nth_bit, 1)};
+            }
+        }
+        elsif ($vector_data =~ /\s*(\w*)\s*\[([01]*)\]\s*;(.*)/) {      # ($vector_data =~ /\s*\[([01]*)\]\s*;(.*)/)
+            $Cycle   = $1;
+            $vector  = $2;
+            $User_comment = $3;
+
+            if ($Cycle) { $WFTRef = $Cycle; }
+
+            $vector_length = length($vector);
+            for ($nth_bit = 0; $nth_bit < $vector_length; $nth_bit++) {
+                substr($vector, $nth_bit, 1) = $MZDI_LUT{substr($MSetData[$MZIndex], $nth_bit, 1),
+                                                         substr($ZSetData[$MZIndex], $nth_bit, 1),
+                                                         substr($DSetData[$DIIndex], $nth_bit, 1),
+                                                         substr($ISetData[$DIIndex], $nth_bit, 1),
+                                                         substr($vector, $nth_bit, 1)};
+            }
+
+        } else { return; }
+
+        $User_comment =~ s/\{|\}//g;                                  # remove '{   }'
+        $User_comment =~ s/\(\*|\*\)//g;                              # remove '(* *)'
+        #d print "$User_comment\n";            
+
+        $comment = $MZDI_comment;
+        if ($User_comment) { $comment .= ",  $User_comment"; }
+
+        #if ($label) { print EVO "$label"; }
+        #print EVO "*$vector* $WFTRef\;";
+        #($microcode ne '') && (print EVO "  < $microcode >") && ($microcode = '');
+        #print EVO "\n";
+
+        if ($repeat_count > $MAX_DPM_RPT) {
+            do {
+                print EVO "*$vector* $WFTRef\;";
+                ($microcode ne '') && (print EVO "  < $microcode $MAX_DPM_RPT >");
+                if (!($comment eq '')) { print EVO "  \"$comment\""; }
+                print EVO "\n";
+                $repeat_count = $repeat_count - $MAX_DPM_RPT;
+            } until ($repeat_count <= $MAX_DPM_RPT);
+            print EVO "*$vector* $WFTRef\;";
+            (($microcode ne '') && ($repeat_count > 1)) && (print EVO "  < $microcode $repeat_count >");
+            if (!($comment eq '')) { print EVO "  \"$comment\""; }
+            print EVO "\n";
+            $microcode = '';
+        } else {
+            print EVO "*$vector* $WFTRef\;";
+            ($microcode ne '') && (print EVO "  < $microcode $repeat_count >") && ($microcode = '');
+            if (!($comment eq '')) { print EVO "  \"$comment\""; }
+            print EVO "\n";
+        }
+
+        &determine_alias_usage($vector);
+
+        $vec_count++;
+#070813  if (!($vec_count % 10)) {
+#            print "\.";                                          # every 10 vectors translated, print '.'
+#            if (!($vec_count % 100)) { print "$vec_count\n"; }   # every 100 vectors translated, print 100*n
+#        }
+        if (!($vec_count % $VecNumCount)) { print "\r\t$vec_count"; }
+    
+        ++$ParallelVectorCount;
+    }
+} # end do_vector
+
+# --------------------------------- get_line ---------------------------------
+sub get_line {
+    local ($path, $include);
+    (eof (VVS_FILE)) && die "\n*** Error : EndOfFile encountered processing: $vvs_file\n";
+    if ($in_include) {
+        $line_buf = <INCLUDE_FILE>;
+        (eof (INCLUDE_FILE)) && (close (INCLUDE_FILE)) && ($in_include = 0);
+    } else {
+
+        do {
+            $line_buf = <VVS_FILE>;
+            if ($line_buf =~ /^\s*%include\s*'([^\']+)'/i) {
+                $include = $1;
+                ($pat_file =~ /(.*\/)/) && ($path = $1) || ($path = '');
+                while ($pat_file =~ s/\$(\w+)/$ENV{$1}/) {}     # evaluate environment variables ($)
+                open (INCLUDE_FILE, "$path$include") || die "\n*** Error : Couldn't open include file: $1\n";
+                $line_buf = <INCLUDE_FILE>;
+                $in_include++;
+            }
+        } until ($line_buf =~ /\w+/);     # gobble up any blank lines, return when $line_buf contains data
+    }
+    $line_buf;
+} # end of get_line
+
+# -------------------------------------------------------------------------
+sub initialize_global_arrays {
+
+    # MZDI Lookup array
+    %MZDI_LUT = (
+    #   MSet ZSet DSet ISet Vec  Alias
+    #    MSet 
+    #      ZSet 
+    #        DSet 
+    #          ISet 
+    #            Vec  Alias            Reciever  Driver
+ 	'0.0.0.0.0', '0',   # TDL '0', Strobe for active '0'.
+	'0.0.0.0.1', '1',   # TDL '1', Strobe for active '1'.
+#	'0.0.0.1.0', '1',   # TDL '1', Strobe for active '1'.
+#	'0.0.0.1.1', '0',   # TDL '0', Strobe for active '0'.
+#	'0.0.1.0.0', 'L',   # TDL 'L', Drive a '0'.
+#	'0.0.1.0.1', 'H',   # TDL 'H', Drive a '1'.
+#	'0.0.1.1.0', 'H',   # TDL 'H', Drive a '1'.
+#	'0.0.1.1.1', 'L',   # TDL 'L', Drive a '0'.
+	'0.1.0.0.0', 'Z',   # TDL 'Z', Strobe for 3State.
+	'0.1.0.0.1', 'Z',   #  "
+	'0.1.0.1.0', 'Z',   #  "
+	'0.1.0.1.1', 'Z',   #  "
+#	'0.1.1.0.0', '?',   #  "
+#	'0.1.1.0.1', '?',   #  "
+#	'0.1.1.1.0', '?',   #  "
+#	'0.1.1.1.1', '?',   #  "
+        '1.0.0.0.0', 'M',   # TDL 'M', Mask the reciever.
+	'1.0.0.0.1', 'M',   #  "
+#	'1.0.0.1.0', 'M',   #  "
+#	'1.0.0.1.1', 'M',   #  "
+	'1.0.1.0.0', 'L',   #  "
+	'1.0.1.0.1', 'H',   #  "
+#	'1.0.1.1.0', 'H',   #  "
+#	'1.0.1.1.1', 'L',   #  "
+#	'1.1.0.0.0', 'M',   #  "
+#	'1.1.0.0.1', 'M',   #  "
+#	'1.1.0.1.0', 'M',   #  "
+#	'1.1.0.1.1', 'M',   #  "
+#	'1.1.1.0.0', '?',   #  "
+#	'1.1.1.0.1', '?',   #  "
+#	'1.1.1.1.0', '?',   #  "
+#	'1.1.1.1.1', '?',   #  "
+                    
+    # From Layne (990503), using non-TDL aliases
+    # Updated from Layne (990505): ~ -> %, ^/? -> e/E, +/% -> v/V            
+                    
+    # An Input pin (PinSet = s_Ipin) uses DI bits.
+    #    M bit is masked, and the Z bit has no effect.
+    #       M=1, Z=0,1
+    #
+    # An Output pin (PinSet = s_Opin) uses MZ bits.
+    #    D and I bit has no effect.
+    #       D=0,1, I=0,1
+    #
+    # An IO pin (PinSet = s_IOpin) uses DI bits in input mode, and the
+    #    MZ bits while in output mode.
+    #       Input  Mode: M=1, Z=0,1
+    #       Output Mode: D=0,1 at s_OFF, I=0,1
+    #
+    #    MSet 
+    #      ZSet 
+    #        DSet 
+    #          ISet 
+    #            Vec  Alias
+#       '0.0.0.0.0', 'L',   # Enable receiver   Hi-Lo, drive FMT0 = s_OFF, no invert Drive, Data '0'.
+#       '0.0.0.0.1', 'H',   # Enable receiver   Hi-Lo, drive FMT0 = s_OFF, no invert Drive, Data '1'.
+        '0.0.0.1.0', 'l',   # Enable receiver   Hi-Lo, drive FMT0 = s_OFF,    invert Drive, Data '0'. **
+        '0.0.0.1.1', 'h',   # Enable receiver   Hi-Lo, drive FMT0 = s_OFF,    invert Drive, Data '1'. **
+        '0.0.1.0.0', '_',   # Enable receiver   Hi-Lo, drive FMT1 = ?????, no invert Drive, Data '4'. **
+        '0.0.1.0.1', '%',   # Enable receiver   Hi-Lo, drive FMT1 = ?????, no invert Drive, Data '5'. **
+        '0.0.1.1.0', ',',   # Enable receiver   Hi-Lo, drive FMT1 = ?????,    invert Drive, Data '4'. **
+        '0.0.1.1.1', '=',   # Enable receiver   Hi-Lo, drive FMT1 = ?????,    invert Drive, Data '5'. **
+#       '0.1.0.0.0', 'z',   # Enable receiver 3-State, drive FMT0 = s_OFF, no invert Drive, Data '0'.
+#       '0.1.0.0.1', 'Z',   # Enable receiver 3-State, drive FMT0 = s_OFF, no invert Drive, Data '1'.
+#       '0.1.0.1.0', 't',   # Enable receiver 3-State, drive FMT0 = s_OFF,    invert Drive, Data '0'. **
+#       '0.1.0.1.1', 'T',   # Enable receiver 3-State, drive FMT0 = s_OFF,    invert Drive, Data '1'. **
+        '0.1.1.0.0', 'e',   # Enable receiver 3-State, drive FMT1 = ?????, no invert Drive, Data '4'. **
+        '0.1.1.0.1', 'E',   # Enable receiver 3-State, drive FMT1 = ?????, no invert Drive, Data '5'. **
+        '0.1.1.1.0', 'v',   # Enable receiver 3-State, drive FMT1 = ?????,    invert Drive, Data '4'. **
+        '0.1.1.1.1', 'V',   # Enable receiver 3-State, drive FMT1 = ?????,    invert Drive, Data '5'. **
+#       '1.0.0.0.0', 'x',   # Mask   receiver   Hi-Lo, drive FMT0 = s_OFF, no invert Drive, Data '2'.
+#       '1.0.0.0.1', 'X',   # Mask   receiver   Hi-Lo, drive FMT0 = s_OFF, no invert Drive, Data '3'.
+        '1.0.0.1.0', '.',   # Mask   receiver   Hi-Lo, drive FMT0 = s_OFF,    invert Drive, Data '2'. **
+        '1.0.0.1.1', 'w',   # Mask   receiver   Hi-Lo, drive FMT0 = s_OFF,    invert Drive, Data '3'. **
+#       '1.0.1.0.0', '0',   # Mask   receiver   Hi-Lo, drive FMT1 = ?????, no invert Drive, Data '6'.
+#       '1.0.1.0.1', '1',   # Mask   receiver   Hi-Lo, drive FMT1 = ?????, no invert Drive, Data '7'.
+        '1.0.1.1.0', 'i',   # Mask   receiver   Hi-Lo, drive FMT1 = ?????,    invert Drive, Data '6'. **
+        '1.0.1.1.1', 'I',   # Mask   receiver   Hi-Lo, drive FMT1 = ?????,    invert Drive, Data '7'. **
+        '1.1.0.0.0', 'm',   # Mask   receiver 3-State, drive FMT0 = s_OFF, no invert Drive, Data '2'.
+        '1.1.0.0.1', 'M',   # Mask   receiver 3-State, drive FMT0 = s_OFF, no invert Drive, Data '3'.
+        '1.1.0.1.0', 'n',   # Mask   receiver 3-State, drive FMT0 = s_OFF,    invert Drive, Data '2'. **
+        '1.1.0.1.1', 'N',   # Mask   receiver 3-State, drive FMT0 = s_OFF,    invert Drive, Data '3'. **
+        '1.1.1.0.0', 'a',   # Mask   receiver 3-State, drive FMT1 = ?????, no invert Drive, Data '6'.
+        '1.1.1.0.1', 'A',   # Mask   receiver 3-State, drive FMT1 = ?????, no invert Drive, Data '7'.
+        '1.1.1.1.0', 'b',   # Mask   receiver 3-State, drive FMT1 = ?????,    invert Drive, Data '6'. **
+        '1.1.1.1.1', 'B',   # Mask   receiver 3-State, drive FMT1 = ?????,    invert Drive, Data '7'. **
+ 
+        # Note ** = This alias should probably never occur in a pattern translation from V-Series. If
+        #           does then this would seem to violate the conditions that Dale Ohmart was worried about.
+
+        '1.0.0.0.M', 'M',
+        '1.0.0.1.M', 'M',
+        '1.0.1.0.M', 'M',
+        '1.0.1.1.M', 'M',
+    );
+    @MSetData           = ();
+    @ZSetData           = ();
+    @DSetData           = ();
+    @ISetData           = ();
+    # Predefined sets
+    $InitMZDISet = "";
+    for (0..$#signal_order) { $InitMZDISet .= '1'; }
+    $MSetData[0] = $InitMZDISet;
+    $InitMZDISet = "";
+    for (0..$#signal_order) { $InitMZDISet .= '0'; }
+    $ZSetData[0] = $InitMZDISet;
+    $DSetData[0] = $InitMZDISet;
+    $ISetData[0] = $InitMZDISet;
+    #for $MZDIIndex (0..2) {  #65535) {
+    #	$MSetData[$MZDIIndex] = $InitMZDISet;
+    #	$ZSetData[$MZDIIndex] = $InitMZDISet;
+    #	$DSetData[$MZDIIndex] = $InitMZDISet;
+    #	$ISetData[$MZDIIndex] = $InitMZDISet;
+    #}
+}
+ 
+# -------------------------------------------------------------------------
+sub initialize_arrays {
+    # Reset and initialize arrays for each nth .vvs file
+    $vector_count       = 0;
+    $vec_count          = 0;
+    $SyncIndex          = 0;
+    $PMEXIndex          = 0;
+    $TMUIndex           = 0;
+    $LoopIndex          = 0;
+    $MatchIndex         = 0;
+    %alias_table        = '';
+    @conv_status        = ();
+    $ScanPattern        = 0;
+    $ParallelVectorCount = 0;
+    $ScanVectorCount    = 0;
+    undef %ScanPathUsed;
+    undef %ScanLengthUsed;
+    
+    $pattern_intro      = 0;
+    $vector             = '';
+    @serialPathOrder    = ();
+    @serialPinOrder     = ();
+    %scan_data_array    = '';
+    @pre_scan_vectors   = ();
+    $CPMpattern_length  = 0;
+}
+ 
+
+# --------------------------------- write_AdapterBoard  -------------------------
+sub write_AdapterBoard {
+    $AdapterBoardObject = "AdapterBoard DebugAdapterBoard {\n";
+    for ($signal_index = 0; $signal_index <= $#AdapterBoard_signal_names; $signal_index++) {
+        $TC   = $signal_index;
+        $Ppid = $signal_index + 1;
+        $AdapterBoardObject .= "\tPin { Name = $AdapterBoard_signal_names[$signal_index]; TesterCh = $TC; Ppid = \"$Ppid\"; XCoord = (120,120); Shape = 16; PinType = Type_IO; }\n";
+    }
+    $AdapterBoardObject .= "}\n";
+    print EVA $AdapterBoardObject;
+}
+
+
+# --------------------------------------------------------------------------
+sub createPinTypeObjects {
+    %PinTypeData = ('S_IPIN',  'Input:Norm',
+                    'S_OPIN',  'Output:Norm',
+                    'S_IOPIN', 'Bidirect:Norm',
+                    'S_PWR',   'Input:Pwr',
+                    'NULL',    'Input:NullPin',
+                    'EXT',     'Input:Norm');
+#PinType Type_s_IOpin {
+#    Direction = Bidirect;
+#    Mode = NoTerm;
+#    Type = Norm;
+#    Mux = False;
+#}
+    foreach $PinDir (sort keys %PinTypes) {
+        ($pin_type_direction, $pin_type_type) = split(/:/, $PinTypeData{$PinDir});
+        $PinType = "PinType Type_" . "$PinDir {\n" .
+                   "\tDirection = $pin_type_direction;\n" .
+                   "\tMode = NoTerm;\n" .
+                   "\tType = $pin_type_type;\n" .
+                   "\tMux  = False;\n" .
+                   "}\n";
+        print EVA $PinType;
+    }
+    # What the heck, add in S_PWR, Null and EXT PinTypes (actually per Layne's request)
+#PinType Type_PWR {
+#    Direction = Input;
+#    Mode = NoTerm;
+#    Type = Pwr;
+#    Mux = False;
+#}
+#PinType Type_NULL {
+#    Direction = Input;
+#    Mode = NoTerm;
+#    Type = NullPin;
+#    Mux = False;
+#}
+    for ('S_PWR', 'NULL', 'EXT') {
+        ($pin_type_direction, $pin_type_type) = split(/:/, $PinTypeData{$_});
+        $PinType = "PinType Type_" . "$_ {\n" .
+                   "\tDirection = $pin_type_direction;\n" .
+                   "\tMode = NoTerm;\n" .
+                   "\tType = $pin_type_type;\n" .
+                   "\tMux  = False;\n" .
+                   "}\n";
+        print EVA $PinType;
+    }
+}
+
+
+# --------------------------------------------------------------------------
+sub createAdapterBoardObjects {
+    print ">>>  Creating AdapterBoard(s)\n";
+    foreach (@AdapterBoardPins) { if ($_) { push(@PinRecords, $_); }}    # condense @AdapterBoardPins into @PinRecords, preserving pin order
+                                  
+    $xy_size = int(sqrt($PinCount));
+    #d print "Num pins: ", $PinCount, "   xy_size: ", $xy_size, "\n";
+    foreach $AdapterBoard (@pin_map_names) {
+        print "     -  AdapterBoard $AdapterBoard\n";
+        $AdapterBoard_rec = "AdapterBoard $AdapterBoard {\n";
+        # foreach $PinIndex (1 .. $#AdapterBoardPins) {
+	$PinIndex = 0;
+        foreach $PinRecord (@PinRecords) {
+            ($Plist, $Pin, $Pdir) = split(/:/, $PinRecord);
+            $x = ($PinIndex % $xy_size)*120 + 120;
+            $y = int($PinIndex / $xy_size)*120 + 120;
+            #   Pin { Name = MA0ADR_17; TesterCh = 484; Ppid = "A8"; XCoord = (960,120); Shape = 16; PinType = Type_OUT; }
+            #   Pin { Name = MA1ADR_17; TesterCh = 361; Ppid = "A9"; XCoord = (1080,120); Shape = 16; PinType = Type_OUT; }
+            # R6.x syntax> $AdapterBoard_rec .= "\tPin { Name = $Plist; TesterCh = $Pin; Ppid = \"$Pin\"; XCoord = ($x, $y); Shape = 16; PinType = Type_$Pdir; }\n";
+            #   Pin { Name = X_SDRTA_14; Ppid = "6"; XCoord = (600,120); Shape = 16; PinType = Type_S_IOPIN;
+            #       Connection[0] { TesterCh[1] = 99; }
+            #   }
+            $AdapterBoard_rec .= "\tPin { Name = $Plist; Ppid = \"$Pin\"; XCoord = ($x, $y); Shape = 16; PinType = Type_$Pdir;\n\t\tConnection[0] { TesterCh[1] = $Pin; }\n\t}\n";
+	    $PinIndex++;
+        }
+        # add in power pin(s)
+        $AdapterBoardPinCount = $Pin;
+        $x = 120;
+        $y = $y + 120;
+        $DPSNumber = 2;
+        foreach $PowerPinName (sort keys %PowerPins) {
+            # R6.x syntax> $AdapterBoard_rec .= "\tPin { Name = $PowerPinName; TesterCh = DPS" . $DPSNumber++ . "; Ppid = \"" . ++$AdapterBoardPinCount . "\"; XCoord = ($x, $y); Shape = 16; PinType = Type_S_PWR; }\n";
+            $AdapterBoard_rec .= "\tPin { Name = $PowerPinName; Ppid = \"" . ++$AdapterBoardPinCount . "\"; XCoord = ($x, $y); Shape = 16; PinType = Type_S_PWR;\n\t\tConnection[0] { TesterCh[1] = DPS" . $DPSNumber++ . "; }\n\t}\n";
+            $x = $x + 120;
+            # $PowerPinName =~ /PS_(.*)/ && ($PowerPinNameTC = "TC_$1";
+            $PowerPinNameTC = $PowerPinName . "_TC";
+            $AdapterBoard_rec .= "\tPin { Name = $PowerPinNameTC; XCoord = ($x, $y); Shape = 16; PinType = Type_EXT;\n\t\tConnection[0] { TesterCh[1] = $AdapterBoardPinCount; }\n\t}\n";
+            $x = $x + 120;
+        }
+        $AdapterBoard_rec .= "\}\n";
+        print EVA $AdapterBoard_rec;
+    }
+}
+
+
+# --------------------------------------------------------------------------
+sub createPinGroupObjects {
+#   Parse ITP PinListSet, create enVision PinGroup
+    print ">>>  Creating PinGroup(s)\n";
+
+#      PinListSet( OSC3V_OUTS,
+#              XTLOUT1 );
+#
+#      PinListSet( OSC3V_IOS,
+#              XTLINP1 );
+#
+#PinGroup all_ins {
+#        Group = Expr { String = "
+#        KBIO_7+CTS0_N+SIMERR+RFDI+DU+SIOXCLK+SIXEN_N+SOXEN_N+CKI+CK32I+RSTO_N+LOWVOLT_N+AUXON+ONKEY+TCK+TMS+TDI+TRST_N"; }
+#}
+    while ($itp_prog =~ s/PinListSet\s*\(\s*([\w\s\,]+)\s*\)//i) { 
+        $PinGroupData = $1;
+        $PinGroupData =~ s/\n//g;                                       # remove any new-lines and white space
+        $PinGroupData =~ s/\s//g;
+
+        #$PinGroupData =~ s/\(\*/{/g;                         # change (*comments*) into {comments}
+        #$PinGroupData =~ s/\*\)/}/g;
+        #$PinGroupData =~ s/\{[^\}]*\}//g;                    # delete all comments
+
+        #d print "PinListSet $PinGroupData\n";
+        @pin_group_pins = split(/,/, $PinGroupData);
+        $PinGroupName = shift(@pin_group_pins);                         # first name is PinGroup name
+        $PinGroupName = "\L$PinGroupName";                              # lower case PinGroup name
+
+        $TempGroupName = "\U$PinGroupName";
+        $ListOfPinGroupNames{$TempGroupName}++;                         # keep a list of PinGroupNames for matching
+
+        if (!$PinGroupArray{$PinGroupName}) { push(@PinGroups, $PinGroupName); }  # keep ordered list of PinGroup names
+
+        # Iterate through @pin_group_pins PinLists, upper-case if it's a PinName, lower-case if it's a PinGroup name
+        foreach $PinList (@pin_group_pins) {
+            $PinList = "\U$PinList";                                    # upper case for match
+            if ($ListOfPinNames{$PinList}) { $PinList = "\U$PinList"; }           # PinName, set upper case (redundent, already upper-case )
+            if ($ListOfPinGroupNames{$PinList}) { $PinList = "\L$PinList"; }      # PinGroup, set lower case
+
+            $PinGroupArray{$PinGroupName} .= "$PinList+";
+        }
+        $PinGroupCount++;
+    }
+
+    foreach $PinGroupName (%PinGroupArray) { $PinGroupArray{$PinGroupName} =~ s/\+$//; }    # remove last '+'
+
+    foreach $PinGroupName (@PinGroups) {
+        $pin_name_count = 0;
+        $pg_rec = "PinGroup $PinGroupName \{\n\tGroup = Expr \{ String = \"";
+        @temp_pg_array = split(/\+/, $PinGroupArray{$PinGroupName});
+        foreach $pin_name (@temp_pg_array) {
+            if ($ListOfPinNames{$pin_name}) { $pin_name = "\U$pin_name"; }      # PinName, set upper case (redundent, already upper-case )
+            if ($ListOfPinGroupNames{$pin_name}) { $pin_name = "\L$pin_name"; } # PinGroup, set lower-case
+
+            $pg_rec .= "$pin_name";
+            if ($pin_name_count < $#temp_pg_array) { $pg_rec .= "+"; }
+            $pin_name_count++;
+            if ((!($pin_name_count % 10)) && ($pin_name_count-1 < $#temp_pg_array)) { $pg_rec .= "\n\t\t"; } # every 10 pin names, add "\n"
+        }
+        $pg_rec .= "\"; }\n}\n";
+        print EVA $pg_rec;
+    }
+    print "     -  Number of PinGroups      : $PinGroupCount\n";
+
+    if (%PowerPins) {
+        # Generate all_power PinGroup
+        $pg_rec = "PinGroup all_power \{\n\tGroup = Expr \{ String = \"";
+        foreach $PowerPinName (sort keys %PowerPins) {
+            $pg_rec .= "$PowerPinName\+";
+        }
+        $pg_rec =~ s/\+$//;
+        $pg_rec .= "\"; }\n}\n";                                            # remove last '+'
+        print EVA $pg_rec;
+
+        # Generate all_tc_power PinGroup
+        $pg_rec = "PinGroup all_tc_power \{\n\tGroup = Expr \{ String = \"";
+        foreach $PowerPinName (sort keys %PowerPins) {
+            $PowerPinNameTC = $PowerPinName . "_TC";
+            $pg_rec .= "$PowerPinNameTC\+";
+        }
+        $pg_rec =~ s/\+$//;
+        $pg_rec .= "\"; }\n}\n";                                            # remove last '+'
+        print EVA $pg_rec;
+    }
+}
+
+
+# --------------------------------------------------------------------------
+sub generateContinuityPattern {
+    local($NumberOfPins) = @_;
+    
+    # Create .evo file for functional Continuity
+    $eva_file =~ /(\w+).eva/ && ($base_name = $1);
+    $evoFileName = "continuity.evo";
+    open(EVO, ">$evoFileName") || &terminate ("Couldn't open destination file: $evoFileName\n");
+    print ">>>  Creating .evo file : $evoFileName\n";
+ 
+    $PatternName = "continuity";
+ 
+    #          enVisionObject:"baseline:revision:syntax_revision";
+    #      ex. enVisionObject:"bl8:R5.6";
+    print EVO "enVisionObject:\"$baseline:$system_revision:$syntax_revision\";\n\n";
+    print EVO "Pattern $PatternName {\n";
+    print EVO "Type Dpm;\n";
+    print EVO "Default SignalHeader  $SignalHeader;\n";
+    print EVO "Default WaveformTable cont_t0;\n";
+    print EVO "\$" . $PatternName . "_st\n";
+ 
+    $alldotvector = "*";
+    for (1..$NumberOfPins) { $alldotvector .= "."; if (!($_ % 10)) { $alldotvector .= " "; }}
+    $alldotvector .= "*";
+    $allFvector = "*";
+    for (1..$NumberOfPins) { $allFvector .= "F";   if (!($_ % 10)) { $allFvector .= " "; }}
+    $allFvector .= "*";
+
+    print EVO "\$Open_start\n";
+    print EVO "$alldotvector\;  < RPT 15 > \"Precharge node\"\n";
+    print EVO "$allFvector\;\n";
+    print EVO "$allFvector\;\n";
+    print EVO "\$Open_stop\n";
+    print EVO "$alldotvector\;\n";
+    
+    print EVO "\$Short_start\n";
+    print EVO "$alldotvector\;  < RPT 15 > \"Precharge node\"\n";
+    $ColumnIndex = 1;
+    for (1..$NumberOfPins) {
+        $nth_vector = $alldotvector;
+        substr($nth_vector, $ColumnIndex++, 1) = "F";
+        if (!($_ % 10)) { $ColumnIndex++; }
+
+        print EVO "$nth_vector\;\n";
+    }
+    print EVO "\$Short_stop\n";
+    print EVO "$alldotvector\;\n";
+    print EVO "$alldotvector\;  < RPT 512 > \"Pipeline flush\"\n";
+    print EVO "}\n";
+    close (EVO);
+}
+
+
+# --------------------------------------------------------------------------
+sub generateBasePattern {
+    local($NumberOfPins) = @_;
+
+    # Create Base pattern .evo file
+    $eva_file =~ /(\w+).eva/ && ($base_name = $1);
+    $evoFileName = "base_pattern.evo";
+    open(EVO, ">$evoFileName") || &terminate ("Couldn't open destination file: $evoFileName\n");
+    print ">>>  Creating .evo file : $evoFileName\n";
+ 
+    $PatternName = "base_pattern";
+
+    #          enVisionObject:"baseline:revision:syntax_revision";
+    #      ex. enVisionObject:"bl8:R5.6";
+    print EVO "enVisionObject:\"$baseline:$system_revision:$syntax_revision\";\n\n";
+    print EVO "Pattern $PatternName {\n";
+    print EVO "Type Base;\n";
+    print EVO "Default SignalHeader  $SignalHeader;\n";
+    print EVO "Default WaveformTable Base_WFTRef;\n";
+    print EVO "\$" . $PatternName . "_st\n";
+
+    $all_x_vector = "*";
+    for (1..$NumberOfPins) { $all_x_vector .= "x"; if (!($_ % 10)) { $all_x_vector .= " "; }}
+    $all_x_vector .= "*";
+
+    print EVO "$all_x_vector\;  \"Hold last state\"\n";
+    print EVO "}\n";
+    close (EVO);
+}
+
+
+# --------------------------------------------------------------------------
+sub GenerateBins {
+    print ">>>  Creating Bins(s)\n";
+#ClassDefine( Good_class,          s_GOOD_CLASS );
+#BinDefine( Good,               1, Good_class );
+#BinDefine( dieid_fail,    39, Functional_class );
+#CategoryDefine( Good_cat, Good, s_ALL,
+#                +OPENS..MONITOR );
+    while ($itp_prog =~ /\s*ClassDefine\s*\(\s*(\w+)\s*,\s*(\w+)\s*\)\s*;/ig) {
+        $ClassDefineData{"\U$1"} = "\U$2";
+        $ClassCount++;
+    }
+    print "     -  Number of Classes        : $ClassCount\n";
+    while ($itp_prog =~ /\s*BinDefine\s*\(\s*(\w+)\s*,\s*(\d+)\s*,\s*(\w+)\s*\)\s*;/ig) {
+        # $BinDefineData{"\U$1"} = join(':', $2, "\U$3");
+        $BinDefineData[$BinCount++] = join(':', $1, $2, "\U$3");
+        # $BinCount++;
+    }
+    print "     -  Number of Bins           : $BinCount\n";
+#   No longer used. (990429)
+#    while ($itp_prog =~ /\s*CategoryDefine\s*\(\s*(\w+)\s*,\s*(\w+)\s*,\s*[S_ALL|S_ANY]/ig) {
+#        $CategoryName = $1;
+#        $BinName      = "\U$2";
+#        $CategoryName =~ s/_cat$//;
+#        $CategoryDefineData{$CategoryName} = $BinName;
+#        $CatCount++;
+#    }
+#    print "     - Number of Categories : $CatCount  (enVision Bin_ objects)\n";
+
+    # And just to be complete, add in Template Bins (per Layne's Template file)
+    # Parse out Template Bin objects
+    $TemplateData =~ s/\n\}\n/\!/g;
+    while ($TemplateData =~ s/(Bin_[^!]*)\!//) {
+        $TemplateBin = "$1\n\}\n";
+
+        $TemplateBin =~ /Bin_\s+(\w+)\s+\{/ && ($BinName = $1);
+        $TemplateBin =~ /Number\s*\=\s*(\d+)\s*;/ && ($SWBinNumber = $1);
+        push(@BinDefineData, "$BinName:$SWBinNumber:");
+
+        push(@TemplateBins, $TemplateBin);
+
+        $NumTemplateBins++;
+    }
+    $TemplateData =~ s/\!/\n\}\n/g;
+    print "     -  Number of Template Bins  : $NumTemplateBins\n";
+
+    # Create BinMap object
+    $BinMap = "BinMap $itp_program" . "_BinMap {\n";
+#   No longer used. (990429)
+#    foreach $BinObject (keys(%CategoryDefineData)) {
+#        $SWBinName = $BinObject;
+#        ($HWBinNumber, $ClassType) = split(/:/, $BinDefineData{$CategoryDefineData{$BinObject}});
+#        $BinMap .= "\tBin $SWBinName = $HWBinNumber;\n";
+#    }
+    foreach $BinObject (@BinDefineData) {
+        ($SWBinName, $HWBinNumber, $ClassType) = split(/:/, $BinObject);
+        $BinMap .= "\tBin $SWBinName = $HWBinNumber;\n";
+    }
+    $BinMap .= "}\n";
+    print EVA $BinMap;
+
+    # Create Bin_ objects
+#   No longer used. (990429)
+#    foreach $BinObject (keys(%CategoryDefineData)) {
+#        $SWBinName = $BinObject;
+#        ($HWBinNumber, $ClassType) = split(/:/, $BinDefineData{$CategoryDefineData{$BinObject}}); 
+#        $PassFail  = $ClassDefineData{$ClassType};
+#        $Result = ($PassFail eq "S_GOOD_CLASS") ? "True" : "False";
+#        $Color  = ($PassFail eq "S_GOOD_CLASS") ? 0 : 2;
+#        $Bin = "Bin_ $SWBinName {\n" .
+#               "\tNumber = 12;\n" .
+#               "\tResult = $Result\n" .
+#               "\tCheckOverFlow = True;\n" .
+#               "\tColor  = $Color;\n" .
+#               "}\n";
+#        print EVA $Bin;
+#    }
+    %Result = ('S_GOOD_CLASS',   'True',
+               'S_FAILED_CLASS', 'False');
+    %Color  = ('S_GOOD_CLASS',   '0',
+               'S_FAILED_CLASS', '2');
+    foreach (0..($#BinDefineData-$NumTemplateBins)) {
+        $BinObject = $BinDefineData[$_];
+        ($SWBinName, $HWBinNumber, $ClassType) = split(/:/, $BinObject);
+        $PassFail  = $ClassDefineData{$ClassType};
+        #d print "Bin_ $SWBinName \t: $HWBinNumber, \t$PassFail\n";
+        # ex.     Bin_ FAST_HIMAX_55026e82 : 5, S_FAILED_CLASS
+        $Bin = "Bin_ $SWBinName {\n" .
+               "\tNumber = $HWBinNumber;\n" .                          # using the Hardware BinNumber for the Software BinNumber
+               "\tResult = $Result{$ClassDefineData{$ClassType}};\n" .
+               "\tCheckOverFlow = True;\n" .
+               "\tColor  = $Color{$ClassDefineData{$ClassType}};\n" .
+               "}\n";
+        print EVA $Bin;
+    }
+    # Now add in Template Bins
+    foreach $TemplateBin (@TemplateBins) { print EVA $TemplateBin; }
+}
+
+
+# --------------------------------------------------------------------------
+sub createSignalHeader {
+    print ">>>  Creating SignalHeader\n";
+    print "     -  SignalHeader $SignalHeader\n";
+    $pin_name_count = 0;
+    $SigHead = "SignalHeader $SignalHeader {\n" .
+        "\tRate 1;\n" .
+        "\tDefault Format Fixed 1;\n" .
+        "\tSignals {\n" .
+        "\t\t";
+    foreach $DevicePin (@signal_order) {
+        #d print "$DevicePin\n";
+        $SigHead .= "$DevicePinNumberToPinNameLUT{$DevicePin} ";
+        $pin_name_count++;
+        if ((!($pin_name_count % 10)) && ($pin_name_count-1 < $#signal_order)) { $SigHead .= "\n\t\t"; }      # every 10 pin names, add "\n"
+    }
+    $SigHead .= "\n\t}\n}\n";
+    print EVA $SigHead;
+
+    push(@SignalHeaders, $SignalHeader);
+
+    return;
+    
+    if (%SerialPath) {
+#SignalHeader ScanHdr {
+#    Signals {
+#        TDI { Scan, ChainLength = 72, Fill = x, PostFill; }
+#        %TDO { Scan, ChainLength = 72, Fill = x, PostFill; }
+#    }
+#}
+        print "     -  SignalHeader Scan_$SignalHeader\n";
+	$ScanSignalHeader = "SignalHeader Scan_$SignalHeader {\n" .
+	    "\tSignals {\n";
+	for ($ScanPath = 1; $ScanPath <= $MaxPathNumber; $ScanPath++) {
+	    ($ScanInPin, $ScanOutPin) = split(/:/, $SerialPath{$ScanPath});
+	    if ($ScanPath == 1) {
+	        $ScanSignalHeader .= "\t\t$DevicePinNumberToPinNameLUT{$ScanInPin} { Scan, ChainLength = xxx, Fill = 0, PostFill; }\n";
+	    } else {
+	        $ScanSignalHeader .= "\t\t\%$DevicePinNumberToPinNameLUT{$ScanInPin} { Scan, ChainLength = xxx, Fill = 0, PostFill; }\n";
+	    }
+	    # $ScanSignalHeader .= "\t\t\%$DevicePinNumberToPinNameLUT{$ScanOutPin} { Scan, ChainLength = xxx, Fill = M, PostFill; }\n";
+	    $ScanSignalHeader .= "\t\t\%$DevicePinNumberToPinNameLUT{$ScanOutPin} { Scan, ChainLength = xxx, Fill = x, PostFill; }\n";    # per Layne, 990617
+	}
+	$ScanSignalHeader .= "\t}\n}\n";
+	print EVA $ScanSignalHeader;
+
+	push(@SignalHeaders, "Scan_$SignalHeader");
+    }
+}
+
+
+# --------------------------------------------------------------------------
+sub GenerateThreadAndExternalRefs {
+    print ">>>  Creating ExternalRef(s)\n";
+    # Create ExternalRefs for each PatternLoad
+    print "     -  Number of PatternLoad(s) : $PatternLoadCount\n";
+
+    foreach $cache (keys %PatternLoadStatement) {
+        if ($PatternLoadStatement{$cache} > 1) {
+            print "     -  *** Warning : Pattern $cache loaded multiple times\n";
+            $WarningCount++;
+        }
+    }
+
+    $PatternMap  = "PatternMap DefaultPatternMap {\n";          # Current restriction : "DefaultPatternMap"
+    $PatternMap .= "\tDefaultSourcePath   = \"$cmd_opt{'sourcepath'}\";\n";
+    $PatternMap .= "\tDefaultBinaryPath   = \"$cmd_opt{'cachepath'}\";\n";
+    $PatternMap .= "\tDefaultPatternGroup = \"$PatGrpName\";\n";
+    foreach (@VVSFilesToTranslate) {
+        # &createExternalRef($_, $PatternSourceToCacheLUT{$_});
+        $PatternMap .= sprintf("\tPattern %s {\n\t\tFile \"%s\";\n\t}\n",
+                               $PatternSourceToCacheLUT{$_},
+                               $_);
+    }
+    $PatternMap .= "}\n";
+    print EVA $PatternMap;
+
+    foreach (@VVSFilesToTranslate) {
+        &createThread($PatternSourceToCacheLUT{$_});
+#070813  &createExternalRef($_, $PatternSourceToCacheLUT{$_});
+    }
+
+    if ($cmd_opt{'all'}) {
+        foreach $cache (@PatternLoadArray) {
+            &createThread($cache);                    # generate Thread
+
+            $source = $PatternCacheToSourceLUT{$cache};
+#070813  &createExternalRef($source, $cache);      # generate ExternalRef
+        }
+    }
+}
+
+
+# --------------------------------------------------------------------------
+sub createThread {
+    local($cache) = @_;
+#Thread adrc_xptThrd {
+#    Row {
+#        ThreadAction = Expr { String = "Seq:EnterExit"; }
+#        Pattern = adrc_xpt;
+#    }
+#}
+    $Thread  = "Thread $cache" . "Thrd {\n";
+    $Thread .= "\tRow {\n";
+    $Thread .= "\t\tThreadAction = Expr { String = \"Seq:EnterExit\"; }\n";
+    $Thread .= "\t\tPattern = $cache;\n";
+    $Thread .= "\t}\n";
+    $Thread .= "}\n";
+    print EVA $Thread;
+}
+
+
+# --------------------------------------------------------------------------
+sub createExternalRef {
+    local($source, $cache) = @_;
+#ExternalRef {
+#        Type = Pattern;
+#        File = "adrc.evo";
+#        Path = "Evos";
+#        CachePath = "Flexes/$TESTER";
+#        Cache = adrc;
+#        ObjectInfo = "adrcPatGrp";
+#}
+    $ExternalRef  = "ExternalRef {\n";
+    $ExternalRef .= "\tType  = Pattern;\n";
+    $ExternalRef .= "\tFile  = \"$source\";\n";
+    if ($cmd_opt{'path'}) { $path = $cmd_opt{'path'}; } else            # use User's Path
+        { $path = "../Evos"; }                                          # ../Evos directory
+    $ExternalRef .= "\tPath  = \"$path\";\n";
+    $ExternalRef .= "\tCache = $cache;\n";
+    $ExternalRef .= "\tCachePath  = \"$cmd_opt{'cachepath'}\";\n";
+    $ExternalRef .= "\tObjectInfo = \"$PatGrp\";\n";
+    $ExternalRef .= "}\n";
+    print EVA $ExternalRef;
+
+
+#                $PatternMap .= sprintf("\tPattern %s {\n\t\tFile \"%s\";\n\t}\n",
+#                                       $PatternData[$nthPattern]->{patternName},
+#                                       $PatternData[$nthPattern]->{patternName});
+                $PatternMap .= sprintf("\tPattern %s {\n\t\tFile \"%s\";\n\t}\n",
+                                       $source,
+                                       $source);
+
+    
+}
+
+
+# --------------------------------------------------------------------------
+sub createDCParams {
+    local($procedureData) = @_;
+    local($procData, @procDataArray);
+    print ">>>  Creating DC Params\n";
+
+    $procedureData =~ s/thenbegin//ig && &PascalConstructWarning("then begin");         # clean up $procedureData, remove beginning 'then begin'
+    $procedureData =~ s/endelsebegin//ig && &PascalConstructWarning("end else begin");  # clean up $procedureData, remove beginning 'end else begin'
+    $procedureData =~ s/begin//ig;                     # clean up $procedureData, remove beginning 'begin'
+    $procedureData =~ s/case//ig && &PascalConstructWarning("case xxx of");             # clean up $procedureData, remove beginning 'case xx of'
+    $procData = "";
+    @procDataArray = ();
+    @procDataArray = split(/\n/, $procedureData);
+
+    foreach $ProcStatement (@procDataArray) {
+        $ProcStatement =~ /(\w+):=([\w\.\+\-\*]+)/ && do {
+            #print "GlobalVar $1\n";
+
+            $ParamName  = $1;
+            $ParamValue = $2;
+            $ParamType  = "SCALAR";            # default Param Type
+            if ($ParamValue =~ /TRUE|FALSE/i) { $ParamType = "BOOLEAN"; }
+            $ParamValue =~ s/([^p|P|n|N|u|U|m|M]+)([p|P|n|N|u|U|m|M]?)([a|A|v|V|s|S])$/$1\L$2\U$3/ && ($ParamType = "\U$3");
+            $ParamType =~ s/S$/s/ && ($ParamValue =~ s/S$/s/);          # exception is s (seconds)
+
+            $ParamUsage{$ParamName}++;
+            ($ParamUsage{$ParamName} == 1) && do {
+                push(@GlobalParams, join(':', $ParamName, $ParamValue, $ParamType));
+                $ParamTypes{$ParamName} = $ParamType;
+            };
+        };
+        $ProcStatement =~ /(\w+)_ARR\[(\w+)\]:=([\w\.\+\-\*]+)/i && do {
+            $ParamName  = $1;
+            $ParamTempLimitType = $2;
+            $ParamValue = $3;
+            $ParamType  = "SCALAR";            # default Param Type
+            if ($ParamValue =~ /TRUE|FALSE/i) { $ParamType = "BOOLEAN"; }
+            $ParamValue =~ s/([^p|P|n|N|u|U|m|M]+)([p|P|n|N|u|U|m|M]?)([a|A|v|V|s|S])$/$1\L$2\U$3/ && ($ParamType = "\U$3");
+            $ParamType =~ s/S$/s/ && ($ParamValue =~ s/S$/s/);          # exception is s (seconds)
+#    NS -> ns
+            #thenbegin
+            #endelsebegin
+            #casexxxof1:BEGIN -> BEGINIILIOOSC3V_MIN
+            #print "Var $ParamNam\[$ParamTempLimitType\] = $ParamValue\n";
+
+            if ($ParamName =~ s/(.+)_(VMIN|IMIN|MIN)/$1/i) { $DCParamArray{$ParamName, $ParamTempLimitType, "Min"} = $ParamValue; }
+            elsif ($ParamName =~ s/(.+)_(VMAX|IMAX|MAX)/$1/i) { $DCParamArray{$ParamName, $ParamTempLimitType, "Max"} = $ParamValue; }
+            else { $DCParamArray{$ParamName, $ParamTempLimitType, "Typ"} = $ParamValue; }
+            
+            $ParamUsage{$ParamName}++;
+            ($ParamUsage{$ParamName} == 1) && do {
+                push(@DCParams, join(':', $ParamName, $ParamType));
+                $ParamTypes{$ParamName} = $ParamType;
+            };
+        };
+    }
+}
+
+
+# --------------------------------------------------------------------------
+sub GenerateDCSpecs {
+    print ">>>  Creating Global and DC Specs\n";
+
+    $GlobalSpec = "Spec Global_Specs {\n";
+    $GlobalSpec .= "\tCategory[0] = GlobalVars;\n";
+
+    $GlobalMask = "Mask DefaultGlobalMask {\n";
+
+    # Create Parameters to perform DC_Specs Category selection based on OpVar Test_Limit value
+    $TestLimitIndex = 0;
+    foreach (@TestLimits) {
+        $ParamName = $_;
+        $TestLimitIndex++;
+        $param = "Param $ParamName {\n" .
+                 "\tComment = \"Element of Test_Limit\";\n" .
+                 "\tType = SCALAR;\n" .
+                 "\tSpec = Global_Specs;\n" .
+                 "\tGlobalVars {\n" .
+                 "\t\tTyp = Expr { String = \"$TestLimitIndex\"; Type = SCALAR; }\n" .
+                 "\t}\n}\n";
+        #d print "$param\n";
+
+        $GlobalSpecParams .= "\tParam[" . $GlobalSpecParamCount++ . "] = $ParamName;\n";
+        $GlobalParam_recs .= $param;
+        $GlobalMask       .= "\t$ParamName = Typ;\n";
+    }
+
+    $ParamName = "Temp_Limit";
+    $param = "Param $ParamName {\n" .
+             "\tComment = \"Auto-Selected DC_Specs Category: ";
+    $TempLimitIndex = 1;
+    foreach (@TempLimit_Cats) { $param .= "$_ = $TempLimitIndex, "; $TempLimitIndex++; }
+    $param =~ s/, $//;              # remove last ', '
+    $param .= "\";\n";
+    $param .= "\tType = INTEGER;\n" .
+              "\tSpec = Global_Specs;\n" .
+              "\tGlobalVars {\n" .
+              "\t\tTyp = Expr { String = \"select(Test_Limit";
+    foreach (@TempLimit_Cats) { $param .= ", DC_Specs.$_"; }
+    $param .= ")\"; Type = INTEGER; }\n" .
+              "\t}\n}\n";
+    $GlobalSpecParams .= "\tParam[" . $GlobalSpecParamCount++ . "] = $ParamName;\n";
+    $GlobalParam_recs .= $param;
+    $GlobalMask       .= "\t$ParamName = Typ;\n";
+
+    # Create Parameters to facilitate datalog and debug functions
+    $ParamName = "Datalog";
+    $param = "Param $ParamName {\n" .
+             "\tComment = \"Datalog enable\";\n" .
+             "\tType = BOOLEAN;\n" .
+             "\tSpec = Global_Specs;\n" .
+             "\tGlobalVars {\n" .
+             "\t\tTyp = Expr { String = \"TRUE\"; Type = BOOLEAN; }\n" .
+             "\t}\n}\n";
+    $GlobalSpecParams .= "\tParam[" . $GlobalSpecParamCount++ . "] = $ParamName;\n";
+    $GlobalParam_recs .= $param;
+    $GlobalMask       .= "\t$ParamName = Typ;\n";
+
+    $ParamName = "SerialLeakage";
+    $param = "Param $ParamName {\n" .
+             "\tComment = \"LTX debug variable\";\n" .
+             "\tType = BOOLEAN;\n" .
+             "\tSpec = Global_Specs;\n" .
+             "\tGlobalVars {\n" .
+             "\t\tTyp = Expr { String = \"FALSE\"; Type = BOOLEAN; }\n" .
+             "\t}\n}\n";
+    $GlobalSpecParams .= "\tParam[" . $GlobalSpecParamCount++ . "] = $ParamName;\n";
+    $GlobalParam_recs .= $param;
+    $GlobalMask       .= "\t$ParamName = Typ;\n";
+
+    $ParamName = "SerialVout";
+    $param = "Param $ParamName {\n" .
+             "\tComment = \"LTX debug variable\";\n" .
+             "\tType = BOOLEAN;\n" .
+             "\tSpec = Global_Specs;\n" .
+             "\tGlobalVars {\n" .
+             "\t\tTyp = Expr { String = \"FALSE\"; Type = BOOLEAN; }\n" .
+             "\t}\n}\n";
+    $GlobalSpecParams .= "\tParam[" . $GlobalSpecParamCount++ . "] = $ParamName;\n";
+    $GlobalParam_recs .= $param;
+    $GlobalMask       .= "\t$ParamName = Typ;\n";
+
+    $ParamName = "LevelsDelay";
+    $param = "Param $ParamName {\n" .
+             "\tComment = \"LTX debug delay for DC Setups\";\n" .
+             "\tType = s;\n" .
+             "\tSpec = Global_Specs;\n" .
+             "\tGlobalVars {\n" .
+             "\t\tTyp = Expr { String = \"0s\"; Type = s; }\n" .
+             "\t}\n}\n";
+    $GlobalSpecParams .= "\tParam[" . $GlobalSpecParamCount++ . "] = $ParamName;\n";
+    $GlobalParam_recs .= $param;
+    $GlobalMask       .= "\t$ParamName = Typ;\n";
+
+    $ParamName = "ExtendedMarker";
+    $param = "Param $ParamName {\n" .
+             "\tComment = \"LTX debug enable for extended marker capability\";\n" .
+             "\tType = BOOLEAN;\n" .
+             "\tSpec = Global_Specs;\n" .
+             "\tGlobalVars {\n" .
+             "\t\tTyp = Expr { String = \"FALSE\"; Type = BOOLEAN; }\n" .
+             "\t}\n}\n";
+    $GlobalSpecParams .= "\tParam[" . $GlobalSpecParamCount++ . "] = $ParamName;\n";
+    $GlobalParam_recs .= $param;
+    $GlobalMask       .= "\t$ParamName = Typ;\n";
+
+
+    foreach (@GlobalParams) {
+        ($GlobalParamName, $GlobalParamValue, $GlobalParamType) = split(/:/, $_);
+        $ParamName = $GlobalParamName;
+        $param = "Param $ParamName {\n" .
+                 "\tType = $GlobalParamType;\n" .
+                 "\tSpec = Global_Specs;\n" .
+                 "\tGlobalVars {\n" .
+                 "\t\tTyp = Expr { String = \"$GlobalParamValue\"; Type = $GlobalParamType; }\n" .
+                 "\t}\n}\n";
+        #d print "$param\n";
+
+        $GlobalSpecParams .= "\tParam[" . $GlobalSpecParamCount++ . "] = $ParamName;\n";
+        $GlobalParam_recs .= $param;
+        $GlobalMask       .= "\t$ParamName = Typ;\n";
+    }
+
+    $GlobalSpec .= $GlobalSpecParams;
+    $GlobalSpec .= "}\n";
+    print EVA $GlobalSpec;
+
+    print EVA $GlobalParam_recs;
+
+    $GlobalMask .= "}\n";
+    print EVA $GlobalMask;
+    print "     -  Number of Global_Specs   : $GlobalSpecParamCount\n";
+        
+#    Temp_Limit_Type   = ( HOT, ROOM, TEMP, COLD, HOT_CHUCKS );
+#                          
+#Spec DC_Specs {
+#    Category[0] = CX3000Technology;
+#}
+    $DCSpec = "Spec DC_Specs {\n";
+    foreach (0..$#TempLimit_Cats) {
+        $DCSpec .= "\tCategory[$_] = $TempLimit_Cats[$_];\n";
+        print "     -  Category $TempLimit_Cats[$_]\n";
+    }
+
+    $DCMask = "Mask DCTypMask {\n";
+
+    foreach (@DCParams) {
+        undef %DCMaskSet;                                               # clear %DCMaskSet for this DCParam
+        ($DCParamName, $DCParamType) = split(/:/, $_);
+        $ParamName = $DCParamName;
+
+        $param = "Param $ParamName {\n"; # .
+                 #"\tType = $DCParamType;\n" .
+                 #"\tSpec = DC_Specs;\n";
+        $paramValue = "";
+        foreach (0..$#TempLimit_Cats) {                                 # iterate through each Temp_Limit_Type category
+            #$param .= "\t$TempLimit_Cats[$_] {\n" ;
+            $paramValue .= "\t$TempLimit_Cats[$_] {\n" ;
+            foreach $MinTypMax ("Min", "Typ", "Max") {                  # iterate through Min/Typ/Max 
+                if ($DCParamArray{$ParamName, $TempLimit_Cats[$_], $MinTypMax}) {
+                    $DCMaskSet{$MinTypMax}++;
+                    $ParamExpression = $DCParamArray{$ParamName, $TempLimit_Cats[$_], $MinTypMax};
+                    $ParamExpression =~ s/[\+|\-|\*]/\:/g;
+                    @ParamExpression_elements = split(/\:/, $ParamExpression);
+                    foreach $Element (@ParamExpression_elements) {
+                        if ($ParamTypes{$Element}) {                    # does this expression element match an existing Param?
+                            $DCParamType = $ParamTypes{$Element};
+                            #print "$DCParamName : $Element has new Type of $DCParamType\n";
+                        }
+                    }
+                    $paramValue .= "\t\t$MinTypMax = Expr { String = \"$DCParamArray{$ParamName, $TempLimit_Cats[$_], $MinTypMax}\"; Type = $DCParamType; }\n";
+                }
+            }
+            $paramValue .= "\t}\n";
+        }
+        $param .= "\tType = $DCParamType;\n" .
+                  "\tSpec = DC_Specs;\n" .
+                  $paramValue;
+        $param .= "}\n";
+        #d print "$param\n";
+        
+        $DCSpecParams .= "\tParam[" . $DCSpecParamCount++ . "] = $ParamName;\n";
+        $DCParam_recs .= $param;
+        if ($DCMaskSet{"Typ"})    { $DCMask .= "\t$ParamName = Typ;\n"; }
+        elsif ($DCMaskSet{"Min"}) { $DCMask .= "\t$ParamName = Min;\n"; }
+        elsif ($DCMaskSet{"Max"}) { $DCMask .= "\t$ParamName = Max;\n"; }
+    }
+
+    $DCSpec .= $DCSpecParams;
+    $DCSpec .= "}\n";
+    print EVA $DCSpec;
+
+    print EVA $DCParam_recs;
+
+    $DCMask .= "}\n";
+    print EVA $DCMask;
+    print "     -  Number of DC_Specs       : $DCSpecParamCount\n";
+
+    # Create DCMinMask from DCTypMask, then write to .eva
+    $DCMask =~ s/Mask DCTypMask/Mask DCMinMask/;
+    print EVA $DCMask;
+    
+    # Create DCMaxMask from DCMinMask, then write to .eva
+    $DCMask =~ s/Mask DCMinMask/Mask DCMaxMask/;
+    print EVA $DCMask;
+}
+
+
+# --------------------------------------------------------------------------
+sub GenerateLevels {
+    print ">>>  Creating DC Levels\n";
+
+    foreach $DCSetupName (sort keys %DCSetupArray) {
+        ($DCTableName, $DCSetupData) = split(/:/, $DCSetupArray{$DCSetupName});
+        $LevelsObject = "Levels $DCSetupName {\n";
+        @DCSetupDataArray = ();
+        $DCSetupData =~ s/\;/\;\n/g;
+        @DCSetupDataArray = split(/\n/, $DCSetupData);
+        $ColumnNumber = 0;
+        foreach $DCSetupStatement (@DCSetupDataArray) {
+            $Drvup = $Drvdn = $CalPct = $Vrefup = $Vrefdn = $Vth = $IOH = $IOL = $Plist = "";
+            # $DCSetupStatement =~ /(DCSetRes\b.+|DCSetDyn\b.+|DCSetLDOFF\b.+|DCSetRCTerm\b.+|DCSetDynRCTerm\b.+|DCSet\b.+)/i && do {
+            $DCSetupStatement =~ /(DCSetDyn\b.+|DCSetLDOFF\b.+)/i && do {
+                $DCSettingSubroutine = $1;
+                #d print "$DCSetupName\t: $DCSettingSubroutine\n";
+                $DCSettingSubroutine =~ /(DCSetDyn)\((.+)\);/i && do {
+                    ($Drvup, $Drvdn, $CalPct, $Vrefup, $Vrefdn, $Vth, $IOH, $IOL, $Plist) = split(/,/, $2);
+                };
+                $DCSettingSubroutine =~ /(DCSetLDOFF)\((.+)\);/i && do {
+                    ($Drvup, $Drvdn, $CalPct, $Vrefup, $Vrefdn, $Plist) = split(/,/, $2);
+                };
+
+                # Sanitize each reference
+                foreach ($Drvup, $Drvdn, $CalPct, $Vrefup, $Vrefdn, $Vth, $IOH, $IOL) {
+                    $_ =~ s/([^p|P|n|N|u|U|m|M]+)([p|P|n|N|u|U|m|M]?)([a|A|v|V])$/$1\L$2\U$3/;
+                    $_ =~ s/(.+)_(VMIN|IMIN|MIN)/$1.Min/i;
+                    $_ =~ s/(.+)_(VMAX|IMAX|MAX)/$1.Max/i;
+                }
+                
+                $Plist =~ s/(.+)/\L$1/;
+                $LevelsObject .= "\tColumn[". $ColumnNumber++ . "] {\n";
+                $LevelsObject .= "\t\tGroup   = Expr { String = \"$Plist\"; }\n";
+                $LevelsObject .= "\t\tExecSeq = Expr { String = \"0\"; }\n";
+                if ($Drvdn)  { $LevelsObject .= "\t\tVil     = Expr { String = \"$Drvdn\"; }\n"; }
+                if ($Drvup)  { $LevelsObject .= "\t\tVih     = Expr { String = \"$Drvup\"; }\n"; }
+                if ($Vrefdn) { $LevelsObject .= "\t\tVol     = Expr { String = \"$Vrefdn\"; }\n"; }
+                if ($Vrefup) { $LevelsObject .= "\t\tVoh     = Expr { String = \"$Vrefup\"; }\n"; }
+                if ($IOL)    { $LevelsObject .= "\t\tIol     = Expr { String = \"$IOL\"; }\n"; }
+                if ($IOH)    { $LevelsObject .= "\t\tIoh     = Expr { String = \"$IOH\"; }\n"; }
+                if ($Vth)    { $LevelsObject .= "\t\tVref    = Expr { String = \"$Vth\"; }\n"; }
+                $LevelsObject .= "\t\tDelay   = Expr { String = \"0ms\"; }\n";
+                $LevelsObject .= "\t}\n";
+            };
+        }
+        $LevelsObject =~ s/\"0ms\"; }\n\t}\n$/\"LevelsDelay\"; }\n\t}\n/;   # change last Delay to LevelsDelay
+        $LevelsObject .= "}\n";
+        print EVA $LevelsObject;
+        $LevelsCount++;
+    }
+    print "     -  Number of Levels         : $LevelsCount\n";
+}
+
+
+# --------------------------------------------------------------------------
+sub PascalConstructWarning {
+    local($construct) = @_;
+    #if (!$PascalConstructWarning) {
+        print "\n              *** Warning : ... $construct ... construct in this procedure.\n";
+        print "                            Array-type variables (ie. foo[]) will be assigned values of its last invocation.\n";
+        print "                            Simple variables will be assigned values of its first invocation.\n\n";                         
+        $PascalConstructWarning++;
+        $WarningCount++;
+    #}
+}
+
+
+# --------------------------------------------------------------------------
+sub AddMiscObjects {
+    print ">>>  Creating Misc. Objects\n";
+
+    # Define and add in various OpVars below. Be sure to add the OpVar name
+    # to the TestProg object in 'GenerateTestProgObject'
+    print "     -  OpVar(s)\n";
+
+    print "        Test_Limit\n";
+    $OpVar  = "OperatorVariable Test_Limit {\n";
+    $OpVar .= "\tComment = \"";
+    $TestLimitIndex = 1;
+    foreach (@TestLimits) { $OpVar .= "$_ = $TestLimitIndex, "; $TestLimitIndex++; }
+    $OpVar =~ s/, $//;              # remove last ', '
+    $OpVar .= "\";\n";
+    $OpVar .= "\tExpr = Expr { String = \"$TestLimits[0].Typ\"; Type = SCALAR; }\n" .
+              "}\n";
+    print EVA $OpVar;
+    
+    print "        ExecFocusCal\n";
+    $OpVar = "OperatorVariable ExecFocusCal {\n" .
+             "\tComment = \"Execute FocusCal if 'TRUE'\";\n" .
+             "\tExpr = Expr { String = \"TRUE\"; }\n" .
+             "}\n";
+    print EVA $OpVar;
+    print "        ParametricContinuity\n";
+    $OpVar = "OperatorVariable ParametricContinuity {\n" .
+             "\tComment = \"Execute OSpins Continuity if 'TRUE'\";\n" .
+             "\tExpr = Expr { String = \"FALSE\"; }\n" .
+             "}\n";
+    print EVA $OpVar;
+    
+    # print "     -  Trigger(s)\n";
+    # print "        BreakOnTestPattern\n";
+
+    # print "     -  ExtInterface(s)\n";
+    # print "        Manual_Qterm\n";
+}
+
+
+# --------------------------------------------------------------------------
+sub GenerateTestProgObject {
+    print ">>>  Creating TestProg object\n";
+    print EVA "TestProg $TestProg {\n",
+        "\tDevice = \"$TestProg\";\n",
+        "\tParamCheck = 0;\n",
+        "\tOperatorVariable[0] = Test_Limit;\n",
+        "\tOperatorVariable[1] = ExecFocusCal;\n",
+        "\tOperatorVariable[2] = ParametricContinuity;\n",
+        "\tAdapterBoard = $pin_map_names[0];\n",                # set active AdapterBoard to first Pin_maps_type name
+        "\tFlow_        = MainFlow;\n",
+        "\tBinMap       = $itp_program" . "_BinMap;\n";
+
+    if (($cmd_opt{'TesterType'} ne "FusionCX") && ($cmd_opt{'epf_Format'})) {
+        print EVA "\tPatternMap   = DefaultPatternMap;\n";      # Current restriction : "DefaultPatternMap"
+    }
+
+    print EVA "\tTrigger      = BreakOnPattern;\n";
+
+    if ($enVisionRevNumber < 10080000) {
+        print EVA
+            "\tSamplingSize    = 1;\n",
+            "\tFunctionalFails = 1;\n",
+            "\tIOStreamList[0] {\n",
+            "\t\tIOStreamType = DataViewIO;\n",
+            "\t\tIOStreamCode = 0x00001bff;\n",
+            "\t}\n",
+            "\tUpdateFinal[0]  = False;\n",
+            "\tClearPartial[0] = False;\n",
+            "\tClearFinal[0]   = False;\n",
+            "}\n";
+    } else {                                                    # new DatalogSetup syntax starting in R10.8.0
+        print EVA
+            "\tExtendedDlog = True;\n",
+            "\tDatalogObject[0] {\n",
+            "\t\tMethod        = enVision_AsciiDL;\n",
+            "\t\tMode          = Immediate;\n",
+            "\t\tSamplingSize  = 1;\n",
+            "\t\tTestIdFilter  = Expr { String = \"#\"; Mode = Output; }\n",
+            "\t\tFileFrequency = Expr { String = \"DlogFreq:Lot\"; }\n",
+            "\t}\n",
+            "\tFunctionalFails = 1;\n",
+            "\tIOStreamList[0] {\n",
+            "\t\tIOStreamType  = DataViewIO;\n",
+            "\t\tIOStreamCode  = 0xc0001bff;\n",
+            "\t}\n",
+            "}\n";
+    }
+}
+
+
+# --------------------------------------------------------------------------
+sub Usage {
+    print "Usage:\n";
+    print "\tVSeriesTranslator xxx.itp yyy.vvs zzz.vvs ...  - List of files\n";
+    print "\tVSeriesTranslator xxx.itp `ls *.vvs`           - All .vvs files in directory.\n";
+    print "\tVSeriesTranslator xxx.itp -all                 - All .vvs files specified in PatternLoad(s).\n";
+    print "\t\t[-all] [-itp] [-vvs] [-path 'PathName'] [-cachepath 'PathName']\n";
+    print "\txxx.itp                : A V-Series .itp test program.\n";
+    print "\tyyy.vvs                : A V-Series .vvs (V-Series Vector Source) pattern file.\n";
+    print "\t-all                   : \'-all\' processes all .vvs patterns specified in PatternLoad statements.\n";
+    print "\t-itp                   : \'-itp\' processes the VSeries .itp --> .eva. Default is enabled.\n";
+    print "\t-vvs                   : \'-vvs\' processes the VSeries .vvs --> .evo. Default is enabled.\n";
+    print "\t-path 'PathName'       : '-path\' allows User to specify path of .evo files.\n";
+    print "\t                         Default is \'../Evos\'.\n";
+    print "\t-cachepath 'PathName'  : \'-cachepath\' allows User to specify path of .flex and .cpg files.\n";
+    print "\t                         Default is \'../Epfs\/\$TESTER\'.\n";
+    print "\t-CompressEVO           : Compress (gzip) .evo pattern files after translation. Default is no compression.\n";
+    exit;
+}
+
+
+# -------------------------------------------------------------------------
+sub determine_alias_usage {
+    local ($vec) = @_;
+    $vec =~ s/\s*//g;                                       # remove all spaces
+    $vec =~ s/\*//g;                                        # remove vector delimiters and ending ;
+    $vec =~ s/;//g;
+    #d print "vec:$vec\n";
+ 
+    $vec_index = 0;
+    foreach $pin (@signal_order) {
+        $alias_table{$DevicePinNumberToPinNameLUT{$pin}, substr($vec,$vec_index,1)}++;
+        #d print "pin - $pin_name    char - ", substr($vec,$vec_index,1), "\n";
+        $vec_index++;
+    }
+#if alias character is already there, dont add.
+}
+
+
+# -------------------------------------------------------------------------
+sub write_STATS_File {
+    $stats_file = $evo_file_name . '.stats';
+    print ">>  Writing $stats_file file\n";
+    open (STATS, ">$stats_file") || die "Couldn't open file $stats_file for output.\n";
+
+
+
+
+    close STATS;
+    select(STDOUT);
+}
+
+
+# -------------------------------------------------------------------------
+sub write_AS_Table {
+    # Write out the Alias Symbol Table for this VSeries pattern file.
+    local ($ast_filename, $header);
+    @valid_alias_chars = ('L','H','l','h','k','K','y','Y','z','Z','t','T','e','E','v','V','x','X','.','-','0','1','i','I','m','M','n','N','a','A','b','B');
+
+    # Create directory if it doesn't exist
+    $DestinationDirectory = "./";
+    mkdir($DestinationDirectory . 'AuxFiles', 0777);
+
+    $ast_filename = $DestinationDirectory . 'AuxFiles/' . $evo_file_name . '.ast';
+    print ">>  Writing $ast_filename file\n";
+    open (AST, ">$ast_filename") || die "Couldn't open file $ast_filename for output.\n";
+    $header = "PATTERN SET NAME:  $pattern_name\n\n";
+    $header .= "Pin Names           Aliases Used and \(Counts\)\n";
+    $header .= "--------------------------------------------------------------------------------\n";
+    print AST ($header);
+    foreach $pin (@signal_order) {
+        $ast_rec = sprintf ("%-20s", $DevicePinNumberToPinNameLUT{$pin});
+        foreach $alias_char (@valid_alias_chars) {
+            if ($alias_table{$DevicePinNumberToPinNameLUT{$pin}, $alias_char}) { $ast_rec .= "$alias_char ($alias_table{$DevicePinNumberToPinNameLUT{$pin}, $alias_char})  "; }
+        }
+        $ast_rec .= "\n";
+        print AST ($ast_rec);
+    }
+    close AST;
+}
+
+
+# -------------------------------------------------------------------------
+sub output_CPM_FlowReport {
+    $CPM_flow_filename = $DestinationDirectory . 'AuxFiles/' . $evo_file_name . '.cfr';
+    print ">>  Writing $CPM_flow_filename file\n";
+    open (CFR, ">$CPM_flow_filename") || die "Couldn't open file $CPM_flow_filename for output.\n";
+    select(CFR);
+    $- = 0;
+    $^ = 'cfr_header';
+    foreach $conv_state (@conv_status) {
+        ($mode, $count, $scan_vector) = split(',', $conv_state);
+        if ($mode eq 'Parallel') { $~ = 'parallel_mode'; write(CFR); } else
+                                 { $~ = 'serial_mode'; write(CFR); }
+    }
+    close CFR;
+    select(STDOUT);
+    
+    format cfr_header =
+PATTERN SET NAME:  @<<<<<<<<<<<<<<<<
+                   $pattern_name
+Conversion Status for CPM Pattern Construction
+                   Parallel       Serial         Scan
+                   Vector Count   Bit Count      Vector
+--------------------------------------------------------------------------------
+.
+    format parallel_mode =
+Mode: @<<<<<<<<    @####
+      $mode,       $count
+.
+    format serial_mode =
+Mode: @<<<<<<<<                   @####          @####
+      $mode,                      $count,        $scan_vector
+.
+}
+
+
+# -------------------------------------------------------------------------
+sub numerically { $a <=> $b; }
+ 
+
+# --------------------------------- error  ---------------------------------
+sub error {
+local ($error_message) = @_;
+local ($sec, $min, $hour, $mday, $mon, $year, $time);
+print $error_message;
+
+if ($error_message =~ /INTERNAL/) {
+    $stop;
+}
+
+open (ACTION, ">>$action_file");
+
+if (!$err_no++) {
+    ($sec, $min, $hour, $mday, $mon, $year) = localtime ($^T);
+    $year = $year + 1900;                                       # Y2K fix 
+    $time = ++$mon . "\/$mday\/$year - $hour:$min";
+    print (ACTION "\n$time\n");
+}
+
+# Append the error message to the .act file
+print (ACTION "$err_no: $error_message");
+close (ACTION);
+} # end of error
+
+# --------------------------------- terminate ---------------------------------
+sub terminate {
+    local ($msg) = @_;
+    die $msg;
+} # end of terminate
+
+
+# --------------------------------- handler ---------------------------------
+sub handler {
+	local ($sig) = @_;
+	print "Segmentation fault\n";
+	exit 0;
+}
+
+# --------------------------------- end of program ---------------------------------

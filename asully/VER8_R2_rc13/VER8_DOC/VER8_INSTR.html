@@ -1,0 +1,1020 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//ABISOURCE//DTD XHTML plus AWML 2.2//EN" "http://www.abisource.com/2004/xhtml-awml/xhtml-awml.mod">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:awml="http://www.abisource.com/2004/xhtml-awml/">
+ <head>
+  <!-- ======================================================= -->
+  <!-- Created by AbiWord, a free, Open Source wordprocessor.  -->
+  <!-- For more information visit http://www.abisource.com.    -->
+  <!-- ======================================================= -->
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>VER8_INSTR.html</title>
+  <style type="text/css">
+   <!--
+#toc,
+.toc,
+.mw-warning {
+	border: 1px solid #aaa;
+	background-color: #f9f9f9;
+	padding: 5px;
+	font-size: 95%;
+}
+#toc h2,
+.toc h2 {
+	display: inline;
+	border: none;
+	padding: 0;
+	font-size: 100%;
+	font-weight: bold;
+}
+#toc #toctitle,
+.toc #toctitle,
+#toc .toctitle,
+.toc .toctitle {
+	text-align: center;
+}
+#toc ul,
+.toc ul {
+	list-style-type: none;
+	list-style-image: none;
+	margin-left: 0;
+	padding-left: 0;
+	text-align: left;
+}
+#toc ul ul,
+.toc ul ul {
+	margin: 0 0 0 2em;
+}
+#toc .toctoggle,
+.toc .toctoggle {
+	font-size: 94%;
+}@media print, projection, embossed {
+	body {
+		padding-top:1in;
+		padding-bottom:1in;
+		padding-left:1in;
+		padding-right:1in;
+	}
+}
+body {
+	font-family:'Times New Roman';
+	font-style:normal;
+	widows:2;
+	font-variant:normal;
+	font-weight:normal;
+	text-decoration:none;
+	text-indent:0in;
+	color:#000000;
+	text-align:left;
+	font-size:12pt;
+}
+table {
+}
+td {
+	border-collapse:collapse;
+	text-align:left;
+	vertical-align:top;
+}
+p, h1, h2, h3, li {
+	color:#000000;
+	font-family:'Times New Roman';
+	font-size:12pt;
+	text-align:left;
+	vertical-align:normal;
+}
+     -->
+  </style>
+ </head>
+ <body>
+  <div>
+   <p><span style="font-weight:bold;font-size:18pt;color:#0000ff">Overall instructions for generating waveforms and patterns</span>&nbsp;</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span style="color:#ff0000">Disclaimers:</span></p>
+   <p dir="ltr" style="text-align:left"><span style="color:#ff0000">Note that all testing has been done on a Linux box with at least</span></p>
+   <p dir="ltr" style="text-align:left"><span style="color:#ff0000">1Gbyte of ram. No testing has yet been done on Solaris boxes.</span></p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span style="color:#ff0000">Also, the best efforts have been made to translate patterns and</span></p>
+   <p dir="ltr" style="text-align:left"><span style="color:#ff0000">waveforms correctly. However, it is the user's responsiblity to</span></p>
+   <p dir="ltr" style="text-align:left"><span style="color:#ff0000">validate that the translation is correct.</span></p>
+   <p dir="ltr" style="text-align:left"><span style="color:#ff0000">Please see the LSLv1.2.txt file in this directory.</span></p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">   </p>
+   <table class="toc" summary="Contents">
+    <tr>
+     <td>
+      <div class="toctitle">
+       <h2>
+Contents       </h2>
+      </div>
+     </td>
+    </tr>
+   </table>
+   <p dir="ltr" style="text-align:left"><span style="color:#800080" xml:lang="en-US" lang="en-US">Build the executables and setup links.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="color:#800080" xml:lang="en-US" lang="en-US">Quick description.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="color:#800080" xml:lang="en-US" lang="en-US">Basic Syntax and usage</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="color:#800080" xml:lang="en-US" lang="en-US">Environment variables for DEBUG</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="color:#800080" xml:lang="en-US" lang="en-US">General translation procedure</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="color:#800080" xml:lang="en-US" lang="en-US">"HOW TO" SECTION</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="color:#800080" xml:lang="en-US" lang="en-US">	Why do I need to use START/STOP markers and BUILD_INHERIT_MENU?</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="color:#800080" xml:lang="en-US" lang="en-US">&nbsp;</span><span style="color:#800080" xml:lang="en-US" lang="en-US">Using BUILD_INHERIT_MENU</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="color:#800080" xml:lang="en-US" lang="en-US">&nbsp;</span><span style="color:#800080" xml:lang="en-US" lang="en-US">Pattern sequence example showing use of COMMON_WFT</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="color:#800080" xml:lang="en-US" lang="en-US">&nbsp;</span><span style="color:#800080" xml:lang="en-US" lang="en-US">Futher DESUB intstructions</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="color:#800080" xml:lang="en-US" lang="en-US">&nbsp;</span><span style="color:#800080" xml:lang="en-US" lang="en-US">Pattern translation problems????</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="color:#800080" xml:lang="en-US" lang="en-US">	Some quick comments on translation_status.txt</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="color:#800080" xml:lang="en-US" lang="en-US">	How to add waveforms in a file like sync.p to the conversion set.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="color:#800080" xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#800080" xml:lang="en-US" lang="en-US">How to deal with Waveforms using chanSecond...</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="color:#800080" xml:lang="en-US" lang="en-US">	&lt;</span><span style="color:#800080" xml:lang="en-US" lang="en-US">Need acspec based on START/STOP???? removed&gt;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="color:#800080" xml:lang="en-US" lang="en-US">&nbsp;</span><span style="color:#800080" xml:lang="en-US" lang="en-US">Troubleshooting START/STOP setups and resolve problems.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="color:#800080" xml:lang="en-US" lang="en-US">&nbsp;</span><span style="color:#800080" xml:lang="en-US" lang="en-US">How to deal with waveforms which start a window strobe in one cycle</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="color:#800080" xml:lang="en-US" lang="en-US">	&nbsp;and close it in another.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="color:#008000" xml:lang="en-US" lang="en-US">Issues still to be resolved</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-weight:bold">Note these instructions are specific for generating patterns and waveforms. The rest of your program (acdata.evo, levels.evo, etc) should be generated using a separate procedure. You probably won't be able to load up your program into enVision without completing the general enVision objects via that procedure. That procedure is NOT documented here.</span><br /></p>
+   <p dir="ltr" style="text-align:left"><a name="executables" id="executables"></a><span style="color:#008000">Build the executables and setup links (assuming this has not been done for you already).</span></p>
+   <p dir="ltr" style="text-align:left">================================</p>
+   <p dir="ltr" style="text-align:left">Script Stuff:</p>
+   <p dir="ltr" style="text-align:left">cd /YOUR_SCRIPT_LOCATION/VER8/</p>
+   <p dir="ltr" style="text-align:left">make clean</p>
+   <p dir="ltr" style="text-align:left">make</p>
+   <p dir="ltr" style="text-align:left">=================================</p>
+   <p dir="ltr" style="text-align:left">Setup Stuff:</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">cd /YOUR_PROG_DIR/p_files/</p>
+   <p dir="ltr" style="text-align:left">ln -s /YOUR_SCRIPT_LOCATION/VER8/GCT_GEN_MOD8</p>
+   <p dir="ltr" style="text-align:left">ln -s /YOUR_SCRIPT_LOCATION/VER8/BUILD_INHERIT_MENU</p>
+   <p dir="ltr" style="text-align:left">ln -s /YOUR_SCRIPT_LOCATION/PYTHON/ENUMS.py </p>
+   <p dir="ltr" style="text-align:left">ln -s /YOUR_SCRIPT_LOCATION/PYTHON/POL2FUS_APS.py</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">cd /YOUR_PROG_DIR/Vectors/</p>
+   <p dir="ltr" style="text-align:left">ln -s /YOUR_SCRIPT_LOCATION/VER8/DESUB</p>
+   <p dir="ltr" style="text-align:left">ln -s /YOUR_SCRIPT_LOCATION/VER8/PRE_PROC_NEW</p>
+   <p dir="ltr" style="text-align:left"># the following can be used to force CPM:</p>
+   <p dir="ltr" style="text-align:left">ln -s /YOUR_SCRIPT_LOCATION/VER8/PRE_PROC_NEW PRE_PROC_CPM</p>
+   <p dir="ltr" style="text-align:left">ln -s /YOUR_SCRIPT_LOCATION/VER8/VCP_NEW</p>
+   <p dir="ltr" style="text-align:left">ln -s /YOUR_SCRIPT_LOCATION/VER8/VCS_AUTOGEN8</p>
+   <p dir="ltr" style="text-align:left">=================================</p>
+   <p dir="ltr" style="text-align:left"><span style="color:#008000"><br /></span></p>
+   <p dir="ltr" style="text-align:left"><a name="description" id="description"></a><span style="color:#008000">Quick description:</span></p>
+   <p dir="ltr" style="text-align:left">------------------</p>
+   <p dir="ltr" style="text-align:left"><span style="font-weight:bold">GCT_GEN_MOD8</span>:</p>
+   <p dir="ltr" style="text-align:left">	Creates the mod8 file used to map characters and waveform references in patterns.</p>
+   <p dir="ltr" style="text-align:left">	Creates waveforms.</p>
+   <p dir="ltr" style="text-align:left">	Creates waveform selection files.</p>
+   <p dir="ltr" style="text-align:left">	Figures out scan pins</p>
+   <p dir="ltr" style="text-align:left">	Eventually, it will be able to extract timing parameters from actable_mod.p and </p>
+   <p dir="ltr" style="text-align:left">	acdata_mod.p</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span style="font-weight:bold">BUILD_INHERIT_MENU</span>:</p>
+   <p dir="ltr" style="text-align:left">	This uses the waveform file and menu driven selections to create a specific set of</p>
+   <p dir="ltr" style="text-align:left">	WaveformTables (and potentially a PatternSequence, with no threads) for the conditions</p>
+   <p dir="ltr" style="text-align:left">	requested.</p>
+   <p dir="ltr" style="text-align:left">&nbsp;<span style="font-size:8pt;color:#ffff00">Also, if both actable_markers.p and acdata_markers.p have been processed it will create </span></p>
+   <p dir="ltr" style="text-align:left"><span style="font-size:8pt;color:#ffff00">	a acspec2.evo</span></p>
+   <p dir="ltr" style="text-align:left">	If you have <span style="font-weight:bold">NO</span> device or category specific conditions in your actable files you will not </p>
+   <p dir="ltr" style="text-align:left">	need to use this command.</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span style="font-weight:bold">ENUMS.py</span>:</p>
+   <p dir="ltr" style="text-align:left">	A python script to extract enums.evo from actable.p and Global.h</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span style="font-weight:bold">POL2FUS_APS.py</span>:</p>
+   <p dir="ltr" style="text-align:left">	A python script to convert adapterboard objects to the appropriate fusion mapping.</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span style="font-weight:bold">DESUB</span>:</p>
+   <p dir="ltr" style="text-align:left">	A short routine to routine to patch subroutines into patterns. This works only for external</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;subroutines and not subroutines defined in the same pattern file where it is used.</p>
+   <p dir="ltr" style="text-align:left">&nbsp;<span style="font-weight:bold;color:#0000ff">Note: You can also use thread blocking to tie in the subroutines instead of using</span></p>
+   <p dir="ltr" style="text-align:left"><span style="font-weight:bold;color:#0000ff">&nbsp;DESUB (see futher details below).</span></p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span style="font-weight:bold">PRE_PROC_NEW/PRE_PROC_CPM</span>:</p>
+   <p dir="ltr" style="text-align:left">	The front end to the pattern converters. This routine does field to binary vectors, works </p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;out microinstructions, and does various things to precondition the vectors. It then selects </p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;which of the converters (VCP or VCS) to run.</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span style="font-weight:bold">VCP_NEW</span>:</p>
+   <p dir="ltr" style="text-align:left">	The parallel pattern converter, usually called automatically by PRE_PROC_NEW.</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span style="font-weight:bold">VCS_AUTOGEN8</span>:</p>
+   <p dir="ltr" style="text-align:left">	The scan converter, usually called automatically by PRE_PROC_NEW.</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">Also available is <span style="font-weight:bold">VER8_Rx.x/VER8_DOC/PATGRP_WFT.evo </span>This provides the PatternGroup waveformtable for the alias assignments. Normally, you'll copy the contents of this file into your cycletbl.evo file.<br /></p>
+   <p dir="ltr" style="text-align:left">===================================</p>
+   <p dir="ltr" style="text-align:left"><a name="syntax" id="syntax"></a><span style="color:#008000">Basic Syntax and usage</span>:</p>
+   <p dir="ltr" style="text-align:left">-----------------------</p>
+   <p dir="ltr" style="text-align:left"><span style="font-weight:bold">GCT_GEN_MOD8</span> -fpda cycletbl_mod.p pinlist.txt device_mod.p actable_mod.p</p>
+   <p dir="ltr" style="text-align:left">	Parameter meanings:</p>
+   <p dir="ltr" style="text-align:left">	-f cycletbl.p file follows</p>
+   <p dir="ltr" style="text-align:left">	-p pinlist.txt file follows</p>
+   <p dir="ltr" style="text-align:left">	-d device_mod.p file follows</p>
+   <p dir="ltr" style="text-align:left">	-a actable_mod.p file follows</p>
+   <p dir="ltr" style="text-align:left">	-n Do not generate modifications to handle multicycle windows. <span style="font-weight:bold">DO</span>&nbsp;<span style="font-weight:bold">NOT USE </span>this </p>
+   <p dir="ltr" style="text-align:left">	option<span style="font-weight:bold">&nbsp;</span>unless you really know what you are doing. By <span style="font-weight:bold">NOT </span>using this option additional </p>
+   <p dir="ltr" style="text-align:left">	features will be added to the translation to handle multicycle windows if they exist. These</p>
+   <p dir="ltr" style="text-align:left">	features include evX2 pattern mode so the close cycles can be separated, PUSH_CYC </p>
+   <p dir="ltr" style="text-align:left">	spec parameter is subtracted from the "real" period and the "close window" </p>
+   <p dir="ltr" style="text-align:left">	waveformtables use this parameter. If you include this option any Cells which probably &nbsp;</p>
+   <p dir="ltr" style="text-align:left">	needed this feature may not resolve properly. Warnings will be added to the waveform </p>
+   <p dir="ltr" style="text-align:left">	files and the patterns if this parameter is used.</p>
+   <p dir="ltr" style="text-align:left"><span xml:lang="en-US" lang="en-US">Note that EX/FX1 may be the only tester which will properly support multicycle window strobes.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in">	-m This will remove muxed pins from the waveforms and the patterns. On Polaris</p>
+   <p dir="ltr" style="text-align:left">	a major use of mux mode is to get four edges instead of the normal max of three. If</p>
+   <p dir="ltr" style="text-align:left">	you initially translate and find this is the case you can re-run with this option and the</p>
+   <p dir="ltr" style="text-align:left">	waveforms will not be generated for the mux pins, patterns will use the AM_NOMUX</p>
+   <p dir="ltr" style="text-align:left">	character in aliasmap.h for muxpins (currently space). </p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span style="font-style:italic;font-size:8pt;color:#ffff00">Note there was a prior feature intended to extract acspec parameters from actable.p this feature has been turned off for the moment....</span></p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span style="font-weight:bold;font-style:italic;font-size:8pt;color:#ffff00" xml:lang="en-US" lang="en-US">GCT_GEN_MOD8</span><span style="font-style:italic;font-size:8pt;color:#ffff00" xml:lang="en-US" lang="en-US"> -fpda empty_file.p pinlist.txt device_mod.p acdata_mod.p</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-style:italic;font-size:8pt;color:#ffff00" xml:lang="en-US" lang="en-US">	(this is to parse specifically for acdata parameters for BUILD_INHERIT_MENU to</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-style:italic;font-size:8pt;color:#ffff00" xml:lang="en-US" lang="en-US">	create a spec).</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left">python <span style="font-weight:bold">ENUMS.py</span> actable.p Global.h</p>
+   <p dir="ltr" style="text-align:left">	(don't forget the python command in front)</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">python <span style="font-weight:bold">POL2FUS_APS.py</span> device_mod.p</p>
+   <p dir="ltr" style="text-align:left">	(again don't forget the python command in front)</p>
+   <p dir="ltr" style="text-align:left">	This can also take device_mod.evo instead to map an envision board to a differently </p>
+   <p dir="ltr" style="text-align:left">	mapped envision board.</p>
+   <p dir="ltr" style="text-align:left">&nbsp;</p>
+   <p dir="ltr" style="text-align:left"><span style="font-weight:bold">DESUB</span> normal_pat.vpl.Z my_subroutines.vpl.Z</p>
+   <p dir="ltr" style="text-align:left">	Note that this command can read straight ".vpl" files, compressed "vpl.Z" files, and </p>
+   <p dir="ltr" style="text-align:left">	gzipped ".vpl.gz" files.</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">	Alternatively, if the subroutines are simple pattern subsections with no parameter </p>
+   <p dir="ltr" style="text-align:left">&nbsp;substitution,&nbsp;then thread blocking may also be a solution. See example provided in:</p>
+   <p dir="ltr" style="text-align:left">&nbsp;<span style="font-style:italic;color:#0000ff">Thread_blocking_example_for_subroutines.evo.&nbsp;</span>Note that you will need to grep the</p>
+   <p dir="ltr" style="text-align:left">&nbsp;pattern files to get the subroutine calls to build the thread. Also note that you can have</p>
+   <p dir="ltr" style="text-align:left">&nbsp;different subroutines in the StartBlock portion from one "main" pattern to another (see</p>
+   <p dir="ltr" style="text-align:left">&nbsp;the example).</p>
+   <p dir="ltr" style="text-align:left"><span style="font-weight:bold">PRE_PROC_NEW</span> pattern_file.vpl.Z cycletbl_mod.mod8</p>
+   <p dir="ltr" style="text-align:left">	Note that this command can read straight ".vpl" files, compressed "vpl.Z" files, and </p>
+   <p dir="ltr" style="text-align:left">	gzipped ".vpl.gz" files.</p>
+   <p dir="ltr" style="text-align:left">	This should convert the pattern to an .evo file.</p>
+   <p dir="ltr" style="text-align:left">	If you rename VCP_NEW or VCS_AUTOGEN8 (to VCPX for example)</p>
+   <p dir="ltr" style="text-align:left"><span style="font-weight:bold">	PRE_PROC_NEW</span> will create the intermediate "*.proc"</p>
+   <p dir="ltr" style="text-align:left">	file which you can examine and fix (either the source vpl or the proc) and then hand to</p>
+   <p dir="ltr" style="text-align:left">	&nbsp;the second stage translator (VCP_NEW or VCS_AUTOGEN8).</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span style="font-weight:bold">PRE_PROC_CPM</span> pattern_file.vpl.Z cycletbl_mod.mod8</p>
+   <p dir="ltr" style="text-align:left">	Use this to force Cpm patterns (primarily in the case of big loops that you don't want</p>
+   <p dir="ltr" style="text-align:left">	&nbsp;expanded).</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span style="font-weight:bold">VCP_NEW</span> -fgrz pattern_file.proc cycletbl_mod.mod8</p>
+   <p dir="ltr" style="text-align:left">	Use this to translate the intermediate proc file to .evo for parallel patterns. </p>
+   <p dir="ltr" style="text-align:left">	(normally called automatically from PRE_PROC_NEW)</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span style="font-weight:bold">VCS_AUTOGEN</span> -fgza pattern_file.proc cycletbl_mod.mod8</p>
+   <p dir="ltr" style="text-align:left">	Use this to translate the intermediate proc file to .evo for scan patterns.</p>
+   <p dir="ltr" style="text-align:left">	(normally called automatically from PRE_PROC_NEW)</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span style="font-weight:bold" xml:lang="en-US" lang="en-US">BUILD_INHERIT_MENU</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">	Two ways to use: </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">	&nbsp;1) Prompted based on what is in enums.evo. </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">	&nbsp;2) Command line processing. Order is important:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">	&nbsp;</span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">BUILD_INHERIT_MENU</span><span xml:lang="en-US" lang="en-US"> Cat Dev Temp Test [ExtraEnum]</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">	&nbsp;You can pass 4 or 5 parameters based on whether you have an extra </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">	&nbsp;enum parameter.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-size:8pt" xml:lang="en-US" lang="en-US">	&nbsp;</span><span xml:lang="en-US" lang="en-US">This allows BUILD_INHERIT_MENU to be scripted.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">	Note that </span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">BUILD_INHERIT_MENU</span><span xml:lang="en-US" lang="en-US"> will now log its </span><span style="font-style:italic;text-decoration:underline" xml:lang="en-US" lang="en-US">prompted</span><span xml:lang="en-US" lang="en-US"> options to </span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">BIM.log.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-weight:bold" xml:lang="en-US" lang="en-US">&nbsp;</span><span xml:lang="en-US" lang="en-US">You can use this log file to re-run later if needed.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">	Example:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-size:8pt" xml:lang="en-US" lang="en-US">&nbsp;</span><span style="font-weight:bold;font-size:8pt" xml:lang="en-US" lang="en-US">BUILD_INHERIT_MENU</span><span style="font-size:8pt" xml:lang="en-US" lang="en-US"> TIlofrqlooseACTable SM320C40TAB_pg5x_50MHz TEMP_85_DEG Final RUN_SYNC</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-size:8pt" xml:lang="en-US" lang="en-US">&nbsp;</span><span xml:lang="en-US" lang="en-US">Also, if you run this after you've converted all patterns and copy/link</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">&nbsp;</span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">translation_patref.txt t</span><span xml:lang="en-US" lang="en-US">o the directory where you run</span><span style="font-weight:bold" xml:lang="en-US" lang="en-US"> BUILD_INHERIT_MENU </span><span xml:lang="en-US" lang="en-US">it </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">	will also create a PatternSequence in the file</span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in">===============================================</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><a name="debug" id="debug"></a><span style="color:#008000">Environment variables for DEBUG:</span></p>
+   <p dir="ltr" style="text-align:left">The following environment control variables exist for the various scripts:</p>
+   <p dir="ltr" style="text-align:left">DEBUG_PROC &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if set to something it will enable additional debug prints</p>
+   <p dir="ltr" style="text-align:left">PROC_NO_BACKGROUND_GZIP if set it will not push the gzips into the background</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this will slow the translation down with multiple processors</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;but will save on disk space. For single processors it will</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;just save disk space.</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">===============================================</p>
+   <p dir="ltr" style="text-align:left"><br /></p>
+   <p dir="ltr" style="text-align:left"><a name="procedure" id="procedure"></a><span style="color:#008000">General translation procedure</span></p>
+   <p dir="ltr" style="text-align:left">-----------------------------</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">Program stuff:</p>
+   <p dir="ltr" style="text-align:left">(1) Create the pinlist.txt file from the APEXALLPINS group or the fields groups from VectorMapSet, one pin per line, in order. <span style="font-weight:bold">NOTE: pinlist.txt should !NOT! contain the mux secondary pins!!!</span> Note: In some cases VectorMap does not have all pins listed in the cycletbl waveform files. In other words sometimes waveforms are provided for pins which don't exist in patterns. These pins may or may not exist in the reduced device.p. If you get errors about cycletbl pingroups, add these pins at the !END! of the pinlist.txt file. They'll get transferred into the *.mod8 file but won't get used in pattern translation.</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">(2) Create the cycletbl_mod.p file. If you have two or more cycletable</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;entries you'll have to decide which one you need or if there is no overlap,</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;whether they can be combined together.</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;From F240: </p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;CycleTableOpen( cycletable );</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;CycleTableSpeedSet &nbsp;( StdSpeed );</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;CycleTableMDModeSet ( StdMDMode );</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;or:</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;CycleTableOpen( cycletable );</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;CycleTableSpeedSet &nbsp;( FastSpeed );</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;CycleTableMDModeSet ( ExtMDMode );</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;When you compare these two tables they appear to be the same....</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;Hopefully they are not major differences.</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;You may also end up with some cyclesets from one file/section and some</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;from another. As long as there are no overlaps you are ok. The code now</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;accepts both CycleSetMD() and CycleSet() statements so you no longer need</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;to fix the CycleSet statments. Note: comments are now removed. There may</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;be some situations where comments confuse things. If you have difficulty</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;try removing the comments. Be sure to add in any #include files!</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">(3) Create the device_mod.p file by removing comments and reducing to the</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;section you need for your package. Be sure to add in any #include files!</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span xml:lang="en-US" lang="en-US">(4) The following line will create enums.evo needed for the START/STOP processing:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">python </span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">ENUMS.py</span><span xml:lang="en-US" lang="en-US"> actable.p Global.h </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left">(5) Choose either (5a) or (5b) depending on your circumstances. If there are include statements you will need to pull those into one file before using <span style="font-weight:bold">GCT_GEN_MOD8</span>. If the includes are conditional then you may need (5b).</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">(5a) You have <span style="font-weight:bold">NO</span> conditional waveforms in actable.evo . This means there are no '<span style="font-weight:bold;color:#3366ff">case'</span> or<span style="font-weight:bold;color:#3366ff"> 'if'</span> statements which modify timing setups. Two examples of this could be:</p>
+   <p dir="ltr" style="text-align:left"><br /><span style="font-size:10pt">case actable of TIparametricACTable:</span></p>
+   <p dir="ltr" style="text-align:left"><span style="font-size:10pt"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WaveSetDoubleClk (CLKdrvWF,t[tR1],t[tF1],t[tR2], t[tF2]);</span></p>
+   <p dir="ltr" style="text-align:left"><span style="font-size:10pt"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;others:</span></p>
+   <p dir="ltr" style="text-align:left"><span style="font-size:10pt"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WaveSetNR (CLKdrvWF,t[R1]);</span></p>
+   <p dir="ltr" style="text-align:left"><span style="font-size:10pt">end;</span></p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span style="font-size:10pt">or</span></p>
+   <p dir="ltr" style="text-align:left"><span style="font-size:10pt"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ((actable = TIlofrqmaxACTable) or (actable = TIlofrqminACTable)) then</span></p>
+   <p dir="ltr" style="text-align:left"><span style="font-size:10pt"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EdgeSet (IIOFWF,Edge1,StrobeOff, t[tH1flo]);</span></p>
+   <p dir="ltr" style="text-align:left"><span style="font-size:10pt"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left"><span style="font-size:10pt"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EdgeSet (IIOFWF,Edge1,StrobeOff,t[loosdelay5]);</span></p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">If none of these exist in your actable.p file then just add a </p>
+   <p dir="ltr" style="text-align:left">START<span style="font-weight:bold">(ALLTABLES,ALLENUMS);</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;at the top of your file and a </p>
+   <p dir="ltr" style="text-align:left">STOP<span style="font-weight:bold">(ALLTABLES,ALLENUMS); &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> at the bottom of your file and save it as actable_markers.p and proceed to step (6).</p>
+   <p dir="ltr" style="text-align:left">&nbsp;</p>
+   <p dir="ltr" style="text-align:left">Programs such as 320C40 condition the whole table into separate "duplicate" sections depending on device conditions. Programs such as this will need (5b).</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">(5b) Create the actable_markers.p file pulling in any includes and by adding</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;START/STOP marker lines. &nbsp;Be sure to add in any #include files!</p>
+   <p dir="ltr" style="text-align:left">See also HOWTO Section and the BUILD_INHERIT_MENU section.</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;For any "case" or "if (actable in [...] )" statements</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;add the appropriate START() and STOP() markers.</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You can use the shortcuts:</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight:bold">ALLDEVICE, ALLTEMP, ALLTEST</span> as subset descriptors.</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight:bold">ALLENUMS</span> covers all the three types.</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight:bold">ALLTABLES</span> refers to all possible ACTables/categories.</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The ACTableOpen() should start with:</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;START(<span style="font-weight:bold">ALLENUMS,ALLTABLES</span>);</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and end with:</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STOP(<span style="font-weight:bold">ALLENUMS,ALLTABLES</span>);</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A typical example would be: </p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;START(<span style="font-weight:bold">ALLENUMS</span>,TIChipx4_025ACTable);</p>
+   <p dir="ltr" style="text-align:left">.</p>
+   <p dir="ltr" style="text-align:left">.</p>
+   <p dir="ltr" style="text-align:left">.</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;STOP(<span style="font-weight:bold">ALLENUMS</span>,TIChipx4_025ACTable);</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">Every START should have a matching STOP. Don't forget the semicolons after the statements.</p>
+   <p dir="ltr" style="text-align:left">&nbsp;</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See the notes at the bottom "troubleshooting START/STOP and resolve problems".</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;</p>
+   <p dir="ltr" style="text-align:left">(6) Create waveform table files and lookup table:</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span style="font-weight:bold">GCT_GEN_MOD8</span> -fpda cycletbl_mod.p pinlist.txt device_mod.p actable_markers.p</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">You will get:</p>
+   <p dir="ltr" style="text-align:left"><span style="font-weight:bold" xml:lang="en-US" lang="en-US">Waveforms_actable.evo</span><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;</span><span style="font-size:10pt" xml:lang="en-US" lang="en-US">(Effectively, actable.evo, include this in your program).</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-weight:bold" xml:lang="en-US" lang="en-US">Waveforms_Master_Inherits.evo</span><span xml:lang="en-US" lang="en-US"> &nbsp;</span><span style="font-size:10pt" xml:lang="en-US" lang="en-US">Effectively, cycletable.evo, used by </span><span style="font-size:10pt" xml:lang="en-US" lang="en-US">BUILD_INHERIT_MENU to create condition specific waveform tables, if you have no conditionals in actable.p you can just use this file directly in your program. </span><span style="font-weight:bold;font-size:10pt;color:#ff0000" xml:lang="en-US" lang="en-US">This file will contain multiple definitions for edges which are conditionally defined. If you use this file instead of the "selected" output from BUILD_INHERIT_MENU enVision will ONLY RESOLVE the first instance of the Cell. </span><span style="font-weight:bold;font-size:10pt" xml:lang="en-US" lang="en-US">This file provides the correct definitions only when there are</span><span style="font-weight:bold;font-size:10pt;color:#ff0000" xml:lang="en-US" lang="en-US"> NO </span><span style="font-weight:bold;font-size:10pt" xml:lang="en-US" lang="en-US">conditional Waveforms!)</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-weight:bold" xml:lang="en-US" lang="en-US">InheritControl.ggm</span><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-size:10pt" xml:lang="en-US" lang="en-US">(This is used by BUILD_INHERIT_MENU. It contains the category mapping).</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-weight:bold" xml:lang="en-US" lang="en-US">cycletbl_mod.mod8</span><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-size:10pt" xml:lang="en-US" lang="en-US">(The file which figures out pattern alias choices for pattern conversion).</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-weight:bold" xml:lang="en-US" lang="en-US">translation_status.txt &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span xml:lang="en-US" lang="en-US">&nbsp;</span><span style="font-size:10pt" xml:lang="en-US" lang="en-US">(This logs "interesting" information from the waveform processing, and later pattern conversions).</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-weight:bold" xml:lang="en-US" lang="en-US">translation_errors.txt</span><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-size:10pt" xml:lang="en-US" lang="en-US">(This logs the problems with the waveform conversion, and later pattern conversions. </span><span style="font-weight:bold;font-size:10pt;color:#ff0000" xml:lang="en-US" lang="en-US">This file should always be reviewed after a translation step</span><span style="font-size:10pt" xml:lang="en-US" lang="en-US">).</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;</span></p>
+   <p dir="ltr" style="text-align:left"><span style="font-size:10pt">The following files are now created in a </span><span style="font-weight:bold;font-size:10pt">.Trash/</span><span style="font-size:10pt"> directory for reference. If you have problems sometimes looking at these can be helpful. Normally, you can ignore or delete them.</span></p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span style="font-size:10pt"> &nbsp;</span><span style="font-weight:bold;font-size:10pt">Waveforms_trace_actions_del.evo</span><span style="font-size:10pt"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Its the info before optimization).</span></p>
+   <p dir="ltr" style="text-align:left"><span style="font-size:10pt"> &nbsp;</span><span style="font-weight:bold;font-size:10pt">Waveforms_TRACEABLE_LINES_del.evo</span><span style="font-size:10pt"> &nbsp;(Its useful for tracing the Inherit control lines).</span></p>
+   <p dir="ltr" style="text-align:left"><span style="font-size:10pt"> &nbsp;</span><span style="font-weight:bold;font-size:10pt">Waveforms_actable_unpurged_del.evo</span><span style="font-size:10pt"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(This shows the waveforms before they are compressed together).</span></p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">If you use <span style="font-weight:bold">BUILD_INHERIT_MENU</span> (discussed later) you'll also have: <span style="font-weight:bold" xml:lang="en-US" lang="en-US">Waveforms_Cat_Inherit_([A-Z,a-z,0-9]*).evo </span></p>
+   <p dir="ltr" style="text-align:left">These are specific variations for generated from <span style="font-weight:bold">Waveforms_Master_Inherits.evo</span> to handle conditional waveforms. You should include these with the appropriate pattern sequences.</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span style="font-style:italic;color:#ffff00">The following support has currently been disabled: &nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left"><span style="font-style:italic;color:#ffff00">&nbsp;</span><span style="font-weight:bold;font-style:italic;font-size:10pt;color:#ffff00">ACTDATATBL_WFMS.evo</span><span style="font-style:italic;font-size:10pt;color:#ffff00">&nbsp;</span><span style="font-style:italic;color:#ffff00"> &nbsp;</span><span style="font-style:italic;font-size:10pt;color:#ffff00">(This is a "Spec" of all the parameters in the actable_markers.p file, separated by the "cdtcode". Use it if you wish.)</span></p>
+   <p dir="ltr" style="text-align:left"> &nbsp;</p>
+   <p dir="ltr" style="text-align:left">You include Waveforms_actable.evo and either Waveforms_Master_Inherits.evo or all Waveform_Cat_Inherit([A-Z,a-z,0-9]*).evo files in your program.</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span style="font-size:10pt">My intent is the user will create an additional file called Waveforms_user.evo where any user modified waveforms can be placed (such as for sync). The inherit file can then be modified to pick up the user waveforms from those tables instead. More details on the inherits are in the HOWTO section below. I think this will give us a more structured way to deal with the problems we've encountered.</span></p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">(7) run "zgrep -i subroutine *.vpl* &gt;subr_list.txt" to identify if you have subroutines. If so, you'll need to run <span style="font-weight:bold">DESUB</span> on the files first. &nbsp;A typical grep might show:</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">zgrep -i subroutine *.vpl*</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span style="font-size:10pt" xml:lang="en-US" lang="en-US">RAM0S_HSUBPattern.vpl.Z:hardware subroutine walking0s ()</span></p>
+   <p dir="ltr" style="text-align:left"><span style="font-size:10pt" xml:lang="en-US" lang="en-US">RAM1S_HSUBPattern.vpl.Z:hardware subroutine walking1s ()</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-size:10pt">RAM0SPattern.vpl.Z:external hardware subroutine walking0s ();</span></p>
+   <p dir="ltr" style="text-align:left"><span style="font-size:10pt">RAM1SPattern.vpl.Z:external hardware subroutine walking1s ();</span></p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">In this case the two "HSUB" files define the subroutines, the other two patterns with the "external" use the subroutines. Thus we will run <span style="font-weight:bold">DESUB</span> on the second two files.</p>
+   <p dir="ltr" style="text-align:left">Copy the subroutines definitions from the separate files into one file: my_subroutines.vpl. You can compress this if you want. Now run <span style="font-weight:bold">DESUB</span> on any of the patterns which call subroutines:</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span style="font-weight:bold">DESUB</span>&nbsp;<span xml:lang="en-US" lang="en-US">RAM0SPattern.vpl.Z my_subroutines.vpl.Z </span></p>
+   <p dir="ltr" style="text-align:left"><span xml:lang="en-US" lang="en-US">This will create a new file with a different extension which you will then use instead of the original vpl file. For the given example the new file is RAM0SPattern</span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">.vpl_.gz</span></p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">(8) See if you can translate a pattern:</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;<span style="font-weight:bold">PRE_PROC_NEW</span> sync_pg31.vpl.Z cycletbl_mod.mod8 </p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">Note that PRE_PROC_NEW understands uncompressed, compressed, and gzipped source patterns. By default it will create gzipped output *.evo files to conserve space.</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span xml:lang="en-US" lang="en-US">Note that in the case of a scan pattern the filename will have </span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">"_scanautogen"</span><span xml:lang="en-US" lang="en-US"> appended to its name. This is to distinguish it from patterns which are CPM/DPM scan patterns. </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">There are two scenarios where both a CPM and a DPM pattern will be created. The first is in an optimized situation header vectors from CPM will be pushed into a separate DPM pattern to save space. In this case the two filenames will be: the original name (ABC.evo), and a paired DPM pattern with </span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">_DPM</span><span xml:lang="en-US" lang="en-US"> appended (ABC_DPM.evo). In the case of a CPM calling DPM scan pattern you will get filenames such as ABC</span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">_cpm.evo</span><span xml:lang="en-US" lang="en-US"> and ABC</span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">_dpm.evo</span><span xml:lang="en-US" lang="en-US">. In both these situations you will need to </span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">include BOTH</span><span xml:lang="en-US" lang="en-US"> files in your PatternMap and Thread.</span></p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span style="font-weight:bold" xml:lang="en-US" lang="en-US">PRE_PROC_NEW</span><span xml:lang="en-US" lang="en-US"> will also potentially create </span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">translation_patref.txt</span><span xml:lang="en-US" lang="en-US"> and potentially </span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">scan_signalheaders.evo </span><span xml:lang="en-US" lang="en-US">(only created if scan patterns are found)</span><span xml:lang="en-US" lang="en-US">.</span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">&nbsp;</span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">translation_patref.txt</span><span xml:lang="en-US" lang="en-US"> contains a line for every pattern translated which shows which WaveformTableReferences are used by each pattern. There is now a new feature in BUILD_INHERIT_MENU which can use this file to generate the zipper tables and PatternSequences. The file can also be useful in debug trying to identify which references are used by which patterns. &nbsp;</span></p>
+   <p dir="ltr" style="text-align:left"><span xml:lang="en-US" lang="en-US">The </span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">scan_signalheaders.evo</span><span xml:lang="en-US" lang="en-US"> contains the signalheaders generated in translation of any scan patterns. This file should be sorted and reduced to only the unique entries (unix 'man uniq') and included in your program. </span></p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">(9) In some cases there may be issues with the translation. You may find a *.proc file left behind if the pattern translation crashed due to some unexpected syntax. This *.proc file is an intermediate vpl-type pattern with basic processing of loops and microinstructions. You can review this file to try to determine whether the crash was due to generating the *.proc file (PRE_PROC_NEW) or in the translation to enVision (VCP_NEW or VCS_AUTOGEN8). You may be able to modify the source vpl to work around this crash or you may be able to fix-up the *.proc file and then pass it directly to VCP_NEW or VCS_AUTOGEN8 to get a pattern you can try. </p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">You should also review <span style="font-weight:bold">translation_errors.txt. </span>This file will log any issues that the conversion deems are important enough to bring to the attention of the engineer. These usually <span style="font-weight:bold">MUST</span> be addressed for a successful translation.</p>
+   <p dir="ltr" style="text-align:left">Additionally <span style="font-weight:bold">translation_status.txt</span> will log warnings and informational items that may be useful in trouble shooting conversion issues. In some cases sorting this file to group common errors may be helpful. </p>
+   <p dir="ltr" style="text-align:left">&nbsp;</p>
+   <p dir="ltr" style="text-align:left">Additional notes on dealing with conversion issues are documented in the HOWTO section.</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+   <p dir="ltr" style="text-align:left">(10) If all looks good then create a script to repeat this for the entire directory. </p>
+   <p dir="ltr" style="text-align:left">	(a) ls -la *vpl* &gt;my_pats.csh</p>
+   <p dir="ltr" style="text-align:left">	(b) open my_pats.csh in nedit, column cut and paste to reduce to just the file name</p>
+   <p dir="ltr" style="text-align:left">	(c) then regular expression search with </p>
+   <p dir="ltr" style="text-align:left">&nbsp;<span style="font-style:italic;font-size:10pt">srch:</span>([^$]*)\n &nbsp;&nbsp;&nbsp;<span style="font-style:italic;font-size:10pt">rplc:</span> PRE_PROC_NEW \1 cycletbl_mod.mod8\n</p>
+   <p dir="ltr" style="text-align:left">	(d) Don't forget to run DESUB first if necessary and only use the DESUB output files for </p>
+   <p dir="ltr" style="text-align:left">	files with subroutine calls.</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">(11) See if all patterns will compile. (again see the HOWTO section for problem patterns).</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">(12) Run the <span style="font-weight:bold">BUILD_INHERIT_MENU</span> program for one of your selections. See HOWTO section below.</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">(13) Add a pingroup for MUXPRIMARYPINS which are the primary pins of the muxpins and</p>
+   <p dir="ltr" style="text-align:left">another pingroup for MUXSECONDARYPINS (formerly MUXSECPINS) which is the secondary pin for each muxed-pin-pairs, if used. Note that the polaris begins with ch1 (not zero) so a "MUXSECONDARYPIN" would be even. This could create problems on the adapters which map one-to-one on the mixed signal and odd-to-odd/even-to-even on the digital.</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">(14) If you have multicycle window strobes (look for <span style="font-weight:bold">#USE_PATTERNMODE_EVX2 </span>in your <span style="font-weight:bold">cycltbl_mod.mod8</span> file) create a ac parameter PUSH_CYC. Its initial value should be "5ns".</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">(15) Load up and Check for "orange" waveforms in Waveform tool. Then check for resolve issues.</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;</p>
+   <p dir="ltr" style="text-align:left">(16) If you have scan patterns the file "<span style="font-weight:bold">scan_signalheaders.evo</span>" will have been created.</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;You should sort the entries in this file and then run uniq on them. You</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;&nbsp;include this in your program.</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span xml:lang="en-US" lang="en-US">(17) Now start building the test objects, pattern sequences, and flows for your program.</span></p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span xml:lang="en-US" lang="en-US">(18) Before you complete your program and ideally as you work through each test, it is </span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">STRONGLY </span><span xml:lang="en-US" lang="en-US">recommended that timing validate be run and any adjustments be made to get timing validate clean. Please note that the a failing timing validate can mean that edges do not fire as intended and this can cause unexpected consequences.</span></p>
+   <p dir="ltr" style="text-align:left">===================================================================</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span xml:lang="en-US" lang="en-US"><br /></span><a name="howto" id="howto"></a><span style="color:#008000" xml:lang="en-US" lang="en-US">"HOW TO" SECTION</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">======================================================</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><a name="Why do I need to use START/STO" id="Why do I need to use START/STO"><span style="font-weight:bold;font-size:14pt;color:#800080" xml:lang="en-US" lang="en-US">Why do I need to use START/STOP markers</span></a><span style="font-weight:bold;font-size:14pt;color:#800080" xml:lang="en-US" lang="en-US"> and BUILD_INHERIT_MENU?</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">The purpose of BUILD_INHERIT_MENU and the START/STOP additions to actable.p is to provide a means of accommodating the fact that Polaris can condition and remap formats and timing depending on various conditions. These conditions could include DeviceType, TestType, Temperature, or ACTable (i.e. ac category). enVision can directly condition expressions in waveform table or modify parameters using an ac Spec, but you cannot conditionally change formats. This can be done in enVision but it is usually done by providing a different alias character or a different waveform reference. Due to the complexity in converting a Polaris program over to Fusion, we needed a way to allow the conditional selection of waveforms to happen. enVision has the concept of a Zipper table and one PatternSequence can map a pattern WaveformReference one way and a second PatternSequence can use a different Zipper table to map a different WaveformTable to the pattern WaveformReference. </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-weight:bold;color:#ff0000" xml:lang="en-US" lang="en-US">The secondary purpose of the START/STOP statements is to properly bound the Multi-Edge waveforms (EdgeSet/EdgeSetDelay/EdgeSetDelayData) and the origin set expressions (EdgeSetOrigin). It is expected that all Edges (Edge1-Edge5) and any EdgeSetOrigin statements will occur in the same lowest level bounding condition. You may need to modify (i.e. duplicate) the separate EdgeSet and EdgeSetOrigin statements to accomplish this. Failure to keep all statements in the same block may confuse the translation or result in improper waveform definitions.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Since Polaris uses both 'Case' and 'if' statements it becomes very difficult for a translator to pick up all the potential conditional logic. To simplify this process the user is now required to evaluate any logical decisions in their actable.p file. If there are no conditionals then the user is very lucky and only has to add a "START(ALLTABLES,ALLENUMS);" at the top of the actable.p file and a "STOP(ALLTABLES,ALLENUMS);" at the bottom of their actable.p file then save it out as actable_markers.p. They can then proceed to translate the waveforms and patterns. In this case it will not be necessary to bother with the BUILD_INHERIT_MENU command.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">If the user does find conditionals in their actable.p file they can attempt option 2. This is to modify the conditionals in their program so they are built into the expressions directly. For example if you have:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">if (actable=SPECTEST) then</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EdgeSet(DBUSDriveWF, Edge1, DriveData,t[zero]+ Shift);</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">else </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EdgeSet(DBUSDriveWF, Edge1, DriveData, t[zero]);</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">They can modify this to:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">EdgeSet(DUBSDriveWF,Edge1,DriveData,t[zero]+if (actable=SPECTEST,Shift,0ns);</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">assuming enVision understands what actable=SPECTEST means....</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">If you can do that for all the conditional timing then again, you save the modifications out as actable_markers.p (with the START/STOP at top and bottom as indicated above) and proceed with translation of waveforms and patterns.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Now, what happens if we change the above scenario to:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">if (actable=SPECTEST) then </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WaveSetRTO(RDYdriveWF,t[val1],t[val2]);</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">else </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WaveSetNR(RDYdriveWF,t[val1]);</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">How do we know which format to use? We could assume that we never do spec testing and comment out the first expression. Later when we find out we need spec testing how do we track this waveform down and get the RTO waveform translated and into our waveformtable?</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">If this is the only time this happens, we might be able to keep track of this. What happens if there are more than a handful of these or they condition the WHOLE actable separately for each spec? (go look at 320C40 if you need an example). Worse yet may sometimes an edge strobe gets called and sometimes a window strobe is used depending on whether it is functional or spec testing. Chances are you don't even fully understand the original justification for why the format changed. Maybe it changes for one devicetype because only that one had issues. What happens in the case of multiple nested 'if' statements? Worse yet what if 'if' statements are intermingled with 'case' statements? What if some formats used EdgeSet(WFM,Edge1) for all cases but conditioned EdgeSet(WFM,Edge2)? What if the EdgeSetOrigin() statements were in different conditions?</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">To deal with the complexity in the decision logic it was decided that a "human" could better decipher the intended logic and simplify these using a common boundary marker point statement. For this, the concept of a START(); and STOP(); expression were created. The user will manually go through their actable file looking for 'if' 'case' or other conditionals. At the beginning of each conditional occurrence they'll add a START(); with the conditions that apply. They'll then identify where the end of this conditional sections ends and add a </span><span style="font-style:italic" xml:lang="en-US" lang="en-US">MATCHING</span><span xml:lang="en-US" lang="en-US"> STOP(); expression. In some cases (like the conditioned Edge2 example) they may need to copy multiple instances of the pieces together (common Edge1 or EdgeSetOrigin) so the bounded case is complete.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">This is indeed a pain because the user must understand and interpret the original logical decisions. However, this also puts the user in control of this processing so if things don't go as expected they can try and track down the expressions and make adjustments so it translates as intended. They can also make the decision to totally eliminate some of the conditions if they know they will never exist. Take an example where there is an old "bad" rev. of silicon and a new good silicon rev (call it "pg2"). If the code says "if pg2 do this, otherwise do that" and they know they'll never see pg0 silicon so they can throw those waveforms out. A translator would treat these equally and provide much more complexity in the end that still needs to be figured out.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">So, you go through the tedious process of adding the START/STOP markers and you finally get this clean (see </span><span style="color:#800080" xml:lang="en-US" lang="en-US">Troubleshooting START/STOP setups and resolve problems)</span><span style="font-weight:bold;font-size:14pt;color:#800080" xml:lang="en-US" lang="en-US">. </span><span xml:lang="en-US" lang="en-US">What does this buy the user and how do we use it? Now comes the BUILD_INHERIT_MENU program. It reads all the categories (i.e. actables) and device/test/temp conditions (i.e. enums.evo) and gives you prompts for what condition you want. It then parses through the files you created using GCT_GEN_MOD8 and only gives you the waveforms that apply for the condition you have. It then builds separate variants of your master waveform sources into a file for that category. You then build a pattern sequence for the specific selection with a zipper table that maps the generic names from the patterns into the specific waveforms needed for this selection. &nbsp;You'll need different conditions and different test objects to deal with different conditions. You then complain this is another pain and I agree, but try processing all the separate conditions multiple times by hand and see how many mistakes you can make.... Then after you decide its too much work go find the original 320C40 program and tell me a better way to work this out!</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">See also the sync.p instructions below on how you can get creative with the START/STOP markers.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-weight:bold;font-size:14pt;color:#800080" xml:lang="en-US" lang="en-US">Using BUILD_INHERIT_MENU:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">-------------------------</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;As a first step go look at the bottom of InheritControl.ggm. You'll see a section like this:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">//begin category grouping</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">//ABDFH:CAT[TIparametricACTable]</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">//ABDFH:CAT[TIcrystalACTable]</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">//ABDIJKLNO:CAT[TInomlooseACTable]</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Each letter in this list refers to a specific set of conditions in the actable_markers.p (note that duplicate conditions are categorized as the same letter). There is also a superset/subset concept. 'A' is a superset of all definitions (from the very first START to the last STOP). Any waveforms Cells with an 'A' category exist equally in all sections. All other letter definitions are restricted to specific regions of actable_markers.p.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Prior to randomly generating category waveformtables, grab this entire list and sort it. Now look at the letter codes before the colon. Any that are the same only need to be generated once and apply only to that category. For this case TIparametric and TIcrystal are basically the same. Note that this list doesn't include a "by enums" list. &nbsp;The assumption is that the enums conditionals are generally simpler and don't occur as much. You should review the section prior to the "//begin category grouping" section (the ones with that start with "//b1,//b2,//b3, etc") and look at the E[] section for where the enum changes are made. As an example from 320C40:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">E[11111111111111111110111111111111]&lt;009&gt;UC[J] &nbsp;&nbsp;&nbsp;Not(SM320C40TAB_pg5x_60MHz)</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">E[11111111000000000001000011111111]&lt;010&gt;UC[K] For(SM320C40TAB_pg5x_60MHz)</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Thus in this case 'J' is used when its NOT pg5x_60MHz and 'K' is used when its pg5x_60MHz. </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Y</span><span xml:lang="en-US" lang="en-US">ou'd have to be careful if you needed a program to support both, anything in the listing at the top of this section with only 'J' or only 'K' would require separate runs of BUILD_INHERIT_MENU. Since TInomloose contains "JK" it probably means the enum for devicetype further conditions the category selection. </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">In either case you should be extra careful if there are enum conditioned waveforms and they don't just depend on this category list (actable selections). In the case where the program is more dependent on enum control variables you probably want to use the MENU and compare the printed output and look for the 'catstr' section. <br /></span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">For one set of selections in 320C40 'catstr:[ABDFH]' was output. This correlates with the above TIparametric selection and anytime you get this same 'catstr' you won't need to add anything new.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Now for the real instructions:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">This program will let you enter the category and enum selection (like tpfusion prompts)</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">and build the category specific inherit table. This will create/append to 'Waveforms_cat_Inherit_([A-Z][a-z][0-9]).evo'. If you have conditional waveforms (like 'F240' and 'C40') you should use these Waveforms in the Zipper section of the PatternSequence instead of Waveforms_Master_Inherits.evo' generic definitions in your program. DO NOT delete 'Waveforms_Master_Inherits.evo' as it is the master source and will be used any time you you need to generate another category selection.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;Here's an example from 'F240':</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;bash-3.1$ ./</span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">BUILD_INHERIT_MENU</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;./</span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">BUILD_INHERIT_MENU</span><span xml:lang="en-US" lang="en-US">:build_inherit_menu.c, by Anthony Sully</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;covered by GNU GPL license, see the file COPYING.gz in the source directory</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;(000) TIsearchACTable &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(001) TIsearchlooseACTable &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(002) TIsearchlooseACTable2</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;(003) TIlofrqACTable &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(004) TIlofrqpllACTable &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(005) TIhifrqACTable &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;(006) TIveryhifrqACTable &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(007) TIsearchACTable &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(008) TIlofrqlooseACTable &nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;(009) TIhifrqlooseACTable &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(010) TIveryhifrqlooseACTable &nbsp;&nbsp;(011) TIsearchlooseACTable </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;(012) TIsearchlooseACTable2 &nbsp;&nbsp;&nbsp;&nbsp;(013) TIPMT100ACTable &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;Cat?2</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;(000) F240_Probe &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(001) F240_132QFP &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(002) C240_Probe &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;(003) C240_132QFP &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;Device?1</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;(000) Temp_N40_Degrees_C &nbsp;&nbsp;(001) Temp_0_Degrees_C &nbsp;&nbsp;&nbsp;&nbsp;(002) Temp_5_Degrees_C &nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;(003) Temp_25_Degrees_C &nbsp;&nbsp;&nbsp;(004) Temp_70_Degrees_C &nbsp;&nbsp;&nbsp;(005) Temp_90_Degrees_C &nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;(006) Temp_85_Degrees_C &nbsp;&nbsp;&nbsp;(007) Temp_105_Degrees_C &nbsp;&nbsp;(008) Temp_125_Degrees_C &nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;(009) Temp_135_Degrees_C &nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;Temp?3</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;(000) Probe &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(001) Final &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(002) FT2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;(003) FT3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(004) Q100_FT1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(005) Q100_FT2 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;(006) Q100_FT3 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(007) QA &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(008) Engineering &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;Test?1</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;Enum?CAT: &nbsp;(2) TIsearchlooseACTable2</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;DEV: &nbsp;(1,11) F240_132QFP</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;TEMP: (3,3) Temp_25_Degrees_C</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;TEST: (1,15) Final</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;Is this correct?(Y/n)y</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;catstr:[AD]</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;Note the catstr statement indicating [AD]. This may overlap with other menu selections. </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;For example for 'F240' temperature, device, and testype do not affect waveforms. Therefore</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;you can pick any of the options and it will not affect the results. The program will then</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;parse Waveforms_Master_Inherit.evo for any cell entries that contain any of these letters</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;and create a customized WaveformTable with Inherits specific to that condition.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;The categories for 'F240' (or actables in polaris) reduce to four common sets:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;(These strings were pulled from Waveforms_actable.evo, the [A] is from the UC[A] lines</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;further down).</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;//b1[11111111111111]E[11111111111111111111111]&lt;000&gt;UC[A] all sets. called [A]</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;//b2[10011111000000]E[11111111111111111111111]&lt;001&gt;UC[B] menu options: 0,3,4,5,6,7 called [B]</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;//b2[01000000111101]E[11111111111111111111111]&lt;002&gt;UC[C] menu options: 1,8,9,10,11,13 called[C]</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;//b2[00100000000010]E[11111111111111111111111]&lt;003&gt;UC[D] menu options: 3,12 called[D]</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^0 &nbsp;&nbsp;^5 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;^13 &lt;- these are the category numbers from the menu. It starts at zero. </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;The enums are the E[111...] numbers, they also start counting from zero. Note that </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;dev/temp/test are treated as one string these are the second numbers indicated in the</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;confirmation prompt above: TEMP: (3,3) Temp_25_Degrees_C</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;Note that B,C, and D are mutually exclusive but A overlaps will all of them. In this case</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;you need only need three different runs of '</span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">BUILD_INHERIT_MENU</span><span xml:lang="en-US" lang="en-US">'. After running for the above case [2,1,3,1]&lt;D&gt; you will need [0,1,3,1]&lt;B&gt; &nbsp;and &nbsp;[1,1,3,1]&lt;C&gt;. Other devices </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;(such as 'C40') will have more combinations. Note that if you pick an overlapping case</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;you'll get duplicate WaveformTables in the file and envision will complain. Be sure to</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;validate if your menu selection returns one of the prior selected conditions. </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;The InheritControl.ggm file has an actable list of what codes apply to each actable.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;These don't include the reductions due to other conditions. For example (from C40):</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;//ABCYa:CAT[TIlofrqminACTable]</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;//ABCYa:CAT[TIlofrqmaxACTable]</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;You can see that lofrqmin and lofrqmax use the same codes "ABCYa". Other "enum" values</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;may reduce the length of this "code". It basically means the selected condition is "TRUE"</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;between the START &amp; STOP of 'A','B','C','Y', or 'a'. Any waveforms containing these</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;characters after the "_cat" are valid. Use the list in InheritControl.ggm to determine</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;the unique list of menu choices. In reference to C6203, there are several hundered </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;actables. However, when you review InheritControl.ggm you'll find that most of the</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;actables fall under the same condition and there are only four unique letter combinations.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;Again, the other enums may separate these into more that four program settings but there</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;is no point in rerunning for TIChipx8_025ACTable and TIChipx8_400ACTable separately as</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;there is nothing different between them formatwise (i.e. the period is all that changes).</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;You may want to compare the WaveformTables variations when you are done. Some individual variations will not have any differences. One will give you an empty table (those you can delete). Based on how the waveformTables get used some variations may be mutually exclusive and may never get referenced. You can use ObjectManager to find out to see which tables are referenced zero times. You can remove these before releasing the program.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;You will need to make appropriate patternsequences for each of these unique combinations.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;The zipper entries will use the unique combinations.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;You may want to modify the name of the file to include the condition (loosenom for example) in addition to the code so it is easy to identify. </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-weight:bold;font-size:14pt" xml:lang="en-US" lang="en-US">Two quick reminders:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">First you can batch up BUILD_INHERIT_MENU by passing each of the</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">category and enums by name (in order). example:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-weight:bold;font-size:8pt" xml:lang="en-US" lang="en-US">BUILD_INHERIT_MENU</span><span style="font-size:8pt" xml:lang="en-US" lang="en-US"> TIlofrqlooseACTable SM320C40TAB_pg5x_50MHz TEMP_85_DEG Final RUN_SYNC</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">If you run it using the Menu system it will save all runs into </span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">BIM.log</span><span xml:lang="en-US" lang="en-US">. The purpose of this is so you can rerun this later.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">The second item to mention is that you can get PatternSequence created for you (not including the threads) for each of the specific cases if you copy/link </span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">translation_patref.txt</span><span xml:lang="en-US" lang="en-US"> into the directory where you run the BUILD_INHERIT_MENU script. The Zipper entries will be automatically added for all potential pattern waveform references. Note that if you save this from envision it will remove references that are not used by a pattern in the thread list. Therefore you may want to save these PatternSequences in a backup file in case you add more Threads and need the full reference list. The PatternSequence is named based on the Category and the catstr code. You can rename it to what you want but it is recommended that you keep the catstr in the name for later comparison.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">==================</span><a name="patternsequence" id="patternsequence"></a></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-weight:bold;font-size:14pt;color:#800080" xml:lang="en-US" lang="en-US">Pattern sequence example showing use of COMMON_WFT:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">----------------------------------------</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">In this case the coded letter sequence ('catstr') was replaced with its "human" meaning. For this example "ABDIJNO" was replaced with "SyncTInomloosesACTable" to make it meaningful.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Note that the Specific table "</span><span xml:lang="en-US" lang="en-US">RESETCMPCycle_SyncTInomlooseACTable" is listed first, all the COMMON definitions (things like cpm calling dpm, hold characters, etc) pick up from the COMMON_WFT. In the tool there are additional boxes to the right of the primary box to provide additional waveformtables. For Zipper tables enVision processes from left to right and the first definition "wins". In the waveform tables themselves multiple identical aliases (i.e. Cells) process from top to bottom and again first definition wins. Unique duplicates are highlighted green in the waveform tool. (For reference, in Levels object last column wins).</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">PatternSequence loos_Sync_PatSeq {</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;Thread[0] = Sync_Thread;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;Zipper = Zipper {</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Row { TDLStdPatGrp, RESETCMPCycle = { RESETCMPCycle_SyncTInomlooseACTable, COMMON_WFT } }</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Row { TDLStdPatGrp, LRDDGRDDCycle = { LRDDGRDDCycle_SyncTInomlooseACTable, COMMON_WFT } }</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Row { TDLStdPatGrp, LWRBGRDDCycle = { LWRBGRDDCycle_SyncTInomlooseACTable, COMMON_WFT } }</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Row { TDLStdPatGrp, LWRCGRDDCycle = { LWRCGRDDCycle_SyncTInomlooseACTable, COMMON_WFT } }</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Row { TDLStdPatGrp, LWEAGRDDCycle = { LRDDGWRBCycle_SyncTInomlooseACTable, COMMON_WFT } }</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Row { TDLStdPatGrp, SYNCFIFOCycle = { SYNCFIFOCycle_SyncTInomlooseACTable, COMMON_WFT } }</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Row { TDLStdPatGrp, ALLOFFCycle = { ALLOFFCycle_SyncTInomlooseACTable, COMMON_WFT } }</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;}</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;evAutoBasePeriod = True;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">}</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">If the user had NO actable conditions in his program the Master_Inherit_Wavefoms.evo file could be used directly and a Zipper line would look like:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Row { TDLStdPatGrp, RESETCMPCycle = { RESETCMPCycle, COMMON_WFT } }</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">===========================================================</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><a name="desub" id="desub"></a></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-weight:bold;font-size:14pt;color:#800080" xml:lang="en-US" lang="en-US">Futher DESUB intstructions</span><span xml:lang="en-US" lang="en-US">:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">---------------------------</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">You need to gather all the subroutines into one file (in this case my_subroutines.vpl.Z) so they can all be processed together. If you need different copies of the same subroutines, you need to run the command separately. my_subroutines.vpl.Z should also have any nested subroutines manually expanded. It will take the "normal_pat.vpl.Z" file and create "normal_pat.vpl_.gz" (note the "vpl_") which can then be passed to PRE_PROC_NEW. You can do a "zgrep -i subroutine * &gt;subr_list.txt" to identify if you have subroutines, which files call subroutines ("BusOscB_20MHz_F_PLL.vpl.Z: &nbsp;external subroutine PLLResetMC5v();") and where the subroutines exist ("EEaddress_F_PLL.vpl.Z:subroutine writearray(v1,v2,v3,v4)"). </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Note that the subroutine replace can only replace subroutines that are provided to it. If </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">you don't give it the subroutine in the "my_subroutines.vpl.Z" file it won't know to look for </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">it and it won't replace it.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Match subroutines:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">The </span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">DESUB</span><span xml:lang="en-US" lang="en-US"> program happily adds subroutines containing match microinstructions. Note &nbsp;however, that &nbsp;any patterns which use these will be forced into CPM. A note along those lines is written into translation_errors.txt. If the pattern fits into CPM then you can happily use it that way. Otherwise, you may want to address those patterns by removing the match subroutine call (assuming its something like an initial sync), and building a custom CPM pattern which can be combined the the "normal" pattern in the thread (after its subroutine call is removed). If there are only a couple of these you could also make a few copies of the cpm and have it source the specific DPM patterns.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Some more complicated DESUB substitutions may not work correctly. The user is advised that they should validate DESUB correctly substitutes the subroutine into their pattern.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><a name="translation problems" id="translation problems"></a></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-weight:bold;font-size:14pt;color:#800080" xml:lang="en-US" lang="en-US">Pattern translation problems????</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">--------------------------------</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;Look for proc files left over and review translation_errors.txt and </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;translation_status.txt. </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;a) If you have problems with </span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">PRE_PROC_NEW</span><span xml:lang="en-US" lang="en-US"> expanding huge loops you can re-run</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with </span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">PRE_PROC_CPM</span><span xml:lang="en-US" lang="en-US"> and it will force CPM. </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;b) If you have problems rename </span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">VCP_NEW</span><span xml:lang="en-US" lang="en-US"> and </span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">VCS_AUTOGEN8</span><span xml:lang="en-US" lang="en-US"> so it can't call them.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This will leave the *.proc file behind so you can review that. You can fix the proc file</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in some situations and launch that with:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">VCS_AUTOGEN8</span><span xml:lang="en-US" lang="en-US"> -fgza file.proc cyctbl.mod8 or </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">VCP_NEW</span><span xml:lang="en-US" lang="en-US"> -fgrz file.proc cyctbl.mod8</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;c) Check for comments closing using matching "syntax". Polaris can be somewhat free-form</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in how the comments get bounded. These translation tools expect the opens to have </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;matching closes.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;d) Check for no vectors converted/small *.evo size. This could be a problem with</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the first "begin" missing or comments opening and not closing in a recognizable way.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;e) Check for "funny" control characters in the source.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;f) The maximum number of vectors that can be translated in one pattern is 500000.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you have a pattern that writes a "FATAL_S" statement to translation_errors.txt</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;you may need to split it into separate patterns and piece them back together in the thread.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Be sure to copy the MSET/DSET ISET into both and make sure both have the overall</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'begin' and 'end;'</span><span xml:lang="en-US" lang="en-US"> statements.</span><span xml:lang="en-US" lang="en-US"> Make sure any loops stay in the sub-file.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;g) Note that CPM counters are not checked against the 65535 limit. If you get</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;errors on compile you will need to examine these loops and decide the best</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;way to fix the loops. You will need to either 'multiply' the internal loop</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enough times and fix the loop counts or add a nested loop outside the existing</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loop.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">=======================================================</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-weight:bold;font-size:14pt;color:#800080" xml:lang="en-US" lang="en-US"> Some quick comments on translation_status.txt:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;Running pattern translation on an F240 pattern we get:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;</span><span style="font-size:10pt" xml:lang="en-US" lang="en-US">FYI_align_FOUND:found align Polaris instruction in sync_pg31.vpl.Z! skipping. </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;This is not a major problem (read the manual on Polaris align instruction if you want</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;details).</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;The interesting part of translation_status.txt to mention here is:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;+ &nbsp;&nbsp;&nbsp;FileStat:First begin at &nbsp;&nbsp;&nbsp;&nbsp;14 &nbsp;in [sync_pg31.vpl.Z]</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;+ &nbsp;&nbsp;&nbsp;FileStat:Got &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;133 lines from [sync_pg31.vpl.Z]</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;+ &nbsp;&nbsp;&nbsp;FileStat:vectors &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;84 in [sync_pg31.vpl.Z]</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;+ &nbsp;&nbsp;&nbsp;FileStat:Max loop depth &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1 in [sync_pg31.vpl.Z]</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;+ &nbsp;&nbsp;&nbsp;FileStat:Max RPT depth count &nbsp;0 in [sync_pg31.vpl.Z]</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;+ &nbsp;&nbsp;&nbsp;FileStat:Match? &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NO in [sync_pg31.vpl.Z]</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;+ &nbsp;&nbsp;&nbsp;FileStat:Scan? &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NO in [sync_pg31.vpl.Z]</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;+ &nbsp;&nbsp;&nbsp;FileStat:Repeat forever? &nbsp;&nbsp;&nbsp;&nbsp;NO in [sync_pg31.vpl.Z]</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;In this case this pattern had no scan, match, or repeat forevers, and there was no looping used.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;Note that you can sort the status file to group similar advisories. After translating a bunch of</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;patterns it can be useful to pull from this list to identify match </span><span xml:lang="en-US" lang="en-US">or scan patterns... &nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;The other </span><span xml:lang="en-US" lang="en-US">information in translation_status.txt can be helpful if there are problems/crashes/etc.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">=======================================================</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-weight:bold;font-size:14pt;color:#800080" xml:lang="en-US" lang="en-US">How to add waveforms in a file like sync.p to the conversion set...</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">--------------------------------------</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">1) Add a temporary enum to enums.evo:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">enum SPECIAL_RUN_SYNC</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">{</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;DONT_RUN_SYNC,</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;RUN_SYNC</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">};</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;Hopefully these are unique from all other enum definitions. If not adjust the names.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;** Note ** Any extra enums added here will probably need to be moved into a spec later since tpfusion should not be prompting for something like "SPECIAL_RUN_SYNC"! </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">2) Copy the section from sync.p which are the modified WaveSet/EdgeSet... definitions only into</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;your actable_mod.p file !BEFORE! the ACTableSet sections. Copying it before the rest of</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;the normal tables will cause envision to pick the sync waveforms if sync is chosen.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;Don't include the EdgeSet binary searches or the EdgeGets. In the case of c40 there is</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;a procedure called RstCustomWF, this is what would get copied.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;For best results put the sync section at the top of the file just after the</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;START(ALLENUMS,ALLTABLES) statement. By putting it at the top any waveforms</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;defined in the sync section will take precedence over the "normal" version</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;further down. Obviously, if you choose the non-sync enum you shouldn't get</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;any waveforms from the sync section and you should get the "normal" waveform</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;only.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">3) Add the RUNSYNC START STOPS:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;START(RUNSYNC,ALLDEVICE,ALLTEMP,ALLTEST,ALLTABLES);</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;or filter appropriately if there are conditions in the sync selections...</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">======================================================</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><a name="chansecond" id="chansecond"></a></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-weight:bold;font-size:14pt;color:#800080" xml:lang="en-US" lang="en-US">How to deal with Waveforms using chanSecond...</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">----------------------------------------------</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">The following example was taken from 320X240D1. There is a CLKIN drive waveform and a CLKOUT compare waveform. For a Chanfirst waveform those entries get their data from the primary pin (i.e. the even pin, ch0).</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">In the case of a ChanSecond EdgeSet, the data is determined by the mux pin (i.e. the odd pin). </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">---------</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Example1:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">//ESD[1]:EdgeSetDelayData(CLKINdriveWF,Edge1,ChanFirst,DriveData,ThreshVITL,t[tref]+t[tH],0,DriveData,ThreshVITH,t[tref]+t[tH],0)</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">//ESD[1]:EdgeSetDelayData(CLKINdriveWF,Edge2,ChanSecond,DriveData,ThreshVITL,t[tref]+t[tper],0,DriveData,ThreshVITH,t[tref]+t[tper],0)</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Cell "CLKIN+CLKINm-MUXSECPINS" L CLKINdriveWF_ADSET1DD_cat_A {</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;Data 6; &nbsp;&nbsp;Drive { &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Waveform {</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DriveData &nbsp;@" &nbsp;tref + &nbsp;tH +0* &nbsp;tper &nbsp;+orgclkin";</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DriveData &nbsp;@" &nbsp;tref + &nbsp;tper +0* &nbsp;tper &nbsp;+orgclkin";</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}}}</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Cell "CLKIN+CLKINm-MUXSECPINS" H CLKINdriveWF_BDSET1DD_cat_A {</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;Data 7; &nbsp;&nbsp;Drive { &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Waveform {</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DriveData &nbsp;@" &nbsp;tref + &nbsp;tH +0* &nbsp;tper &nbsp;+orgclkin";</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DriveData &nbsp;@" &nbsp;tref + &nbsp;tper +0* &nbsp;tper &nbsp;+orgclkin";</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}}}</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Cell "(CLKIN+CLKINm)*MUXSECPINS" L/H CLKINdriveWF_DSETMUX1DD_cat_A {</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;Data 0/2; &nbsp;&nbsp;Drive {</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EntryState DriveOn;}</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">}</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">----------</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">In the first example the ChanFirst is DriveData and the ChanSecond is DriveData. Assuming the pattern data is always '10' or '01', you could change the second DriveData to DriveDataNot and combine the L &amp; H waveform cells:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Cell "CLKIN+CLKINm-MUXSECPINS" L/H CLKINdriveWF_ADSET1DD_cat_A {</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;Data 6/7; &nbsp;&nbsp;Drive { &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Waveform {</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DriveData &nbsp;@" &nbsp;tref + &nbsp;tH +0* &nbsp;tper &nbsp;+orgclkin";</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DriveDataNot &nbsp;@" &nbsp;tref + &nbsp;tper +0* &nbsp;tper &nbsp;+orgclkin";</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}}}</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">In this case the MUXSECPINS cell can stay no action. Polaris can nominally only do three edges, Fusion can do four, so we can push these events onto the primary pin.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">-----------</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">If you have patterns with all four combinations '00', '01', '10', '11'. Then a special patch script will be needed to post-process the *.evo patterns (TBD). In this case change the cells to:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Cell "CLKIN+CLKINm-MUXSECPINS" L/H CLKINdriveWFstatic_ADSET1DD_cat_A {</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;Data 6/7; &nbsp;&nbsp;Drive { &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Waveform {</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DriveData &nbsp;@" &nbsp;tref + &nbsp;tH +0* &nbsp;tper &nbsp;+orgclkin";</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">// &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DriveDataNot &nbsp;@" &nbsp;tref + &nbsp;tper +0* &nbsp;tper &nbsp;+orgclkin";</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}}}</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Cell "CLKIN+CLKINm-MUXSECPINS" c/C CLKINdriveWFcompl_ADSET1DD_cat_A {</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;Data 6/7; &nbsp;&nbsp;Drive { &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Waveform {</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DriveData &nbsp;@" &nbsp;tref + &nbsp;tH +0* &nbsp;tper &nbsp;+orgclkin";</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DriveDataNot &nbsp;@" &nbsp;tref + &nbsp;tper +0* &nbsp;tper &nbsp;+orgclkin";</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}}}</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">In this case we can still source the data on the primary pin and leave the "MUXSECPINS" no action.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">-------------</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">In the next case we have double window strobes:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">//ESD[1]:EdgeSetDelayData(CLKINdriveWF,Edge1,ChanFirst,DriveData,ThreshVITL,t[tref]+t[tH],0,DriveData,ThreshVITH,t[tref]+t[tH],0)</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">//ESD[1]:EdgeSetDelayData(CLKINdriveWF,Edge2,ChanSecond,DriveData,ThreshVITL,t[tref]+t[tper],0,DriveData,ThreshVITH,t[tref]+t[tper],0)</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">//ESD[4]:EdgeSetDelayData(CLKOUT1strobeWF,Edge2,ChanFirst,StrobeLow,ThreshVITL,t[tref]+t[tQ]-4ns,0,StrobeHigh,ThreshVITL,t[tref]+t[tQ]-4ns,0)</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">//ESD[4]:EdgeSetDelayData(CLKOUT1strobeWF,Edge3,ChanFirst,StrobeOffLow,ThreshVITL,t[tref]+t[tQ]+0ns,0,StrobeOffHigh,ThreshVITL,t[tref]+t[tQ]+0ns,0)</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">//ESD[4]:EdgeSetDelayData(CLKOUT1strobeWF,Edge4,ChanSecond,StrobeLow,ThreshVITL,t[tref]+t[tH]+t[tQ]-4ns,0,StrobeHigh,ThreshVITL,t[tref]+t[tH]+t[tQ]-4ns,0)</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">//ESD[4]:EdgeSetDelayData(CLKOUT1strobeWF,Edge5,ChanSecond,StrobeOffLow,ThreshVITL,t[tref]+t[tH]+t[tQ]+0ns,0,StrobeOffHigh,ThreshVITL,t[tref]+t[tH]+t[tQ]+0ns,0)</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Cell "CLKOUT1+CLKOUT1m-MUXSECPINS" 0/x CLKOUT1strobeWF_ADSET0_WkWk_cat_BC {</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;Data 0/2; Compare {</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Waveform {</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CompareOpenLow @" &nbsp;tref + &nbsp;tQ -4ns+0* &nbsp;tper &nbsp;+orgclkoutef";</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CompareClose @" &nbsp;tref + &nbsp;tQ +0ns+0* &nbsp;tper &nbsp;+orgclkoutef";</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CompareOpenLow @" &nbsp;tref + &nbsp;tH + &nbsp;tQ -4ns+0* &nbsp;tper &nbsp;+orgclkouter";</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CompareClose @" &nbsp;tref + &nbsp;tH + &nbsp;tQ +0ns+0* &nbsp;tper &nbsp;0.000ps";</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}}}</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Cell "CLKOUT1+CLKOUT1m-MUXSECPINS" 1/X CLKOUT1strobeWF_BDSET0_WkWk_cat_BC {</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;Data 1/3;Compare {Waveform {</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CompareOpenHigh @" &nbsp;tref + &nbsp;tQ -4ns+0* &nbsp;tper &nbsp;+orgclkoutef";</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CompareClose @" &nbsp;tref + &nbsp;tQ +0ns+0* &nbsp;tper &nbsp;+orgclkoutef";</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CompareOpenHigh @" &nbsp;tref + &nbsp;tH + &nbsp;tQ -4ns+0* &nbsp;tper &nbsp;+orgclkouter";</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CompareClose @" &nbsp;tref + &nbsp;tH + &nbsp;tQ +0ns+0* &nbsp;tper &nbsp;0.000ps";</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}}}</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Cell "(CLKOUT1+CLKOUT1m)*MUXSECPINS" 0/1 CLKOUT1strobeWF_DSETMUX0_WkWk_cat_BCD {</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;Data 0/2;Drive {</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EntryState DriveOn;}</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">}</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">----------</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">In this case the data is probably either '01' or '10' because it is a clock.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">For this case combine the two '0/x' and '1/X' cells:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Cell "CLKOUT1+CLKOUT1m-MUXSECPINS" 0/x CLKOUT1strobeWF_ADSET0_WkWk_cat_BC {</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;Data 0/2; Compare {</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Waveform {</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CompareOpenData @" &nbsp;tref + &nbsp;tQ -4ns+0* &nbsp;tper &nbsp;+orgclkoutef";</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CompareClose @" &nbsp;tref + &nbsp;tQ +0ns+0* &nbsp;tper &nbsp;+orgclkoutef";</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CompareOpenDataNot @" &nbsp;tref + &nbsp;tH + &nbsp;tQ -4ns+0* &nbsp;tper &nbsp;+orgclkouter";</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CompareClose @" &nbsp;tref + &nbsp;tH + &nbsp;tQ +0ns+0* &nbsp;tper &nbsp;0.000ps";</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}}}</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">and leave the MUXSECPINS as no action.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">-------------------</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">If you have data pin muxing you may need to use the script above (TBD) and create separate</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">cells to use the adapter.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">-------------------</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Don't forget to modify the Waveforms_actable.evo file and the Waveforms_Master_Inherits.evo file appropriately</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">before using the BUILD_INHERIT_MENU program.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><a name="startstop" id="startstop"></a></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">======================================================</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-size:8pt;color:#ffff00" xml:lang="en-US" lang="en-US">The following feature has been disabled....</span><a name="acspec" id="acspec"></a></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-size:8pt;color:#ffff00" xml:lang="en-US" lang="en-US">Need acspec based on START/STOP????</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-size:8pt;color:#ffff00" xml:lang="en-US" lang="en-US">-----------------------------------</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-size:8pt;color:#ffff00" xml:lang="en-US" lang="en-US">Special Note: The </span><span style="font-weight:bold;font-size:8pt;color:#ffff00" xml:lang="en-US" lang="en-US">GCT_GEN_MOD8</span><span style="font-size:8pt;color:#ffff00" xml:lang="en-US" lang="en-US"> script can also be used to process the acdata.p file with</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-size:8pt;color:#ffff00" xml:lang="en-US" lang="en-US">markers as the actable_markers.p. </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-size:8pt;color:#ffff00" xml:lang="en-US" lang="en-US">To do this do the following:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-size:8pt;color:#ffff00" xml:lang="en-US" lang="en-US">1) touch dummycyctbl &nbsp;&nbsp;&nbsp;This will create an empty file to pass in as the cycletbl.p file.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-size:8pt;color:#ffff00" xml:lang="en-US" lang="en-US">2) add START/STOP markers to the acdata.p file and save it as acdata_markers.p</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-size:8pt;color:#ffff00" xml:lang="en-US" lang="en-US">3) </span><span style="font-weight:bold;font-size:8pt;color:#ffff00" xml:lang="en-US" lang="en-US">GCT_GEN_MOD8</span><span style="font-size:8pt;color:#ffff00" xml:lang="en-US" lang="en-US"> -fpda dummycyctbl pin_list.txt device_mod.p acdata_markers.p</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-size:8pt;color:#ffff00" xml:lang="en-US" lang="en-US">you will get multiple files, two of which are important:ACDATADATA_WFMS.evo and </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-size:8pt;color:#ffff00" xml:lang="en-US" lang="en-US">DataControl.ggm. DataControl.ggm shows the letter mapping for reference for the category lists. !!This mapping is DIFFERENT than the actable mapping!!!</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">==============================================</span><a name="startstop" id="startstop"></a></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-weight:bold;font-size:14pt;color:#800080" xml:lang="en-US" lang="en-US">Troubleshooting START/STOP setups and resolve problems.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Note: if you have syntax like:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">	"if ( actable in [TIlofrqloosACTable..TIPMT100ACTable] ) then begin"</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">	consult Global.h to see the ordered list of actables:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">	&nbsp;ACTable = (</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">	&nbsp;&nbsp;TIlofrqACTable,</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">	&nbsp;&nbsp;TIlofrqpllACTable,</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">	&nbsp;&nbsp;&nbsp;TIhifrqACTable,</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">	&nbsp;&nbsp;&nbsp;TIveryhifrqACTable,</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">	&nbsp;&nbsp;&nbsp;TIsearchACTable,</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">	&nbsp;&nbsp;TIlofrqloosACTable, (* &lt;- HERE *)</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">	&nbsp;&nbsp;&nbsp;TIhifrqloosACTable,</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">	&nbsp;&nbsp;&nbsp;TIveryhifrqloosACTable,</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">	&nbsp;&nbsp;&nbsp;TIsearchloosACTable,</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">	&nbsp;&nbsp;&nbsp;TIsearchloosACTable2, (* for char *)</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">	&nbsp;&nbsp;&nbsp;TIscanACTable,</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">	&nbsp;&nbsp;&nbsp;TIserialscanACTable,</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">	&nbsp;&nbsp;&nbsp;TIPMT100ACTable, (* &lt;- to HERE *)</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">	&nbsp;&nbsp;&nbsp;TIallACTable);</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">See example file created from F240...</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;Other suggestions if it has problems with "case actable of"</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;put a semicolon on the end: ""case actable of;".</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;Same goes for some of the case statements </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;"case actable of</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;TIhifrqloose10ACTable:" &nbsp;change to:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;"case actable of;</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> &nbsp;&nbsp;&nbsp;&nbsp;TIhifrqloose10ACTable:;"</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">------------------------------------------------------</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">In general the InheritControl.ggm file is the best place to start looking. In general there should not be more than on contiguous pair of letters in the category decoder section (lines starting with '//b' or '//e').</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">If you get something like "*** BAD START/STOP data for ACTABLES ***" or</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">=================================================</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">** Mismatched START/STOP[2]!!! (+START-STOP) ***</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">================================================</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">you should look at the UC[] codes. If you get a sudden string where all the UC[] codes are the same this is a good place to look. Generally this might be due to using a START where it should have been a STOP or a START without a STOP or an unterminated line. (All lines should end with a semicolon). Also look for misplaced START/STOP, like inserted in the middle of a multiline definition.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">*** Be careful with if/then/else statements which don't have begin/end. Normally the expression between the then and else doesn't have a semicolon. Add a ';' on these statements. </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">***</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">NOTE: You should make sure any OriginSets occur within their own block and you may need to copy the origins up if there are multiple conditions followed by a common originset afterwards. You generally won't get error messages for these cases so BE CAREFUL!!</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">You should also make sure that any idle Edge/WaveSet lines get bounded by START/STOP otherwise they won't get processed. </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">If you have the same letter listed more than twice in a row, check the START/STOP statements at the end of each line. These should be "pure" START STOP expressions only. If there is space or other junk in the line then check that lines in actable_markers.p has semicolons after each statement. This might not happen in the case of a single if-then-else section. You may need to add a semicolon after case definitions, especially if its a 'case NNN: wave1 others wave2' sort of statement. Next you can use the L[] statements in InheritControl.ggm and see if the line is what you anticipate in ACTABLE_TRACEABLE_LINES.evo. These should</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">indicate the matching line within +/-1 line. </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">The most difficult START/STOP combinations are the ones near a multi-conditional if statement. In general you may need to make multiple copies of the cell information to separately condition the and/or logic. </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">See the 'C40' example in this DOC directory. </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Of course every START should have a matching STOP and each START/STOP should end with a semicolon. Also, make sure that the multiple Edge statements have all edges definited in each block. For example you might have an Edge1-DriveOff, but then Edge2 is conditionally StrobeData (window) or EdgeStrobe. In these cases move &amp; copy the Edge1-DriveOff statement into each block. Also, the same applies to origins. Make sure the origin statements for that edge are specified in each block. Also, look for extraneous statements in between</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">each Edge definition of a multi-Edge waveform. The general rule is that nothing except comments, assignments (sp:=t[1]-t[2];) should occur between the individual Edges.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Also, we have seen issues where enums.evo has been transfered over (from an email) and it ends up with a &lt;CR&gt; (windows/dos) instead of the standard unix format. nedit will usually show these red. If this happens, either re-gen the enums.evo file or do a dos2unix on the file.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">You can look at Waveforms_actable_unpurged.evo to see what each waveform "code" definition is separately. Now, that the major issues have been resolved in processing the compression this should be less of an issue. Make sure you've included any separate enums used for addition selection (shmoo,sync,etc) are included in enums.evo. You can look at translation_status.txt for the SSb/SSe statements, no fields should be listed as missing. Any conditionals not used won't show up in this list, for example if category(actable), testtype,</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">and a "special" control enum are used but temptype &amp; devicetype aren't then the SSb/SSe statement might look like:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"> "SSb2 071: &nbsp;cat:0 &nbsp;&nbsp;test:0 &nbsp;&nbsp;otherenum:1 &nbsp;cdt=P", </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">here otherenum is not its default setting.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">The statement in translation_status.txt "There are 41 unique category/device/temp combinations" should not exceed 62 ([A-Z][a-z][0-9]) as the coding scheme uses a single letter to build a search string. If you get more than that see if you can reduce the number of combinations by combining things (same format, different timing - can be combined into a new acspec parameter for each category).</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Orange Cells in waveform table indicate enVision can't resolve the cell properly. Things like windows left open with no close, or cells that do a close window (StrobeOff) first should get "modified". The waveform cell modification algorithm uses format specifiers from aliasmap.h (FC_nn) to decide if edges need modification.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">In translation_status.txt you'll see statements like:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">'PC=Wk/// &nbsp;&nbsp;&nbsp;FOUND [ABUSstrobeWF_DRDCycle_C]0 WINDOWOPEN-WINDOWCLOSE [chk_problem_type,0,0,0]'</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">This means 'W' -&gt; windowOPEN, k-&gt;windowCLOSE, and the codes at the end indicate no changes are needed. A window open with no close would have got a code [1,0,0].</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">If it doesn't recognize the format feed the information back to myself and I'll add the code and any modifications needed. Thus far these codes have been determined by running several programs (c40,VC33,F240) through the code and fixing any rejects. It could be your waveforms are "different".</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US"><br /></span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">====================================================</span><a name="startclose" id="startclose"></a></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-weight:bold;font-size:14pt;color:#800080" xml:lang="en-US" lang="en-US">How to deal with waveforms which start a window strobe in one cycle and close it in another.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">(This applies only if these cases occur in your program, you are not forced into using this on every program. If your program doesn't need this you can safely ignore this section).</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">New features have been added to the translator to support Multicycle strobing which is often used in DSP type polaris programs (320C40, 320C50, 320C3x, etc). These features are implemented using some more advanced enVision techniques. These techniques are not the best thing for an experienced enVision user to attempt. The following section attempts to document how these features were implemented to "duplicate" what was originally implemented on Polaris. There may be ways to simplify the Polaris window strobes to edge strobes, but no assumptions were made that this was possible as either edge of the window strobe may have been used to validate timing specifications. Simple window waveforms which open and close in the same cycle should not present any major complexities.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">First, a sample Polaris window strobe sequence:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><img style="width:110.9mm" alt="" src="VER8_INSTR.html_files/1.png" /></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Case 'A' is simple and causes enVision no issues.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Case 'B' opens a window in vector '3' but does not close it. enVision does not log anything until the vector actually closes in vector '7'. Vector '8' also opens a vector and leaves it open. Case 'D' (Vector 12) is where the complications come in. Here a prior vector is closed which is determined by the data in the pattern a vector '8'. Any fails for that window get logged as fails in vector 12. Also in this vector, a new window is opened and its data is determined by the data in the pattern in vector 12. This final data is latched and logged in vector 16. The Polaris code to support case 'D' is shown below:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">EdgeSet(STRBstrobeWF,Edge1,StrobeOff,t[off]);</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">EdgeSetDelayData(STRBstrobeWF,Edge2,ChanFirst,StrobeData,ThreshVITL,t[high],0,StrobeData,ThreshVITH,t[low],0);</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Note from the ordering of the events, the close happens </span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">BEFORE</span><span xml:lang="en-US" lang="en-US"> the open. In order to support the two different data states happening in Case 'D' this vector must be split into separate components, however, the original period must be maintained for the total event. We could simply double the vectors and make every vector have two pieces. However, there are two reasons why this doesn't work. First, we might need to run at a faster rate than the SVM rate (100MHz on FX1) to keep the original period. Second, the pattern might use repeats and these repeats need to be maintained. If we only had the first situation, 'DVM' would fix this, and we could do this if we expanded all the repeat compression. However, it turns out that enVision also has a second "paired vector" mode called 'evX2'. This mode treats the two user vectors as a group so any repeats will happen to both vectors. This is perfect for what we need. Pattern size will double since we will now have two enVision vectors for every Polaris vector. This could be a problem in Cpm since vector space is small. In Dpm this is not anticipated to be a problem since vector space is significantly larger than on Polaris and repeat compression is applied to the original Polaris patterns. It could be an issue in the case of a Polaris pattern which uses loops which get expanded so Dpm could be used (instead of forcing into Cpm because it has loops).</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Now that we've decided to split the vectors up, we need to decide how to split this data. It turns out the easiest way is to translate each vector normally into the second-half vector, and then use the first vector as a placeholder for any vectors requiring the CloseWindow (StrobeOff on Polaris). This means for the majority of pins and potentially the majority of vectors, this first-half vector will be a NoAction event (AM_DONOTHINGPAD, '.' if the present alias_map.h file is used).</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Back in case 'D' we mentioned that two data states are needed. First, the close event that was initiated in Vector '8', second the new data for the vector that initiates at vector '12'. To properly close any pending open window we must know the prior vector data. The pattern translator will now 'remember' the prior data from vector '8' and use it to appropriately close this data in vector '12a'.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">For enVision to properly calibrate any prior open window it must know the prior state. This adds the second justification for all this added complexity. Each of the close events must be separated so the calibrated data state can be applied correctly. This means that the waveforms must really separate into 'CloseHigh' and 'CloseLow' characters. We can't just say CloseWindow or the timing might be wrong. As we stated at the beginning of this section we don't want to make assumptions as to the original intent of the engineer, and we don't know if the Close event was trying to validate a spec timing parameter. For enVision to know this information we have to use the "EntryState CompareOpenData" statement in the waveforms. When the two alias states really resolve this will become "EntryState CompareOpenLow;" &amp; "EntryState CompareOpenHigh;". These are automatically added during the normal waveform translation process. Please note that EntryState is NOT an actual event, it tells the waveform compiler what to "assume" about the entry state prior to this Cell. (The same applies to the Drive section, an "EntryState Driveoff" doesn't tell this Cell to turn the driver off, it tells it to ASSUME the driver was left in an "Off" state by a prior Cell).</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">To support the waveform portion of our evX2 vectors all original waveforms are post processed and separated into the Open events and the close events. In this case the "normal" events simplify down to the "Open" events, any "normal" strobes, and any Drive events. Any initial &nbsp;CompareClose events are commented out (with '//') as well as any "EntryState" Compare indicators. Since we've removed these events from their original Cells, we must put them into a new Cell with a new alias. Aliases are alphabetically assigned in pairs with the lower case letter as the low and the upper case letter as the high. These vectors use their own reference so there is no interference with the "normal" aliases in the general waveforms. In this case two new WaveformTables are used, "zpbStrobeOffEdges" and "zpb_COMMON". "zpStrobeOffEdges" gets all the events that we've extracted from the original Cells (the "EntryState CompareOpendata;" and the actual "CompareClose" expression. "zpb_COMMON" is defined as no action and is used for resolving any waveforms not inherited for a specific category. (In other words a window strobe with initial close in one category might become an edge strobe in another category, we'll no longer need the close event but the pattern must still resolve). Additionally, the timing expressions for the close events are shifted forward by PUSH_CYC so they end up in their intended spots.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">To complete this process Waveforms_Master_Inherit.evo is modified so the Periods are reduced by the PUSH_CYC parameter and an additional WaveformTable is created called "zpbMIStrobeOffEdges" (note the MI for MasterInherit). This table inherits from "zpStrobeOffEdges" and puts in the specific pin mapping. As a reminder &nbsp;Waveforms_ACTABLE.evo is equivalent to Polaris actable.p and only defines the formats and timing. Waveforms_Master_Inherit.evo is equivalent to Polaris cycletbl.p and groups the formats with the correct pins and the correct waveform reference. </span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">PUSHBACK_CYCLE is used as the WaveformTable reference for ALL first-half strobeoff vectors in the patterns. Thus in the zipper table PUSHBACK_CYCLE should map to the &nbsp;category selected (i.e. BUILD_INHERIT_MENU) version of zpbMIStrobeOffEdges and zpb_COMMON:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">Row { TDLStdPatGrp, PUSHBACK_CYCLE = { zpbMIStrobeFOffEdge_MYCATACTable, zpb_COMMON } }</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">You will note above that the PUSH_CYC parameter was mentioned. The intent of this parameter is to portion up the original Polaris period into two separate sections that total the original period. Since the minimum value of a period is 5ns in evX2/DVM mode this is the best value to start with. The original spec parameter value for "Period" will stay the same in acspecs, it will get modified in the waveformtables to give the correct total period:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><img style="width:118.5mm" alt="" src="VER8_INSTR.html_files/3.png" /></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">It turns out if the period is large (greater than 25ns) and the strobe off time is far into the period then using the default 5ns will not work. This is because edges can only be pushed out by up to 5 cycles. In these cases (and maybe on a per category basis) PUSH_CYC will need to be modified to be a higher percentage of the period. The maximum you should need to increase PUSH_CYC is to 20% of the period (to allow for 5 cycles). Thus for a 200ns period you should need PUSH_CYC larger than 40ns. (For that case the PUSH_CYC would be 40ns and the remaining waveformtable period would be 200ns-40ns=160ns). Note that the effective start of the waveform is still the original start point. Any initial closes are shifted back in the pattern but shifted forward in the waveform resulting in all the events happening at the same original time. This assumes that WaveformReference switching can happen on the fly but the period is consistent for all references. The problem becomes much more complicated if period switching is used. Hopefully, that is not the case. Note also that with all the added aliases there may be cases when more than 64 aliases are needed and this does not resolve. In most cases enVision's internal waveform compression should help bound this to something that will work.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">In any situation, it is </span><span style="font-weight:bold" xml:lang="en-US" lang="en-US">STRONGLY </span><span xml:lang="en-US" lang="en-US">recommended that timing validate be run and any adjustments be made to get timing validate clean. Please note that the a failing timing validate can mean that edges do not fire as intended and this can cause unexpected consequences.</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">There may be instances where the occurrence of a few minor strobeoff waveforms cause the translation to kick into this mode. The user may understand these issues and wish to deal with this on their own. For these cases you can turn off the translation into evX2 mode by adding the '-n' option to GCT_GEN_MOD8:</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="font-weight:bold" xml:lang="en-US" lang="en-US">GCT_GEN_MOD8</span><span xml:lang="en-US" lang="en-US"> -fpdan cycletbl_mod.p pinlist.txt device_mod.p actable_mod.p</span></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span xml:lang="en-US" lang="en-US">====================================================================</span><a name="buildinheritmenu" id="buildinheritmenu"></a></p>
+   <p dir="ltr" style="text-align:left;margin-bottom:0.0000in;margin-top:0.0000in;margin-right:0.0000in"><span style="color:#008000">Issues still to be resolved:</span></p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span style="color:#008000">0.1) aliases with 0/1/e/k/x/X....</span></p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">1) Edge5 (or higher) - not verified yet. One clkout waveform in F240 appeared to get</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;the open/close/open/close correct, it correctly dropped the front driveoff. This</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;is ok for output only pins (driver always off). I need to try some other scenarios</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;and add error checking. Solution:You should verify the translation of any polaris waveforms </p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;&nbsp;using Edge5 or higher.</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">2) CPM patterns do not check against the 65535 counter limit. The decision was that it</p>
+   <p dir="ltr" style="text-align:left"> &nbsp;&nbsp;was better for the user to make this decision. (Solution: See notes in the problem section below).</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">3) Big patterns are limited to 500000 vectors. Solution:Bigger source files will need to be split.</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">4) Shutdowns in scan patterns???? Solution: left to the user to validate correct use of shutdown in scan patterns.</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">5) Create 'c/C' waveforms for mux pins with mixed data. Add code to modify the pattern translation.</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">6) Complete acdata.p/actable.p parameter processing. Features were added but this was not completed and it was disabled... Solution: User should move these parameters to acdata.p and validate the correct category selected values.</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">7) Look at hexfields assigned with binary pins in 'c022'.</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left">8) ChannelSecond waveforms (Partial solution provided in HOWTO section).</p>
+   <p dir="ltr" style="text-align:left"></p>
+   <p dir="ltr" style="text-align:left"><span xml:lang="en-US" lang="en-US">Most of the known minor bugs have now been cleaned up. Please note that all exceptions and potential polaris syntax cannot be anticipated. Any feedback is appreciated. </span>Ideally create a log file of any changes you need to make to the files so you can patch them into newer versions. Some support will be provided to address issues that are identified. The user may have to create work-arounds to get the translation to work successfully. As a reminder it is always up to the user to verify the translation is correct for their situation. Please see the license file...</p>
+   <p dir="ltr" style="text-align:left">======================================================</p>
+   <p dir="ltr" style="text-align:left"></p>
+  </div>
+ </body>
+</html>

@@ -1,0 +1,899 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.7	//
+ACDATA	global_ggm.c	/^int ACTABLE, ACDATA;$/;"	v
+ACTABLE	global_ggm.c	/^int ACTABLE, ACDATA;$/;"	v
+ACTABLELEN	includes_ggm.h	149;"	d
+ACTABLELINES	includes_ggm.h	150;"	d
+ACTABLENAMES	includes_ggm.h	/^typedef struct ACTABLENAMES {$/;"	s
+ACTABLENAMES	includes_ggm.h	/^} ACTABLENAMES;$/;"	t	typeref:struct:ACTABLENAMES
+ACTLINES	common_includes.h	22;"	d
+ACTPARAMSTBL	common_includes.h	15;"	d
+ACWAVES	includes_ggm.h	/^typedef struct ACWAVES {$/;"	s
+ACWAVES	includes_ggm.h	/^} ACWAVES;$/;"	t	typeref:struct:ACWAVES
+ALIASLIST	purge_actable_ggm.c	/^	} ALIASLIST;$/;"	t	typeref:struct:ALIASLIST	file:
+ALIASLIST	purge_actable_ggm.c	/^typedef struct ALIASLIST {$/;"	s	file:
+ALLD0	includes_ggm.h	/^	int ALLD0[MAX_MOD_CODES + 1];$/;"	m	struct:MODCODE
+ALLD1	includes_ggm.h	/^	int ALLD1[MAX_MOD_CODES + 1];$/;"	m	struct:MODCODE
+ALLDEVICE	globals_build.c	/^char ALLDEVICE[ENUMLEN + 1], ALLTEMP[ENUMLEN + 1], ALLTEST[ENUMLEN + 1],$/;"	v
+ALLTEMP	globals_build.c	/^char ALLDEVICE[ENUMLEN + 1], ALLTEMP[ENUMLEN + 1], ALLTEST[ENUMLEN + 1],$/;"	v
+ALLTEST	globals_build.c	/^char ALLDEVICE[ENUMLEN + 1], ALLTEMP[ENUMLEN + 1], ALLTEST[ENUMLEN + 1],$/;"	v
+AM_ALLTS	aliasmap.h	142;"	d
+AM_BOGUS	aliasmap.h	140;"	d
+AM_DONOTHINGPAD	aliasmap.h	108;"	d
+AM_MISC1	aliasmap.h	135;"	d
+AM_MISC2	aliasmap.h	136;"	d
+AM_MISC3	aliasmap.h	137;"	d
+AM_MISC4	aliasmap.h	138;"	d
+AM_NOMUX	aliasmap.h	104;"	d
+AM_allts	aliasmap.h	143;"	d
+AM_close10HI	aliasmap.h	129;"	d
+AM_close10LO	aliasmap.h	128;"	d
+AM_close11HI	aliasmap.h	131;"	d
+AM_close11LO	aliasmap.h	130;"	d
+AM_close12HI	aliasmap.h	133;"	d
+AM_close12LO	aliasmap.h	132;"	d
+AM_close1HI	aliasmap.h	111;"	d
+AM_close1LO	aliasmap.h	110;"	d
+AM_close2HI	aliasmap.h	113;"	d
+AM_close2LO	aliasmap.h	112;"	d
+AM_close3HI	aliasmap.h	115;"	d
+AM_close3LO	aliasmap.h	114;"	d
+AM_close4HI	aliasmap.h	117;"	d
+AM_close4LO	aliasmap.h	116;"	d
+AM_close5HI	aliasmap.h	119;"	d
+AM_close5LO	aliasmap.h	118;"	d
+AM_close6HI	aliasmap.h	121;"	d
+AM_close6LO	aliasmap.h	120;"	d
+AM_close7HI	aliasmap.h	123;"	d
+AM_close7LO	aliasmap.h	122;"	d
+AM_close8HI	aliasmap.h	125;"	d
+AM_close8LO	aliasmap.h	124;"	d
+AM_close9HI	aliasmap.h	127;"	d
+AM_close9LO	aliasmap.h	126;"	d
+AM_continue	aliasmap.h	58;"	d
+AM_continueDRV	aliasmap.h	60;"	d
+AM_continueLO	aliasmap.h	59;"	d
+AM_cpmdpm	aliasmap.h	57;"	d
+AM_driveHID0	aliasmap.h	63;"	d
+AM_driveHID1	aliasmap.h	61;"	d
+AM_driveLOD0	aliasmap.h	64;"	d
+AM_driveLOD1	aliasmap.h	62;"	d
+AM_driveoffHID0	aliasmap.h	88;"	d
+AM_driveoffHID1	aliasmap.h	90;"	d
+AM_driveoffHILO	aliasmap.h	93;"	d
+AM_driveoffLOD0	aliasmap.h	87;"	d
+AM_driveoffLOD1	aliasmap.h	89;"	d
+AM_driveoffLOHI	aliasmap.h	92;"	d
+AM_edgefloatD0	aliasmap.h	83;"	d
+AM_edgefloatD1	aliasmap.h	84;"	d
+AM_edgestbHID0	aliasmap.h	66;"	d
+AM_edgestbHID1	aliasmap.h	68;"	d
+AM_edgestbLOD0	aliasmap.h	65;"	d
+AM_edgestbLOD1	aliasmap.h	67;"	d
+AM_maskD0	aliasmap.h	69;"	d
+AM_maskD1	aliasmap.h	72;"	d
+AM_maskHID0	aliasmap.h	70;"	d
+AM_maskHID1	aliasmap.h	73;"	d
+AM_scanin	aliasmap.h	55;"	d
+AM_scanout	aliasmap.h	56;"	d
+AM_strobefloatoffD0	aliasmap.h	102;"	d
+AM_strobefloatoffD1	aliasmap.h	103;"	d
+AM_strobeoffHID0	aliasmap.h	99;"	d
+AM_strobeoffHID1	aliasmap.h	101;"	d
+AM_strobeoffLOD0	aliasmap.h	98;"	d
+AM_strobeoffLOD1	aliasmap.h	100;"	d
+AM_windowHID0	aliasmap.h	78;"	d
+AM_windowHID1	aliasmap.h	80;"	d
+AM_windowLOD0	aliasmap.h	77;"	d
+AM_windowLOD1	aliasmap.h	79;"	d
+AM_windowfloatD0	aliasmap.h	81;"	d
+AM_windowfloatD1	aliasmap.h	82;"	d
+ASSUMED_DSET	include_vcs.h	11;"	d
+AUTO_PRE_PROC	includes_appn.h	22;"	d
+BEEP	include_vcs.h	27;"	d
+BEGINCNT	globals_appn.c	/^int BEGINCNT = 0, ENDCNT = 0, REPEATCNT = 0, MAXLOOPDEPTH = 0;$/;"	v
+BIG_BUFFER_SIZE	includes_appn.h	25;"	d
+CATCODE	includes_build.h	/^typedef struct CATCODE {$/;"	s
+CATCODE	includes_build.h	/^} CATCODE;$/;"	t	typeref:struct:CATCODE
+CELLBUFFSIZE	separate_actable_ggm.c	5;"	d	file:
+CELL_INFO	includes_ggm.h	/^typedef struct CELL_INFO {$/;"	s
+CELL_INFO	includes_ggm.h	/^} CELL_INFO;$/;"	t	typeref:struct:CELL_INFO
+CODE	includes_build.h	/^	char CODE, LVL, REF;$/;"	m	struct:SPECS
+COMMENT	includes_appn.h	47;"	d
+COMPAREold_HIGH_ALIAS	include_vcs.h	18;"	d
+COMPAREold_HIGH_ALIAS2	include_vcs.h	20;"	d
+COMPAREold_LOW_ALIAS	include_vcs.h	19;"	d
+COMPAREold_LOW_ALIAS2	include_vcs.h	21;"	d
+CPB	purge_actable_ggm.c	/^	} CPB;$/;"	t	typeref:struct:CPB	file:
+CPB	purge_actable_ggm.c	/^typedef struct CPB {$/;"	s	file:
+CPM	global_vcp.c	/^int CPM = 0, found_shut = 0;$/;"	v
+CYCBUFFSIZE	includes_ggm.h	11;"	d
+CYCLEN	includes_ggm.h	96;"	d
+CYCSETMD	includes_ggm.h	/^typedef struct CYCSETMD {$/;"	s
+CYCSETMD	includes_ggm.h	/^} CYCSETMD;$/;"	t	typeref:struct:CYCSETMD
+CYCTBL	includes_ggm.h	/^typedef struct CYCTBL {$/;"	s
+CYCTBL	includes_ggm.h	/^} CYCTBL;$/;"	t	typeref:struct:CYCTBL
+D0c	includes_ggm.h	/^	int D0c;$/;"	m	struct:MODCODE
+D0cnt	includes_ggm.h	/^	int D0cnt;$/;"	m	struct:MODCODE
+D1c	includes_ggm.h	/^	int D1c;$/;"	m	struct:MODCODE
+D1cnt	includes_ggm.h	/^	int D1cnt;$/;"	m	struct:MODCODE
+DATACONTROL	common_includes.h	11;"	d
+DEBUG	global_vcp.c	/^boolean DEBUG = FALSE;			\/* off by default *\/$/;"	v
+DEBUG	includes_ggm.h	8;"	d
+DEFAULT_SCAN_OPT	include_vcs.h	4;"	d
+DEF_WFT	include_vcp.h	55;"	d
+DEV2PIN	global_ggm.c	/^int PIN2DEV[NUMPINS], DEV2PIN[NUMPINS];$/;"	v
+DEVPIN	global_ggm.c	/^char DEVPIN[NUMPINS][PINSIZE];$/;"	v
+DFLTSGHDR	include_vcp.h	35;"	d
+DFLTSGHDR	include_vcs.h	38;"	d
+DISCARD_LEN	line_parsing_appn.c	29;"	d	file:
+DONT_CAREold_ALIAS	include_vcs.h	22;"	d
+DONT_CAREold_ALIAS2	include_vcs.h	23;"	d
+DPM_COUNT_file	include_vcp.h	32;"	d
+DRIVEold_HIGH_ALIAS	include_vcs.h	14;"	d
+DRIVEold_HIGH_ALIAS2	include_vcs.h	16;"	d
+DRIVEold_LOW_ALIAS	include_vcs.h	15;"	d
+DRIVEold_LOW_ALIAS2	include_vcs.h	17;"	d
+DSET0	include_vcp.h	/^	char DSET0[MAXPINS + 1];$/;"	m	struct:PBSET
+DSET1	include_vcp.h	/^	char DSET1[MAXPINS + 1];$/;"	m	struct:PBSET
+DSETPTR	include_vcp.h	/^	char *MSETPTR, *DSETPTR, *ISETPTR, *WFT,$/;"	m	struct:SETvS
+ENDCNT	globals_appn.c	/^int BEGINCNT = 0, ENDCNT = 0, REPEATCNT = 0, MAXLOOPDEPTH = 0;$/;"	v
+ENUMLEN	common_includes.h	25;"	d
+ENUMS	global_ggm.c	/^char ENUMS[MAXENUMS][ENUMLEN + 1];$/;"	v
+ENUMSFILE	common_includes.h	13;"	d
+ENVISIONMAXSCANLEN	include_vcs.h	40;"	d
+ENVISIONTOP	common_includes.h	2;"	d
+EO	global_ggm.c	/^char EO[MAXORIGINS][ORIGINSIZE + 1];$/;"	v
+EOCNT	global_ggm.c	/^int EOCNT;$/;"	v
+EVEN	purge_actable_ggm.c	252;"	d	file:
+EVX2	global_ggm.c	/^int EVX2 = 0, PBSTROBE = 0, PBCLOSE = 0, NOPUSHCYC = 0, NOMUX = 0, MUXFLAG = 0;$/;"	v
+EVX2	global_vcp.c	/^int EVX2 = 0,NOEVX2 = 0,NOMUX = 0;$/;"	v
+EVX2VECT	global_vcp.c	/^char dummy_vector[MULTILINESIZE], cpmdpm_vector[MULTILINESIZE],EVX2VECT[MULTILINESIZE];$/;"	v
+EXPRLEN	includes_build.h	7;"	d
+FALSE	include_vcp.h	53;"	d
+FC_ASCII	aliasmap.h	37;"	d
+FC_BAD	aliasmap.h	39;"	d
+FC_DRIVECOMP	aliasmap.h	7;"	d
+FC_DRIVEDATA	aliasmap.h	6;"	d
+FC_DRIVEHI	aliasmap.h	4;"	d
+FC_DRIVELO	aliasmap.h	5;"	d
+FC_DRIVEOFF	aliasmap.h	9;"	d
+FC_DRVSTRBOFF	aliasmap.h	30;"	d
+FC_DUMMY	aliasmap.h	36;"	d
+FC_EDGECOMP	aliasmap.h	14;"	d
+FC_EDGEDATA	aliasmap.h	13;"	d
+FC_EDGEFLOAT	aliasmap.h	16;"	d
+FC_EDGEHI	aliasmap.h	11;"	d
+FC_EDGELO	aliasmap.h	12;"	d
+FC_LATCH	aliasmap.h	18;"	d
+FC_MUXCLOCK	aliasmap.h	34;"	d
+FC_NOMUX	aliasmap.h	38;"	d
+FC_NULLEDGE	aliasmap.h	31;"	d
+FC_NULLEDGE_DRV	aliasmap.h	32;"	d
+FC_STROBEOFF	aliasmap.h	29;"	d
+FC_WINDOWCOMP	aliasmap.h	23;"	d
+FC_WINDOWDATA	aliasmap.h	22;"	d
+FC_WINDOWFLOAT	aliasmap.h	26;"	d
+FC_WINDOWHI	aliasmap.h	20;"	d
+FC_WINDOWLO	aliasmap.h	21;"	d
+FC_WINDOWOPEN	aliasmap.h	24;"	d
+FC_WINDOWOPENZ	aliasmap.h	27;"	d
+FILENAMELEN	desub.c	12;"	d	file:
+FILENAMELEN	desub_k.c	12;"	d	file:
+FILENAMELEN	desub_old.c	12;"	d	file:
+FILENAMELEN	include_vcp.h	15;"	d
+FILENAMELEN	include_vcs.h	28;"	d
+FILENAMELEN	includes_ggm.h	12;"	d
+FILETABLE	include_vcp.h	/^struct FILETABLE {$/;"	s
+FINDME_SIZE	includes_ggm.h	21;"	d
+FIND_CYCLE_HOLD	include_vcs.h	10;"	d
+FIND_SIGHDR_IN	include_vcs.h	6;"	d
+FIND_SIGHDR_OUT	include_vcs.h	7;"	d
+FMTLEN	includes_ggm.h	163;"	d
+FORCEDPM	globals_appn.c	/^int FORCEDPM = 0;$/;"	v
+FORMAT_SEARCH	includes_ggm.h	/^struct FORMAT_SEARCH {$/;"	s
+GCTMODNAME	include_vcp.h	/^		GCTMODNAME[MAXMODGCT][MAXGCTLEN + 1];$/;"	m	struct:SETvS
+GCTSIZE	includes_ggm.h	16;"	d
+GCT_GEN_MODVER	common_includes.h	8;"	d
+GENERALBUFLEN	include_vcs.h	32;"	d
+GE_DEVICE	includes_build.h	15;"	d
+GE_OTHER	includes_build.h	18;"	d
+GE_TEMP	includes_build.h	16;"	d
+GE_TEST	includes_build.h	17;"	d
+GGMCAT	includes_build.h	/^typedef struct GGMCAT {$/;"	s
+GGMCAT	includes_build.h	/^} GGMCAT;$/;"	t	typeref:struct:GGMCAT
+GGMENUMS	includes_build.h	/^typedef struct GGMENUMS {$/;"	s
+GGMENUMS	includes_build.h	/^} GGMENUMS;$/;"	t	typeref:struct:GGMENUMS
+G_DPM_VECTOR	global_vcs.c	/^char G_DPM_VECTOR[NUMPINS];$/;"	v
+G_GCTMODNAME	global_vcs.c	/^char G_GCTMODNAME[MAXMODGCT][MAXGCTLEN];$/;"	v
+G_GCTMODUSED	global_vcs.c	/^int G_GCTMODUSED[MAXMODGCT];$/;"	v
+G_HOLD_VECTOR	global_vcs.c	/^char G_HOLD_VECTOR[NUMPINS];$/;"	v
+G_MOD2_SIZE	global_vcs.c	/^int G_MOD2_SIZE = 0;$/;"	v
+G_NORMALSGHDR	global_vcs.c	/^char G_NORMALSGHDR[MAXSIGHDRLEN];$/;"	v
+G_QUIET	global_vcs.c	/^int G_QUIET = 1, NOMUX = 0;$/;"	v
+G_SCANHOLD	global_vcs.c	/^char G_SCANHOLD[NUMPINS];$/;"	v
+G_SCANINPIN	global_vcs.c	/^int G_SCANINPIN = 0;			\/* TDI *\/$/;"	v
+G_SCANOUTPIN	global_vcs.c	/^int G_SCANOUTPIN = 0;			\/* TDO *\/$/;"	v
+G_VECTD0	global_vcs.c	/^char G_VECTD0[MAXMODGCT][MAXPINS + 1], G_VECTD1[MAXMODGCT][MAXPINS + 1];$/;"	v
+G_VECTD1	global_vcs.c	/^char G_VECTD0[MAXMODGCT][MAXPINS + 1], G_VECTD1[MAXMODGCT][MAXPINS + 1];$/;"	v
+G_compilestr	global_vcs.c	/^char G_compilestr[MEMOSTRLEN];	\/* concaternated strings *\/$/;"	v
+G_cyclecount	global_vcs.c	/^long G_cyclecount = 0, G_vectorcount = 0;$/;"	v
+G_datestr	global_vcs.c	/^char G_progstr[MEMOSTRLEN], G_datestr[MEMOSTRLEN], G_timestr[MEMOSTRLEN];$/;"	v
+G_hostname	global_vcs.c	/^char G_username[MEMOSTRLEN], G_hostname[MEMOSTRLEN], G_pwd[MEMOSTRLEN];$/;"	v
+G_infile1	global_vcs.c	/^char G_infile1[FILENAMELEN];$/;"	v
+G_maxdev	global_ggm.c	/^int G_maxdev, G_maxtmp, G_maxtst, G_maxrem;$/;"	v
+G_maxgctSET	global_vcs.c	/^int G_maxgctSET = 0;$/;"	v
+G_maxrem	global_ggm.c	/^int G_maxdev, G_maxtmp, G_maxtst, G_maxrem;$/;"	v
+G_maxtmp	global_ggm.c	/^int G_maxdev, G_maxtmp, G_maxtst, G_maxrem;$/;"	v
+G_maxtst	global_ggm.c	/^int G_maxdev, G_maxtmp, G_maxtst, G_maxrem;$/;"	v
+G_pinhead	global_vcs.c	/^char G_pinhead[SCANPINNUM][NUMPINS];$/;"	v
+G_pinheadcount	global_vcs.c	/^int G_pinheadcount = 0;$/;"	v
+G_progstr	global_vcs.c	/^char G_progstr[MEMOSTRLEN], G_datestr[MEMOSTRLEN], G_timestr[MEMOSTRLEN];$/;"	v
+G_pwd	global_vcs.c	/^char G_username[MEMOSTRLEN], G_hostname[MEMOSTRLEN], G_pwd[MEMOSTRLEN];$/;"	v
+G_readlinenum	global_vcs.c	/^long G_readlinenum = 0;$/;"	v
+G_scandata	global_vcs.c	/^SCAN_INFO G_scandata[MAXSCANHDRS];$/;"	v
+G_scanhdrs	global_vcs.c	/^int G_scanhdrs = 0;$/;"	v
+G_timestr	global_vcs.c	/^char G_progstr[MEMOSTRLEN], G_datestr[MEMOSTRLEN], G_timestr[MEMOSTRLEN];$/;"	v
+G_username	global_vcs.c	/^char G_username[MEMOSTRLEN], G_hostname[MEMOSTRLEN], G_pwd[MEMOSTRLEN];$/;"	v
+G_vectorcount	global_vcs.c	/^long G_cyclecount = 0, G_vectorcount = 0;$/;"	v
+Gcat	globals_build.c	/^GGMCAT *Gcat;$/;"	v
+Genums	globals_build.c	/^GGMENUMS *Genums;$/;"	v
+Gwftref	globals_build.c	/^WFTREF *Gwftref;$/;"	v
+HOLD_CYCLE	include_vcs.h	25;"	d
+INHCONTROL	common_includes.h	12;"	d
+ISETPTR	include_vcp.h	/^	char *MSETPTR, *DSETPTR, *ISETPTR, *WFT,$/;"	m	struct:SETvS
+KEEP_NO	desub.c	15;"	d	file:
+KEEP_NO	desub_k.c	15;"	d	file:
+KEEP_YES	desub.c	14;"	d	file:
+KEEP_YES	desub_k.c	14;"	d	file:
+LABEL	include_vcs.h	63;"	d
+LABEL	includes_appn.h	48;"	d
+LASTI	global_ggm.c	/^int LASTI;$/;"	v
+LINE_BUFF	includes_appn.h	68;"	d
+LOOP_LINES	includes_appn.h	/^struct LOOP_LINES {$/;"	s
+LVL	includes_build.h	/^	char CODE, LVL, REF;$/;"	m	struct:SPECS
+MAXACTABLENAMELEN	common_includes.h	26;"	d
+MAXACTABLES	common_includes.h	29;"	d
+MAXALIAS	include_vcp.h	21;"	d
+MAXALIAS	include_vcs.h	47;"	d
+MAXCATCODE	includes_build.h	4;"	d
+MAXCELLS	includes_ggm.h	75;"	d
+MAXCPMLINES	cpmopt_new_vcp.c	12;"	d	file:
+MAXCPMOPTLINES	include_vcp.h	11;"	d
+MAXCPMTODPMLINES	include_vcp.h	10;"	d
+MAXCYCLE	include_vcp.h	17;"	d
+MAXCYCLE	include_vcs.h	42;"	d
+MAXCYCROWS	includes_ggm.h	105;"	d
+MAXCYCSETS	includes_ggm.h	95;"	d
+MAXCYCTBL	includes_ggm.h	106;"	d
+MAXDSET	include_vcp.h	27;"	d
+MAXDSET	include_vcs.h	50;"	d
+MAXENUMCODE	includes_build.h	3;"	d
+MAXENUMS	includes_ggm.h	169;"	d
+MAXERRORLEN	include_vcp.h	23;"	d
+MAXERRORLEN	include_vcs.h	34;"	d
+MAXFILESIZE	includes_appn.h	12;"	d
+MAXGCT	include_vcp.h	19;"	d
+MAXGCT	include_vcs.h	45;"	d
+MAXGCTDSET	include_vcp.h	31;"	d
+MAXGCTLEN	include_vcp.h	20;"	d
+MAXGCTLEN	include_vcs.h	46;"	d
+MAXHDRLEN	include_vcs.h	52;"	d
+MAXISET	include_vcp.h	28;"	d
+MAXISET	include_vcs.h	51;"	d
+MAXLOOPDEPTH	globals_appn.c	/^int BEGINCNT = 0, ENDCNT = 0, REPEATCNT = 0, MAXLOOPDEPTH = 0;$/;"	v
+MAXLVL	parse_actable_ggm.c	14;"	d	file:
+MAXMODGCT	include_vcp.h	29;"	d
+MAXMODGCT	include_vcs.h	12;"	d
+MAXMSET	include_vcp.h	26;"	d
+MAXMSET	include_vcs.h	49;"	d
+MAXORIGINS	includes_ggm.h	147;"	d
+MAXPATLINES	includes_appn.h	53;"	d
+MAXPINLEN	include_vcp.h	22;"	d
+MAXPINLEN	include_vcs.h	48;"	d
+MAXPINS	include_vcp.h	18;"	d
+MAXPINS	include_vcs.h	43;"	d
+MAXREF	includes_build.h	36;"	d
+MAXREPFOREVER	include_vcs.h	59;"	d
+MAXREPFOREVERLINES	include_vcs.h	60;"	d
+MAXRPT	include_vcp.h	24;"	d
+MAXRPT	include_vcs.h	37;"	d
+MAXSBRT	desub.c	56;"	d	file:
+MAXSBRT	desub_k.c	56;"	d	file:
+MAXSBRT	desub_old.c	44;"	d	file:
+MAXSCAN	includes_appn.h	65;"	d
+MAXSCANCNT	include_vcs.h	44;"	d
+MAXSCANHDRLEN	include_vcs.h	9;"	d
+MAXSCANHDRS	include_vcs.h	53;"	d
+MAXSCANLEN	include_vcs.h	33;"	d
+MAXSCANNUM	include_vcs.h	54;"	d
+MAXSCANORDERLEN	include_vcs.h	8;"	d
+MAXSCANPINS	include_vcs.h	57;"	d
+MAXSCANTBLLEN	include_vcs.h	55;"	d
+MAXSIGHDRLEN	include_vcp.h	37;"	d
+MAXSIGHDRLEN	include_vcs.h	39;"	d
+MAXSPECS	includes_build.h	6;"	d
+MAXVMS	includes_ggm.h	114;"	d
+MAXWAVE	include_vcp.h	16;"	d
+MAXWAVE	include_vcs.h	41;"	d
+MAX_CELLLEN	includes_ggm.h	41;"	d
+MAX_CELLPINLEN	includes_ggm.h	42;"	d
+MAX_COUNT	includes_appn.h	28;"	d
+MAX_EDGES	includes_ggm.h	20;"	d
+MAX_LOOP_SIZE	globals_appn.c	/^long MAX_LOOP_SIZE = def_MAX_LOOP_SIZE;$/;"	v
+MAX_MATCH_FMT	includes_ggm.h	133;"	d
+MAX_MOD_CODES	includes_ggm.h	28;"	d
+MAX_PARAMS	includes_ggm.h	85;"	d
+MAX_RPT_CPM	include_vcp.h	49;"	d
+MAX_RPT_DPM	include_vcp.h	50;"	d
+MAX_SCAN_LEN	includes_appn.h	60;"	d
+MAXlists	includes_ggm.h	17;"	d
+MC_DUPE	includes_ggm.h	29;"	d
+MDI	includes_appn.h	49;"	d
+MDISET	includes_appn.h	55;"	d
+MED_BUFFER_SIZE	includes_appn.h	26;"	d
+MEMOSTRLEN	common_includes.h	27;"	d
+MEMOSTRLEN	include_vcp.h	30;"	d
+MEMOSTRLEN	include_vcs.h	35;"	d
+MEMOSTRLEN	includes_appn.h	23;"	d
+MEMOSTRLEN	includes_ggm.h	13;"	d
+MF_EDGESET	includes_ggm.h	258;"	d
+MF_EDGESETDATA	includes_ggm.h	257;"	d
+MOD2_SIZE	global_vcp.c	/^int MOD2_SIZE;$/;"	v
+MODCODE	includes_ggm.h	/^struct MODCODE {$/;"	s
+MODCODE	includes_ggm.h	/^} MODCODE;$/;"	v	typeref:struct:MODCODE
+MODVER	aliasmap.h	1;"	d
+MODVER	common_includes.h	9;"	d
+MSETPTR	include_vcp.h	/^	char *MSETPTR, *DSETPTR, *ISETPTR, *WFT,$/;"	m	struct:SETvS
+MULTILINESIZE	include_vcp.h	13;"	d
+MULTILINESIZE	include_vcs.h	30;"	d
+MULTILINESIZEBIG	include_vcp.h	14;"	d
+MUXFLAG	global_ggm.c	/^int EVX2 = 0, PBSTROBE = 0, PBCLOSE = 0, NOPUSHCYC = 0, NOMUX = 0, MUXFLAG = 0;$/;"	v
+MXFIELD	includes_appn.h	43;"	d
+MX_INSTR	includes_appn.h	29;"	d
+NOEVX2	global_vcp.c	/^int EVX2 = 0,NOEVX2 = 0,NOMUX = 0;$/;"	v
+NOMUX	global_ggm.c	/^int EVX2 = 0, PBSTROBE = 0, PBCLOSE = 0, NOPUSHCYC = 0, NOMUX = 0, MUXFLAG = 0;$/;"	v
+NOMUX	global_vcp.c	/^int EVX2 = 0,NOEVX2 = 0,NOMUX = 0;$/;"	v
+NOMUX	global_vcs.c	/^int G_QUIET = 1, NOMUX = 0;$/;"	v
+NOPUSHCYC	global_ggm.c	/^int EVX2 = 0, PBSTROBE = 0, PBCLOSE = 0, NOPUSHCYC = 0, NOMUX = 0, MUXFLAG = 0;$/;"	v
+NORMALSGHDR	global_vcp.c	/^char NORMALSGHDR[MAXSIGHDRLEN + 1];$/;"	v
+NOT_VECTOR	includes_appn.h	54;"	d
+NO_COMMENT	include_vcp.h	42;"	d
+NO_DMI	include_vcp.h	39;"	d
+NO_MATCH	includes_appn.h	58;"	d
+NO_MICROINSTR	include_vcp.h	43;"	d
+NO_REPEAT	include_vcp.h	45;"	d
+NO_VECTOR	include_vcp.h	41;"	d
+NO_WFT	include_vcp.h	40;"	d
+NUMPINS	include_vcp.h	102;"	d
+NUMPINS	include_vcs.h	58;"	d
+NUMPINS	includes_appn.h	44;"	d
+NUMPINS	includes_ggm.h	14;"	d
+ODD	purge_actable_ggm.c	251;"	d	file:
+ORIGINSIZE	includes_ggm.h	148;"	d
+OTHERENUM	globals_build.c	/^	OTHERENUM[ENUMLEN + 1], OTHERENUM[ENUMLEN + 1];$/;"	v
+PARAMLEN	includes_build.h	5;"	d
+PARAM_INFO	includes_ggm.h	/^typedef struct PARAM_INFO {$/;"	s
+PARAM_INFO	includes_ggm.h	/^} PARAM_INFO;$/;"	t	typeref:struct:PARAM_INFO
+PAT_REF_FILE	common_includes.h	6;"	d
+PAT_REF_FILE	include_vcp.h	33;"	d
+PB	purge_actable_ggm.c	/^	} PB;$/;"	t	typeref:struct:PB	file:
+PB	purge_actable_ggm.c	/^typedef struct PB {$/;"	s	file:
+PBCHARS	common_includes.h	31;"	d
+PBCLOSE	global_ggm.c	/^int EVX2 = 0, PBSTROBE = 0, PBCLOSE = 0, NOPUSHCYC = 0, NOMUX = 0, MUXFLAG = 0;$/;"	v
+PBCOMMON	includes_ggm.h	26;"	d
+PBCYC	includes_ggm.h	23;"	d
+PBEDGES	includes_ggm.h	25;"	d
+PBELEMENTS	purge_actable_ggm.c	10;"	d	file:
+PBSET	include_vcp.h	/^	} PBSET;$/;"	t	typeref:struct:PBSET
+PBSET	include_vcp.h	/^typedef struct PBSET {$/;"	s
+PBSTROBE	global_ggm.c	/^int EVX2 = 0, PBSTROBE = 0, PBCLOSE = 0, NOPUSHCYC = 0, NOMUX = 0, MUXFLAG = 0;$/;"	v
+PBWFT	includes_ggm.h	24;"	d
+PIN	global_ggm.c	/^char PIN[NUMPINS][PINSIZE];$/;"	v
+PIN2DEV	global_ggm.c	/^int PIN2DEV[NUMPINS], DEV2PIN[NUMPINS];$/;"	v
+PINLIST	includes_ggm.h	/^typedef struct PINLIST {$/;"	s
+PINLIST	includes_ggm.h	/^} PINLIST;$/;"	t	typeref:struct:PINLIST
+PINSIZE	include_vcp.h	103;"	d
+PINSIZE	includes_appn.h	45;"	d
+PINSIZE	includes_ggm.h	15;"	d
+POLARIS_PINS	includes_appn.h	46;"	d
+PRE_PROC_CPM	includes_appn.h	20;"	d
+PRE_PROC_DPM	includes_appn.h	21;"	d
+PT	includes_ggm.h	/^enum PT {$/;"	g
+PT_CLOSE	includes_ggm.h	/^	PT_CLOSE,$/;"	e	enum:PT
+PT_CLOSEFLOATOPEN	includes_ggm.h	/^	PT_CLOSEFLOATOPEN,$/;"	e	enum:PT
+PT_CLOSEOFF	includes_ggm.h	/^	PT_CLOSEOFF,$/;"	e	enum:PT
+PT_CLOSEOPEN	includes_ggm.h	/^	PT_CLOSEOPEN,$/;"	e	enum:PT
+PT_CONTINUE	includes_ggm.h	/^	PT_CONTINUE,$/;"	e	enum:PT
+PT_FLOATOPEN	includes_ggm.h	/^	PT_FLOATOPEN$/;"	e	enum:PT
+PT_NOPROBLEM	includes_ggm.h	/^	PT_NOPROBLEM,$/;"	e	enum:PT
+PT_OFFCLOSE	includes_ggm.h	/^	PT_OFFCLOSE,$/;"	e	enum:PT
+PT_OFFFLOATOPEN	includes_ggm.h	/^	PT_OFFFLOATOPEN,$/;"	e	enum:PT
+PT_OFFOPEN	includes_ggm.h	/^	PT_OFFOPEN,$/;"	e	enum:PT
+PT_OPEN	includes_ggm.h	/^	PT_OPEN,$/;"	e	enum:PT
+PUSHBACK_CYCLE	include_vcp.h	56;"	d
+QUIET	global_vcp.c	/^boolean QUIET = TRUE;$/;"	v
+READLINELEN	desub.c	11;"	d	file:
+READLINELEN	desub_k.c	11;"	d	file:
+READLINELEN	desub_old.c	11;"	d	file:
+READLINELEN	include_vcp.h	12;"	d
+READLINELEN	include_vcs.h	31;"	d
+READLINELEN	includes_appn.h	24;"	d
+READLINELEN	includes_build.h	2;"	d
+READLINELEN	includes_ggm.h	10;"	d
+REF	includes_build.h	/^	char CODE, LVL, REF;$/;"	m	struct:SPECS
+REFISSCAN	include_vcs.h	66;"	d
+REFISVECT	include_vcs.h	65;"	d
+REMAP_DEF_WFT	global_vcp.c	/^char REMAP_DEF_WFT[MAXGCTLEN + 1];$/;"	v
+REMAP_DEF_WFT	include_vcp.h	/^char REMAP_DEF_WFT[MAXGCTLEN + 1];$/;"	v
+REMOVEDUPE	global_ggm.c	/^char *REMOVEDUPE;$/;"	v
+REPEATCNT	globals_appn.c	/^int BEGINCNT = 0, ENDCNT = 0, REPEATCNT = 0, MAXLOOPDEPTH = 0;$/;"	v
+REPEAT_COMPRESSION	global_vcp.c	/^boolean REPEAT_COMPRESSION = TRUE;$/;"	v
+RESULT_BAD	globals_appn.c	/^int RESULT_BAD;$/;"	v
+RET_BAD_INFILE	includes_appn.h	38;"	d
+RET_BAD_OUTFILE	includes_appn.h	39;"	d
+RET_CPM_NEEDED	includes_appn.h	40;"	d
+RET_FOREVER	include_vcp.h	104;"	d
+RET_FOREVER	includes_appn.h	42;"	d
+RET_GOOD	includes_appn.h	31;"	d
+RET_IGNORING_STATEMENT	includes_appn.h	34;"	d
+RET_LOOP_SIZE_TOO_BIG	includes_appn.h	37;"	d
+RET_MATCH	includes_appn.h	32;"	d
+RET_NORMAL	includes_appn.h	35;"	d
+RET_NOT_ENOUGH_MEMORY	includes_appn.h	41;"	d
+RET_REPEAT_FOREVER	includes_appn.h	33;"	d
+RET_REPEAT_FOREVER_SCAN	includes_appn.h	36;"	d
+REV	include_vcp.h	3;"	d
+REV	includes_appn.h	3;"	d
+RPTC	out_pats_appn.c	/^static int RPTC = 0;$/;"	v	file:
+RPT_LVLNUMS	includes_appn.h	52;"	d
+SCAN	globals_appn.c	/^int SCAN = 0, lastwascont = 0, SCANCNT = 0;$/;"	v
+SCANCNT	globals_appn.c	/^int SCAN = 0, lastwascont = 0, SCANCNT = 0;$/;"	v
+SCANLINE	aliasmap.h	2;"	d
+SCANPINNUM	include_vcs.h	56;"	d
+SCANV	globals_appn.c	/^struct SCAN_VECTORS *SCANV;$/;"	v	typeref:struct:SCAN_VECTORS
+SCAN_HDR_FILE	common_includes.h	14;"	d
+SCAN_INFO	include_vcs.h	/^typedef struct SCAN_INFO {$/;"	s
+SCAN_INFO	include_vcs.h	/^} SCAN_INFO;$/;"	t	typeref:struct:SCAN_INFO
+SCAN_VECTORS	includes_appn.h	/^struct SCAN_VECTORS {$/;"	s
+SCATcycle	global_ggm.c	/^char *SCATcycle;$/;"	v
+SETS	global_vcp.c	/^struct SETvS SETS;$/;"	v	typeref:struct:SETvS
+SETvS	include_vcp.h	/^struct SETvS {$/;"	s
+SIZE_EDGETYPE	global_ggm.c	/^int SIZE_EDGETYPE = sizeof(edgetypes);$/;"	v
+SIZE_WAVETYPES	global_ggm.c	/^int SIZE_WAVETYPES = sizeof(wavetypes);$/;"	v
+SPACES	includes_appn.h	51;"	d
+SPECS	includes_build.h	/^typedef struct SPECS {$/;"	s
+SPECS	includes_build.h	/^} SPECS;$/;"	t	typeref:struct:SPECS
+SSSTART	includes_ggm.h	172;"	d
+SSSTOP	includes_ggm.h	173;"	d
+STARTSTOP	includes_ggm.h	/^typedef struct STARTSTOP {$/;"	s
+STARTSTOP	includes_ggm.h	/^} STARTSTOP;$/;"	t	typeref:struct:STARTSTOP
+STARTSTOPCNT	includes_ggm.h	166;"	d
+STARTSTOPCNTPRE	includes_ggm.h	167;"	d
+STRING	include_vcs.h	62;"	d
+SUPPRESS_COMMENTS	global_vcp.c	/^boolean SUPPRESS_COMMENTS = FALSE;$/;"	v
+TBUFFSIZE	separate_actable_ggm.c	118;"	d	file:
+TEMPGZIPNAME	include_vcs.h	36;"	d
+TRANSLATION_ERRORS	common_includes.h	4;"	d
+TRANSLATION_STATUS	common_includes.h	5;"	d
+TRASH	common_includes.h	20;"	d
+TRUE	include_vcp.h	52;"	d
+VC	global_vcp.c	/^long readlinenum = 0, VC, VN = 0, VNIR = 0, countrpts = 0;$/;"	v
+VECTMOD	include_vcp.h	/^	char VECTMOD[2][MAXMODGCT][MAXPINS + 1];$/;"	m	struct:SETvS
+VECTOR	include_vcs.h	61;"	d
+VECTORLEN	include_vcp.h	25;"	d
+VECTORLEN	include_vcs.h	29;"	d
+VECTOR_CONVERT_POLARIS	includes_appn.h	19;"	d
+VECTOR_CONVERT_SCAN	includes_appn.h	14;"	d
+VECTOR_CONVERT_SCAN_CPM	includes_appn.h	15;"	d
+VECTOR_DONE	include_vcp.h	46;"	d
+VECTOR_DONT_PRINT	include_vcp.h	48;"	d
+VECTOR_FLUSH	include_vcp.h	47;"	d
+VMS	includes_ggm.h	/^} VMS;$/;"	t	typeref:struct:vectormapsets
+VMSBINARY	includes_ggm.h	126;"	d
+VMSHEX	includes_ggm.h	127;"	d
+VMSPARALLEL	includes_ggm.h	128;"	d
+VMSSCANIN	includes_ggm.h	129;"	d
+VMSSCANOTHER	includes_ggm.h	131;"	d
+VMSSCANOUT	includes_ggm.h	130;"	d
+VMfields	global_ggm.c	/^int maxvmsets, VMparallel, VMfields;$/;"	v
+VMparallel	global_ggm.c	/^int maxvmsets, VMparallel, VMfields;$/;"	v
+VN	global_vcp.c	/^long readlinenum = 0, VC, VN = 0, VNIR = 0, countrpts = 0;$/;"	v
+VNIR	global_vcp.c	/^long readlinenum = 0, VC, VN = 0, VNIR = 0, countrpts = 0;$/;"	v
+VT_NONE	includes_appn.h	73;"	d
+VT_SCAN	includes_appn.h	76;"	d
+VT_SCANCONTROL	includes_appn.h	77;"	d
+VT_SET	includes_appn.h	75;"	d
+VT_VECTOR	includes_appn.h	74;"	d
+VectorType	includes_appn.h	/^	int VectorType;$/;"	m	struct:LOOP_LINES
+WARNING	global_ggm.c	/^int WARNING;$/;"	v
+WFT	include_vcp.h	/^	char *MSETPTR, *DSETPTR, *ISETPTR, *WFT,$/;"	m	struct:SETvS
+WFTINHSPECIFIC	common_includes.h	18;"	d
+WFTINHVER	common_includes.h	16;"	d
+WFTMODVER	common_includes.h	23;"	d
+WFTMODVER_RED	common_includes.h	17;"	d
+WFTMODVERpre	common_includes.h	21;"	d
+WFTREF	include_vcp.h	/^	char WFTREF[MAXGCTLEN + 1];$/;"	m	struct:PBSET
+WFTREF	includes_appn.h	50;"	d
+WFTREF	includes_build.h	/^typedef struct WFTREF {$/;"	s
+WFTREF	includes_build.h	/^} WFTREF;$/;"	t	typeref:struct:WFTREF
+WF_EXPR_LEN	includes_ggm.h	18;"	d
+__DATE__	local_date.h	1;"	d
+__TIME__	autogen8_vcs.c	6;"	d	file:
+__TIME__	include_vcp.h	7;"	d
+__TIME__	includes_appn.h	6;"	d
+__TIME__	pre_proc18_appn.c	189;"	d	file:
+actablebufsize	includes_ggm.h	215;"	d
+actablelistsize	includes_ggm.h	217;"	d
+actablenames	global_ggm.c	/^ACTABLENAMES *actablenames;$/;"	v
+actline	includes_ggm.h	/^	int actline, used;$/;"	m	struct:PARAM_INFO
+actline	includes_ggm.h	/^	int actline;$/;"	m	struct:CELL_INFO
+acwaves	global_ggm.c	/^ACWAVES *acwaves;$/;"	v
+add_cycleset	read_cycletbl_ggm.c	/^int add_cycleset(char *ptrfind)$/;"	f
+add_cyclesetMD	read_cycletbl_ggm.c	/^int add_cyclesetMD(char *ptrfind)$/;"	f
+add_open_add_full_window	unused_old_funcs_ggm.c	/^int add_open_add_full_window(int modify, char *tbuf, char *newcells)$/;"	f
+add_to_inherit	separate_actable_ggm.c	/^int add_to_inherit(char *cellname, char *cnstptr, char *inheritbuf)$/;"	f
+add_vectormapset	read_cycletbl_ggm.c	/^int add_vectormapset(char *ptrfind)$/;"	f
+alias0	includes_ggm.h	/^	char cdtcode, alias0, alias1,alias6,alias7;$/;"	m	struct:CELL_INFO
+alias1	includes_ggm.h	/^	char cdtcode, alias0, alias1,alias6,alias7;$/;"	m	struct:CELL_INFO
+alias1	purge_actable_ggm.c	/^	int alias1,alias2,oldal1,oldal2;$/;"	m	struct:ALIASLIST	file:
+alias2	purge_actable_ggm.c	/^	int alias1,alias2,oldal1,oldal2;$/;"	m	struct:ALIASLIST	file:
+alias6	includes_ggm.h	/^	char cdtcode, alias0, alias1,alias6,alias7;$/;"	m	struct:CELL_INFO
+alias7	includes_ggm.h	/^	char cdtcode, alias0, alias1,alias6,alias7;$/;"	m	struct:CELL_INFO
+alias_vcpvcs	alias_vcpvcs.c	/^int alias_vcpvcs(int vect, int vmset, int vdset, int dset0val,int dset1val,int priorstate) {$/;"	f
+alphaHEXhex	expand_vector_appn.c	21;"	d	file:
+alphabet	global_ggm.c	/^char alphabet[26 + 26 + 10 + 1] =$/;"	v
+appr_vc	globals_appn.c	/^long readlinenum = 0, cpm_calling_dpm_count = 0, appr_vc = 0, countlines =$/;"	v
+begin	includes_appn.h	/^	int begin;$/;"	m	struct:LOOP_LINES
+beginC	out_pats_appn.c	/^static int beginC = 0;$/;"	v	file:
+beginpointtoend	includes_appn.h	/^	int beginpointtoend, endpointtobegin;$/;"	m	struct:LOOP_LINES
+bl	includes_build.h	/^	int el, bl, lvl;$/;"	m	struct:CATCODE
+boolean	include_vcp.h	/^typedef int boolean;$/;"	t
+break_up_edges	edgeset_make_wfms_ggm.c	/^int break_up_edges(int actablelines, int en[], int enable_edge[],$/;"	f
+cat	includes_build.h	/^	char cat[2048 + 1];$/;"	m	struct:CATCODE
+catcodes	globals_build.c	/^char catcodes[MAXCATCODE][2048 + 1], catstr[MAXCATCODE];$/;"	v
+catcount	globals_build.c	/^int catcount = 0, maxactlen = 0;$/;"	v
+catstr	globals_build.c	/^char catcodes[MAXCATCODE][2048 + 1], catstr[MAXCATCODE];$/;"	v
+cattype	includes_ggm.h	/^	char enumtype[MAXENUMS + 1], cattype[MAXACTABLES + 1];$/;"	m	struct:STARTSTOP
+cdtcode	includes_ggm.h	/^	char cdtcode, alias0, alias1,alias6,alias7;$/;"	m	struct:CELL_INFO
+cdtcode	includes_ggm.h	/^	char cdtcode;$/;"	m	struct:PARAM_INFO
+cdtcode	includes_ggm.h	/^	char cdtcode;$/;"	m	struct:STARTSTOP
+cdtstr	includes_ggm.h	/^	char cdtstr[MAX_MOD_CODES + 1];$/;"	m	struct:CELL_INFO
+cellcnt	global_ggm.c	/^int cellcnt, worstcasecellcnt = 0;$/;"	v
+cellcntD0	includes_ggm.h	/^	int cellcntD0[MAX_MOD_CODES + 2];	\/* plus 2 for 'after' cellcnt *\/$/;"	m	struct:MODCODE
+cellcntD1	includes_ggm.h	/^	int cellcntD1[MAX_MOD_CODES + 2];$/;"	m	struct:MODCODE
+cellexpr	includes_ggm.h	/^	char cellexpr[20 * READLINELEN + 1];$/;"	m	struct:CELL_INFO
+cellinfo	global_ggm.c	/^CELL_INFO *cellinfo;$/;"	v
+cellname	includes_ggm.h	/^	char cellname[MAX_CELLLEN];$/;"	m	struct:CELL_INFO
+cellstr	purge_actable_ggm.c	/^	char cellstr[READLINELEN +1];$/;"	m	struct:PB	file:
+ch	includes_build.h	/^	char ch;$/;"	m	struct:CATCODE
+check_SET	smallfunc_vcp.c	/^int check_SET(int beginflag, char *mod_vector, const char *SET,$/;"	f
+check_for_SET	line_parsing_appn.c	/^int check_for_SET(char *vector, char *result_vector, int *vs, int *ve)$/;"	f
+check_for_align_until	line_parsing_appn.c	/^int check_for_align_until(char *vector)$/;"	f
+check_for_begin	line_parsing_appn.c	/^int check_for_begin(char *vector, int *begin_loc, int *loopnest)$/;"	f
+check_for_end	line_parsing_appn.c	/^int check_for_end(char *vector, int *end_loc, int loopnest)$/;"	f
+check_for_match	line_parsing_appn.c	/^int check_for_match(char *vector, int *match_loc, int *matchloop)$/;"	f
+check_for_repeat	line_parsing_appn.c	/^int check_for_repeat(char *vector, int *repeat_loc, int *repeatloop,$/;"	f
+check_for_scan	line_parsing_appn.c	/^int check_for_scan(char *vector)$/;"	f
+check_for_shutdown	line_parsing_appn.c	/^int check_for_shutdown(char *vector, int *shutdown_loc)$/;"	f
+check_for_subroutine	line_parsing_appn.c	/^int check_for_subroutine(char *vector)$/;"	f
+check_for_vector	line_parsing_appn.c	/^int check_for_vector(char *vector, char *result_vector, int *vs, int *ve,$/;"	f
+chk_problem_type	chk_problem_type_ggm.c	/^int chk_problem_type(int DSET, int lcoden[], char field[][100][WF_EXPR_LEN], char *GCTNAME, char *dupwarn) {$/;"	f
+chksumout	alias_vcpvcs.c	/^int chksumout(FILE * fpout1, char *open, char *close)$/;"	f
+cmma	globals_appn.c	/^int phd_st[MXFIELD], phd_sp[MXFIELD], cmma[MXFIELD];$/;"	v
+codecnt	globals_build.c	/^int codecnt = 0;$/;"	v
+codecnt	includes_build.h	/^int codecnt;$/;"	v
+col	includes_build.h	/^	int col;					\/* find the plus *\/$/;"	m	struct:GGMCAT
+col	includes_build.h	/^	int col;					\/* find the plus *\/$/;"	m	struct:GGMENUMS
+comment	include_vcp.h	/^	char *comment, *commente;$/;"	m	struct:FILETABLE
+comment	includes_appn.h	/^	char comment[COMMENT];$/;"	m	struct:LOOP_LINES
+commente	include_vcp.h	/^	char *comment, *commente;$/;"	m	struct:FILETABLE
+compact_cycletbl	compact_cycletbl_ggm.c	/^int compact_cycletbl() {$/;"	f
+compareclose	purge_actable_ggm.c	/^	char compareclose[READLINELEN+1];$/;"	m	struct:PB	file:
+compareopen	purge_actable_ggm.c	/^	char compareopen[READLINELEN+1]; \/* this will be '\\0' if compareclose only *\/$/;"	m	struct:PB	file:
+compilestr	global_vcp.c	/^char progstr[MEMOSTRLEN], datestr[MEMOSTRLEN], timestr[MEMOSTRLEN], compilestr[MEMOSTRLEN], mydate[101];	\/* concaternated strings *\/$/;"	v
+compilestr	globals_appn.c	/^char progstr[MEMOSTRLEN], datestr[MEMOSTRLEN], timestr[MEMOSTRLEN], compilestr[MEMOSTRLEN];	\/* concaternated strings *\/$/;"	v
+countlines	globals_appn.c	/^long readlinenum = 0, cpm_calling_dpm_count = 0, appr_vc = 0, countlines =$/;"	v
+countrpts	global_vcp.c	/^long readlinenum = 0, VC, VN = 0, VNIR = 0, countrpts = 0;$/;"	v
+cpm_calling_dpm_count	globals_appn.c	/^long readlinenum = 0, cpm_calling_dpm_count = 0, appr_vc = 0, countlines =$/;"	v
+cpmdpm_vector	global_vcp.c	/^char dummy_vector[MULTILINESIZE], cpmdpm_vector[MULTILINESIZE],EVX2VECT[MULTILINESIZE];$/;"	v
+cpmoptimize	cpmopt_new_vcp.c	/^int cpmoptimize(char *pattern)$/;"	f
+cpmoptimize	cpmopt_vcp.c	/^int cpmoptimize(char *pattern)$/;"	f
+cyclebuff	global_ggm.c	/^char *cyclebuff;$/;"	v
+cycsets	global_ggm.c	/^CYCSETMD *cycsets;$/;"	v
+cyctbl	global_ggm.c	/^CYCTBL *cyctbl;$/;"	v
+datestr	global_vcp.c	/^char progstr[MEMOSTRLEN], datestr[MEMOSTRLEN], timestr[MEMOSTRLEN], compilestr[MEMOSTRLEN], mydate[101];	\/* concaternated strings *\/$/;"	v
+datestr	globals_appn.c	/^char progstr[MEMOSTRLEN], datestr[MEMOSTRLEN], timestr[MEMOSTRLEN], compilestr[MEMOSTRLEN];	\/* concaternated strings *\/$/;"	v
+deal_with_comment	comments_shutdown_vcp.c	/^int deal_with_comment(FILE * fpout1, char *mod_vector, char *comment, int *commentcount, int *commentflag, int *commentON, int vectorflag)$/;"	f
+deal_with_match	deal_with_functions_appn.c	/^int deal_with_match(FILE * fpin1, FILE * fpout1, char *ptr,$/;"	f
+deal_with_repeat_CPM	deal_with_functions_appn.c	/^int deal_with_repeat_CPM(FILE * fpin1, FILE * fpout1, char *ptr,$/;"	f
+deal_with_repeat_DPM	deal_with_functions_appn.c	/^int deal_with_repeat_DPM(FILE * fpin1, FILE * fpout1, char *ptr,$/;"	f
+deal_with_shutdown	comments_shutdown_vcp.c	/^int deal_with_shutdown(char *line, char *ptr, FILE * fpin1, char *pb_vector)$/;"	f
+debug	globals_appn.c	/^int debug = 0;$/;"	v
+def_MAX_LOOP_SIZE	includes_appn.h	27;"	d
+dset0	includes_ggm.h	/^	char dset0[CYCLEN + 1], dset1[CYCLEN + 1];$/;"	m	struct:CYCSETMD
+dset0cnt	includes_ggm.h	/^	int dset0cnt, dset1cnt;$/;"	m	struct:FORMAT_SEARCH
+dset1	includes_ggm.h	/^	char dset0[CYCLEN + 1], dset1[CYCLEN + 1];$/;"	m	struct:CYCSETMD
+dset1cnt	includes_ggm.h	/^	int dset0cnt, dset1cnt;$/;"	m	struct:FORMAT_SEARCH
+dummy	includes_appn.h	/^	int dummy;$/;"	m	struct:LOOP_LINES
+dummy_vector	global_vcp.c	/^char dummy_vector[MULTILINESIZE], cpmdpm_vector[MULTILINESIZE],EVX2VECT[MULTILINESIZE];$/;"	v
+dupnum	includes_ggm.h	/^	int dupnum;$/;"	m	struct:CELL_INFO
+edgenum0	includes_ggm.h	/^	int edgenum0[MAX_MATCH_FMT];	\/* Edge number 1-4 *\/$/;"	m	struct:FORMAT_SEARCH
+edgenum1	includes_ggm.h	/^	int edgenum1[MAX_MATCH_FMT];	\/* Edge number 1-4 *\/$/;"	m	struct:FORMAT_SEARCH
+edgeset_make_wfms	edgeset_make_wfms_ggm.c	/^int edgeset_make_wfms(char *cyclebuff,$/;"	f
+edgetp0	includes_ggm.h	/^	int edgetp0[MAX_MATCH_FMT];	\/* actual edgtype that match if EdgeSet* (could be four edges) *\/$/;"	m	struct:FORMAT_SEARCH
+edgetp1	includes_ggm.h	/^	int edgetp1[MAX_MATCH_FMT];	\/* actual edgtype that match if EdgeSet* (could be four edges) *\/$/;"	m	struct:FORMAT_SEARCH
+edgetypefull	global_ggm.c	/^char edgetypefull[sizeof(edgetypes)];$/;"	v
+edgetypes	global_ggm.c	/^char edgetypes[][FMTLEN] =$/;"	v
+el	includes_build.h	/^	int el, bl, lvl;$/;"	m	struct:CATCODE
+end	includes_appn.h	/^	int end;$/;"	m	struct:LOOP_LINES
+endpointtobegin	includes_appn.h	/^	int beginpointtoend, endpointtobegin;$/;"	m	struct:LOOP_LINES
+endptr	global_vcp.c	/^char env[READLINELEN + 1], *endptr;$/;"	v
+enumcount	globals_build.c	/^int enumcount = 0, maxenumlen = 0;$/;"	v
+enums	includes_build.h	/^	char enums[2048 + 1];$/;"	m	struct:CATCODE
+enumstr	global_ggm.c	/^char enumstr[50][100];$/;"	v
+enumtype	includes_ggm.h	/^	char enumtype[MAXENUMS + 1], cattype[MAXACTABLES + 1];$/;"	m	struct:STARTSTOP
+env	global_vcp.c	/^char env[READLINELEN + 1], *endptr;$/;"	v
+error	build_inherit_menu.c	/^void error(char *ptr, int line)$/;"	f
+expand_vector	expand_vector_appn.c	/^int expand_vector(char *newvector, char *vector, char *ptr, int callfrom, char *file)$/;"	f
+expr	includes_build.h	/^	char expr[EXPRLEN + PARAMLEN + 1];$/;"	m	struct:SPECS
+expr	includes_ggm.h	/^	char expr[READLINELEN + 1];$/;"	m	struct:STARTSTOP
+fhlen	globals_appn.c	/^	0, fhlen = 0;$/;"	v
+field	includes_ggm.h	/^	int field;					\/* order *\/$/;"	m	struct:vectormapsets
+fieldcount	globals_appn.c	/^int fieldcount[MXFIELD], fieldtype[MXFIELD], fieldstart[MXFIELD], fields =$/;"	v
+fields	globals_appn.c	/^int fieldcount[MXFIELD], fieldtype[MXFIELD], fieldstart[MXFIELD], fields =$/;"	v
+fieldset	unused_old_funcs_ggm.c	/^char hexproc[READLINELEN + 1], fieldset[READLINELEN + 1];$/;"	v
+fieldstart	globals_appn.c	/^int fieldcount[MXFIELD], fieldtype[MXFIELD], fieldstart[MXFIELD], fields =$/;"	v
+fieldtype	globals_appn.c	/^int fieldcount[MXFIELD], fieldtype[MXFIELD], fieldstart[MXFIELD], fields =$/;"	v
+fileininhst	unused_old_funcs_ggm.c	/^long fileoutinhst, fileoutend, fileininhst;$/;"	v
+fileoutend	unused_old_funcs_ggm.c	/^long fileoutinhst, fileoutend, fileininhst;$/;"	v
+fileoutinhst	unused_old_funcs_ggm.c	/^long fileoutinhst, fileoutend, fileininhst;$/;"	v
+filepos	includes_ggm.h	/^	long filepos;				\/* for fseek\/ftell *\/$/;"	m	struct:CELL_INFO
+find_close	desub.c	/^char *find_close(char *ptrST, char *ptrCR, char *comment, char *stophere)$/;"	f
+find_close	desub_k.c	/^char *find_close(char *ptrST, char *ptrCR, char *comment, char *stophere)$/;"	f
+find_origin	find_origin_ggm.c	/^int find_origin(char *WF, char org[MAX_EDGES + 1][WF_EXPR_LEN],$/;"	f
+formatnum	includes_ggm.h	/^	int formatnum;$/;"	m	struct:CELL_INFO
+formats	includes_ggm.h	/^	int formats[MAX_EDGES];$/;"	m	struct:CELL_INFO
+found_shut	global_vcp.c	/^int CPM = 0, found_shut = 0;$/;"	v
+fp_cycmod3	globals_appn.c	/^FILE *fperrors, *fpin1, *fpout1, *fpstatus, *fp_cycmod3;$/;"	v
+fperrors	desub.c	/^FILE *fperrors, *fpstatus;$/;"	v
+fperrors	desub_k.c	/^FILE *fperrors, *fpstatus;$/;"	v
+fperrors	global_ggm.c	/^FILE *fperrors, *fpstatus, *fppreopt;$/;"	v
+fperrors	global_vcp.c	/^FILE *fperrors, *tempfile, *fpstatus, *fppatref;$/;"	v
+fperrors	global_vcs.c	/^FILE *fperrors, *fpstatus, *fpsignalheaders, *fppatref;$/;"	v
+fperrors	globals_appn.c	/^FILE *fperrors, *fpin1, *fpout1, *fpstatus, *fp_cycmod3;$/;"	v
+fpin1	globals_appn.c	/^FILE *fperrors, *fpin1, *fpout1, *fpstatus, *fp_cycmod3;$/;"	v
+fpout1	globals_appn.c	/^FILE *fperrors, *fpin1, *fpout1, *fpstatus, *fp_cycmod3;$/;"	v
+fppatref	global_vcp.c	/^FILE *fperrors, *tempfile, *fpstatus, *fppatref;$/;"	v
+fppatref	global_vcs.c	/^FILE *fperrors, *fpstatus, *fpsignalheaders, *fppatref;$/;"	v
+fppreopt	global_ggm.c	/^FILE *fperrors, *fpstatus, *fppreopt;$/;"	v
+fpsignalheaders	global_vcs.c	/^FILE *fperrors, *fpstatus, *fpsignalheaders, *fppatref;$/;"	v
+fpstatus	desub.c	/^FILE *fperrors, *fpstatus;$/;"	v
+fpstatus	desub_k.c	/^FILE *fperrors, *fpstatus;$/;"	v
+fpstatus	global_ggm.c	/^FILE *fperrors, *fpstatus, *fppreopt;$/;"	v
+fpstatus	global_vcp.c	/^FILE *fperrors, *tempfile, *fpstatus, *fppatref;$/;"	v
+fpstatus	global_vcs.c	/^FILE *fperrors, *fpstatus, *fpsignalheaders, *fppatref;$/;"	v
+fpstatus	globals_appn.c	/^FILE *fperrors, *fpin1, *fpout1, *fpstatus, *fp_cycmod3;$/;"	v
+fromtbl	includes_build.h	/^	int fromtbl;$/;"	m	struct:CATCODE
+fullwftname	unused_old_funcs_ggm.c	/^char fullwftname[READLINELEN + 1];$/;"	v
+get_count	line_parsing_appn.c	/^int get_count(char *ptr)$/;"	f
+get_count	smallfunc_vcp.c	/^char *get_count(char *ptr, int offset, long *count, int call)$/;"	f
+get_count_orig	line_parsing_appn.c	/^char *get_count_orig(char *ptr, int offset, long *count, char *vector)$/;"	f
+get_pins	get_pins_ggm.c	/^int get_pins(FILE * fpin2, FILE * fpin3, char *infile3, char *muxpin)$/;"	f
+groupcount	global_ggm.c	/^int maxdevpin, maxpin, groupcount, maxlists = 0;$/;"	v
+groups	includes_ggm.h	/^	char groups[READLINELEN + 1];	\/* this is for groups inside groups, i.e. things that are not pins *\/$/;"	m	struct:PINLIST
+gunzip	global_vcp.c	/^int gzip = 0, gunzip = 0;$/;"	v
+gzip	global_vcp.c	/^int gzip = 0, gunzip = 0;$/;"	v
+hexfield	globals_appn.c	/^char hexfield[READLINELEN + 1], newvector[READLINELEN + 1];$/;"	v
+hexproc	globals_appn.c	/^char hexproc[READLINELEN + 1], muxpin[READLINELEN + 1];$/;"	v
+hexproc	unused_old_funcs_ggm.c	/^char hexproc[READLINELEN + 1], fieldset[READLINELEN + 1];$/;"	v
+hostname	global_vcp.c	/^char username[MEMOSTRLEN], hostname[MEMOSTRLEN], pwd[MEMOSTRLEN];$/;"	v
+index	include_vcs.h	/^	int index[MAXSCANPINS], shlen, scanpins;$/;"	m	struct:SCAN_INFO
+infile_base	globals_appn.c	/^char infile_base[READLINELEN + 1];$/;"	v
+infile_orig	global_vcp.c	/^char infile_orig[FILENAMELEN];$/;"	v
+infile_orig	globals_appn.c	/^char infile_orig[READLINELEN + 1];$/;"	v
+inheritbufsize	includes_ggm.h	216;"	d
+ininherit	unused_old_funcs_ggm.c	/^int ininherit;$/;"	v
+inmatch	includes_appn.h	/^	int inmatch, matchcnt;$/;"	m	struct:LOOP_LINES
+k	unused_old_funcs_ggm.c	/^int k, l;$/;"	v
+l	unused_old_funcs_ggm.c	/^int k, l;$/;"	v
+label	includes_appn.h	/^	char label[LABEL];$/;"	m	struct:LOOP_LINES
+laststart	includes_ggm.h	/^	int loc, laststart;$/;"	m	struct:ACWAVES
+lastwascont	globals_appn.c	/^int SCAN = 0, lastwascont = 0, SCANCNT = 0;$/;"	v
+level	includes_appn.h	/^	int level;$/;"	m	struct:LOOP_LINES
+line	includes_ggm.h	/^	int loc, line;$/;"	m	struct:STARTSTOP
+loc	includes_ggm.h	/^	int loc, laststart;$/;"	m	struct:ACWAVES
+loc	includes_ggm.h	/^	int loc, line;$/;"	m	struct:STARTSTOP
+local_origin	find_origin_ggm.c	/^int local_origin(char *WF, char org[MAX_EDGES + 1][WF_EXPR_LEN],$/;"	f
+lvl	includes_build.h	/^	int el, bl, lvl;$/;"	m	struct:CATCODE
+lvl	includes_ggm.h	/^	char lvl;					\/* '0' for current *\/$/;"	m	struct:STARTSTOP
+main	autogen8_vcs.c	/^int main(int argc, char *argv[])$/;"	f
+main	build_inherit_menu.c	/^int main(int argc, char *argv[])$/;"	f
+main	desub.c	/^int main(int argc, char *argv[])$/;"	f
+main	desub_k.c	/^int main(int argc, char *argv[])$/;"	f
+main	desub_old.c	/^int main(int argc, char *argv[])$/;"	f
+main	gct_gen_mod8_ggm.c	/^int main(int argc, char *argv[])$/;"	f
+main	main_vcp.c	/^int main(int argc, char *argv[], char *envp[])$/;"	f
+main	pre_proc18_appn.c	/^int main(int argc, char *argv[])$/;"	f
+make_hexmuxlist	make_hexmuxlist_ggm.c	/^int make_hexmuxlist(FILE * fp_mod_file, char *muxpin, int maxcyclen)$/;"	f
+make_scan_headers	make_scan_headers_ggm.c	/^int make_scan_headers(FILE * fp_mod_file, char *muxpin)$/;"	f
+matchcnt	includes_appn.h	/^	int inmatch, matchcnt;$/;"	m	struct:LOOP_LINES
+maxactablenames	global_ggm.c	/^int maxactablenames;$/;"	v
+maxactlen	globals_build.c	/^int catcount = 0, maxactlen = 0;$/;"	v
+maxcycset	global_ggm.c	/^int maxcycset;$/;"	v
+maxdevpin	global_ggm.c	/^int maxdevpin, maxpin, groupcount, maxlists = 0;$/;"	v
+maxenumlen	globals_build.c	/^int enumcount = 0, maxenumlen = 0;$/;"	v
+maxenums	global_ggm.c	/^int maxenums;$/;"	v
+maxgctDSET	include_vcp.h	/^	int maxgctDSET;$/;"	m	struct:SETvS
+maxlines	desub.c	49;"	d	file:
+maxlines	desub_k.c	49;"	d	file:
+maxlines	desub_old.c	37;"	d	file:
+maxlists	global_ggm.c	/^int maxdevpin, maxpin, groupcount, maxlists = 0;$/;"	v
+maxparamlen	desub.c	48;"	d	file:
+maxparamlen	desub_k.c	48;"	d	file:
+maxparamlen	desub_old.c	36;"	d	file:
+maxparams	desub.c	47;"	d	file:
+maxparams	desub_k.c	47;"	d	file:
+maxparams	desub_old.c	35;"	d	file:
+maxpb	global_vcp.c	/^int maxpb;$/;"	v
+maxpin	global_ggm.c	/^int maxdevpin, maxpin, groupcount, maxlists = 0;$/;"	v
+maxref	globals_build.c	/^int maxref=0;$/;"	v
+maxrow	includes_ggm.h	/^	int rows[MAXCYCROWS], maxrow, valid[MAXCYCROWS];$/;"	m	struct:CYCTBL
+maxspecs	globals_build.c	/^int maxspecs;$/;"	v
+maxstartstop	global_ggm.c	/^int maxstartstop;$/;"	v
+maxtbl	global_ggm.c	/^int maxtbl;$/;"	v
+maxvmsets	global_ggm.c	/^int maxvmsets, VMparallel, VMfields;$/;"	v
+microinstr	include_vcp.h	/^	char *microinstr, *microinstre;$/;"	m	struct:FILETABLE
+microinstre	include_vcp.h	/^	char *microinstr, *microinstre;$/;"	m	struct:FILETABLE
+mod_add_close_ESD	modify_waveforms_ggm.c	/^int mod_add_close_ESD(char field[][100][WF_EXPR_LEN],$/;"	f
+move_push_close	unused_old_funcs_ggm.c	/^int move_push_close(int modify, char *tbuf)$/;"	f
+multidefnum	includes_ggm.h	/^	int multidefnum;$/;"	m	struct:CELL_INFO
+muxpin	globals_appn.c	/^char hexproc[READLINELEN + 1], muxpin[READLINELEN + 1];$/;"	v
+mydate	global_vcp.c	/^char progstr[MEMOSTRLEN], datestr[MEMOSTRLEN], timestr[MEMOSTRLEN], compilestr[MEMOSTRLEN], mydate[101];	\/* concaternated strings *\/$/;"	v
+name	includes_build.h	/^	char name[ENUMLEN + 1];$/;"	m	struct:GGMENUMS
+name	includes_build.h	/^	char name[MAXACTABLENAMELEN + 1];$/;"	m	struct:GGMCAT
+name	includes_ggm.h	/^	char name[MAXACTABLES + 1][MAXACTABLENAMELEN + 1];$/;"	m	struct:ACTABLENAMES
+name	includes_ggm.h	/^	char name[READLINELEN + 1];	\/* name of the scan header *\/$/;"	m	struct:vectormapsets
+newstr	unused_old_funcs_ggm.c	/^char tstr[NUMPINS + 1], newstr[NUMPINS + 1];$/;"	v
+newvector	globals_appn.c	/^char hexfield[READLINELEN + 1], newvector[READLINELEN + 1];$/;"	v
+noaction	includes_appn.h	/^	int noaction;$/;"	m	struct:LOOP_LINES
+nocat	purge_actable_ggm.c	/^	char nocat[READLINELEN+1];$/;"	m	struct:ALIASLIST	file:
+old_break_up_edges	unused_old_funcs_ggm.c	/^int old_break_up_edges(int en[], int en1[], int *startfrom, char name[][1000], char *findme, int which, int *forward)$/;"	f
+oldal1	purge_actable_ggm.c	/^	int alias1,alias2,oldal1,oldal2;$/;"	m	struct:ALIASLIST	file:
+oldal2	purge_actable_ggm.c	/^	int alias1,alias2,oldal1,oldal2;$/;"	m	struct:ALIASLIST	file:
+orgcnt	global_ggm.c	/^int orgcnt;$/;"	v
+origins	global_ggm.c	/^ACWAVES *origins;$/;"	v
+out_begin_dpm	out_pats_appn.c	/^int out_begin_dpm(struct LOOP_LINES *SUPER, int at, int lvl, int *exitat,$/;"	f
+out_rpt_dpm	out_pats_appn.c	/^int out_rpt_dpm(struct LOOP_LINES *SUPER, int rpt, int at, int lvl,$/;"	f
+output_cpm_dpm	out_pats_appn.c	/^int output_cpm_dpm(int *SUPER_CNT, struct LOOP_LINES *SUPER, int force_cpm)$/;"	f
+output_dpm	out_pats_appn.c	/^int output_dpm(int *SUPER_CNT, struct LOOP_LINES *SUPER)$/;"	f
+output_scan	out_pats_appn.c	/^int output_scan(char *outfile1, char *CYCLETBL, int *SUPER_CNT, struct LOOP_LINES *SUPER) {$/;"	f
+output_scan_cpm	out_pats_appn.c	/^int output_scan_cpm(char *outfile1, char *CYCLETBL, int *SUPER_CNT, struct LOOP_LINES *SUPER) {$/;"	f
+outputvector	outputvector_vcs.c	/^void outputvector(FILE * fpout1, int *lastitem, char *out_vector,$/;"	f
+outputvector	outvector_vcp.c	/^int outputvector(FILE * fpout1, char *out_vector, char *wft, char *DMI,$/;"	f
+outputvector_evX2	outvector_evX2_vcp.c	/^int outputvector_evX2(FILE * fpout1, char *out_vector, char *wft, char *DMI,$/;"	f
+param	includes_build.h	/^	char param[PARAMLEN + 1];$/;"	m	struct:SPECS
+param_def	includes_ggm.h	/^	char param_def[MAX_CELLLEN];$/;"	m	struct:PARAM_INFO
+paramcnt	global_ggm.c	/^int paramcnt;$/;"	v
+paraminfo	global_ggm.c	/^PARAM_INFO *paraminfo;$/;"	v
+pare_comment	comments_shutdown_vcp.c	/^int pare_comment(char *newcomment, char *oldcomment)$/;"	f
+parse_actable	parse_actable_ggm.c	/^int parse_actable(char *fname, FILE * fpwaves)$/;"	f
+parse_cyctbl	parse_cyctbl_ggm.c	/^int parse_cyctbl(int actablelines, char *infile4, FILE * fpwaves,$/;"	f
+parse_mod_file	parse_mod_vcs.c	/^int parse_mod_file(char *infile2)$/;"	f
+pb	purge_actable_ggm.c	/^	char pb[2][NUMPINS + 1];$/;"	m	struct:CPB	file:
+pbset	global_vcp.c	/^struct PBSET *pbset;$/;"	v	typeref:struct:PBSET
+phd_sp	globals_appn.c	/^int phd_st[MXFIELD], phd_sp[MXFIELD], cmma[MXFIELD];$/;"	v
+phd_st	globals_appn.c	/^int phd_st[MXFIELD], phd_sp[MXFIELD], cmma[MXFIELD];$/;"	v
+pin	includes_ggm.h	/^	char pin[PINSIZE];$/;"	m	struct:CELL_INFO
+pin	includes_ggm.h	/^	char pin[READLINELEN + 1];$/;"	m	struct:CYCSETMD
+pinhead	global_vcp.c	/^char pinhead[PINSIZE][NUMPINS];$/;"	v
+pinheadcount	global_vcp.c	/^int pinheadcount = 0;$/;"	v
+pinheader	unused_old_funcs_ggm.c	/^char pinheader[PINSIZE][NUMPINS];$/;"	v
+pinlist	global_ggm.c	/^PINLIST *pinlist;$/;"	v
+pinlist	includes_ggm.h	/^	char pinlist[NUMPINS + 1];$/;"	m	struct:vectormapsets
+pinlistname	includes_ggm.h	/^	char pinlistname[READLINELEN + 1];	\/* name of the pingroup *\/$/;"	m	struct:PINLIST
+pinlists	includes_ggm.h	/^	char pinlists[NUMPINS + 1];	\/* when complete, this will be asterisks for any pins existing in the group *\/$/;"	m	struct:PINLIST
+priorstate	global_vcp.c	/^char priorstate[NUMPINS+1],priorvect[NUMPINS+1];$/;"	v
+priorstate	global_vcs.c	/^char priorstate[MAXPINS+1];$/;"	v
+priorvect	global_vcp.c	/^char priorstate[NUMPINS+1],priorvect[NUMPINS+1];$/;"	v
+problemtype	includes_ggm.h	/^	int problemtype;$/;"	m	struct:CELL_INFO
+process_cycletbl	unused_old_funcs_ggm.c	/^int process_cycletbl()$/;"	f
+process_edgesetdelay_waveform	process_all_edgesets_ggm.c	/^int process_edgesetdelay_waveform(int actablelines, char *GCTNAME, char *cyclebuff, long *tell, $/;"	f
+process_waveforms	process_waveforms_ggm.c	/^int process_waveforms(int actablelines, char *GCTNAME, char *cyclebuff, long *tell, int which, $/;"	f
+progstr	global_vcp.c	/^char progstr[MEMOSTRLEN], datestr[MEMOSTRLEN], timestr[MEMOSTRLEN], compilestr[MEMOSTRLEN], mydate[101];	\/* concaternated strings *\/$/;"	v
+progstr	globals_appn.c	/^char progstr[MEMOSTRLEN], datestr[MEMOSTRLEN], timestr[MEMOSTRLEN], compilestr[MEMOSTRLEN];	\/* concaternated strings *\/$/;"	v
+ptr	unused_old_funcs_ggm.c	/^char *ptr, *ptr1, *ptr2, *ptr3, *ptr4, *ptr5;$/;"	v
+ptr1	unused_old_funcs_ggm.c	/^char *ptr, *ptr1, *ptr2, *ptr3, *ptr4, *ptr5;$/;"	v
+ptr2	unused_old_funcs_ggm.c	/^char *ptr, *ptr1, *ptr2, *ptr3, *ptr4, *ptr5;$/;"	v
+ptr3	unused_old_funcs_ggm.c	/^char *ptr, *ptr1, *ptr2, *ptr3, *ptr4, *ptr5;$/;"	v
+ptr4	unused_old_funcs_ggm.c	/^char *ptr, *ptr1, *ptr2, *ptr3, *ptr4, *ptr5;$/;"	v
+ptr5	unused_old_funcs_ggm.c	/^char *ptr, *ptr1, *ptr2, *ptr3, *ptr4, *ptr5;$/;"	v
+purge_actable	purge_actable_ggm.c	/^int purge_actable(FILE * fpinherit, FILE *fp_mod_file, char *muxpin) {$/;"	f
+pwd	global_vcp.c	/^char username[MEMOSTRLEN], hostname[MEMOSTRLEN], pwd[MEMOSTRLEN];$/;"	v
+read_cycletbl	read_cycletbl_ggm.c	/^int read_cycletbl(char *fname) {$/;"	f
+read_gct_dset_info	smallfunc_vcp.c	/^int read_gct_dset_info (char *readstr, char *name, char *gctD0, char *gctD1, int *count) {$/;"	f
+read_ggm	read_ggm_build.c	/^int read_ggm(FILE * fpggm)$/;"	f
+read_pat_ref	read_patref_build.c	/^int read_pat_ref() {$/;"	f
+readlinenum	global_vcp.c	/^long readlinenum = 0, VC, VN = 0, VNIR = 0, countrpts = 0;$/;"	v
+readlinenum	globals_appn.c	/^long readlinenum = 0, cpm_calling_dpm_count = 0, appr_vc = 0, countlines =$/;"	v
+readstr	unused_old_funcs_ggm.c	/^char readstr[READLINELEN];$/;"	v
+reduce_expressions	edgeset_make_wfms_ggm.c	/^int reduce_expressions(int ne, int en[], char name[][FINDME_SIZE + 1], char field[][100][WF_EXPR_LEN]) {$/;"	f
+remove_comments	desub.c	/^int remove_comments(char *inout, char *comment, int KEEP, char *stophere)$/;"	f
+remove_comments	desub_k.c	/^int remove_comments(char *inout, char *comment, int KEEP, char *stophere)$/;"	f
+remove_dupe_cells	modify_waveforms_ggm.c	/^int remove_dupe_cells(char *cyclebuff, struct MODCODE *mc)$/;"	f
+remove_multispace	desub.c	/^int remove_multispace(char *ptrCR, char *pbuf)$/;"	f
+remove_multispace	desub_k.c	/^int remove_multispace(char *ptrCR, char *pbuf)$/;"	f
+repeat_count_buffer	globals_appn.c	/^int repeat_count_buffer[4];		\/* max 4 counter nesting *\/$/;"	v
+repeatcnt	includes_appn.h	/^	int repeatcnt, repeatforever;$/;"	m	struct:LOOP_LINES
+repeatforever	includes_appn.h	/^	int repeatcnt, repeatforever;$/;"	m	struct:LOOP_LINES
+resolve_list	resolve_list_ggm.c	/^int resolve_list(char *PINLIST, char *PINBINARY, char YES, char NO, int pinorder[NUMPINS]) {$/;"	f
+rows	includes_ggm.h	/^	int rows[MAXCYCROWS], maxrow, valid[MAXCYCROWS];$/;"	m	struct:CYCTBL
+scan	includes_ggm.h	/^	int scan;					\/* see below *\/$/;"	m	struct:vectormapsets
+scanhdr	include_vcs.h	/^	char scanhdr[MAXHDRLEN + 1];$/;"	m	struct:SCAN_INFO
+scannum	includes_appn.h	/^	int scannum;$/;"	m	struct:LOOP_LINES
+scanpin	includes_ggm.h	/^	int scanpin;				\/* pin number *\/$/;"	m	struct:vectormapsets
+scanpinname	include_vcs.h	/^	char scanpinname[MAXSCANPINS][SCANPINNUM + 1];$/;"	m	struct:SCAN_INFO
+scanpins	include_vcs.h	/^	int index[MAXSCANPINS], shlen, scanpins;$/;"	m	struct:SCAN_INFO
+scanset	includes_ggm.h	/^	int scanset;				\/* different for each header *\/$/;"	m	struct:vectormapsets
+separate_actable	separate_actable_ggm.c	/^int separate_actable(char *actablebuf, char *inheritbuf, char *actablelist, struct MODCODE *mc)$/;"	f
+shlen	include_vcs.h	/^	int index[MAXSCANPINS], shlen, scanpins;$/;"	m	struct:SCAN_INFO
+shutdownvect	includes_appn.h	/^	int shutdownvect;$/;"	m	struct:LOOP_LINES
+sighdr	include_vcp.h	/^	char *sighdr, *sighdre;$/;"	m	struct:FILETABLE
+sighdre	include_vcp.h	/^	char *sighdr, *sighdre;$/;"	m	struct:FILETABLE
+sizehead	unused_old_funcs_ggm.c	/^int sizehead;$/;"	v
+specs	globals_build.c	/^SPECS *specs;$/;"	v
+startpt2stop	includes_ggm.h	/^	int startpt2stop;$/;"	m	struct:STARTSTOP
+startstop	global_ggm.c	/^STARTSTOP startstop[STARTSTOPCNTPRE];$/;"	v
+strip_comments	line_parsing_appn.c	/^int strip_comments(char *vector, char *comments, int *incomment)$/;"	f
+swap_alias	unused_old_funcs_ggm.c	/^int swap_alias(char *buffer, int *wfmcodeD0, int *wfmcodeD1)$/;"	f
+tblname	includes_ggm.h	/^	char tblname[CYCLEN + 1];$/;"	m	struct:CYCSETMD
+tblname	includes_ggm.h	/^	char tblname[CYCLEN + 1];$/;"	m	struct:CYCTBL
+tempfile	global_vcp.c	/^FILE *fperrors, *tempfile, *fpstatus, *fppatref;$/;"	v
+tempgrpexpand2	unused_old_funcs_ggm.c	/^char tempgrpexpand2[READLINELEN * 20 + 1];$/;"	v
+tempgunzipname	global_vcp.c	/^char tempgunzipname[FILENAMELEN];$/;"	v
+tempgunzipname	globals_appn.c	/^char tempgunzipname[READLINELEN + 1];$/;"	v
+timestr	global_vcp.c	/^char progstr[MEMOSTRLEN], datestr[MEMOSTRLEN], timestr[MEMOSTRLEN], compilestr[MEMOSTRLEN], mydate[101];	\/* concaternated strings *\/$/;"	v
+timestr	globals_appn.c	/^char progstr[MEMOSTRLEN], datestr[MEMOSTRLEN], timestr[MEMOSTRLEN], compilestr[MEMOSTRLEN];	\/* concaternated strings *\/$/;"	v
+tperiod	global_ggm.c	/^char tperiod[50];$/;"	v
+tstr	unused_old_funcs_ggm.c	/^char tstr[NUMPINS + 1], newstr[NUMPINS + 1];$/;"	v
+type	includes_build.h	/^	int type;$/;"	m	struct:GGMENUMS
+type	includes_ggm.h	/^	char type;					\/* 'b' for start, 'e' for stop *\/$/;"	m	struct:STARTSTOP
+type	includes_ggm.h	/^	int type;					\/* hex or bin, see below *\/$/;"	m	struct:vectormapsets
+ucat	includes_ggm.h	/^	int ucat, udev, utst, utmp, urem;$/;"	m	struct:STARTSTOP
+udev	includes_ggm.h	/^	int ucat, udev, utst, utmp, urem;$/;"	m	struct:STARTSTOP
+urem	includes_ggm.h	/^	int ucat, udev, utst, utmp, urem;$/;"	m	struct:STARTSTOP
+used	include_vcp.h	/^	int used[MAXMODGCT];$/;"	m	struct:SETvS
+used	includes_ggm.h	/^	int actline, used;$/;"	m	struct:PARAM_INFO
+username	global_vcp.c	/^char username[MEMOSTRLEN], hostname[MEMOSTRLEN], pwd[MEMOSTRLEN];$/;"	v
+utmp	includes_ggm.h	/^	int ucat, udev, utst, utmp, urem;$/;"	m	struct:STARTSTOP
+utst	includes_ggm.h	/^	int ucat, udev, utst, utmp, urem;$/;"	m	struct:STARTSTOP
+valid	includes_ggm.h	/^	int rows[MAXCYCROWS], maxrow, valid[MAXCYCROWS];$/;"	m	struct:CYCTBL
+vc	includes_appn.h	/^	int vc;$/;"	m	struct:LOOP_LINES
+vect	include_vcp.h	/^	char *vect, *vecte;$/;"	m	struct:FILETABLE
+vecte	include_vcp.h	/^	char *vect, *vecte;$/;"	m	struct:FILETABLE
+vectisbefore	includes_appn.h	/^	int vectisbefore;$/;"	m	struct:LOOP_LINES
+vector	includes_appn.h	/^	char vector[LINE_BUFF];$/;"	m	struct:LOOP_LINES
+vector	includes_appn.h	/^	char vector[MAX_SCAN_LEN + 1];$/;"	m	struct:SCAN_VECTORS
+vector_convert	convert_vcp.c	/^int vector_convert(int *beginflag, char *vector, char *mod_vector,$/;"	f
+vectormapsets	includes_ggm.h	/^typedef struct vectormapsets {$/;"	s
+vmsets	global_ggm.c	/^VMS vmsets[MAXVMS];$/;"	v
+w	includes_ggm.h	/^	char w[ACTABLELEN + 1];$/;"	m	struct:ACWAVES
+wavetypefull	global_ggm.c	/^char wavetypefull[sizeof(wavetypes)];$/;"	v
+wavetypes	global_ggm.c	/^char wavetypes[][FMTLEN] =$/;"	v
+wfmln0	includes_ggm.h	/^	int wfmln0[MAX_MATCH_FMT];	\/* all DSET0 waveforms that match *\/$/;"	m	struct:FORMAT_SEARCH
+wfmln1	includes_ggm.h	/^	int wfmln1[MAX_MATCH_FMT];	\/* all DSET0 waveforms that match *\/$/;"	m	struct:FORMAT_SEARCH
+wftname	includes_ggm.h	/^	char wftname[MAX_CELLLEN];$/;"	m	struct:CELL_INFO
+wftpending	unused_old_funcs_ggm.c	/^int wftpending;$/;"	v
+wftref	include_vcp.h	/^	char *wftref, *wftrefe;$/;"	m	struct:FILETABLE
+wftref	includes_build.h	/^	char wftref[MAXACTABLENAMELEN];$/;"	m	struct:WFTREF
+wftrefe	include_vcp.h	/^	char *wftref, *wftrefe;$/;"	m	struct:FILETABLE
+wftype0	includes_ggm.h	/^	int wftype0[MAX_MATCH_FMT];	\/* actual wfmtype that match *\/$/;"	m	struct:FORMAT_SEARCH
+wftype1	includes_ggm.h	/^	int wftype1[MAX_MATCH_FMT];	\/* actual wfmtype that match *\/$/;"	m	struct:FORMAT_SEARCH
+worstcasecellcnt	global_ggm.c	/^int cellcnt, worstcasecellcnt = 0;$/;"	v
+write_params	write_params_build.c	/^int write_params()$/;"	f
+write_paramsINHC	parse_actable_ggm.c	/^int write_paramsINHC()$/;"	f
+write_partial	parse_actable_ggm.c	/^int write_partial(char *actablein, off_t filesize)$/;"	f

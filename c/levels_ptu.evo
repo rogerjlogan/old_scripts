@@ -1,0 +1,127 @@
+Levels TIPTUIOddHi1DCTable{
+	Column[0]{
+		LevelsColumnType = evDigitalType;
+		Group = Expr { String = "ODDINLEAKINS"; }
+		Vil = Expr { String = "vinleaklo"; }
+		Vih = Expr { String = "vinleaklo"; }
+	}
+	Column[1]{
+		LevelsColumnType = evDigitalType;
+		Group = Expr { String = "EVENINLEAKINS"; }
+		Vil = Expr { String = "vinleakhi"; }
+		Vih = Expr { String = "vinleakhi"; }
+	}
+	Column[2]{
+		LevelsColumnType = evDigitalType;
+		Group = Expr { String = "CLKMOD1"; }
+		Vil = Expr { String = "vinleakhi"; }
+		Vih = Expr { String = "vinleakhi"; }
+	}
+	Column[3]{
+		LevelsColumnType = evDigitalType;
+		Group = Expr { String = "CLKMOD2"; }
+		Vil = Expr { String = "vinleakhi"; }
+		Vih = Expr { String = "vinleakhi"; }
+	}
+	Column[4]{
+		LevelsColumnType = evDigitalType;
+		Group = Expr { String = "INUPS"; }
+		Vil = Expr { String = "vinleakhi"; }
+		Vih = Expr { String = "vinleakhi"; }
+	}
+	Column[5]{
+		LevelsColumnType = evDigitalType;
+		Group = Expr { String = "X2CLKIN"; }
+		Vil = Expr { String = "vinleakhi"; }
+		Vih = Expr { String = "vinleakhi"; }
+	}
+	Column[6]{
+		LevelsColumnType = evDCTestType;
+		Group = Expr { String = "INDOWNS"; }
+		evForceValue = Expr { String = "vinleaklo"; }
+		evLowLimit = Expr { String = "iTRSTleaklo"; }
+		evHighLimit = Expr { String = "40uA"; }
+		evMeasureRange = Expr { String = "40uA"; }
+	}
+	Column[7]{
+		LevelsColumnType = evDigitalType;
+		Group = Expr { String = "INDOWNS"; }
+		Vil = Expr { String = "vinleaklo"; }
+		Vih = Expr { String = "vinleaklo"; }
+	}
+	Column[8]{
+		LevelsColumnType = evDigitalType;
+		Group = Expr { String = "EMU0"; }
+		Vil = Expr { String = "vtrilkghi"; }
+		Vih = Expr { String = "vtrilkghi"; }
+		Vol = Expr { String = "vtrilkghi"; }
+		Voh = Expr { String = "vtrilkghi"; }
+		Vref = Expr { String = "vtrilkghi"; }
+		Iol = Expr { String = "min(0A,-1mA)"; }
+		Ioh = Expr { String = "max(0A,1mA)"; }
+	}
+	Column[9]{
+		LevelsColumnType = evDigitalType;
+		Group = Expr { String = "EMU1"; }
+		Vil = Expr { String = "vtrilkglo"; }
+		Vih = Expr { String = "vtrilkglo"; }
+		Vol = Expr { String = "vtrilkglo"; }
+		Voh = Expr { String = "vtrilkglo"; }
+		Vref = Expr { String = "vtrilkglo"; }
+		Iol = Expr { String = "min(0A,-1mA)"; }
+		Ioh = Expr { String = "max(0A,1mA)"; }
+	}
+	Column[10]{
+		LevelsColumnType = evDigitalType;
+		Group = Expr { String = "ODDTRISTATE"; }
+		Vil = Expr { String = "0V"; }
+		Vih = Expr { String = "0V"; }
+		Vol = Expr { String = "0V"; }
+		Voh = Expr { String = "0V"; }
+		Vref = Expr { String = "0V"; }
+		Iol = Expr { String = "0A"; }
+		Ioh = Expr { String = "0A"; }
+	}
+	Column[11]{
+		LevelsColumnType = evDigitalType;
+		Group = Expr { String = "EVENTRISTATE"; }
+		Vil = Expr { String = "0V"; }
+		Vih = Expr { String = "0V"; }
+		Vol = Expr { String = "0V"; }
+		Voh = Expr { String = "0V"; }
+		Vref = Expr { String = "0V"; }
+		Iol = Expr { String = "0A"; }
+		Ioh = Expr { String = "0A"; }
+	}
+	Column[12]{
+		LevelsColumnType = evDigitalType;
+		Group = Expr { String = "IOUPS"; }
+		Vil = Expr { String = "vtrilkglo"; }
+		Vih = Expr { String = "vtrilkglo"; }
+		Vol = Expr { String = "vtrilkglo"; }
+		Voh = Expr { String = "vtrilkglo"; }
+		Vref = Expr { String = "0V"; }
+		Iol = Expr { String = "0A"; }
+		Ioh = Expr { String = "0A"; }
+	}
+	Column[13]{
+		LevelsColumnType = evDigitalType;
+		Group = Expr { String = "X1"; }
+		Vol = Expr { String = "0V"; }
+		Voh = Expr { String = "0V"; }
+		Vref = Expr { String = "0V"; }
+		Iol = Expr { String = "0A"; }
+		Ioh = Expr { String = "0A"; }
+	}
+	Column[14]{
+		LevelsColumnType = evDigitalType;
+		Group = Expr { String = "NOTESTINS"; }
+		Vil = Expr { String = "0V"; }
+		Vih = Expr { String = "0V"; }
+		Vol = Expr { String = "0V"; }
+		Voh = Expr { String = "0V"; }
+		Vref = Expr { String = "0V"; }
+		Iol = Expr { String = "0A"; }
+		Ioh = Expr { String = "0A"; }
+	}
+}

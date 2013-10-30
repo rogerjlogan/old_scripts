@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ $# -lt 1 ]; then
+    echo "usage:replaceX *vpl"
+else
+    for file in "$@"; do
+        echo $file
+        perl -i.bak -pe 's/X([,\]])/0\1/g;'
+                    -pe 's/^\s*define.*//g;' $file
+    done
+fi   

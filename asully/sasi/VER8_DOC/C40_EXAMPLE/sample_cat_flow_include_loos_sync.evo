@@ -1,0 +1,816 @@
+enVision:"bl8:R15.3.1:S4.1";
+
+SubFlow loos_Sync {
+    Node[0] =     FlowNode_  {
+        XCoord = (153,203);
+        Port[0] {
+            To = 1;
+            UIFPort = 92;
+        }
+        Port[1] {
+            To = 6;
+            UIFPort = 177;
+        }
+        UIFInfo = 274;
+        SpecPairs {
+            ACSpecs = Expr { String = "ACSpecs.TInomlooseACTable"; }
+            DCSpecs = Expr { String = "DCSpecs.TIlevelsDCTable"; }
+            TIGlobalVars = Expr { String = "TIGlobalVars.TIVariables"; }
+            TIGlobals = Expr { String = "TIGlobals.TIGlobalTypes"; }
+        }
+        TestId = "30000021";
+        Exec = loos_tclockdelay_SyncTest;
+        EVO_Calibration = F320C40N16_CAL_FocusCAL;
+    }
+    Node[1] =     FlowNode_  {
+        XCoord = (272,206);
+        Port[0] {
+            To = 2;
+            UIFPort = 87;
+        }
+        Port[1] {
+            To = 6;
+            UIFPort = 178;
+        }
+        UIFInfo = 273;
+        SpecPairs {
+            ACSpecs = Expr { String = "ACSpecs.TInomlooseACTable"; }
+            DCSpecs = Expr { String = "DCSpecs.TIlevelsDCTable"; }
+            TIGlobalVars = Expr { String = "TIGlobalVars.TIVariables"; }
+            TIGlobals = Expr { String = "TIGlobals.TIGlobalTypes"; }
+        }
+        TestId = "31000022";
+        Exec = loos_true_tH1flo_SyncTest;
+        EVO_Calibration = F320C40N16_CAL_FocusCAL;
+    }
+    Node[2] =     FlowNode_  {
+        XCoord = (385,205);
+        Port[0] {
+            To = 3;
+            UIFPort = 92;
+        }
+        Port[1] {
+            To = 6;
+            UIFPort = 190;
+        }
+        UIFInfo = 271;
+        SpecPairs {
+            ACSpecs = Expr { String = "ACSpecs.TInomlooseACTable"; }
+            DCSpecs = Expr { String = "DCSpecs.TIlevelsDCTable"; }
+            TIGlobalVars = Expr { String = "TIGlobalVars.TIVariables"; }
+            TIGlobals = Expr { String = "TIGlobals.TIGlobalTypes"; }
+        }
+        TestId = "32000023";
+        Exec = orgtH1highlow_calc_Test;
+        EVO_Calibration = F320C40N16_CAL_FocusCAL;
+    }
+    Node[3] =     FlowNode_  {
+        XCoord = (498,210);
+        Port[0] {
+            To = 4;
+            UIFPort = 82;
+        }
+        Port[1] {
+            To = 6;
+            UIFPort = 184;
+        }
+        UIFInfo = 277;
+        SpecPairs {
+            ACSpecs = Expr { String = "ACSpecs.TInomlooseACTable"; }
+            DCSpecs = Expr { String = "DCSpecs.TIlevelsDCTable"; }
+            TIGlobalVars = Expr { String = "TIGlobalVars.TIVariables"; }
+            TIGlobals = Expr { String = "TIGlobals.TIGlobalTypes"; }
+        }
+        TestId = "33000024";
+        Exec = loos_true_tH3flo_SyncTest;
+        EVO_Calibration = F320C40N16_CAL_FocusCAL;
+    }
+    Node[4] =     FlowNode_  {
+        XCoord = (608,207);
+        Port[0] {
+            To = 5;
+            UIFPort = 84;
+        }
+        Port[1] {
+            To = 6;
+            UIFPort = 195;
+        }
+        UIFInfo = 274;
+        SpecPairs {
+            ACSpecs = Expr { String = "ACSpecs.TInomlooseACTable"; }
+            DCSpecs = Expr { String = "DCSpecs.TIlevelsDCTable"; }
+            TIGlobalVars = Expr { String = "TIGlobalVars.TIVariables"; }
+            TIGlobals = Expr { String = "TIGlobals.TIGlobalTypes"; }
+        }
+        TestId = "34000025";
+        Exec = loos_true_tH3rhi_SyncTest;
+        EVO_Calibration = F320C40N16_CAL_FocusCAL;
+    }
+    Node[5] =     FlowNode_  {
+        XCoord = (719,205);
+        Port[0] {
+            To = 7;
+            UIFPort = 88;
+        }
+        Port[1] {
+            To = 6;
+            UIFPort = 197;
+        }
+        UIFInfo = 274;
+        SpecPairs {
+            ACSpecs = Expr { String = "ACSpecs.TInomlooseACTable"; }
+            DCSpecs = Expr { String = "DCSpecs.TIlevelsDCTable"; }
+            TIGlobalVars = Expr { String = "TIGlobalVars.TIVariables"; }
+            TIGlobals = Expr { String = "TIGlobals.TIGlobalTypes"; }
+        }
+        TestId = "35000026";
+        Exec = orgtH3highlow_calc_Test;
+        EVO_Calibration = F320C40N16_CAL_FocusCAL;
+    }
+    Node[6] =     FlowNode_  {
+        XCoord = (563,499);
+        UIFInfo = 0;
+        TestId = "";
+        Exec = sync;
+    }
+    Node[7] =     FlowNode_  {
+        XCoord = (828,201);
+        Port[0] {
+            To = 8;
+            UIFPort = 90;
+        }
+        Port[1] {
+            To = 6;
+            UIFPort = 181;
+        }
+        UIFInfo = 265;
+        SpecPairs {
+            ACSpecs = Expr { String = "ACSpecs.TInomlooseACTable"; }
+            DCSpecs = Expr { String = "DCSpecs.TIlevelsDCTable"; }
+            TIGlobalVars = Expr { String = "TIGlobalVars.TIVariables"; }
+            TIGlobals = Expr { String = "TIGlobals.TIGlobalTypes"; }
+        }
+        TestId = "36000027";
+        Exec = H1H3_low2high_delay_chk_Test;
+        EVO_Calibration = F320C40N16_CAL_FocusCAL;
+    }
+    Node[8] =     FlowNode_  {
+        XCoord = (934,200);
+        Port[0] {
+            To = 9;
+            UIFPort = 90;
+        }
+        Port[1] {
+            To = 6;
+            UIFPort = 184;
+        }
+        UIFInfo = 270;
+        SpecPairs {
+            ACSpecs = Expr { String = "ACSpecs.TInomlooseACTable"; }
+            DCSpecs = Expr { String = "DCSpecs.TIlevelsDCTable"; }
+            TIGlobalVars = Expr { String = "TIGlobalVars.TIVariables"; }
+            TIGlobals = Expr { String = "TIGlobals.TIGlobalTypes"; }
+        }
+        TestId = "37000028";
+        Exec = loos_true_tCSTRBfhi_SyncTest;
+        EVO_Calibration = F320C40N16_CAL_FocusCAL;
+    }
+    Node[9] =     FlowNode_  {
+        XCoord = (1044,201);
+        Port[0] {
+            To = 10;
+            UIFPort = 91;
+        }
+        Port[1] {
+            To = 6;
+            UIFPort = 181;
+        }
+        UIFInfo = 270;
+        SpecPairs {
+            ACSpecs = Expr { String = "ACSpecs.TInomlooseACTable"; }
+            DCSpecs = Expr { String = "DCSpecs.TIlevelsDCTable"; }
+            TIGlobalVars = Expr { String = "TIGlobalVars.TIVariables"; }
+            TIGlobals = Expr { String = "TIGlobals.TIGlobalTypes"; }
+        }
+        TestId = "38000029";
+        Exec = loos_true_tCRDYflo_SyncTest;
+        EVO_Calibration = F320C40N16_CAL_FocusCAL;
+    }
+    Node[10] =     FlowNode_  {
+        XCoord = (1159,211);
+        UIFInfo = 269;
+        TestId = "";
+        PortSelect = "0";
+        PortNumber = 0;
+    }
+    Node[11] =     FlowNode_  {
+        XCoord = (23,203);
+        Port[0] {
+            To = 0;
+            UIFPort = 87;
+        }
+        Port[1] {
+            UIFPort = 180;
+        }
+        UIFInfo = 0;
+        SpecPairs {
+            ACSpecs = Expr { String = "ACSpecs.TInomlooseACTable"; }
+            DCSpecs = Expr { String = "DCSpecs.TIlevelsDCTable"; }
+            TIGlobalVars = Expr { String = "TIGlobalVars.TIVariables"; }
+            TIGlobals = Expr { String = "TIGlobals.TIGlobalTypes"; }
+        }
+        TestId = "40000030";
+        Exec = loos_ResetOrigins_Test;
+        EVO_Calibration = F320C40N16_CAL_FocusCAL;
+    }
+    StartState = 11;
+}
+Test loos_tclockdelay_SyncTest {
+    FinderFilter = "";
+    Result = Expr { String = "#"; Mode = Output; }
+    Mask[0] = SyncMask;
+    Mask[1] = DCSpecsMask;
+    Entry[0] = loos_Sync_PatSeq;
+    Entry[1] = TIlevelsDCTable;
+    Exit[0] = UpdateHardware_MF;
+    PortExpr[0] = Expr { String = ".Result = tm_rslt:PASS"; }
+    PortExpr[1] = Expr { String = "TRUE"; }
+    LoopDepth = Outside;
+    Title[0] = tclockdelay_raw_measure;
+    Title[1] = check;
+    Title[2] = calc;
+    TestMethod = PARtest;
+    Test_enable[0] = Expr { String = "Seq_en:DEFAULT_EXECUTION"; }
+    Test_enable[1] = Expr { String = "Seq_en:FLOW_ONLY"; }
+    Test_enable[2] = Expr { String = "Seq_en:FLOW_ONLY"; }
+    Test_pins[0] = Expr { String = "H1"; }
+    Test_result[0] = Expr { String = "#"; Mode = Output; }
+    Test_result[1] = Expr { String = "#"; Mode = Output; }
+    Test_result[2] = Expr { String = "#"; Mode = Output; }
+    Levels_setup[0] = SyncVOL80VOHpassLevels;
+    Micro_flow_sequence[1] = tclockdelay_chk_MF;
+    Micro_flow_sequence[2] = true_toffset_calc_MF;
+    Axis_setup[0] = loos_tclockdelay_sync_Axis;
+    Preset_pattern_index[0] = Expr { String = "Sync_PatSeq.Thread.Sync_Thread"; }
+    Override_pattern_fails[0] = Expr { String = "TRUE"; }
+    Override_pattern_fails[1] = Expr { String = "FALSE"; }
+    Override_pattern_fails[2] = Expr { String = "FALSE"; }
+    Search_Algorithm[0] = Expr { String = "Search_method:BINARY_SEARCH"; }
+    Search_Algorithm[1] = Expr { String = "Search_method:BINARY_SEARCH"; }
+    Search_Algorithm[2] = Expr { String = "Search_method:BINARY_SEARCH"; }
+    Test_per_pin[0] = Expr { String = "FALSE"; }
+    Test_per_pin[1] = Expr { String = "FALSE"; }
+    Test_per_pin[2] = Expr { String = "FALSE"; }
+    Analysis_switch = Expr { String = "arg_switch:SWITCH_ON"; }
+    Simulate_results[0] = Expr { String = "tm_rslt:FLOW_SIM_OFF"; }
+    Simulate_results[1] = Expr { String = "tm_rslt:FLOW_SIM_OFF"; }
+    Simulate_results[2] = Expr { String = "tm_rslt:FLOW_SIM_OFF"; }
+    Disable_pattern_datalog[0] = Expr { String = "TRUE"; }
+    Disable_pattern_datalog[1] = Expr { String = "FALSE"; }
+    Disable_pattern_datalog[2] = Expr { String = "FALSE"; }
+    Output_run_time_errors[0] = Expr { String = "FALSE"; }
+    Output_run_time_errors[1] = Expr { String = "FALSE"; }
+    Output_run_time_errors[2] = Expr { String = "FALSE"; }
+    Execute_sites_serially[0] = Expr { String = "FALSE"; }
+    Execute_sites_serially[1] = Expr { String = "FALSE"; }
+    Execute_sites_serially[2] = Expr { String = "FALSE"; }
+    Log_enable[0] = Expr { String = "Log:LOG_OFF"; }
+    Log_enable[1] = Expr { String = "Log:LOG_OFF"; }
+    Log_enable[2] = Expr { String = "Log:LOG_OFF"; }
+    Parameter_results[0] = Expr { String = "#->tclockdelay"; Mode = Output; }
+    Parameter_results[1] = Expr { String = "#"; Mode = Output; }
+    Parameter_results[2] = Expr { String = "#"; Mode = Output; }
+    Per_pin_measurements[0] = Expr { String = "#"; Mode = Output; }
+    Per_pin_measurements[1] = Expr { String = "#"; Mode = Output; }
+    Per_pin_measurements[2] = Expr { String = "#"; Mode = Output; }
+    Characterization_switch = Expr { String = "arg_switch:SWITCH_ON"; }
+    Characterization_enable[0] = Expr { String = "FALSE"; }
+    Characterization_enable[1] = Expr { String = "FALSE"; }
+    Characterization_enable[2] = Expr { String = "FALSE"; }
+    Characterize_by_pin[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin[2] = Expr { String = "FALSE"; }
+    Acquisition_method[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method[1] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method[2] = Expr { String = "Char_method:BINARY"; }
+    Characterization_enable_1[0] = Expr { String = "FALSE"; }
+    Characterization_enable_1[1] = Expr { String = "FALSE"; }
+    Characterization_enable_1[2] = Expr { String = "FALSE"; }
+    Characterize_by_pin_1[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin_1[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin_1[2] = Expr { String = "FALSE"; }
+    Acquisition_method_1[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_1[1] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_1[2] = Expr { String = "Char_method:BINARY"; }
+    Characterization_enable_2[0] = Expr { String = "FALSE"; }
+    Characterization_enable_2[1] = Expr { String = "FALSE"; }
+    Characterization_enable_2[2] = Expr { String = "FALSE"; }
+    Characterize_by_pin_2[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin_2[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin_2[2] = Expr { String = "FALSE"; }
+    Acquisition_method_2[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_2[1] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_2[2] = Expr { String = "Char_method:BINARY"; }
+    Characterization_enable_3[0] = Expr { String = "FALSE"; }
+    Characterization_enable_3[1] = Expr { String = "FALSE"; }
+    Characterization_enable_3[2] = Expr { String = "FALSE"; }
+    Characterize_by_pin_3[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin_3[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin_3[2] = Expr { String = "FALSE"; }
+    Acquisition_method_3[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_3[1] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_3[2] = Expr { String = "Char_method:BINARY"; }
+    Characterization_enable_4[0] = Expr { String = "FALSE"; }
+    Characterization_enable_4[1] = Expr { String = "FALSE"; }
+    Characterization_enable_4[2] = Expr { String = "FALSE"; }
+    Characterize_by_pin_4[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin_4[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin_4[2] = Expr { String = "FALSE"; }
+    Acquisition_method_4[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_4[1] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_4[2] = Expr { String = "Char_method:BINARY"; }
+}
+Test loos_true_tCRDYflo_SyncTest {
+    FinderFilter = "";
+    Result = Expr { String = "#"; Mode = Output; }
+    Mask[0] = SyncMask;
+    Mask[1] = DCSpecsMask;
+    Entry[0] = loos_Sync_PatSeq;
+    Entry[1] = TIlevelsDCTable;
+    Exit[0] = UpdateHardware_MF;
+    PortExpr[0] = Expr { String = ".Result = tm_rslt:PASS"; }
+    PortExpr[1] = Expr { String = "TRUE"; }
+    LoopDepth = Outside;
+    Title[0] = true_tCRDYflo_raw_measure;
+    TestMethod = PARtest;
+    Test_enable[0] = Expr { String = "Seq_en:DEFAULT_EXECUTION"; }
+    Test_enable[1] = Expr { String = "Seq_en:FLOW_ONLY"; }
+    Test_pins[0] = Expr { String = "CRDY3_"; }
+    Test_result[0] = Expr { String = "#"; Mode = Output; }
+    Test_result[1] = Expr { String = "#"; Mode = Output; }
+    Levels_setup[0] = SyncVOL80VOHpassLevels;
+    Micro_flow_sequence[1] = orgtCRDYflo_calc_MF;
+    Axis_setup[0] = loos_true_tCRDYflo_sync_Axis;
+    Preset_pattern_index[0] = Expr { String = "Sync_PatSeq.Thread.Sync_Thread"; }
+    Override_pattern_fails[0] = Expr { String = "TRUE"; }
+    Override_pattern_fails[1] = Expr { String = "FALSE"; }
+    Search_Algorithm[0] = Expr { String = "Search_method:BINARY_SEARCH"; }
+    Search_Algorithm[1] = Expr { String = "Search_method:BINARY_SEARCH"; }
+    Test_per_pin[0] = Expr { String = "FALSE"; }
+    Test_per_pin[1] = Expr { String = "FALSE"; }
+    Analysis_switch = Expr { String = "arg_switch:SWITCH_ON"; }
+    Simulate_results[0] = Expr { String = "tm_rslt:FLOW_SIM_OFF"; }
+    Simulate_results[1] = Expr { String = "tm_rslt:FLOW_SIM_OFF"; }
+    Disable_pattern_datalog[0] = Expr { String = "TRUE"; }
+    Disable_pattern_datalog[1] = Expr { String = "FALSE"; }
+    Output_run_time_errors[0] = Expr { String = "FALSE"; }
+    Output_run_time_errors[1] = Expr { String = "FALSE"; }
+    Execute_sites_serially[0] = Expr { String = "FALSE"; }
+    Execute_sites_serially[1] = Expr { String = "FALSE"; }
+    Log_enable[0] = Expr { String = "Log:LOG_OFF"; }
+    Log_enable[1] = Expr { String = "Log:LOG_OFF"; }
+    Analysis_pins[0] = Expr { String = "CRDY3_"; }
+    Parameter_results[0] = Expr { String = "#->true_tCRDYflo-tref"; Mode = Output; }
+    Parameter_results[1] = Expr { String = "#"; Mode = Output; }
+    Per_pin_measurements[0] = Expr { String = "#"; Mode = Output; }
+    Per_pin_measurements[1] = Expr { String = "#"; Mode = Output; }
+    Characterization_switch = Expr { String = "arg_switch:SWITCH_ON"; }
+    Characterization_enable[0] = Expr { String = "FALSE"; }
+    Characterization_enable[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin[1] = Expr { String = "FALSE"; }
+    Acquisition_method[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method[1] = Expr { String = "Char_method:BINARY"; }
+    Characterization_enable_1[0] = Expr { String = "FALSE"; }
+    Characterization_enable_1[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin_1[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin_1[1] = Expr { String = "FALSE"; }
+    Acquisition_method_1[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_1[1] = Expr { String = "Char_method:BINARY"; }
+    Characterization_enable_2[0] = Expr { String = "FALSE"; }
+    Characterization_enable_2[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin_2[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin_2[1] = Expr { String = "FALSE"; }
+    Acquisition_method_2[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_2[1] = Expr { String = "Char_method:BINARY"; }
+    Characterization_enable_3[0] = Expr { String = "FALSE"; }
+    Characterization_enable_3[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin_3[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin_3[1] = Expr { String = "FALSE"; }
+    Acquisition_method_3[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_3[1] = Expr { String = "Char_method:BINARY"; }
+    Characterization_enable_4[0] = Expr { String = "FALSE"; }
+    Characterization_enable_4[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin_4[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin_4[1] = Expr { String = "FALSE"; }
+    Acquisition_method_4[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_4[1] = Expr { String = "Char_method:BINARY"; }
+}
+Test loos_true_tCSTRBfhi_SyncTest {
+    FinderFilter = "";
+    Result = Expr { String = "#"; Mode = Output; }
+    Mask[0] = SyncMask;
+    Mask[1] = DCSpecsMask;
+    Entry[0] = loos_Sync_PatSeq;
+    Entry[1] = TIlevelsDCTable;
+    PortExpr[0] = Expr { String = ".Result = tm_rslt:PASS"; }
+    PortExpr[1] = Expr { String = "TRUE"; }
+    LoopDepth = Outside;
+    Title[0] = true_tCSTRBfhi_raw_measure;
+    TestMethod = PARtest;
+    Test_enable[0] = Expr { String = "Seq_en:DEFAULT_EXECUTION"; }
+    Test_enable[1] = Expr { String = "Seq_en:FLOW_ONLY"; }
+    Test_pins[0] = Expr { String = "CSTRB2_"; }
+    Test_result[0] = Expr { String = "#"; Mode = Output; }
+    Test_result[1] = Expr { String = "#"; Mode = Output; }
+    Levels_setup[0] = SyncVOL80VOHpassLevels;
+    Micro_flow_sequence[1] = orgtCSTRBfhi_calc_MF;
+    Axis_setup[0] = loos_true_tCSTRBfhi_sync_Axis;
+    Preset_pattern_index[0] = Expr { String = "Sync_PatSeq.Thread.Sync_Thread"; }
+    Override_pattern_fails[0] = Expr { String = "TRUE"; }
+    Override_pattern_fails[1] = Expr { String = "FALSE"; }
+    Search_Algorithm[0] = Expr { String = "Search_method:BINARY_SEARCH"; }
+    Search_Algorithm[1] = Expr { String = "Search_method:BINARY_SEARCH"; }
+    Test_per_pin[0] = Expr { String = "FALSE"; }
+    Test_per_pin[1] = Expr { String = "FALSE"; }
+    Analysis_switch = Expr { String = "arg_switch:SWITCH_ON"; }
+    Simulate_results[0] = Expr { String = "tm_rslt:FLOW_SIM_OFF"; }
+    Simulate_results[1] = Expr { String = "tm_rslt:FLOW_SIM_OFF"; }
+    Disable_pattern_datalog[0] = Expr { String = "TRUE"; }
+    Disable_pattern_datalog[1] = Expr { String = "FALSE"; }
+    Output_run_time_errors[0] = Expr { String = "FALSE"; }
+    Output_run_time_errors[1] = Expr { String = "FALSE"; }
+    Execute_sites_serially[0] = Expr { String = "FALSE"; }
+    Execute_sites_serially[1] = Expr { String = "FALSE"; }
+    Log_enable[0] = Expr { String = "Log:LOG_OFF"; }
+    Log_enable[1] = Expr { String = "Log:LOG_OFF"; }
+    Analysis_pins[0] = Expr { String = "CSTRB3_"; }
+    Parameter_results[0] = Expr { String = "#->true_tCSTRBfhi-tref"; Mode = Output; }
+    Parameter_results[1] = Expr { String = "#"; Mode = Output; }
+    Per_pin_measurements[0] = Expr { String = "#"; Mode = Output; }
+    Per_pin_measurements[1] = Expr { String = "#"; Mode = Output; }
+    Characterization_switch = Expr { String = "arg_switch:SWITCH_ON"; }
+    Characterization_enable[0] = Expr { String = "FALSE"; }
+    Characterization_enable[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin[1] = Expr { String = "FALSE"; }
+    Acquisition_method[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method[1] = Expr { String = "Char_method:BINARY"; }
+    Characterization_enable_1[0] = Expr { String = "FALSE"; }
+    Characterization_enable_1[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin_1[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin_1[1] = Expr { String = "FALSE"; }
+    Acquisition_method_1[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_1[1] = Expr { String = "Char_method:BINARY"; }
+    Characterization_enable_2[0] = Expr { String = "FALSE"; }
+    Characterization_enable_2[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin_2[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin_2[1] = Expr { String = "FALSE"; }
+    Acquisition_method_2[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_2[1] = Expr { String = "Char_method:BINARY"; }
+    Characterization_enable_3[0] = Expr { String = "FALSE"; }
+    Characterization_enable_3[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin_3[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin_3[1] = Expr { String = "FALSE"; }
+    Acquisition_method_3[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_3[1] = Expr { String = "Char_method:BINARY"; }
+    Characterization_enable_4[0] = Expr { String = "FALSE"; }
+    Characterization_enable_4[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin_4[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin_4[1] = Expr { String = "FALSE"; }
+    Acquisition_method_4[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_4[1] = Expr { String = "Char_method:BINARY"; }
+}
+Test loos_true_tH1flo_SyncTest {
+    FinderFilter = "";
+    Result = Expr { String = "#"; Mode = Output; }
+    Mask[0] = SyncMask;
+    Mask[1] = DCSpecsMask;
+    Entry[0] = loos_Sync_PatSeq;
+    Entry[1] = TIlevelsDCTable;
+    Exit[0] = UpdateHardware_MF;
+    PortExpr[0] = Expr { String = ".Result = tm_rslt:PASS"; }
+    PortExpr[1] = Expr { String = "TRUE"; }
+    PortAction[0] = Expr { String = "true_tH1flo_chk_MF.true_tH1flo_chk"; }
+    PortAction[1] = Expr { String = "true_tH1flo.Meas"; }
+    PortAction[2] = Expr { String = "tdCLKINHH1max"; }
+    LoopDepth = Outside;
+    Title[0] = true_tH1flo_raw_measure;
+    TestMethod = PARtest;
+    Test_enable[0] = Expr { String = "Seq_en:DEFAULT_EXECUTION"; }
+    Test_enable[1] = Expr { String = "Seq_en:FLOW_ONLY"; }
+    Test_pins[0] = Expr { String = "H1"; }
+    Test_result[0] = Expr { String = "#"; Mode = Output; }
+    Test_result[1] = Expr { String = "#"; Mode = Output; }
+    Levels_setup[0] = SyncVOL80VOHpassLevels;
+    Micro_flow_sequence[1] = true_tH1flo_chk_MF;
+    Axis_setup[0] = loos_true_tH1flo_sync_Axis;
+    Preset_pattern_index[0] = Expr { String = "Sync_PatSeq.Thread.Sync_Thread"; }
+    Override_pattern_fails[0] = Expr { String = "TRUE"; }
+    Override_pattern_fails[1] = Expr { String = "FALSE"; }
+    Search_Algorithm[0] = Expr { String = "Search_method:BINARY_SEARCH"; }
+    Search_Algorithm[1] = Expr { String = "Search_method:BINARY_SEARCH"; }
+    Test_per_pin[0] = Expr { String = "FALSE"; }
+    Test_per_pin[1] = Expr { String = "FALSE"; }
+    Analysis_switch = Expr { String = "arg_switch:SWITCH_ON"; }
+    Simulate_results[0] = Expr { String = "tm_rslt:FLOW_SIM_OFF"; }
+    Simulate_results[1] = Expr { String = "tm_rslt:FLOW_SIM_OFF"; }
+    Disable_pattern_datalog[0] = Expr { String = "TRUE"; }
+    Disable_pattern_datalog[1] = Expr { String = "FALSE"; }
+    Output_run_time_errors[0] = Expr { String = "FALSE"; }
+    Output_run_time_errors[1] = Expr { String = "FALSE"; }
+    Execute_sites_serially[0] = Expr { String = "FALSE"; }
+    Execute_sites_serially[1] = Expr { String = "FALSE"; }
+    Log_enable[0] = Expr { String = "Log:LOG_OFF"; }
+    Log_enable[1] = Expr { String = "Log:LOG_OFF"; }
+    Analysis_pins[0] = Expr { String = "H1"; }
+    Parameter_results[0] = Expr { String = "#->true_tH1flo-tref"; Mode = Output; }
+    Parameter_results[1] = Expr { String = "#"; Mode = Output; }
+    Per_pin_measurements[0] = Expr { String = "#"; Mode = Output; }
+    Per_pin_measurements[1] = Expr { String = "#"; Mode = Output; }
+    Characterization_switch = Expr { String = "arg_switch:SWITCH_ON"; }
+    Characterization_enable[0] = Expr { String = "FALSE"; }
+    Characterization_enable[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin[1] = Expr { String = "FALSE"; }
+    Acquisition_method[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method[1] = Expr { String = "Char_method:BINARY"; }
+    Characterization_enable_1[0] = Expr { String = "FALSE"; }
+    Characterization_enable_1[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin_1[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin_1[1] = Expr { String = "FALSE"; }
+    Acquisition_method_1[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_1[1] = Expr { String = "Char_method:BINARY"; }
+    Characterization_enable_2[0] = Expr { String = "FALSE"; }
+    Characterization_enable_2[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin_2[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin_2[1] = Expr { String = "FALSE"; }
+    Acquisition_method_2[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_2[1] = Expr { String = "Char_method:BINARY"; }
+    Characterization_enable_3[0] = Expr { String = "FALSE"; }
+    Characterization_enable_3[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin_3[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin_3[1] = Expr { String = "FALSE"; }
+    Acquisition_method_3[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_3[1] = Expr { String = "Char_method:BINARY"; }
+    Characterization_enable_4[0] = Expr { String = "FALSE"; }
+    Characterization_enable_4[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin_4[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin_4[1] = Expr { String = "FALSE"; }
+    Acquisition_method_4[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_4[1] = Expr { String = "Char_method:BINARY"; }
+}
+Test loos_true_tH3flo_SyncTest {
+    FinderFilter = "";
+    Result = Expr { String = "#"; Mode = Output; }
+    Mask[0] = SyncMask;
+    Mask[1] = DCSpecsMask;
+    Entry[0] = loos_Sync_PatSeq;
+    Entry[1] = TIlevelsDCTable;
+    PortExpr[0] = Expr { String = ".Result = tm_rslt:PASS"; }
+    PortExpr[1] = Expr { String = "TRUE"; }
+    PortAction[0] = Expr { String = "tH3flo"; }
+    LoopDepth = Outside;
+    Title[0] = true_tH3flo_raw_measure;
+    TestMethod = PARtest;
+    Test_enable[0] = Expr { String = "Seq_en:DEFAULT_EXECUTION"; }
+    Test_enable[1] = Expr { String = "Seq_en:FLOW_ONLY"; }
+    Test_pins[0] = Expr { String = "H3"; }
+    Test_result[0] = Expr { String = "#"; Mode = Output; }
+    Test_result[1] = Expr { String = "#"; Mode = Output; }
+    Levels_setup[0] = SyncVOL80VOHpassLevels;
+    Micro_flow_sequence[1] = orgtH3flo_calc_MF;
+    Axis_setup[0] = loos_true_tH3flo_sync_Axis;
+    Preset_pattern_index[0] = Expr { String = "Sync_PatSeq.Thread.Sync_Thread"; }
+    Override_pattern_fails[0] = Expr { String = "TRUE"; }
+    Override_pattern_fails[1] = Expr { String = "FALSE"; }
+    Search_Algorithm[0] = Expr { String = "Search_method:BINARY_SEARCH"; }
+    Search_Algorithm[1] = Expr { String = "Search_method:BINARY_SEARCH"; }
+    Test_per_pin[0] = Expr { String = "FALSE"; }
+    Test_per_pin[1] = Expr { String = "FALSE"; }
+    Analysis_switch = Expr { String = "arg_switch:SWITCH_ON"; }
+    Simulate_results[0] = Expr { String = "tm_rslt:FLOW_SIM_OFF"; }
+    Simulate_results[1] = Expr { String = "tm_rslt:FLOW_SIM_OFF"; }
+    Disable_pattern_datalog[0] = Expr { String = "TRUE"; }
+    Disable_pattern_datalog[1] = Expr { String = "FALSE"; }
+    Output_run_time_errors[0] = Expr { String = "FALSE"; }
+    Output_run_time_errors[1] = Expr { String = "FALSE"; }
+    Execute_sites_serially[0] = Expr { String = "FALSE"; }
+    Execute_sites_serially[1] = Expr { String = "FALSE"; }
+    Log_enable[0] = Expr { String = "Log:LOG_OFF"; }
+    Log_enable[1] = Expr { String = "Log:LOG_OFF"; }
+    Analysis_pins[0] = Expr { String = "H3"; }
+    Parameter_results[0] = Expr { String = "#->true_tH3flo-tcH-tref"; Mode = Output; }
+    Parameter_results[1] = Expr { String = "#"; Mode = Output; }
+    Per_pin_measurements[0] = Expr { String = "#"; Mode = Output; }
+    Per_pin_measurements[1] = Expr { String = "#"; Mode = Output; }
+    Characterization_switch = Expr { String = "arg_switch:SWITCH_ON"; }
+    Characterization_enable[0] = Expr { String = "FALSE"; }
+    Characterization_enable[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin[1] = Expr { String = "FALSE"; }
+    Acquisition_method[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method[1] = Expr { String = "Char_method:BINARY"; }
+    Characterization_enable_1[0] = Expr { String = "FALSE"; }
+    Characterization_enable_1[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin_1[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin_1[1] = Expr { String = "FALSE"; }
+    Acquisition_method_1[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_1[1] = Expr { String = "Char_method:BINARY"; }
+    Characterization_enable_2[0] = Expr { String = "FALSE"; }
+    Characterization_enable_2[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin_2[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin_2[1] = Expr { String = "FALSE"; }
+    Acquisition_method_2[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_2[1] = Expr { String = "Char_method:BINARY"; }
+    Characterization_enable_3[0] = Expr { String = "FALSE"; }
+    Characterization_enable_3[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin_3[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin_3[1] = Expr { String = "FALSE"; }
+    Acquisition_method_3[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_3[1] = Expr { String = "Char_method:BINARY"; }
+    Characterization_enable_4[0] = Expr { String = "FALSE"; }
+    Characterization_enable_4[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin_4[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin_4[1] = Expr { String = "FALSE"; }
+    Acquisition_method_4[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_4[1] = Expr { String = "Char_method:BINARY"; }
+}
+Test loos_true_tH3rhi_SyncTest {
+    FinderFilter = "";
+    Result = Expr { String = "#"; Mode = Output; }
+    Mask[0] = SyncMask;
+    Mask[1] = DCSpecsMask;
+    Entry[0] = loos_Sync_PatSeq;
+    Entry[1] = TIlevelsDCTable;
+    PortExpr[0] = Expr { String = ".Result = tm_rslt:PASS"; }
+    PortExpr[1] = Expr { String = "TRUE"; }
+    LoopDepth = Outside;
+    Title[0] = true_tH3rhi_raw_measure;
+    TestMethod = PARtest;
+    Test_enable[0] = Expr { String = "Seq_en:DEFAULT_EXECUTION"; }
+    Test_enable[1] = Expr { String = "Seq_en:FLOW_ONLY"; }
+    Test_pins[0] = Expr { String = "H3"; }
+    Test_result[0] = Expr { String = "#"; Mode = Output; }
+    Test_result[1] = Expr { String = "#"; Mode = Output; }
+    Levels_setup[0] = SyncVOL80VOHpassLevels;
+    Micro_flow_sequence[1] = orgtH3rhi_calc_MF;
+    Axis_setup[0] = loos_true_tH3rhi_sync_Axis;
+    Preset_pattern_index[0] = Expr { String = "Sync_PatSeq.Thread.Sync_Thread"; }
+    Override_pattern_fails[0] = Expr { String = "TRUE"; }
+    Override_pattern_fails[1] = Expr { String = "FALSE"; }
+    Search_Algorithm[0] = Expr { String = "Search_method:BINARY_SEARCH"; }
+    Search_Algorithm[1] = Expr { String = "Search_method:BINARY_SEARCH"; }
+    Test_per_pin[0] = Expr { String = "FALSE"; }
+    Test_per_pin[1] = Expr { String = "FALSE"; }
+    Analysis_switch = Expr { String = "arg_switch:SWITCH_ON"; }
+    Simulate_results[0] = Expr { String = "tm_rslt:FLOW_SIM_OFF"; }
+    Simulate_results[1] = Expr { String = "tm_rslt:FLOW_SIM_OFF"; }
+    Disable_pattern_datalog[0] = Expr { String = "TRUE"; }
+    Disable_pattern_datalog[1] = Expr { String = "FALSE"; }
+    Output_run_time_errors[0] = Expr { String = "FALSE"; }
+    Output_run_time_errors[1] = Expr { String = "FALSE"; }
+    Execute_sites_serially[0] = Expr { String = "FALSE"; }
+    Execute_sites_serially[1] = Expr { String = "FALSE"; }
+    Log_enable[0] = Expr { String = "Log:LOG_OFF"; }
+    Log_enable[1] = Expr { String = "Log:LOG_OFF"; }
+    Analysis_pins[0] = Expr { String = "H3"; }
+    Parameter_results[0] = Expr { String = "#->true_tH3rhi-tref"; Mode = Output; }
+    Parameter_results[1] = Expr { String = "#"; Mode = Output; }
+    Per_pin_measurements[0] = Expr { String = "#"; Mode = Output; }
+    Per_pin_measurements[1] = Expr { String = "#"; Mode = Output; }
+    Characterization_switch = Expr { String = "arg_switch:SWITCH_ON"; }
+    Characterization_enable[0] = Expr { String = "FALSE"; }
+    Characterization_enable[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin[1] = Expr { String = "FALSE"; }
+    Acquisition_method[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method[1] = Expr { String = "Char_method:BINARY"; }
+    Characterization_enable_1[0] = Expr { String = "FALSE"; }
+    Characterization_enable_1[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin_1[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin_1[1] = Expr { String = "FALSE"; }
+    Acquisition_method_1[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_1[1] = Expr { String = "Char_method:BINARY"; }
+    Characterization_enable_2[0] = Expr { String = "FALSE"; }
+    Characterization_enable_2[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin_2[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin_2[1] = Expr { String = "FALSE"; }
+    Acquisition_method_2[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_2[1] = Expr { String = "Char_method:BINARY"; }
+    Characterization_enable_3[0] = Expr { String = "FALSE"; }
+    Characterization_enable_3[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin_3[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin_3[1] = Expr { String = "FALSE"; }
+    Acquisition_method_3[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_3[1] = Expr { String = "Char_method:BINARY"; }
+    Characterization_enable_4[0] = Expr { String = "FALSE"; }
+    Characterization_enable_4[1] = Expr { String = "FALSE"; }
+    Characterize_by_pin_4[0] = Expr { String = "FALSE"; }
+    Characterize_by_pin_4[1] = Expr { String = "FALSE"; }
+    Acquisition_method_4[0] = Expr { String = "Char_method:BINARY"; }
+    Acquisition_method_4[1] = Expr { String = "Char_method:BINARY"; }
+}
+Test loos_ResetOrigins_Test {
+    Comment = "Used in UserOnLoad and at the beginning of the main flow.";
+    Result = Expr { String = "#"; Mode = Output; }
+    PortExpr[0] = Expr { String = "TRUE"; }
+    PortExpr[1] = Expr { String = "TRUE"; }
+    LoopDepth = Outside;
+    Title[0] = ResetOriginVariables;
+    TestMethod = MFtest;
+    Test_enable[0] = Expr { String = "Seq_en:FLOW_ONLY"; }
+    Test_pins[0] = Expr { String = "ALLPINS"; }
+    Test_result[0] = Expr { String = "#"; Mode = Output; }
+    Micro_flow_sequence[0] = ResetOrigins_MF;
+    Analysis_switch = Expr { String = "arg_switch:SWITCH_ON"; }
+    Simulate_results[0] = Expr { String = "tm_rslt:FLOW_SIM_OFF"; }
+    Execute_sites_serially[0] = Expr { String = "FALSE"; }
+    Characterization_switch = Expr { String = "arg_switch:SWITCH_ON"; }
+    Characterization_enable[0] = Expr { String = "FALSE"; }
+    Characterization_enable_1[0] = Expr { String = "FALSE"; }
+    Characterization_enable_2[0] = Expr { String = "FALSE"; }
+    Characterization_enable_3[0] = Expr { String = "FALSE"; }
+    Characterization_enable_4[0] = Expr { String = "FALSE"; }
+}
+PatternSequence loos_Sync_PatSeq {
+    Thread[0] = Sync_Thread;
+    Zipper = Zipper {
+        Row { TDLStdPatGrp, RESETCMPCycle = { RESETCMPCycle_SyncTInomlooseACTable, COMMON_WFT } }
+        Row { TDLStdPatGrp, LRDDGRDDCycle = { LRDDGRDDCycle_SyncTInomlooseACTable, COMMON_WFT } }
+        Row { TDLStdPatGrp, LWRBGRDDCycle = { LWRBGRDDCycle_SyncTInomlooseACTable, COMMON_WFT } }
+        Row { TDLStdPatGrp, LWRCGRDDCycle = { LWRCGRDDCycle_SyncTInomlooseACTable, COMMON_WFT } }
+        Row { TDLStdPatGrp, LWEAGRDDCycle = { LWEAGRDDCycle_SyncTInomlooseACTable, COMMON_WFT } }
+        Row { TDLStdPatGrp, LRDDGWRBCycle = { LRDDGWRBCycle_SyncTInomlooseACTable, COMMON_WFT } }
+        Row { TDLStdPatGrp, LRDDGWRCCycle = { LRDDGWRCCycle_SyncTInomlooseACTable, COMMON_WFT } }
+        Row { TDLStdPatGrp, LRDDGWEACycle = { LRDDGWEACycle_SyncTInomlooseACTable, COMMON_WFT } }
+        Row { TDLStdPatGrp, LWWBGRDDCycle = { LWWBGRDDCycle_SyncTInomlooseACTable, COMMON_WFT } }
+        Row { TDLStdPatGrp, SYNCFIFOCycle = { SYNCFIFOCycle_SyncTInomlooseACTable, COMMON_WFT } }
+        Row { TDLStdPatGrp, ALLOFFCycle = { ALLOFFCycle_SyncTInomlooseACTable, COMMON_WFT } }
+    }
+    evAutoBasePeriod = True;
+}
+Axis loos_tclockdelay_sync_Axis {
+    NumSteps = Expr { String = "400"; }
+    ExprVariance {
+        PinGroup = Expr { String = "H1"; }
+        Start = Expr { String = "tref"; }
+        Stop = Expr { String = "tref+tcCI-7ns"; }
+        SendTo "LRDDGRDDCycle_SyncTInomlooseACTable.H1strobeWF_DSET0XEQn_cat_FIOVWXYZa.C1";
+    }
+}
+Axis loos_true_tCRDYflo_sync_Axis {
+    NumSteps = Expr { String = "400"; }
+    ParameterVariance {
+        Param output_axis;
+        Start = Expr { String = "true_tCRDYflo_axisSTART"; }
+        Stop = Expr { String = "true_tCRDYflo_axisSTOP"; }
+        PinGroup = Expr { String = "CRDY3_"; }
+    }
+}
+/*Axis loos_true_tCRDYflo_sync_Axis {
+    NumSteps = Expr { String = "400"; }
+    ExprVariance {
+        Param output_axis;
+        Start = Expr { String = "true_tCRDYflo_axisSTART"; }
+        Stop = Expr { String = "true_tCRDYflo_axisSTOP"; }
+        SendTo "LRDDGRDDCycle_SyncTInomlooseACTable.H1strobeWF_DSET0XEQn_cat_FIOVWXYZa.C1";
+        SendTo "LRDDGRDDCycle_SyncTInomlooseACTable.H1strobeWF_DSET0XEQn_cat_FIOVWXYZa.C2";
+    }
+}*/
+Axis loos_true_tCSTRBfhi_sync_Axis {
+    NumSteps = Expr { String = "400"; }
+    ParameterVariance {
+        Param output_axis;
+        Start = Expr { String = "true_tCSTRBfhi_axisSTART"; }
+        Stop = Expr { String = "true_tCSTRBfhi_axisSTOP"; }
+        PinGroup = Expr { String = "CSTRB2_"; }
+    }
+}
+Axis loos_true_tH1flo_sync_Axis {
+    NumSteps = Expr { String = "400"; }
+    ExprVariance {
+        PinGroup = Expr { String = "H1"; }
+        Start = Expr { String = "tref+tcCI-7ns"; }
+        Stop = Expr { String = "tref+tcCI+ 7ns"; }
+        SendTo "LRDDGRDDCycle_SyncTInomlooseACTable.H1strobeWF_DSET0XEQn_cat_FIOVWXYZa.C1";
+    }
+}
+Axis loos_true_tH3flo_sync_Axis {
+    NumSteps = Expr { String = "400"; }
+    ExprVariance {
+        PinGroup = Expr { String = "H3"; }
+        Start = Expr { String = "tref+tcH-7ns"; }
+        Stop = Expr { String = "tref+tcH+7ns"; }
+        SendTo "LRDDGRDDCycle_SyncTInomlooseACTable.H3strobeWF_DSET0XEQn_cat_FIOVWXYZa.C1";
+    }
+}
+Axis loos_true_tH3rhi_sync_Axis {
+    NumSteps = Expr { String = "400"; }
+    ExprVariance {
+        PinGroup = Expr { String = "H3"; }
+        Start = Expr { String = "tref+tcCI-7ns"; }
+        Stop = Expr { String = "tref+tcCI+7ns"; }
+        SendTo "LRDDGRDDCycle_SyncTInomlooseACTable.H3strobeWF_DSET0XEQn_cat_FIOVWXYZa.C1";
+    }
+}

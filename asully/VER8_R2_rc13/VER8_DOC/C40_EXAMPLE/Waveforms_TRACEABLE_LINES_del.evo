@@ -1,0 +1,2022 @@
+
+procedure SccsIdentificationacdata;
+  var
+    SccsId	:   String;
+  begin
+    SccsId:= '@(#) acdata.p 1.6 9/20/93 11:05:26 c TI';
+  end;
+
+                                                                               
+            
+
+                   
+                  
+                                
+                                   
+                                                        
+                                    
+
+                                                                               
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                     
+                                                               
+                                                               
+                                                                         
+                                                                         
+                                                               
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                          
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                           
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                         
+                                                                           
+                                                                         
+                                                                         
+                                                                         
+
+
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+
+procedure ACDataSheetSet;                     
+
+  var
+    lfgb, hfgb : PicoSeconds;
+
+
+ procedure TITimingSet(actable : ACTable);
+START(ALLENUMS,ALLTABLES);
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+
+ begin
+
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+
+  case TITestType of
+    Probe:
+      begin	                                                      
+      end;
+    Final:
+      begin	                                                      
+      end;
+    QA:
+      begin	                                                      
+      end;
+    others:
+      begin	                                                      
+      end;
+  end;         
+
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+
+  with ACDataSheets[ actable ] do
+    begin
+
+                                                                               
+                                                                               
+                                                                               
+
+      t[tref]        := 10ns;                                                  
+                                                                               
+
+      t[tclockdelay] :=  5ns;                                                  
+      t[tsyncdelay]  :=  5ns;                                                  
+
+      t[tcCI]  := period div 2;                                                
+      t[twCIH] := (duty * t[tcCI] div 100);                                    
+      t[twCIL] := t[tcCI]-t[twCIH];                                            
+
+      t[tcH]  := period;                                                       
+      t[tper] := period;                                                       
+
+      t[toffset]   :=  0ns;                                                    
+      t[tH1flo]    :=  t[tcCI];                                                
+      t[tH3flo]    :=  0ns;                                                    
+      t[tH3rhi]    :=  t[tcCI];                                                
+      t[tCSTRBfhi] :=  5ns;                                                    
+      t[tCRDYflo]  := 10ns;                                                    
+
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+
+      t[true_toffset]   :=  0ns;
+      t[true_tH1flo]    :=  t[tcCI];
+      t[true_tH3flo]    :=  0ns;
+      t[true_tH3rhi]    :=  t[tcCI];
+      t[true_tCSTRBfhi] :=  5ns;
+      t[true_tCRDYflo]  := 10ns;
+      t[tsuDR2]		:= 10ns;                                                          
+				                                                          
+				                                                          
+				                                                          
+				                                                          
+				                                                          
+
+      case actable of
+                                                                            
+                                                                             
+                                                                            
+        TIparametricACTable,
+        TIcrystalACTable,
+        TInomlooseACTable,
+        TIstressminACTable,
+        TIstressmaxACTable,
+        TIlofrqminACTable,
+        TIlofrqmaxACTable,
+        TIlofrqlooseACTable,
+        TIlofrqedgeACTable,
+        TIhifrqmin50ACTable,
+        TIhifrqmax50ACTable,
+        TIhifrqloose50ACTable,
+        TIhifrqedge50ACTable,
+        TIsearchACTable,
+        TIsearchlevelsACTable,
+        TIcharACTable:
+          begin
+START(ALLENUMS,TIparametricACTable,TIcrystalACTable,TInomlooseACTable,TIstressminACTable,TIstressmaxACTable,TIlofrqminACTable,TIlofrqmaxACTable,TIlofrqlooseACTable,TIlofrqedgeACTable,TIhifrqmin50ACTable,TIhifrqmax50ACTable,TIhifrqloose50ACTable,TIhifrqedge50ACTable,TIsearchACTable,TIsearchlevelsACTable,TIcharACTable);
+            t[tfH]       := 3ns;                                               
+            t[tfHmax]    := 3ns;                                               
+            t[twHLmin]   := t[tcCI]-6ns;                                       
+            t[twHL]      := t[tcCI];                                           
+            t[twHLmax]   := t[tcCI]+6ns;                                       
+            t[twHHmin]   := t[tcCI]-6ns;                                       
+            t[twHH]      := t[tcCI];                                           
+            t[twHHmax]   := t[tcCI]+6ns;                                       
+            t[trH]       := 4ns;                                               
+            t[trHmax]    := 4ns;                                               
+
+            t[tdHLHHmin] :=-1ns;                                               
+            t[tdHLHH]    := 4ns;                                               
+            t[tdHLHHmax] := 4ns;                                               
+
+	    if (TITestType = Probe) then
+  	      begin
+START(ALLTEMPS,ALLDEVICES,Probe,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIparametricACTable,TIcrystalACTable,TInomlooseACTable,TIstressminACTable,TIstressmaxACTable,TIlofrqminACTable,TIlofrqmaxACTable,TIlofrqlooseACTable,TIlofrqedgeACTable,TIhifrqmin50ACTable,TIhifrqmax50ACTable,TIhifrqloose50ACTable,TIhifrqedge50ACTable,TIsearchACTable,TIsearchlevelsACTable,TIcharACTable);
+                t[tdCLKINHH1min] :=  2ns;                                          
+                t[tdCLKINHH3min] :=  2ns;                                          
+STOP(ALLTEMPS,ALLDEVICES,Probe,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIparametricACTable,TIcrystalACTable,TInomlooseACTable,TIstressminACTable,TIstressmaxACTable,TIlofrqminACTable,TIlofrqmaxACTable,TIlofrqlooseACTable,TIlofrqedgeACTable,TIhifrqmin50ACTable,TIhifrqmax50ACTable,TIhifrqloose50ACTable,TIhifrqedge50ACTable,TIsearchACTable,TIsearchlevelsACTable,TIcharACTable);
+	      end
+	    else
+	      begin
+START(ALLTEMPS,ALLDEVICES,ALLTESTS-Probe,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIparametricACTable,TIcrystalACTable,TInomlooseACTable,TIstressminACTable,TIstressmaxACTable,TIlofrqminACTable,TIlofrqmaxACTable,TIlofrqlooseACTable,TIlofrqedgeACTable,TIhifrqmin50ACTable,TIhifrqmax50ACTable,TIhifrqloose50ACTable,TIhifrqedge50ACTable,TIsearchACTable,TIsearchlevelsACTable,TIcharACTable);
+                t[tdCLKINHH1min] :=  2ns;                                          
+                t[tdCLKINHH3min] :=  2ns;                                          
+STOP(ALLTEMPS,ALLDEVICES,ALLTESTS-Probe,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIparametricACTable,TIcrystalACTable,TInomlooseACTable,TIstressminACTable,TIstressmaxACTable,TIlofrqminACTable,TIlofrqmaxACTable,TIlofrqlooseACTable,TIlofrqedgeACTable,TIhifrqmin50ACTable,TIhifrqmax50ACTable,TIhifrqloose50ACTable,TIhifrqedge50ACTable,TIsearchACTable,TIsearchlevelsACTable,TIcharACTable);
+	      end;
+
+            if (actable = TIstressminACTable) then                                               
+              begin
+START(ALLTEMPS,ALLDEVICES,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIstressminACTable);
+                t[tdCLKINHH1max] := 14ns;                                                 
+                t[tdCLKINHH3max] := 14ns;                                                 
+STOP(ALLTEMPS,ALLDEVICES,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIstressminACTable);
+              end
+            else
+              begin
+START(ALLTEMPS,ALLDEVICES,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIparametricACTable,TIcrystalACTable,TInomlooseACTable,TIstressmaxACTable,TIlofrqminACTable,TIlofrqmaxACTable,TIlofrqlooseACTable,TIlofrqedgeACTable,TIhifrqmin50ACTable,TIhifrqmax50ACTable,TIhifrqloose50ACTable,TIhifrqedge50ACTable,TIsearchACTable,TIsearchlevelsACTable,TIcharACTable);
+                t[tdCLKINHH1max] := 12ns;                                          
+                t[tdCLKINHH3max] := 12ns;                                          
+STOP(ALLTEMPS,ALLDEVICES,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIparametricACTable,TIcrystalACTable,TInomlooseACTable,TIstressmaxACTable,TIlofrqminACTable,TIlofrqmaxACTable,TIlofrqlooseACTable,TIlofrqedgeACTable,TIhifrqmin50ACTable,TIhifrqmax50ACTable,TIhifrqloose50ACTable,TIhifrqedge50ACTable,TIsearchACTable,TIsearchlevelsACTable,TIcharACTable);
+              end;
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tdH1LS]    := 10ns;                                              
+            t[tdH1HRW]   :=  9ns;                                              
+            t[tdH1LA]    := 10ns;                                              
+            t[tdH1LAV]   := 22ns;                                              
+                                                                               
+            t[tsuDR]     := 15ns;                                              
+            t[thDR]      :=  0ns;                                              
+            t[tsuRDY]    := 25ns;                                              
+            t[thRDY]     :=  0ns;                                              
+            t[tdH1LSTAT] := 10ns;                                              
+
+            t[tvDW]      := 16ns;                                              
+            t[thDW]      :=  0ns;                                              
+
+            t[tdH1HA]    := 13ns;                                              
+                                                                               
+
+            t[tdH1LLOCK] := 11ns;                                              
+                                                                               
+
+            t[tENB]      :=  0ns;                                              
+            t[tdENBZ]    := 15ns;                                              
+            t[tdENBDV]   := 22ns;                                              
+            t[tdENBAV]   := 21ns;                                              
+            t[tdENBCV]   := 21ns;                                              
+
+                                                                               
+                                                                               
+                                                                               
+                    
+            t[tvH1LIF] := 18ns;                                                
+                                                                               
+
+
+            t[thIF]    :=  0ns;                                                
+                                                                               
+
+            t[tdH1LIF] := 16ns;                                                
+                                                                               
+
+            t[thH1LIFOI] := 0ns;                                               
+                                                                               
+                                                                               
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tsuRESET]     := 11ns;                                           
+            t[tsuRESETH]    := 13ns;                                           
+
+            t[tdisH1HD]     := 13ns;                                           
+            t[tdisH3HA]     :=  9ns;                                           
+            t[tdH3HCTRLH]   :=  9ns;                                           
+
+            t[tdisRESETLAS] := 21ns;                                           
+                                                                               
+
+            t[tRESETLOC]    :=  0ns;                                           
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tsuINT] := 11ns;                                                 
+
+            t[tsuINTIDLE] := 18ns;                                             
+                                                                                      
+
+            t[twINT]  := t[tcH];                                               
+                                                                               
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tdH1LIACK] := 9ns;                                               
+
+                                                                               
+                                                                               
+                                                                               
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tsuCREQ]  := 10ns;                                               
+            t[tsuCACK]  := 10ns;                                               
+
+            t[tCRDYLO]  := t[tref]+t[tcCI];                                    
+            t[tCRDYHI]  := t[tref]+t[tcH];                                     
+
+            t[tCSTRBLO] := t[tref]+t[tCSTRBfhi];                               
+            t[tCSTRBHI] := t[tref]+t[tCSTRBfhi]+t[tcCI];                       
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tdRHSLw]   := 12ns;                                              
+
+            t[tdRLSHw]   := 12ns;                                              
+
+            t[tsuCDw]    :=  2ns;                                              
+
+            t[thCDw]     :=  1ns;                                              
+
+            t[tdSLRLr]   := 10ns;                                              
+
+            t[tdSHRHr]   := 10ns;                                              
+
+            t[tsuCDr]    :=  0ns;                                              
+
+            t[thCDr]     :=  2ns;                                              
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tdH1HRQLt] := 28ns;                                              
+                                                                               
+
+            t[tdALRQHt]  := 22ns;                                              
+                                                                               
+
+            t[tdRQHRQLt] :=  8ns;                                              
+                                                                               
+
+            t[tdRQHRQOt] := 22ns;                                              
+                                                                               
+
+            t[tdRQLALt]  := 22ns;                                              
+                                                                               
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tsuTCLK] := 10ns;                                                
+            t[thTCLK]  :=  0ns;                                                
+            t[tdTCLK]  := 13ns;                                                
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tROMEN] := 0ns;                                                  
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tNMI] := 0ns;                                                    
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tsuTDITMS] := 10ns;                                              
+            t[thTDITMS]  :=  5ns;                                              
+            t[tdTDO]     := 15ns;                                              
+            t[tJTAG]     :=  7ns;                                              
+
+            t[tdEMU]     := 20ns;                                              
+            t[tEMU]      :=  0ns;                                              
+STOP(ALLENUMS,TIparametricACTable,TIcrystalACTable,TInomlooseACTable,TIstressminACTable,TIstressmaxACTable,TIlofrqminACTable,TIlofrqmaxACTable,TIlofrqlooseACTable,TIlofrqedgeACTable,TIhifrqmin50ACTable,TIhifrqmax50ACTable,TIhifrqloose50ACTable,TIhifrqedge50ACTable,TIsearchACTable,TIsearchlevelsACTable,TIcharACTable);
+
+          end;
+
+                                                                           
+                                                                           
+                                                                           
+                                                                           
+ 	TIhifrqmin60ACTable,
+	TIhifrqmax60ACTable,
+	TIhifrqloose60ACTable,
+        TIhifrqedge60ACTable,
+ 	TIlofrqmin60ACTable,
+	TIlofrqmax60ACTable,
+	TIlofrqloose60ACTable,
+        TIlofrqedge60ACTable:
+
+	  begin
+START(ALLENUMS,TIhifrqmin60ACTable,TIhifrqmax60ACTable,TIhifrqloose60ACTable,TIhifrqedge60ACTable,TIlofrqmin60ACTable,TIlofrqmax60ACTable,TIlofrqloose60ACTable,TIlofrqedge60ACTable);
+            t[tfH]       := 3ns;                                               
+            t[tfHmax]    := 3ns;                                               
+            t[twHLmin]   := t[tcCI]-6ns;                                       
+            t[twHL]      := t[tcCI];                                           
+            t[twHLmax]   := t[tcCI]+6ns;                                       
+            t[twHHmin]   := t[tcCI]-6ns;                                       
+            t[twHH]      := t[tcCI];                                           
+            t[twHHmax]   := t[tcCI]+6ns;                                       
+            t[trH]       := 4ns;                                               
+            t[trHmax]    := 4ns;                                               
+
+            t[tdHLHHmin] :=-1ns;                                               
+            t[tdHLHH]    := 4ns;                                               
+            t[tdHLHHmax] := 4ns;                                               
+
+            t[tdCLKINHH1min] :=  2ns;                                          
+            t[tdCLKINHH1max] := 10ns;                                          
+            t[tdCLKINHH3min] :=  2ns;                                          
+            t[tdCLKINHH3max] := 10ns;                                          
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tdH1LS]    := 10ns;                                              
+            t[tdH1HRW]   :=  9ns;                                              
+            t[tdH1LA]    := 10ns;                                              
+            t[tdH1LAV]   := 22ns;                                              
+                                                                               
+            t[tsuDR]     := 15ns;                                              
+            t[thDR]      :=  0ns;                                              
+            t[tsuRDY]    := 25ns;                                              
+            t[thRDY]     :=  0ns;                                              
+            t[tdH1LSTAT] := 10ns;                                              
+
+            t[tvDW]      := 16ns;                                              
+            t[thDW]      :=  0ns;                                              
+
+            t[tdH1HA]    := 13ns;                                              
+                                                                               
+
+            t[tdH1LLOCK] := 11ns;                                              
+                                                                               
+
+            t[tENB]      :=  0ns;                                              
+            t[tdENBZ]    := 15ns;                                              
+            t[tdENBDV]   := 22ns;                                              
+            t[tdENBAV]   := 21ns;                                              
+            t[tdENBCV]   := 21ns;                                              
+
+                                                                               
+                                                                               
+                                                                               
+            t[tvH1LIF] := 18ns;                                                
+                                                                               
+
+            t[tsuIF]   := 11ns;                                                
+            t[thIF]    :=  0ns;                                                
+                                                                               
+
+            t[tdH1LIF] := 16ns;                                                
+                                                                               
+
+            t[thH1LIFOI] := 0ns;                                               
+                                                                               
+                                                                               
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tsuRESET]     := 11ns;                                           
+            t[tsuRESETH]    := 13ns;                                           
+
+            t[tdisH1HD]     := 13ns;                                           
+            t[tdisH3HA]     :=  9ns;                                           
+            t[tdH3HCTRLH]   :=  9ns;                                           
+
+            t[tdisRESETLAS] := 21ns;                                           
+                                                                               
+
+            t[tRESETLOC]    :=  0ns;                                           
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tsuINT] := 11ns;                                                 
+
+            t[tsuINTIDLE] := 15ns;                                             
+                                                                                      
+
+            t[twINT]  := t[tcH];                                               
+                                                                               
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tdH1LIACK] := 9ns;                                               
+
+                                                                               
+                                                                               
+                                                                               
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tsuCREQ]  := 10ns;                                               
+            t[tsuCACK]  := 10ns;                                               
+
+            t[tCRDYLO]  := t[tref]+t[tcCI];                                    
+            t[tCRDYHI]  := t[tref]+t[tcH];                                     
+
+            t[tCSTRBLO] := t[tref]+t[tCSTRBfhi];                               
+            t[tCSTRBHI] := t[tref]+t[tCSTRBfhi]+t[tcCI];                       
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tdRHSLw]   := 12ns;                                              
+
+            t[tdRLSHw]   := 12ns;                                              
+
+            t[tsuCDw]    :=  2ns;                                              
+
+            t[thCDw]     :=  1ns;                                              
+
+            t[tdSLRLr]   := 10ns;                                              
+
+            t[tdSHRHr]   := 10ns;                                              
+
+            t[tsuCDr]    :=  0ns;                                              
+
+            t[thCDr]     :=  2ns;                                              
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tdH1HRQLt] := 28ns;                                              
+                                                                               
+
+            t[tdALRQHt]  := 25ns;                                              
+                                                                               
+
+            t[tdRQHRQLt] :=  8ns;                                              
+                                                                               
+
+            t[tdRQHRQOt] := 22ns;                                              
+                                                                               
+
+            t[tdRQLALt]  := 25ns;                                              
+                                                                               
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tsuTCLK] := 10ns;                                                
+            t[thTCLK]  :=  0ns;                                                
+            t[tdTCLK]  := 13ns;                                                
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tROMEN] := 0ns;                                                  
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tNMI] := 0ns;                                                    
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tsuTDITMS] := 10ns;                                              
+            t[thTDITMS]  :=  5ns;                                              
+            t[tdTDO]     := 15ns;                                              
+            t[tJTAG]     :=  7ns;                                              
+
+            t[tdEMU]     := 20ns;                                              
+            t[tEMU]      :=  0ns;                                              
+STOP(ALLENUMS,TIhifrqmin60ACTable,TIhifrqmax60ACTable,TIhifrqloose60ACTable,TIhifrqedge60ACTable,TIlofrqmin60ACTable,TIlofrqmax60ACTable,TIlofrqloose60ACTable,TIlofrqedge60ACTable);
+
+	  end;
+
+                                                                            
+                                                                             
+                                                                            
+        TIhifrqmin40ACTable,
+        TIhifrqmax40ACTable,
+        TIhifrqloose40ACTable,
+        TIhifrqedge40ACTable,
+        TIsearch40ACTable,
+        TIsearchlevels40ACTable,
+        TIchar40ACTable:
+          begin
+START(ALLENUMS,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+            t[tfH]       := 3ns;                                               
+            t[tfHmax]    := 3ns;                                               
+            t[twHLmin]   := t[tcCI]-6ns;                                       
+            t[twHL]      := t[tcCI];                                           
+            t[twHLmax]   := t[tcCI]+6ns;                                       
+            t[twHHmin]   := t[tcCI]-6ns;                                       
+            t[twHH]      := t[tcCI];                                           
+            t[twHHmax]   := t[tcCI]+6ns;                                       
+            t[trH]       := 4ns;                                               
+            t[trHmax]    := 4ns;                                               
+
+            t[tdHLHHmin] :=-1ns;                                               
+            t[tdHLHH]    := 4ns;                                               
+            t[tdHLHHmax] := 4ns;                                               
+
+            t[tdCLKINHH1min] :=  2ns;                                          
+            t[tdCLKINHH1max] := 10ns;                                          
+            t[tdCLKINHH3min] :=  2ns;                                          
+            t[tdCLKINHH3max] := 10ns;                                          
+
+                                                                               
+                                                                               
+                                                                               
+if (TIDeviceType = TMS320C40TAL_pg3x_50MHz) then;
+
+START(ALLTEMPS,ALLTESTS,TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+
+            t[tdH1LS]    :=  9ns;                                               
+
+STOP(ALLTEMPS,ALLTESTS,TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+
+else
+
+START(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+
+            t[tdH1LS]    := 10ns;                                               
+
+STOP(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+
+            t[tdH1HRW]   :=  9ns;                                              
+
+            t[tdH1LA]    :=  9ns;                                              
+
+            t[tdH1LAV]   := 22ns;                                              
+                                                                               
+
+            t[tsuDR]     := 10ns;                                              
+
+            t[thDR]      :=  0ns;                                              
+ 
+            t[tsuRDY]    := 20ns;                                              
+ 
+            t[thRDY]     :=  0ns;                                              
+
+if (TIDeviceType = TMS320C40TAL_pg3x_50MHz) then   
+START(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+            t[tdH1LSTAT] :=  8ns;                                               
+STOP(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+else
+START(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+            t[tdH1LSTAT] := 10ns;                                              
+STOP(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+ 
+
+            t[tvDW]      := 16ns;                                              
+            t[thDW]      :=  0ns;                                              
+
+if (TIDeviceType = TMS320C40TAL_pg3x_50MHz) then   
+START(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+            t[tdH1HA]    :=  9ns;                                               
+                                                                               
+STOP(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+
+else
+START(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+            t[tdH1HA]    := 13ns;                                              
+                                                                               
+STOP(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+
+if (TIDeviceType = TMS320C40TAL_pg3x_50MHz) then   
+START(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+            t[tdH1LLOCK] :=  8ns;                                               
+                                                                               
+STOP(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+else
+START(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+            t[tdH1LLOCK] :=  9ns;                                              
+                                                                               
+STOP(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+
+            t[tENB]      :=  0ns;                                              
+            t[tdENBZ]    := 15ns;                                              
+
+if (TIDeviceType = TMS320C40TAL_pg3x_50MHz) then  
+begin 
+START(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+            t[tdENBDV]   := 21ns;                                              
+            t[tdENBAV]   := 18ns;                                              
+STOP(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+end
+else
+begin 
+START(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+            t[tdENBDV]   := 22ns;                                              
+            t[tdENBAV]   := 21ns;                                              
+STOP(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+end;
+            t[tdENBCV]   := 21ns;                                              
+
+
+                                                                               
+                                                                               
+                                                                               
+
+if (TIDeviceType = TMS320C40TAL_pg3x_50MHz) then  
+START(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+            t[tvH1LIF] := 14ns;                                                
+                                                                               
+STOP(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+else                  
+START(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+            t[tvH1LIF] := 16ns;                                            
+                                                                           
+STOP(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+
+            t[tsuIF]   := 11ns;                                                
+            t[thIF]    :=  0ns;                                                
+                                                                               
+
+if (TIDeviceType = TMS320C40TAL_pg3x_50MHz) then  
+START(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+            t[tdH1LIF] := 14ns;                                                
+                                                                              
+STOP(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+else
+START(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+            t[tdH1LIF] := 16ns;                                                
+                                                                               
+STOP(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+
+            t[thH1LIFOI] := 0ns;                                               
+                                                                               
+                                                                               
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tsuRESET]     := 11ns;                                           
+            t[tsuRESETH]    := 13ns;                                           
+
+            t[tdisH1HD]     := 13ns;                                           
+            t[tdisH3HA]     :=  9ns;                                           
+            t[tdH3HCTRLH]   :=  9ns;                                           
+
+            t[tdisRESETLAS] := 21ns;                                           
+                                                                               
+
+            t[tRESETLOC]    :=  0ns;                                           
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tsuINT] := 11ns;                                                 
+
+            t[tsuINTIDLE] := 18ns;                                             
+                                                                                      
+
+            t[twINT]  := t[tcH];                                               
+                                                                               
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tdH1LIACK] := 9ns;                                               
+
+                                                                               
+                                                                               
+                                                                               
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tsuCREQ]  := 10ns;                                               
+            t[tsuCACK]  := 10ns;                                               
+
+            t[tCRDYLO]  := t[tref]+t[tcCI];                                    
+            t[tCRDYHI]  := t[tref]+t[tcH];                                     
+
+            t[tCSTRBLO] := t[tref]+t[tCSTRBfhi];                               
+            t[tCSTRBHI] := t[tref]+t[tCSTRBfhi]+t[tcCI];                       
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tdRHSLw]   :=  12ns;                                              
+
+            t[tdRLSHw]   :=  12ns;                                              
+
+            t[tsuCDw]    :=  2ns;                                              
+
+if (TIDeviceType = TMS320C40TAL_pg3x_50MHz) then  
+START(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+            t[thCDw]     :=  2ns;                                              
+STOP(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+else
+START(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+            t[thCDw]     :=  1ns;                                              
+STOP(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+
+
+            t[tdSLRLr]   :=  10ns;                                              
+
+            t[tdSHRHr]   :=  10ns;                                              
+
+            t[tsuCDr]    :=  0ns;                                              
+
+            t[thCDr]     :=  2ns;                                              
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tdH1HRQLt] := 28ns;                                              
+                                                                               
+
+            t[tdALRQHt]  := 22ns;                                              
+                                                                               
+
+            t[tdRQHRQLt] :=  8ns;                                              
+                                                                               
+
+            t[tdRQHRQOt] := 22ns;                                              
+                                                                               
+
+            t[tdRQLALt]  := 22ns;                                              
+                                                                               
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tsuTCLK] := 10ns;                                                
+            t[thTCLK]  :=  0ns;                                                
+            t[tdTCLK]  := 13ns;                                                
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tROMEN] := 0ns;                                                  
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tNMI] := 0ns;                                                    
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tsuTDITMS] := 10ns;                                              
+            t[thTDITMS]  :=  5ns;                                              
+            t[tdTDO]     := 15ns;                                              
+            t[tJTAG]     :=  7ns;                                              
+
+            t[tdEMU]     := 20ns;                                              
+            t[tEMU]      :=  0ns;                                              
+
+
+STOP(ALLENUMS,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable);
+          end;
+
+                                                                            
+                                                                             
+                                                                            
+        TIhifrqmin33ACTable,
+        TIhifrqmax33ACTable,
+        TIspecsetupmin33ACTable,
+        TIspecholdmin33ACTable,
+        TIspecsetupmax33ACTable,
+        TIspecholdmax33ACTable,
+        TIsearchlevels33ACTable,
+        TIsearch33ACTable,
+        TIchar33ACTable:
+          begin
+START(ALLENUMS,TIhifrqmin33ACTable,TIhifrqmax33ACTable,TIspecsetupmin33ACTable,TIspecholdmin33ACTable,TIspecsetupmax33ACTable,TIspecholdmax33ACTable,TIsearchlevels33ACTable,TIsearch33ACTable,TIchar33ACTable);
+            t[tfH]       := 3ns;                                               
+            t[tfHmax]    := 3ns;                                               
+            t[twHLmin]   := t[tcCI]-6ns;                                       
+            t[twHL]      := t[tcCI];                                           
+            t[twHLmax]   := t[tcCI]+6ns;                                       
+            t[twHHmin]   := t[tcCI]-6ns;                                       
+            t[twHH]      := t[tcCI];                                           
+            t[twHHmax]   := t[tcCI]+6ns;                                       
+            t[trH]       := 4ns;                                               
+            t[trHmax]    := 4ns;                                               
+
+            t[tdHLHHmin] :=-1ns;                                               
+            t[tdHLHH]    := 4ns;                                               
+            t[tdHLHHmax] := 4ns;                                               
+
+            t[tdCLKINHH1min] :=  2ns;                                          
+            t[tdCLKINHH1max] := 10ns;                                          
+            t[tdCLKINHH3min] :=  2ns;                                          
+            t[tdCLKINHH3max] := 10ns;                                          
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tdH1LS]    :=  8ns;                                              
+            t[tdH1HRW]   :=  8ns;                                              
+            t[tdH1LA]    :=  9ns;                                              
+            t[tdH1LAV]   := 22ns;                                              
+                                                                               
+            t[tsuDR]     :=  9ns;                                              
+            t[thDR]      :=  0ns;                                              
+            t[tsuRDY]    := 18ns;                                              
+            t[thRDY]     :=  0ns;                                              
+            t[tdH1LSTAT] :=  8.0ns;                                              
+
+            t[tvDW]      := 13ns;                                              
+            t[thDW]      :=  0ns;                                              
+
+            t[tdH1HA]    :=  8ns;                                              
+                                                                               
+
+            t[tdH1LLOCK] :=  8ns;                                              
+                                                                               
+
+            t[tENB]      :=  0ns;                                              
+            t[tdENBZ]    := 15ns;                                              
+            t[tdENBDV]   := 16ns;                                              
+            t[tdENBAV]   := 16ns;                                              
+            t[tdENBCV]   := 16ns;                                              
+
+                                                                               
+                                                                               
+                                                                               
+                        
+             t[tvH1LIF] := 14ns;                                               
+                                                                               
+
+            t[tsuIF]   := 11ns;                                                
+            t[thIF]    :=  0ns;                                                
+                                                                               
+
+            t[tdH1LIF] := 14ns;                                                
+                                                                               
+
+            t[thH1LIFOI] := 0ns;                                               
+                                                                               
+                                                                               
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tsuRESET]     := 11ns;                                           
+            t[tsuRESETH]    := 13ns;                                           
+
+            t[tdisH1HD]     := 13ns;                                           
+            t[tdisH3HA]     :=  9ns;                                           
+            t[tdH3HCTRLH]   :=  9ns;                                           
+
+            t[tdisRESETLAS] := 21ns;                                           
+                                                                               
+
+            t[tRESETLOC]    :=  0ns;                                           
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tsuINT] := 11ns;                                                 
+
+            t[tsuINTIDLE] := 15ns;                                             
+                                                                                      
+
+            t[twINT]  := t[tcH];                                               
+                                                                               
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tdH1LIACK] := 7ns;                                               
+
+                                                                               
+                                                                               
+                                                                               
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tsuCREQ]  := 10ns;                                               
+            t[tsuCACK]  := 10ns;                                               
+
+            t[tCRDYLO]  := t[tref]+t[tcCI];                                    
+            t[tCRDYHI]  := t[tref]+t[tcH];                                     
+
+            t[tCSTRBLO] := t[tref]+t[tCSTRBfhi];                               
+            t[tCSTRBHI] := t[tref]+t[tCSTRBfhi]+t[tcCI];                       
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tdRHSLw]   :=  12ns;                                              
+
+            t[tdRLSHw]   :=  12ns;                                              
+
+            t[tsuCDw]    :=  2ns;                                              
+
+            t[thCDw]     :=  2ns;                                              
+
+            t[tdSLRLr]   :=  10ns;                                              
+
+            t[tdSHRHr]   :=  10ns;                                              
+
+            t[tsuCDr]    :=  0ns;                                              
+
+            t[thCDr]     :=  2ns;                                              
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tdH1HRQLt] := 28ns;                                              
+                                                                               
+
+            t[tdALRQHt]  := 22ns;                                              
+                                                                               
+
+            t[tdRQHRQLt] :=  8ns;                                              
+                                                                               
+
+            t[tdRQHRQOt] := 22ns;                                              
+                                                                               
+
+            t[tdRQLALt]  := 22ns;                                              
+                                                                               
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tsuTCLK] := 10ns;                                                
+            t[thTCLK]  :=  0ns;                                                
+            t[tdTCLK]  := 13ns;                                                
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tROMEN] := 0ns;                                                  
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tNMI] := 0ns;                                                    
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tsuTDITMS] := 10ns;                                              
+            t[thTDITMS]  :=  5ns;                                              
+            t[tdTDO]     := 12ns;                                              
+            t[tJTAG]     :=  7ns;                                              
+
+            t[tdEMU]     := 20ns;                                              
+            t[tEMU]      :=  0ns;                                              
+STOP(ALLENUMS,TIhifrqmin33ACTable,TIhifrqmax33ACTable,TIspecsetupmin33ACTable,TIspecholdmin33ACTable,TIspecsetupmax33ACTable,TIspecholdmax33ACTable,TIsearchlevels33ACTable,TIsearch33ACTable,TIchar33ACTable);
+
+          end;
+
+
+        TIspecsetupmin25ACTable,
+        TIspecholdmin25ACTable,
+        TIspecsetupmax25ACTable,
+        TIspecholdmax25ACTable,
+        TIsearch25ACTable,
+        TIchar25ACTable:
+          begin
+START(ALLENUMS,TIspecsetupmin25ACTable,TIspecholdmin25ACTable,TIspecsetupmax25ACTable,TIspecholdmax25ACTable,TIsearch25ACTable,TIchar25ACTable);
+            t[tfH]       := 3ns;                                               
+            t[tfHmax]    := 3ns;                                               
+            t[twHLmin]   := t[tcCI]-6ns;                                       
+            t[twHL]      := t[tcCI];                                           
+            t[twHLmax]   := t[tcCI]+6ns;                                       
+            t[twHHmin]   := t[tcCI]-6ns;                                       
+            t[twHH]      := t[tcCI];                                           
+            t[twHHmax]   := t[tcCI]+6ns;                                       
+            t[trH]       := 4ns;                                               
+            t[trHmax]    := 4ns;                                               
+
+            t[tdHLHHmin] :=-1ns;                                               
+            t[tdHLHH]    := 4ns;                                               
+            t[tdHLHHmax] := 4ns;                                               
+
+            t[tdCLKINHH1min] :=  2ns;                                          
+            t[tdCLKINHH1max] := 10ns;                                          
+            t[tdCLKINHH3min] :=  2ns;                                          
+            t[tdCLKINHH3max] := 10ns;                                          
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tdH1LS]    :=  8ns;                                              
+            t[tdH1HRW]   :=  8ns;                                              
+            t[tdH1LA]    :=  8ns;                                              
+            t[tdH1LAV]   := 22ns;                                              
+                                                                               
+            t[tsuDR]     :=  9ns;                                              
+            t[thDR]      :=  0ns;                                              
+            t[tsuRDY]    := 18ns;                                              
+            t[thRDY]     :=  0ns;                                              
+            t[tdH1LSTAT] :=  8ns;                                              
+
+            t[tvDW]      := 13ns;                                              
+            t[thDW]      :=  0ns;                                              
+
+            t[tdH1HA]    :=  8ns;                                              
+                                                                               
+
+            t[tdH1LLOCK] :=  8ns;                                              
+                                                                               
+
+            t[tENB]      :=  0ns;                                              
+            t[tdENBZ]    := 15ns;                                              
+            t[tdENBDV]   := 16ns;                                              
+            t[tdENBAV]   := 16ns;                                              
+            t[tdENBCV]   := 16ns;                                              
+
+                                                                               
+                                                                               
+                                                                               
+                                                
+            t[tvH1LIF] := 18ns;                                                
+                                                                               
+
+            t[tsuIF]   := 11ns;                                                
+            t[thIF]    :=  0ns;                                                
+                                                                               
+
+            t[tdH1LIF] := 14ns;                                                
+                                                                               
+
+            t[thH1LIFOI] := 0ns;                                               
+                                                                               
+                                                                               
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tsuRESET]     := 11ns;                                           
+            t[tsuRESETH]    := 13ns;                                           
+
+            t[tdisH1HD]     := 13ns;                                           
+            t[tdisH3HA]     :=  9ns;                                           
+            t[tdH3HCTRLH]   :=  9ns;                                           
+
+            t[tdisRESETLAS] := 21ns;                                           
+                                                                               
+
+            t[tRESETLOC]    :=  0ns;                                           
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tsuINT] := 11ns;                                                 
+
+            t[tsuINTIDLE] := 15ns;                                             
+                                                                                      
+
+            t[twINT]  := t[tcH];                                               
+                                                                               
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tdH1LIACK] := 7ns;                                               
+
+                                                                               
+                                                                               
+                                                                               
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tsuCREQ]  := 10ns;                                               
+            t[tsuCACK]  := 10ns;                                               
+
+            t[tCRDYLO]  := t[tref]+t[tcCI];                                    
+            t[tCRDYHI]  := t[tref]+t[tcH];                                     
+
+            t[tCSTRBLO] := t[tref]+t[tCSTRBfhi];                               
+            t[tCSTRBHI] := t[tref]+t[tCSTRBfhi]+t[tcCI];                       
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tdRHSLw]   :=  12ns;                                              
+
+            t[tdRLSHw]   :=  12ns;                                              
+
+            t[tsuCDw]    :=  2ns;                                              
+
+            t[thCDw]     :=  2ns;                                              
+
+            t[tdSLRLr]   :=  10ns;                                              
+
+            t[tdSHRHr]   :=  10ns;                                              
+
+            t[tsuCDr]    :=  0ns;                                              
+
+            t[thCDr]     :=  2ns;                                              
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tdH1HRQLt] := 28ns;                                              
+                                                                               
+
+            t[tdALRQHt]  := 22ns;                                              
+                                                                               
+
+            t[tdRQHRQLt] :=  8ns;                                              
+                                                                               
+
+            t[tdRQHRQOt] := 22ns;                                              
+                                                                               
+
+            t[tdRQLALt]  := 22ns;                                              
+                                                                               
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tsuTCLK] := 10ns;                                                
+            t[thTCLK]  :=  0ns;                                                
+            t[tdTCLK]  := 13ns;                                                
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tROMEN] := 0ns;                                                  
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tNMI] := 0ns;                                                    
+
+                                                                               
+                                                                               
+                                                                               
+
+            t[tsuTDITMS] := 10ns;                                              
+            t[thTDITMS]  :=  5ns;                                              
+            t[tdTDO]     := 15ns;                                              
+            t[tJTAG]     :=  7ns;                                              
+
+            t[tdEMU]     := 20ns;                                              
+            t[tEMU]      :=  0ns;                                              
+STOP(ALLENUMS,TIspecsetupmin25ACTable,TIspecholdmin25ACTable,TIspecsetupmax25ACTable,TIspecholdmax25ACTable,TIsearch25ACTable,TIchar25ACTable);
+
+          end;
+
+
+
+        others:
+          begin
+          end;
+      end;           
+
+    end;           
+STOP(ALLENUMS,ALLTABLES);
+
+ end;                  
+
+
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+	                                                             
+
+begin                   
+
+  case TITestType of
+    Probe:
+      begin                                                          
+        lfgb :=  0ns;                                                
+        hfgb :=  0ns;                                                
+      end;
+    Final:
+      begin                                                          
+        lfgb := 15ns;                                                
+        hfgb :=  0ns;                                                
+      end;
+    QA:
+      begin                                                          
+        lfgb :=  0ns;                                                
+        hfgb :=  0ns;                                                
+      end;
+    others:
+      begin                                                          
+        lfgb :=  0ns;                                                
+        hfgb :=  0ns;                                                
+      end;
+  end;         
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIallACTable, TIparametricACTable]) then
+  begin
+   duty   := 50;
+   period := PeriodLower(485ns, StdSpeed);
+   TITimingSet( TIparametricACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIallACTable, TIcrystalACTable]) then
+  begin
+   duty   := 50;
+   period := PeriodLower(200ns, StdSpeed);
+   TITimingSet( TIcrystalACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIallACTable, TInomlooseACTable]) then
+  begin
+   duty   := 50;
+   period := PeriodLower(100ns, StdSpeed);
+   TITimingSet( TInomlooseACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIallACTable, TIstressminACTable]) then
+  begin
+   duty   := 50;
+   period := PeriodLower(485ns, StdSpeed);
+   TITimingSet( TIstressminACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIallACTable, TIstressmaxACTable]) then
+  begin
+   duty   := 50;
+   period := PeriodLower(100ns, StdSpeed);
+   TITimingSet( TIstressmaxACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIallACTable, TIlofrqminACTable]) then
+  begin
+   duty   := 33;
+   period := PeriodLower(485ns+lfgb, StdSpeed);
+   TITimingSet( TIlofrqminACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIallACTable, TIlofrqmaxACTable]) then
+  begin
+   duty   := 67;
+   period := PeriodLower(485ns+lfgb, StdSpeed);
+   TITimingSet( TIlofrqmaxACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIallACTable, TIlofrqlooseACTable]) then
+  begin
+   duty   := 50;
+   period := PeriodLower(485ns+lfgb, StdSpeed);
+   TITimingSet( TIlofrqlooseACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIallACTable, TIlofrqedgeACTable]) then
+  begin
+   duty   := 50;
+   period := PeriodLower(485ns+lfgb, StdSpeed);
+   TITimingSet( TIlofrqedgeACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIallACTable, TIlofrqmin60ACTable]) then
+  begin
+   duty   := 33;
+   period := PeriodLower(485ns+lfgb, StdSpeed);
+   TITimingSet( TIlofrqmin60ACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIallACTable, TIlofrqmax60ACTable]) then
+  begin
+   duty   := 67;
+   period := PeriodLower(485ns+lfgb, StdSpeed);
+   TITimingSet( TIlofrqmax60ACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIallACTable, TIlofrqloose60ACTable]) then
+  begin
+   duty   := 50;
+   period := PeriodLower(485ns+lfgb, StdSpeed);
+   TITimingSet( TIlofrqloose60ACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIallACTable, TIlofrqedge60ACTable]) then
+  begin
+   duty   := 50;
+   period := PeriodLower(485ns+lfgb, StdSpeed);
+   TITimingSet( TIlofrqedge60ACTable );
+  end;      
+
+                                                                                 
+                                                                                     
+                                                                                 
+
+ if (actable in [TIallACTable, TIspecsetupmin25ACTable]) then
+  begin
+   duty   := 33;
+   period := PeriodLower(25ns-hfgb, StdSpeed);
+   TITimingSet( TIspecsetupmin25ACTable );
+  end;      
+
+                                                                                 
+                                                                                         
+                                                                                 
+
+ if (actable in [TIallACTable, TIspecholdmin25ACTable]) then
+  begin
+   duty   := 33;
+   period := PeriodLower(25ns-hfgb, StdSpeed);
+   TITimingSet( TIspecholdmin25ACTable );
+  end;      
+
+                                                                                 
+                                                                                     
+                                                                                 
+
+ if (actable in [TIallACTable, TIspecsetupmax25ACTable]) then
+  begin
+   duty   := 67;
+   period := PeriodLower(25ns-hfgb, StdSpeed);
+   TITimingSet( TIspecsetupmax25ACTable );
+  end;      
+
+                                                                                 
+                                                                                         
+                                                                                 
+
+ if (actable in [TIallACTable, TIspecholdmax25ACTable]) then
+  begin
+   duty   := 33;
+   period := PeriodLower(25ns-hfgb, StdSpeed);
+   TITimingSet( TIspecholdmax25ACTable );
+  end;      
+
+                                                                                 
+                                                                                     
+                                                                                 
+
+ if (actable in [TIallACTable, TIspecsetupmin33ACTable]) then
+  begin
+   duty   := 33;
+   period := PeriodLower(33ns-hfgb, StdSpeed);
+   TITimingSet( TIspecsetupmin33ACTable );
+  end;      
+
+                                                                                 
+                                                                                         
+                                                                                 
+
+ if (actable in [TIallACTable, TIspecholdmin33ACTable]) then
+  begin
+   duty   := 33;
+   period := PeriodLower(33ns-hfgb, StdSpeed);
+   TITimingSet( TIspecholdmin33ACTable );
+  end;      
+
+                                                                                 
+                                                                                     
+                                                                                 
+
+ if (actable in [TIallACTable, TIspecsetupmax33ACTable]) then
+  begin
+   duty   := 67;
+   period := PeriodLower(33ns-hfgb, StdSpeed);
+   TITimingSet( TIspecsetupmax33ACTable );
+  end;      
+
+                                                                                 
+                                                                                         
+                                                                                 
+
+ if (actable in [TIallACTable, TIspecholdmax33ACTable]) then
+  begin
+   duty   := 67;
+   period := PeriodLower(33ns-hfgb, StdSpeed);
+   TITimingSet( TIspecholdmax33ACTable );
+  end;      
+
+                                                                                 
+                                                                               
+                                                                                 
+
+ if (actable in [TIallACTable, TIhifrqmin33ACTable]) then
+  begin
+   duty   := 33;
+   period := PeriodLower(33ns-hfgb, StdSpeed);
+   TITimingSet( TIhifrqmin33ACTable );
+  end;      
+
+                                                                                 
+                                                                               
+                                                                                 
+
+ if (actable in [TIallACTable, TIhifrqmax33ACTable]) then
+  begin
+   duty   := 67;
+   period := PeriodLower(33ns-hfgb, StdSpeed);
+   TITimingSet( TIhifrqmax33ACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIallACTable, TIhifrqmin40ACTable]) then
+  begin
+   duty   := 33;
+   period := PeriodLower(40ns-hfgb, StdSpeed);
+   TITimingSet( TIhifrqmin40ACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIallACTable, TIhifrqmax40ACTable]) then
+  begin
+   duty   := 67;
+   period := PeriodLower(40ns-hfgb, StdSpeed);
+   TITimingSet( TIhifrqmax40ACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIallACTable, TIhifrqloose40ACTable]) then
+  begin
+   duty   := 50;
+   if (pg2patt) and (TITestType = Pre_Burnin) then
+      period := PeriodLower(42ns-hfgb, StdSpeed)                                                                 
+   else						                                                                 
+      period := PeriodLower(40ns-hfgb, StdSpeed);
+   TITimingSet( TIhifrqloose40ACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIallACTable, TIhifrqedge40ACTable]) then
+  begin
+   duty   := 50;
+   period := PeriodLower(40ns-hfgb, StdSpeed);
+   TITimingSet( TIhifrqedge40ACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIallACTable, TIhifrqmin50ACTable]) then
+  begin
+   duty   := 33;
+   period := PeriodLower(50ns-hfgb, StdSpeed);
+   TITimingSet( TIhifrqmin50ACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIallACTable, TIhifrqmax50ACTable]) then
+  begin
+   duty   := 67;
+   period := PeriodLower(50ns-hfgb, StdSpeed);
+   TITimingSet( TIhifrqmax50ACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIallACTable, TIhifrqloose50ACTable]) then
+  begin
+   duty   := 50;
+   period := PeriodLower(50ns-hfgb, StdSpeed);
+   TITimingSet( TIhifrqloose50ACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIallACTable, TIhifrqedge50ACTable]) then
+  begin
+   duty   := 50;
+   period := PeriodLower(50ns-hfgb, StdSpeed);
+   TITimingSet( TIhifrqedge50ACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIallACTable, TIhifrqmin60ACTable]) then
+  begin
+   duty   := 33;
+   period := PeriodLower(50ns-hfgb, StdSpeed);
+   TITimingSet( TIhifrqmin60ACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIallACTable, TIhifrqmax60ACTable]) then
+  begin
+   duty   := 67;
+   period := PeriodLower(50ns-hfgb, StdSpeed);
+   TITimingSet( TIhifrqmax60ACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIallACTable, TIhifrqloose60ACTable]) then
+  begin
+   duty   := 50;
+   period := PeriodLower(50ns-hfgb, StdSpeed);
+   TITimingSet( TIhifrqloose60ACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIallACTable, TIhifrqedge60ACTable]) then
+  begin
+   duty   := 50;
+   period := PeriodLower(50ns-hfgb, StdSpeed);
+   TITimingSet( TIhifrqedge60ACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIsearchACTable]) then
+  begin
+   period := PeriodLower(ACDataSheets[actable].t[tcH], StdSpeed);
+   TITimingSet( TIsearchACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIsearch40ACTable]) then
+  begin
+   period := PeriodLower(ACDataSheets[actable].t[tcH], StdSpeed);
+   TITimingSet( TIsearch40ACTable );
+  end;      
+
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIsearch33ACTable]) then
+  begin
+   period := PeriodLower(ACDataSheets[actable].t[tcH], StdSpeed);
+   TITimingSet( TIsearch33ACTable );
+  end;      
+
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIsearchlevelsACTable]) then
+  begin
+   period := PeriodLower(ACDataSheets[actable].t[tcH], StdSpeed);
+   TITimingSet( TIsearchlevelsACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIsearchlevels40ACTable]) then
+  begin
+   period := PeriodLower(ACDataSheets[actable].t[tcH], StdSpeed);
+   TITimingSet( TIsearchlevels40ACTable );
+  end;      
+
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIsearchlevels33ACTable]) then
+  begin
+   period := PeriodLower(ACDataSheets[actable].t[tcH], StdSpeed);
+   TITimingSet( TIsearchlevels33ACTable );
+  end;      
+
+
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIcharACTable]) then
+  begin
+   duty := 50;
+   period := PeriodLower(ACDataSheets[actable].t[tcH], StdSpeed);
+   TITimingSet( TIcharACTable );
+  end;      
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIchar33ACTable]) then
+  begin
+   duty := 50;
+   period := PeriodLower(ACDataSheets[actable].t[tcH], StdSpeed);
+   TITimingSet( TIchar33ACTable );
+  end;      
+
+
+                                                                               
+                                                                               
+                                                                               
+
+ if (actable in [TIchar40ACTable]) then
+  begin
+   duty := 50;
+   period := PeriodLower(ACDataSheets[actable].t[tcH], StdSpeed);
+   TITimingSet( TIchar40ACTable );
+  end;      
+
+end;                   
+

@@ -1,0 +1,36 @@
+enVision:"bl8:R11.1.0.WW1111:S3.5"; /* 5.7 */
+
+
+
+enum TITestTemp
+{
+	Temp_N40_Degrees_C,
+	Temp_0_Degrees_C,
+	Temp_5_Degrees_C,
+	Temp_25_Degrees_C,
+	Temp_70_Degrees_C,
+	Temp_90_Degrees_C,
+	Temp_85_Degrees_C,
+	Temp_105_Degrees_C,
+	Temp_125_Degrees_C,
+	Temp_135_Degrees_C
+};
+enum TIDeviceType
+{
+	F240_Probe,
+	F240_132QFP,
+	C240_Probe,
+	C240_132QFP
+};
+enum TITestType
+{
+	Probe,
+	Final,
+	FT2,
+	FT3,
+	Q100_FT1,
+	Q100_FT2,
+	Q100_FT3,
+	QA,
+	Engineering
+};

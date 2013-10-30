@@ -1,0 +1,66 @@
+
+All,
+
+This is primarily targeted to Rex's Custom HV device but it could be useful to all of you. In this case there is a spec timing dependency on a couple of device types. A similar situation could be used for other timing only dependencies (such as temperature).
+
+I'll be adding this to my documentation files later....
+
+First of all I found some problems in the START/STOP definitions that I'll highlight first.
+     
+1) If you get a situation like this:
+	  (actable in [TIlofrqlooseACTable..TIhifrqlooseACTable])) 
+wrong:
+START(ALLTABLES,ALLTEMPS,ALLTESTS,SMJ320C31TAB33_pg2x,TIlofrqlooseACTable,TIhifrqlooseACTable);
+
+   this means all ACTables from TIlofrqlooseACTable to TIhifrqlooseACTable:
+correct:
+START(ALLENUMS,TIlofrqlooseACTable,TIhifrqmin74ACTable,TIhifrqminACTable,TIhifrqmin50ACTable,TIhifrqmin40ACTable,TIhifrqmin33ACTable,TIhifrqmin25ACTable,TIhifrqmax74ACTable,TIhifrqmaxACTable,TIhifrqmax50ACTable,TIhifrqmax40ACTable,TIhifrqmax33ACTable,TIhifrqmax25ACTable,TIhifrqloose74ACTable,TIhifrqlooseACTable);
+
+(See START_STOP_WITH_DOUBLE_DOTS.txt)
+
+You get the ordered list from the bottom of actable.p where they list all the TIACTableSet statements....
+
+if (actable in [TIallACTable, TIsearch33ACTable]) then
+   TIACTableSet( TIsearch33ACTable );
+
+
+2) ALLTABLES should not be used in the list if individual ACTABLES are specified. It
+    should only be used either when ALL tables use the same thing or in a subtraction
+    where you have ALL tables minus several tables.
+
+3) Make sure you include all Edges and all origins for the format in the same section,
+    even if it means duplicating  Edge(s) or origin(s).
+
+For example you shouldn't have:
+
+EdgeSet(Edge1,DriveData,0ns);
+START(MYCONDITIONS1);
+EdgeSet(Edge2,DriveLow,10ns);
+STOP(MYCONDITIONS1);
+START(MYCONDITIONS2);
+EdgeSet(Edge2,DriveHigh,10ns);
+STOP(MYCONDITIONS2);
+
+it should be:
+
+START(MYCONDITIONS1);
+EdgeSet(Edge1,DriveData,0ns);
+EdgeSet(Edge2,DriveLow,10ns);
+STOP(MYCONDITIONS1);
+START(MYCONDITIONS2);
+EdgeSet(Edge1,DriveData,0ns);
+EdgeSet(Edge2,DriveHigh,10ns);
+STOP(MYCONDITIONS2);
+
+Ok, now that we have that highlighted we'll get back to the original problem which was how to deal with Rex's long list of devices without having to condition tests specifically on them.
+
+Basically, what I've done is search through the CUSTOM_HV actable.p file and located the device specific references and there are two of them. One where they reference one specific device and one where they reference all the pg2 devices. I created a simple spec (see HV_DEV_SPEC.evo) which for this situation defines two device lists and two parameters. The DEV_LISTn parameters are contain boolean values for all the device types. The PARAMn variables use the DEV_LISTn parameter to chose the extracted expressions from the two Edge definitions. Since these are now timing expressions they are of "Type = s;". I then replaced the original expressions in the actable.p file with the with the PARAMn variables. When you select the device type from the tpfusion enum list this will correctly pick which of the two expressions you get in the little spec. You can do this for a category decision, a temp decision or any of the other tpfusion prompted inputs. Note that this doesn't help if there is a format change.
+
+(See files HV_DEV_SPEC.evo and FIXES_ACTABLE.p for details).
+
+I'll deal with the CUSTOM_HV big pattern stuff and translator updates separately...
+
+
+Anthony
+
+

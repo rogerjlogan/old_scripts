@@ -1,0 +1,25 @@
+#!/bin/bash
+
+if [ $# -lt 2 ]; then
+    echo "usage:stripcomm -c *c   (for C/C++  type files)"
+    echo "usage:stripcomm -p *vpl (for Pascal type files)"
+else
+
+    if [ "$1" == "-p" ]; then #strip pascal type comments
+        for file in "${@:2}"; do
+            echo $file
+            perl -0777 -i.bak -pe 's/\{(.*?)\}//sg;' -pe 's/\(\*(.*?)\*\)//sg;' -pe 's/\n\s*\n/\n/g;' $file
+        done
+    elif [ "$1" == "-c" ]; then #strip C type comments
+        for file in "${@:2}"; do
+            echo $file
+            cp $file $file".bak"
+            sed 's/a/aA/g;s/__/aB/g;s/#/aC/g' "$file" |
+                gcc -P -E $arg - |
+                sed 's/aC/#/g;s/aB/__/g;s/aA/a/g'  > ${file}
+       done
+
+    else
+        echo "Error: pass either -c for C type file or -p for Pascal type file"
+    fi
+fi   

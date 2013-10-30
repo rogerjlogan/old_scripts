@@ -1,0 +1,99 @@
+#USE_SIGNAL_HEADER:SH0
+# Codes are defined in aliasmap.h (FC_xxxxxxxx)
+<ShutSCA>   [nnDDnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn][nnDnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn]
+<SCL_0>     [WWDDDDDWDDDWWWDDDDDWWDDWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWDWWWWDDDDDDDDDDDDDDDDDWWWWXX][DDDWDDDWDDDWDDDDDDDDDDDDDDDDDWDDDDDDDDDDDDDDDDDWDDWDDDDWWWWDDDDDDDDDDDDDDDDDDDDDXX]
+<SCL_1>     [WWDDWWWWDDDWDDDDDDDWWDDWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWDWWWWDDDDDDDDDDDDDDDDDDDDDXX][DWDWDDDWDDDWDDDDDDDWDDDDDDDDDWDDDDDDDDDDDDDDDDDWWWWDDDDWWWWDDDDDDDDDDDDDDDDDDDDDXX]
+<SCL_2>     [WWDDDDDWWWWWDDDDDDDWWDDWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWDWWWWDDDDDDDDDDDDDDDDDWWWWXX][DDDWDDDDDDDWDDDDDDDWDDDDDDDDWWDWWWWWWWDDDDDDDWWWDDWDWWDWWWWDDDDDDDDDDDDDDDDDDDDDXX]
+<SCL_3>     [WWDDDDDWWWWDDDDDDDDDWDDWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWDWWWWDDDDDDDDDDDDDDDDDWWWWXX][DWDWDDDWDDDDDDDDDDDDWDDWWWWWWWWWWWWWWWWWWWWWWWWWDDWWWWDWWWWDDDDDDDDDDDDDDDDDWWWWXX]
+<SCLHALT>   [WDDWDDDWDDDWWWDDDDDDWDDWWWWWWWWDDDDDDDWWWWWWWWWWWWWWWWDWWWWDDDDDDDDDDDDDDDDDWWWWDX][DDDWDDDDDDDDDDDDDDDDDDDDDDDDDWDDDDDDDDDDDDDDDDDWDDWDDDDWWWWDDDDDDDDDDDDDDDDDDDDDDX]
+<CAN_0>     [WWDDDDDWDDDWDDDDDDDWWDDWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWDWWWWDDDDDDDDDDDDDDDDDWWWWDW][DWDWDDDWDDDWDDDDDDDWDDDDDDDDDWDDDDDDDDDDDDDDDDDWDDWDDDDWWWWDDDDDDDDDDDDDDDDDDDDDDW]
+<MATCH_0>   [nWDDnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn][nWDnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn]
+<MATCH_SWP> [nnDnnnnWnnnWnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn][nnDnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn]
+#pin descriptors:
+# pins:     [nCOOCCCCCCCCCCCCDMPCSRRSSSSSTTTCCCCCCCCCCCCCCCCCCCCEEEDCCCCAAAAAAAAATTTTTTTTTTTTRT][nCOOCCCCCCCCCCCCDMPCSRRSSSSSTTTCCCCCCCCCCCCCCCCCCCCEEEDCCCCAAAAAAAAATTTTTTTTTTTTRT]
+# pins:     [RLSS111188881818IUL8CXXCPPPPCCC11111111111111111888XXXP1188NNNNNNNNN11223344OOOOXX][RLSS111188881818IUL8CXXCPPPPCCC11111111111111111888XXXP1188NNNNNNNNN11223344OOOOXX]
+# pins:     [EKCC6666____6_6_VLL_I12IIIIIAMM66666666666666666___TTT_66__012345678121212121234CC][EKCC6666____6_6_VLL_I12IIIIIAMM66666666666666666___TTT_66__012345678121212121234CC]
+# pins:     [SOIO____CCSS_V_T22ECT  CSSCSPPP_________________BBRIIIC__DS                     AA][SOIO____CCSS_V_T22ECT  CSSCSPPP_________________BBRIIIC__DS                     AA]
+# pins:     [EUNUCCSS10IOVPTE  NLX  LOILT432BBBBBBBCCCCCCCBBRRRENNNLDSPH                     NN][EUNUCCSS10IOVPTE  NLX  LOILT432BBBBBBBCCCCCCCBBRRRENNNLDSPH                     NN]
+# pins:     [TT T10IO    PPES   KD  KMMKB   6543210_______RRELLLTTTKPHOF                       ][TT T10IO    PPES   KD  KMMKB   6543210_______RRELLLTTTKPHOF                       ]
+# pins:     [            P ST   O    IO            6543210LLL21 210IOFUT                       ][            P ST   O    IO            6543210LLL21 210IOFUT                       ]
+# pins:     [              T    U                         21       NUTTC                       ][              T    U                         21       NUTTC                       ]
+# pins:     [                   T                                   TC L                       ][                   T                                   TC L                       ]
+# pins:     [                                                        L K                       ][                                                        L K                       ]
+# pins:     [                                                        K                         ][                                                        K                         ]
+#Note:muxpins marked in MUXPINS but are left off the other vector data...
+#AUTO_PRE_PROC will correctly deal with them and VCP/VCS will expand cycle info above.
+MUXPINS     [..M...............................................................................]
+HEXPROC     [BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB]
+FIELDS      [AAAABBBBBBBBCCCCCCCCDDDDEEEEFFFGGGGGGGHHHHHHHIIIIIIJJJKKKKKLLLLLLLLLMMMMMMMMMMMMNN]
+PINGROUP    [................................................................................**](*CANPINS*){}
+PINGROUP    [....................................................................********......](*TRIGINS*){}
+PINGROUP    [............................................................................****..](*TRIGOUTS*){}
+PINGROUP    [........***.......................................................................](*TAPC8INS*){}
+PINGROUP    [....***...........................................................................](*TAPC16INS*){}
+PINGROUP    [.*.*..............................................................................](*HOUTS*){}
+PINGROUP    [....................................................................************..](*TRIGGER*){}
+PINGROUP    [...........................................................*********..............](*ADC*){}
+PINGROUP    [......................................................*****.......................](*MAILBOX*){}
+PINGROUP    [...................................................***............................](*Interrupt*){}
+PINGROUP    [.............................................******...............................](*BRL*){}
+PINGROUP    [......................................*******.....................................](*PORTC*){}
+PINGROUP    [...............................*******............................................](*PORTB*){}
+PINGROUP    [............................***...................................................](*Timer_C16*){}
+PINGROUP    [........................****......................................................](*SPI*){}
+PINGROUP    [....................****..........................................................](*SCI*){}
+PINGROUP    [............********..............................................................](*ModeTest*){}
+PINGROUP    [....********......................................................................](*TAP*){}
+PINGROUP    [****..............................................................................](*Rst_Clk*){}
+PINGROUP    [..............**....................................................********......](*LEAK_lessPINS*){,TRIGINS}
+PINGROUP    [.............................................................................***..](*MTrig234*){}
+PINGROUP    [............................................................................*.**..](*MTrig134*){}
+PINGROUP    [............................................................................**.*..](*MTrig124*){}
+PINGROUP    [............................................................................***...](*MTrig123*){}
+PINGROUP    [....................................................................**............](*InTrig1*){}
+PINGROUP    [......................................................................**..........](*InTrig2*){}
+PINGROUP    [........................................................................**........](*InTrig3*){}
+PINGROUP    [..........................................................................**......](*InTrig4*){}
+PINGROUP    [............**....................................................................](*VPP*){}
+PINGROUP    [................................................**................................](*ioc8*){}
+PINGROUP    [..................................................*...............................](*outc8*){}
+PINGROUP    [....................*..******.*****************....***......................****..](*ioc16*){,PORTB,PORTC,SPI,Interrupt,TRIGOUTS}
+PINGROUP    [.................................................................................*](*outc16*){}
+PINGROUP    [...........................*..*............**...............................****..](*bipull10*){}
+PINGROUP    [..................................****............................................](*gate*){}
+PINGROUP    [.........................**.......................................................](*gate05*){}
+PINGROUP    [......................................****........................................](*anad*){}
+PINGROUP    [.............................*....................................................](*opd20*){}
+PINGROUP    [...............................................*..................................](*opd10*){}
+PINGROUP    [...................................................*..............................](*pul250*){}
+PINGROUP    [..........................................*.......................................](*pul500*){}
+PINGROUP    [....................*.............................................................](*bipol33*){}
+PINGROUP    [....................*....***.**...***********..*...*........................****..](*gpioc16*){,bipull10,gate,gate05,anad,opd20,opd10,pul250,pul500,bipol33}
+PINGROUP    [..............*..*....*....................................*.*.*...*.**..**.......](*EVENINS*){}
+PINGROUP    [..*............**.*..*................................*.....*.*.***.*..**..*....*.](*ODDINS*){}
+PINGROUP    [.*...**..**.*......**...*.*...*.*.*.***.*..*..*..*.*.*......................*.*...](*EVENTRISTATE*){}
+PINGROUP    [....*..**..*.*.........*.*.**..*.*.*...*.**.**..*...*........................*.*..](*ODDTRISTATE*){}
+PINGROUP    [*****************************.**************************************************..](*ALLIOS*){}
+PINGROUP    [..*...........*****..**...............................*....*****************....*.](*TESTINS*){,EVENINS,ODDINS}
+PINGROUP    [.**.*..**..*.****.**.*.**.*..*..*.*.*.*.*.*.**.*.*..*..*..*.*.*.***.*.*.*.*..*.**.](*ODDPINS*){}
+PINGROUP    [*..*.**..**.*....*..*.*..*.**.**.*.*.*.*.*.*..*.*.**.**.**.*.*.*...*.*.*.*.**.*..*](*EVENPINS*){}
+PINGROUP    [...*.........................*.................*..*....****......................*](*ALLOUTS*){}
+PINGROUP    [...*.........................*.................*..*....****......................*](*ALLOUTS_NOSC*){,ALLOUTS}
+PINGROUP    [..*...........*****..**...............................*....*****************....*.](*ALLINS*){,EVENINS,ODDINS,NOTESTINS}
+PINGROUP    [.*..**********.....**..******.*****************.**.***......................****..](*ALLTRISTATE*){,EVENTRISTATE,ODDTRISTATE}
+PINGROUP    [********************************************************************************.*](*NOTRISTATEOUTS*){,ALLOUTS,ALLIOS}
+PINGROUP    [**********************************************************************************](*ALLPINS*){,EVENPINS,ODDPINS}
+PINGROUP    [**********************************************************************************](*SHORTSPINS*){,ALLPINS}
+PINGROUP    [**********************************************************************************](*OPENSPINS*){,ALLPINS}
+PINGROUP    [**********************************************************************************](*SWPMatchPins*){,ALLPINS}
+//nCOOOCCCCCCCCCCCCDMPCSRRSSSSSTTTCCCCCCCCCCCCCCCCCCCCEEEDCCCCAAAAAAAAATTTTTTTTTTTTRT
+//RLSSS111188881818IUL8CXXCPPPPCCC11111111111111111888XXXP1188NNNNNNNNN11223344OOOOXX
+//EKCCC6666____6_6_VLL_I12IIIIIAMM66666666666666666___TTT_66__012345678121212121234CC
+//SOIIO____CCSS_V_T22ECT  CSSCSPPP_________________BBRIIIC__DS                     AA
+//EUNNUCCSS10IOVPTE  NLX  LOILT432BBBBBBBCCCCCCCBBRRRENNNLDSPH                     NN
+//TT  T10IO    PPES   KD  KMMKB   6543210_______RRELLLTTTKPHOF                       
+//             P ST   O    IO            6543210LLL21 210IOFUT                       
+//               T    U                         21       NUTTC                       
+//                    T                                   TC L                       
+//                                                         L K                       
+//                                                         K                         

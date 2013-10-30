@@ -1,0 +1,1243 @@
+enVision:"bl8:R11.1.0.WW1111:S3.5"; /* 5.7 */
+
+Levels TIPTUIOddLo1DCTable {
+//DCSetInput(ODDINLEAKINS,v[vinleaklo],v[vinleaklo],v[vinleaklo],v[vinleaklo]);
+  Column[ 0]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "ODDINLEAKINS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleaklo";}
+    Vih              = Expr { String = "vinleaklo";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetInput(EVENINLEAKINS,v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi]);
+  Column[ 1]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "EVENINLEAKINS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleakhi";}
+    Vih              = Expr { String = "vinleakhi";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetInput(CLKMOD1,v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi]);
+  Column[ 2]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "CLKMOD1";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleakhi";}
+    Vih              = Expr { String = "vinleakhi";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetInput(CLKMOD2,v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi]);
+  Column[ 3]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "CLKMOD2";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleakhi";}
+    Vih              = Expr { String = "vinleakhi";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetInput(INUPS,v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi]);
+  Column[ 4]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "INUPS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleakhi";}
+    Vih              = Expr { String = "vinleakhi";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetInput(X2CLKIN,v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi]);
+  Column[ 5]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "X2CLKIN";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleakhi";}
+    Vih              = Expr { String = "vinleakhi";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetPTUIInput(INDOWNS,v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi],i[iinleakhi],i[iTRSTleakhi],4ma);
+  Column[ 6]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "INDOWNS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleakhi";}
+    Vih              = Expr { String = "vinleakhi";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+  Column[ 7]{
+    LevelsColumnType = evDCTestType;
+    Group            = Expr { String = "INDOWNS";}
+    ExecSeq          = Expr { String = "0";}
+    evForceValue       = Expr { String = "vinleakhi";}
+    evLowLimit       = Expr { String = "iinleakhi";}
+    evHighLimit      = Expr { String = "iTRSTleakhi";}
+    evMeasureRange   = Expr { String = "4ma * 1.2";}
+  }
+//DCSetIO(EMU0,v[vtrilkghi],v[vtrilkghi],0v,0v,v[vtrilkghi],v[vtrilkghi],0v,0ma,0ma);
+  Column[ 8]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "EMU0";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vtrilkghi";}
+    Vih              = Expr { String = "vtrilkghi";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "0ma";}
+    Ioh              = Expr { String = "0ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetIO(EMU1,v[vtrilkglo],v[vtrilkglo],0v,0v,v[vtrilkglo],v[vtrilkglo],0v,0ma,0ma);
+  Column[ 9]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "EMU1";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vtrilkglo";}
+    Vih              = Expr { String = "vtrilkglo";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "0ma";}
+    Ioh              = Expr { String = "0ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetIO(ODDTRISTATE,0v,0v,0v,0v,0v,0v,0v,0ma,0ma);
+  Column[10]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "ODDTRISTATE";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0v";}
+    Vih              = Expr { String = "0v";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "0ma";}
+    Ioh              = Expr { String = "0ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetIO(EVENTRISTATE,0v,0v,0v,0v,0v,0v,0v,0ma,0ma);
+  Column[11]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "EVENTRISTATE";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0v";}
+    Vih              = Expr { String = "0v";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "0ma";}
+    Ioh              = Expr { String = "0ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetIO(IOUPS,v[vtrilkglo],v[vtrilkglo],0v,0v,v[vtrilkglo],v[vtrilkglo],0v,0ma,0ma);
+  Column[12]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "IOUPS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vtrilkglo";}
+    Vih              = Expr { String = "vtrilkglo";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "0ma";}
+    Ioh              = Expr { String = "0ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetOutput(X1,0v,0v,0v,0ma,0ma);
+  Column[13]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "X1";}
+    ExecSeq          = Expr { String = "0";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "0ma";}
+    Ioh              = Expr { String = "0ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetIO(NOTESTINS,0v,0v,0v,0v,0v,0v,0v,0ma,0ma);
+  Column[14]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "NOTESTINS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0v";}
+    Vih              = Expr { String = "0v";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "0ma";}
+    Ioh              = Expr { String = "0ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+}
+
+Levels TIPTUIOddHi1DCTable {
+//DCSetInput(ODDINLEAKINS,v[vinleaklo],v[vinleaklo],v[vinleaklo],v[vinleaklo]);
+  Column[ 0]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "ODDINLEAKINS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleaklo";}
+    Vih              = Expr { String = "vinleaklo";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetInput(EVENINLEAKINS,v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi]);
+  Column[ 1]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "EVENINLEAKINS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleakhi";}
+    Vih              = Expr { String = "vinleakhi";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetInput(CLKMOD1,v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi]);
+  Column[ 2]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "CLKMOD1";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleakhi";}
+    Vih              = Expr { String = "vinleakhi";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetInput(CLKMOD2,v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi]);
+  Column[ 3]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "CLKMOD2";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleakhi";}
+    Vih              = Expr { String = "vinleakhi";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetInput(INUPS,v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi]);
+  Column[ 4]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "INUPS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleakhi";}
+    Vih              = Expr { String = "vinleakhi";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetInput(X2CLKIN,v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi]);
+  Column[ 5]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "X2CLKIN";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleakhi";}
+    Vih              = Expr { String = "vinleakhi";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetPTUIInput(INDOWNS,v[vinleaklo],v[vinleaklo],v[vinleaklo],v[vinleaklo],v[vinleaklo],i[iTRSTleaklo],40ua,40ua);
+  Column[ 6]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "INDOWNS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleaklo";}
+    Vih              = Expr { String = "vinleaklo";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+  Column[ 7]{
+    LevelsColumnType = evDCTestType;
+    Group            = Expr { String = "INDOWNS";}
+    ExecSeq          = Expr { String = "0";}
+    evForceValue       = Expr { String = "vinleaklo";}
+    evLowLimit       = Expr { String = "iTRSTleaklo";}
+    evHighLimit      = Expr { String = "40ua";}
+    evMeasureRange   = Expr { String = "40ua * 1.2";}
+  }
+//DCSetIO(EMU0,v[vtrilkghi],v[vtrilkghi],v[vtrilkghi],v[vtrilkghi],v[vtrilkghi],v[vtrilkghi],v[vtrilkghi],-1ma,1ma);
+  Column[ 8]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "EMU0";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vtrilkghi";}
+    Vih              = Expr { String = "vtrilkghi";}
+    Vol              = Expr { String = "vtrilkghi";}
+    Voh              = Expr { String = "vtrilkghi";}
+    Vref             = Expr { String = "vtrilkghi";}
+    Iol              = Expr { String = "-1ma";}
+    Ioh              = Expr { String = "1ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetIO(EMU1,v[vtrilkglo],v[vtrilkglo],v[vtrilkglo],v[vtrilkglo],v[vtrilkglo],v[vtrilkglo],v[vtrilkglo],-1ma,1ma);
+  Column[ 9]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "EMU1";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vtrilkglo";}
+    Vih              = Expr { String = "vtrilkglo";}
+    Vol              = Expr { String = "vtrilkglo";}
+    Voh              = Expr { String = "vtrilkglo";}
+    Vref             = Expr { String = "vtrilkglo";}
+    Iol              = Expr { String = "-1ma";}
+    Ioh              = Expr { String = "1ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetIO(ODDTRISTATE,0v,0v,0v,0v,0v,0v,0v,0ma,0ma);
+  Column[10]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "ODDTRISTATE";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0v";}
+    Vih              = Expr { String = "0v";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "0ma";}
+    Ioh              = Expr { String = "0ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetIO(EVENTRISTATE,0v,0v,0v,0v,0v,0v,0v,0ma,0ma);
+  Column[11]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "EVENTRISTATE";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0v";}
+    Vih              = Expr { String = "0v";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "0ma";}
+    Ioh              = Expr { String = "0ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetIO(IOUPS,v[vtrilkglo],v[vtrilkglo],v[vtrilkglo],v[vtrilkglo],v[vtrilkglo],v[vtrilkglo],0v,0ma,0ma);
+  Column[12]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "IOUPS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vtrilkglo";}
+    Vih              = Expr { String = "vtrilkglo";}
+    Vol              = Expr { String = "vtrilkglo";}
+    Voh              = Expr { String = "vtrilkglo";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "0ma";}
+    Ioh              = Expr { String = "0ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetOutput(X1,0v,0v,0v,0ma,0ma);
+  Column[13]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "X1";}
+    ExecSeq          = Expr { String = "0";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "0ma";}
+    Ioh              = Expr { String = "0ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetIO(NOTESTINS,0v,0v,0v,0v,0v,0v,0v,0ma,0ma);
+  Column[14]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "NOTESTINS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0v";}
+    Vih              = Expr { String = "0v";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "0ma";}
+    Ioh              = Expr { String = "0ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+}
+
+Levels TIPTUIOddHi2DCTable {
+//DCSetInput(EVENINLEAKINS,v[vinleaklo],v[vinleaklo],v[vinleaklo],v[vinleaklo]);
+  Column[ 0]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "EVENINLEAKINS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleaklo";}
+    Vih              = Expr { String = "vinleaklo";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetInput(ODDINLEAKINS,v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi]);
+  Column[ 1]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "ODDINLEAKINS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleakhi";}
+    Vih              = Expr { String = "vinleakhi";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetInput(CLKMOD1,0v,0v,0v,0v);
+  Column[ 2]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "CLKMOD1";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0v";}
+    Vih              = Expr { String = "0v";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetInput(CLKMOD2,0v,0v,0v,0v);
+  Column[ 3]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "CLKMOD2";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0v";}
+    Vih              = Expr { String = "0v";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetInput(INUPS,v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi]);
+  Column[ 4]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "INUPS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleakhi";}
+    Vih              = Expr { String = "vinleakhi";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetPTUIInput(X2CLKIN,v[vinleaklo],v[vinleaklo],v[vinleaklo],v[vinleaklo],v[vinleaklo],i[iinleaklo],i[iinleakhi],i[ipturange]);
+  Column[ 5]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "X2CLKIN";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleaklo";}
+    Vih              = Expr { String = "vinleaklo";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+  Column[ 6]{
+    LevelsColumnType = evDCTestType;
+    Group            = Expr { String = "X2CLKIN";}
+    ExecSeq          = Expr { String = "0";}
+    evForceValue       = Expr { String = "vinleaklo";}
+    evLowLimit       = Expr { String = "iinleaklo";}
+    evHighLimit      = Expr { String = "iinleakhi";}
+    evMeasureRange   = Expr { String = "ipturange * 1.2";}
+  }
+//DCSetInput(INDOWNS,0v,0v,0v,0v);
+  Column[ 7]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "INDOWNS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0v";}
+    Vih              = Expr { String = "0v";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetPTUIIO(EMU0,v[vtrilkglo],v[vtrilkglo],v[vtrilkglo],v[vtrilkglo],v[vtrilkglo],v[vtrilkglo],v[vtrilkglo],i[itrilkglo],i[itrilkghi],i[ipturange]);
+  Column[ 8]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "EMU0";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vtrilkglo";}
+    Vih              = Expr { String = "vtrilkglo";}
+    Vol              = Expr { String = "vtrilkglo";}
+    Voh              = Expr { String = "vtrilkglo";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+  Column[ 9]{
+    LevelsColumnType = evDCTestType;
+    Group            = Expr { String = "EMU0";}
+    ExecSeq          = Expr { String = "0";}
+    evForceValue       = Expr { String = "vtrilkglo";}
+    evLowLimit       = Expr { String = "itrilkglo";}
+    evHighLimit      = Expr { String = "itrilkghi";}
+    evMeasureRange   = Expr { String = "ipturange * 1.2";}
+  }
+//DCSetPTUIIO(EMU1,v[vtrilkghi],v[vtrilkghi],v[vtrilkghi],v[vtrilkghi],v[vtrilkghi],v[vtrilkghi],v[vtrilkghi],i[itrilkglo],i[itrilkghi],i[ipturange]);
+  Column[10]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "EMU1";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vtrilkghi";}
+    Vih              = Expr { String = "vtrilkghi";}
+    Vol              = Expr { String = "vtrilkghi";}
+    Voh              = Expr { String = "vtrilkghi";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+  Column[11]{
+    LevelsColumnType = evDCTestType;
+    Group            = Expr { String = "EMU1";}
+    ExecSeq          = Expr { String = "0";}
+    evForceValue       = Expr { String = "vtrilkghi";}
+    evLowLimit       = Expr { String = "itrilkglo";}
+    evHighLimit      = Expr { String = "itrilkghi";}
+    evMeasureRange   = Expr { String = "ipturange * 1.2";}
+  }
+//DCSetIO(EVENTRISTATE,0v,0v,0v,0v,0v,0v,0v,0ma,0ma);
+  Column[12]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "EVENTRISTATE";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0v";}
+    Vih              = Expr { String = "0v";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "0ma";}
+    Ioh              = Expr { String = "0ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetIO(ODDTRISTATE,0v,0v,0v,0v,0v,0v,0v,0ma,0ma);
+  Column[13]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "ODDTRISTATE";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0v";}
+    Vih              = Expr { String = "0v";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "0ma";}
+    Ioh              = Expr { String = "0ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetIO(IOUPS,0v,0v,0v,0v,0v,0v,0v,0ma,0ma);
+  Column[14]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "IOUPS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0v";}
+    Vih              = Expr { String = "0v";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "0ma";}
+    Ioh              = Expr { String = "0ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetOutput(X1,0v,0v,0v,0ma,0ma);
+  Column[15]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "X1";}
+    ExecSeq          = Expr { String = "0";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "0ma";}
+    Ioh              = Expr { String = "0ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetIO(NOTESTINS,0v,0v,0v,0v,0v,0v,0v,0ma,0ma);
+  Column[16]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "NOTESTINS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0v";}
+    Vih              = Expr { String = "0v";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "0ma";}
+    Ioh              = Expr { String = "0ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+}
+
+Levels TIPTUIOddLo2DCTable {
+//DCSetInput(ODDINLEAKINS,v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi]);
+  Column[ 0]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "ODDINLEAKINS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleakhi";}
+    Vih              = Expr { String = "vinleakhi";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetInput(EVENINLEAKINS,v[vinleaklo],v[vinleaklo],v[vinleaklo],v[vinleaklo]);
+  Column[ 1]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "EVENINLEAKINS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleaklo";}
+    Vih              = Expr { String = "vinleaklo";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetInput(CLKMOD1,v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi]);
+  Column[ 2]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "CLKMOD1";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleakhi";}
+    Vih              = Expr { String = "vinleakhi";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetInput(CLKMOD2,v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi]);
+  Column[ 3]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "CLKMOD2";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleakhi";}
+    Vih              = Expr { String = "vinleakhi";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetInput(INUPS,v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi]);
+  Column[ 4]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "INUPS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleakhi";}
+    Vih              = Expr { String = "vinleakhi";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetPTUIInput(X2CLKIN,v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi],i[iX2leaklo],i[iX2leakhi],400ua);
+  Column[ 5]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "X2CLKIN";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleakhi";}
+    Vih              = Expr { String = "vinleakhi";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+  Column[ 6]{
+    LevelsColumnType = evDCTestType;
+    Group            = Expr { String = "X2CLKIN";}
+    ExecSeq          = Expr { String = "0";}
+    evForceValue       = Expr { String = "vinleakhi";}
+    evLowLimit       = Expr { String = "iX2leaklo";}
+    evHighLimit      = Expr { String = "iX2leakhi";}
+    evMeasureRange   = Expr { String = "400ua * 1.2";}
+  }
+//DCSetInput(INDOWNS,0v,0v,0v,0v);
+  Column[ 7]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "INDOWNS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0v";}
+    Vih              = Expr { String = "0v";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetPTUIIO(EMU0,v[vtrilkghi],v[vtrilkghi],0v,0v,v[vtrilkghi],v[vtrilkghi],v[vtrilkghi],i[itrilkglo],i[itrilkghi],i[ipturange]);
+  Column[ 8]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "EMU0";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vtrilkghi";}
+    Vih              = Expr { String = "vtrilkghi";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+  Column[ 9]{
+    LevelsColumnType = evDCTestType;
+    Group            = Expr { String = "EMU0";}
+    ExecSeq          = Expr { String = "0";}
+    evForceValue       = Expr { String = "vtrilkghi";}
+    evLowLimit       = Expr { String = "itrilkglo";}
+    evHighLimit      = Expr { String = "itrilkghi";}
+    evMeasureRange   = Expr { String = "ipturange * 1.2";}
+  }
+//DCSetPTUIIO(EMU1,v[vtrilkglo],v[vtrilkglo],0v,0v,v[vtrilkglo],v[vtrilkglo],v[vtrilkglo],i[itrilkglo],i[itrilkghi],i[ipturange]);
+  Column[10]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "EMU1";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vtrilkglo";}
+    Vih              = Expr { String = "vtrilkglo";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+  Column[11]{
+    LevelsColumnType = evDCTestType;
+    Group            = Expr { String = "EMU1";}
+    ExecSeq          = Expr { String = "0";}
+    evForceValue       = Expr { String = "vtrilkglo";}
+    evLowLimit       = Expr { String = "itrilkglo";}
+    evHighLimit      = Expr { String = "itrilkghi";}
+    evMeasureRange   = Expr { String = "ipturange * 1.2";}
+  }
+//DCSetIO(ODDTRISTATE,0v,0v,0v,0v,0v,0v,0v,0ma,0ma);
+  Column[12]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "ODDTRISTATE";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0v";}
+    Vih              = Expr { String = "0v";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "0ma";}
+    Ioh              = Expr { String = "0ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetIO(EVENTRISTATE,0v,0v,0v,0v,0v,0v,0v,0ma,0ma);
+  Column[13]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "EVENTRISTATE";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0v";}
+    Vih              = Expr { String = "0v";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "0ma";}
+    Ioh              = Expr { String = "0ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetIO(IOUPS,0v,0v,0v,0v,0v,0v,v[vtrilkghi],-1ma,1ma);
+  Column[14]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "IOUPS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0v";}
+    Vih              = Expr { String = "0v";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "vtrilkghi";}
+    Iol              = Expr { String = "-1ma";}
+    Ioh              = Expr { String = "1ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetOutput(X1,0v,0v,0v,0ma,0ma);
+  Column[15]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "X1";}
+    ExecSeq          = Expr { String = "0";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "0ma";}
+    Ioh              = Expr { String = "0ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetIO(NOTESTINS,0v,0v,0v,0v,0v,0v,0v,0ma,0ma);
+  Column[16]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "NOTESTINS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0v";}
+    Vih              = Expr { String = "0v";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "0ma";}
+    Ioh              = Expr { String = "0ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+}
+
+Levels TIPTUIOddHi3DCTable {
+//DCSetPTUIInput(EVENINLEAKINS,v[vinleaklo],v[vinleaklo],v[vinleaklo],v[vinleaklo],v[vinleaklo],i[iinleaklo],i[iinleakhi],i[ipturange]);
+  Column[ 0]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "EVENINLEAKINS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleaklo";}
+    Vih              = Expr { String = "vinleaklo";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+  Column[ 1]{
+    LevelsColumnType = evDCTestType;
+    Group            = Expr { String = "EVENINLEAKINS";}
+    ExecSeq          = Expr { String = "0";}
+    evForceValue       = Expr { String = "vinleaklo";}
+    evLowLimit       = Expr { String = "iinleaklo";}
+    evHighLimit      = Expr { String = "iinleakhi";}
+    evMeasureRange   = Expr { String = "ipturange * 1.2";}
+  }
+//DCSetPTUIInput(ODDINLEAKINS,v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi],i[iinleaklo],i[iinleakhi],i[ipturange]);
+  Column[ 2]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "ODDINLEAKINS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleakhi";}
+    Vih              = Expr { String = "vinleakhi";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+  Column[ 3]{
+    LevelsColumnType = evDCTestType;
+    Group            = Expr { String = "ODDINLEAKINS";}
+    ExecSeq          = Expr { String = "0";}
+    evForceValue       = Expr { String = "vinleakhi";}
+    evLowLimit       = Expr { String = "iinleaklo";}
+    evHighLimit      = Expr { String = "iinleakhi";}
+    evMeasureRange   = Expr { String = "ipturange * 1.2";}
+  }
+//DCSetPTUIInput(CLKMOD1,v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi],i[iinleaklo],i[iinleakhi],i[ipturange]);
+  Column[ 4]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "CLKMOD1";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleakhi";}
+    Vih              = Expr { String = "vinleakhi";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+  Column[ 5]{
+    LevelsColumnType = evDCTestType;
+    Group            = Expr { String = "CLKMOD1";}
+    ExecSeq          = Expr { String = "0";}
+    evForceValue       = Expr { String = "vinleakhi";}
+    evLowLimit       = Expr { String = "iinleaklo";}
+    evHighLimit      = Expr { String = "iinleakhi";}
+    evMeasureRange   = Expr { String = "ipturange * 1.2";}
+  }
+//DCSetPTUIInput(CLKMOD2,v[vinleaklo],v[vinleaklo],v[vinleaklo],v[vinleaklo],v[vinleaklo],i[iinleaklo],i[iinleakhi],i[ipturange]);
+  Column[ 6]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "CLKMOD2";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleaklo";}
+    Vih              = Expr { String = "vinleaklo";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+  Column[ 7]{
+    LevelsColumnType = evDCTestType;
+    Group            = Expr { String = "CLKMOD2";}
+    ExecSeq          = Expr { String = "0";}
+    evForceValue       = Expr { String = "vinleaklo";}
+    evLowLimit       = Expr { String = "iinleaklo";}
+    evHighLimit      = Expr { String = "iinleakhi";}
+    evMeasureRange   = Expr { String = "ipturange * 1.2";}
+  }
+//DCSetPTUIInput(INUPS,v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi],-40ua,i[iINUPSleakhi],40ua);
+  Column[ 8]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "INUPS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleakhi";}
+    Vih              = Expr { String = "vinleakhi";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+  Column[ 9]{
+    LevelsColumnType = evDCTestType;
+    Group            = Expr { String = "INUPS";}
+    ExecSeq          = Expr { String = "0";}
+    evForceValue       = Expr { String = "vinleakhi";}
+    evLowLimit       = Expr { String = "-40ua";}
+    evHighLimit      = Expr { String = "iINUPSleakhi";}
+    evMeasureRange   = Expr { String = "40ua * 1.2";}
+  }
+//DCSetInput(X2CLKIN,0v,0v,0v,0v);
+  Column[10]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "X2CLKIN";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0v";}
+    Vih              = Expr { String = "0v";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetInput(INDOWNS,0v,0v,0v,0v);
+  Column[11]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "INDOWNS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0v";}
+    Vih              = Expr { String = "0v";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetIO(EMU0,v[vtrilkghi],v[vtrilkghi],v[vtrilkghi],v[vtrilkghi],v[vtrilkghi],v[vtrilkghi],v[vtrilkghi],-50ma,50ma);
+  Column[12]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "EMU0";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vtrilkghi";}
+    Vih              = Expr { String = "vtrilkghi";}
+    Vol              = Expr { String = "vtrilkghi";}
+    Voh              = Expr { String = "vtrilkghi";}
+    Vref             = Expr { String = "vtrilkghi";}
+    Iol              = Expr { String = "-50ma";}
+    Ioh              = Expr { String = "50ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetIO(EMU1,0v,0v,0v,0v,0v,0v,0v,-50ma,50ma);
+  Column[13]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "EMU1";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0v";}
+    Vih              = Expr { String = "0v";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "-50ma";}
+    Ioh              = Expr { String = "50ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetPTUIIO(EVENTRISTATE,v[vtrilkglo],v[vtrilkglo],0v,0v,v[vtrilkglo],v[vtrilkglo],v[vtrilkglo],i[itrilkglo],i[itrilkghi],i[ipturange]);
+  Column[14]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "EVENTRISTATE";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vtrilkglo";}
+    Vih              = Expr { String = "vtrilkglo";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+  Column[15]{
+    LevelsColumnType = evDCTestType;
+    Group            = Expr { String = "EVENTRISTATE";}
+    ExecSeq          = Expr { String = "0";}
+    evForceValue       = Expr { String = "vtrilkglo";}
+    evLowLimit       = Expr { String = "itrilkglo";}
+    evHighLimit      = Expr { String = "itrilkghi";}
+    evMeasureRange   = Expr { String = "ipturange * 1.2";}
+  }
+//DCSetPTUIIO(ODDTRISTATE,v[vtrilkghi],v[vtrilkghi],0v,0v,v[vtrilkghi],v[vtrilkghi],v[vtrilkghi],i[itrilkglo],i[itrilkghi],i[ipturange]);
+  Column[16]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "ODDTRISTATE";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vtrilkghi";}
+    Vih              = Expr { String = "vtrilkghi";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+  Column[17]{
+    LevelsColumnType = evDCTestType;
+    Group            = Expr { String = "ODDTRISTATE";}
+    ExecSeq          = Expr { String = "0";}
+    evForceValue       = Expr { String = "vtrilkghi";}
+    evLowLimit       = Expr { String = "itrilkglo";}
+    evHighLimit      = Expr { String = "itrilkghi";}
+    evMeasureRange   = Expr { String = "ipturange * 1.2";}
+  }
+//DCSetPTUIIO(IOUPS,v[vtrilkghi],v[vtrilkghi],0v,0v,v[vtrilkghi],v[vtrilkghi],v[vtrilkghi],-40ua,i[iIOUPSlkghi],40ua);
+  Column[18]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "IOUPS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vtrilkghi";}
+    Vih              = Expr { String = "vtrilkghi";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+  Column[19]{
+    LevelsColumnType = evDCTestType;
+    Group            = Expr { String = "IOUPS";}
+    ExecSeq          = Expr { String = "0";}
+    evForceValue       = Expr { String = "vtrilkghi";}
+    evLowLimit       = Expr { String = "-40ua";}
+    evHighLimit      = Expr { String = "iIOUPSlkghi";}
+    evMeasureRange   = Expr { String = "40ua * 1.2";}
+  }
+//DCSetOutput(X1,0v,0v,0v,0ma,0ma);
+  Column[20]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "X1";}
+    ExecSeq          = Expr { String = "0";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "0ma";}
+    Ioh              = Expr { String = "0ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetIO(NOTESTINS,0v,0v,0v,0v,0v,0v,0v,0ma,0ma);
+  Column[21]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "NOTESTINS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0v";}
+    Vih              = Expr { String = "0v";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "0ma";}
+    Ioh              = Expr { String = "0ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+}
+
+Levels TIPTUIOddLo3DCTable {
+//DCSetPTUIInput(ODDINLEAKINS,v[vinleaklo],v[vinleaklo],v[vinleaklo],v[vinleaklo],v[vinleaklo],i[iinleaklo],i[iinleakhi],i[ipturange]);
+  Column[ 0]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "ODDINLEAKINS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleaklo";}
+    Vih              = Expr { String = "vinleaklo";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+  Column[ 1]{
+    LevelsColumnType = evDCTestType;
+    Group            = Expr { String = "ODDINLEAKINS";}
+    ExecSeq          = Expr { String = "0";}
+    evForceValue       = Expr { String = "vinleaklo";}
+    evLowLimit       = Expr { String = "iinleaklo";}
+    evHighLimit      = Expr { String = "iinleakhi";}
+    evMeasureRange   = Expr { String = "ipturange * 1.2";}
+  }
+//DCSetPTUIInput(EVENINLEAKINS,v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi],i[iinleaklo],i[iinleakhi],i[ipturange]);
+  Column[ 2]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "EVENINLEAKINS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleakhi";}
+    Vih              = Expr { String = "vinleakhi";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+  Column[ 3]{
+    LevelsColumnType = evDCTestType;
+    Group            = Expr { String = "EVENINLEAKINS";}
+    ExecSeq          = Expr { String = "0";}
+    evForceValue       = Expr { String = "vinleakhi";}
+    evLowLimit       = Expr { String = "iinleaklo";}
+    evHighLimit      = Expr { String = "iinleakhi";}
+    evMeasureRange   = Expr { String = "ipturange * 1.2";}
+  }
+//DCSetPTUIInput(CLKMOD1,v[vinleaklo],v[vinleaklo],v[vinleaklo],v[vinleaklo],v[vinleaklo],i[iinleaklo],i[iinleakhi],i[ipturange]);
+  Column[ 4]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "CLKMOD1";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleaklo";}
+    Vih              = Expr { String = "vinleaklo";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+  Column[ 5]{
+    LevelsColumnType = evDCTestType;
+    Group            = Expr { String = "CLKMOD1";}
+    ExecSeq          = Expr { String = "0";}
+    evForceValue       = Expr { String = "vinleaklo";}
+    evLowLimit       = Expr { String = "iinleaklo";}
+    evHighLimit      = Expr { String = "iinleakhi";}
+    evMeasureRange   = Expr { String = "ipturange * 1.2";}
+  }
+//DCSetPTUIInput(CLKMOD2,v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi],v[vinleakhi],i[iinleaklo],i[iinleakhi],i[ipturange]);
+  Column[ 6]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "CLKMOD2";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleakhi";}
+    Vih              = Expr { String = "vinleakhi";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+  Column[ 7]{
+    LevelsColumnType = evDCTestType;
+    Group            = Expr { String = "CLKMOD2";}
+    ExecSeq          = Expr { String = "0";}
+    evForceValue       = Expr { String = "vinleakhi";}
+    evLowLimit       = Expr { String = "iinleaklo";}
+    evHighLimit      = Expr { String = "iinleakhi";}
+    evMeasureRange   = Expr { String = "ipturange * 1.2";}
+  }
+//DCSetPTUIInput(INUPS,v[vinleaklo],v[vinleaklo],v[vinleaklo],v[vinleaklo],v[vinleaklo],i[iINUPSleaklo],i[iinleaklo],4ma);
+  Column[ 8]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "INUPS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vinleaklo";}
+    Vih              = Expr { String = "vinleaklo";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+  Column[ 9]{
+    LevelsColumnType = evDCTestType;
+    Group            = Expr { String = "INUPS";}
+    ExecSeq          = Expr { String = "0";}
+    evForceValue       = Expr { String = "vinleaklo";}
+    evLowLimit       = Expr { String = "iINUPSleaklo";}
+    evHighLimit      = Expr { String = "iinleaklo";}
+    evMeasureRange   = Expr { String = "4ma * 1.2";}
+  }
+//DCSetInput(X2CLKIN,0v,0v,0v,0v);
+  Column[10]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "X2CLKIN";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0v";}
+    Vih              = Expr { String = "0v";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetInput(INDOWNS,0v,0v,0v,0v);
+  Column[11]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "INDOWNS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0v";}
+    Vih              = Expr { String = "0v";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetIO(EMU0,v[vtrilkghi],v[vtrilkghi],v[vtrilkghi],v[vtrilkghi],v[vtrilkghi],v[vtrilkghi],v[vtrilkghi],-50ma,50ma);
+  Column[12]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "EMU0";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vtrilkghi";}
+    Vih              = Expr { String = "vtrilkghi";}
+    Vol              = Expr { String = "vtrilkghi";}
+    Voh              = Expr { String = "vtrilkghi";}
+    Vref             = Expr { String = "vtrilkghi";}
+    Iol              = Expr { String = "-50ma";}
+    Ioh              = Expr { String = "50ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetIO(EMU1,0v,0v,0v,0v,0v,0v,0v,-50ma,50ma);
+  Column[13]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "EMU1";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0v";}
+    Vih              = Expr { String = "0v";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "-50ma";}
+    Ioh              = Expr { String = "50ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetPTUIIO(ODDTRISTATE,v[vtrilkglo],v[vtrilkglo],0v,0v,v[vtrilkglo],v[vtrilkglo],v[vtrilkglo],i[itrilkglo],i[itrilkghi],i[ipturange]);
+  Column[14]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "ODDTRISTATE";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vtrilkglo";}
+    Vih              = Expr { String = "vtrilkglo";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+  Column[15]{
+    LevelsColumnType = evDCTestType;
+    Group            = Expr { String = "ODDTRISTATE";}
+    ExecSeq          = Expr { String = "0";}
+    evForceValue       = Expr { String = "vtrilkglo";}
+    evLowLimit       = Expr { String = "itrilkglo";}
+    evHighLimit      = Expr { String = "itrilkghi";}
+    evMeasureRange   = Expr { String = "ipturange * 1.2";}
+  }
+//DCSetPTUIIO(EVENTRISTATE,v[vtrilkghi],v[vtrilkghi],0v,0v,v[vtrilkghi],v[vtrilkghi],v[vtrilkghi],i[itrilkglo],i[itrilkghi],i[ipturange]);
+  Column[16]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "EVENTRISTATE";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vtrilkghi";}
+    Vih              = Expr { String = "vtrilkghi";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+  Column[17]{
+    LevelsColumnType = evDCTestType;
+    Group            = Expr { String = "EVENTRISTATE";}
+    ExecSeq          = Expr { String = "0";}
+    evForceValue       = Expr { String = "vtrilkghi";}
+    evLowLimit       = Expr { String = "itrilkglo";}
+    evHighLimit      = Expr { String = "itrilkghi";}
+    evMeasureRange   = Expr { String = "ipturange * 1.2";}
+  }
+//DCSetPTUIIO(IOUPS,v[vtrilkglo],v[vtrilkglo],0v,0v,v[vtrilkglo],v[vtrilkglo],v[vtrilkglo],i[iIOUPSlkglo],i[itrilkglo],4ma);
+  Column[18]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "IOUPS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vtrilkglo";}
+    Vih              = Expr { String = "vtrilkglo";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+  Column[19]{
+    LevelsColumnType = evDCTestType;
+    Group            = Expr { String = "IOUPS";}
+    ExecSeq          = Expr { String = "0";}
+    evForceValue       = Expr { String = "vtrilkglo";}
+    evLowLimit       = Expr { String = "iIOUPSlkglo";}
+    evHighLimit      = Expr { String = "itrilkglo";}
+    evMeasureRange   = Expr { String = "4ma * 1.2";}
+  }
+//DCSetOutput(X1,0v,0v,0v,0ma,0ma);
+  Column[20]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "X1";}
+    ExecSeq          = Expr { String = "0";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "0ma";}
+    Ioh              = Expr { String = "0ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+//DCSetIO(NOTESTINS,0v,0v,0v,0v,0v,0v,0v,0ma,0ma);
+  Column[21]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "NOTESTINS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0v";}
+    Vih              = Expr { String = "0v";}
+    Vol              = Expr { String = "0v";}
+    Voh              = Expr { String = "0v";}
+    Vref             = Expr { String = "0v";}
+    Iol              = Expr { String = "0ma";}
+    Ioh              = Expr { String = "0ma";}
+    ClampLo          = Expr { String = "-50mV";}
+    ClampHi          = Expr { String = "Vdd_PS+50mV";}
+  }
+}

@@ -1,0 +1,263 @@
+
+function  patterntest  ;
+begin
+writeln(execFile,'PROC:patterntest');
+patterntest:=true;
+if ( ( firstpat=generic_long ) and ( lastpat=specific_long ) ) then
+  begin
+    if not myTestFunc(generic_long)  then begin
+				           patterntest:=false;
+					   if TIScreenPrint then writeln(' >> FAILED generic_long pattern');
+					 end else begin
+					   if TIScreenPrint and TIPrintPass then writeln(' PASSED generic_long pattern');
+					 end;
+    SpareString1:='LONGPATS';
+    if EnvironmentIsSet(SpareString1) then
+         begin
+            if not myPATTERNTEST(cycletable,actab,dctab,saram,mpassing_base) then
+                                         begin
+				           patterntest:=false;
+					   if TIScreenPrint then writeln(' >> FAILED specific_long pattern');
+					 end else begin
+					   if TIScreenPrint and TIPrintPass then writeln(' PASSED specific_long pattern');
+					 end;
+         end else begin
+            if not myTestFunc(specific_long) then
+                                         begin
+				           patterntest:=false;
+					   if TIScreenPrint then writeln(' >> FAILED specific_long pattern');
+					 end else begin
+					   if TIScreenPrint and TIPrintPass then writeln(' PASSED specific_long pattern');
+					 end;
+         end;
+  end else begin
+    if not myPATTERNTEST(cycletable,actab,dctab,firstpat, lastpat) then patterntest:=false;
+  end;
+writeln(execFile,'PROCEND:patterntest');
+end;
+function  c5x_PATTERNTEST;
+label 100;
+var
+ScreenPrint      : boolean;
+DBUSEdgeTime1    : PicoSeconds;
+DBUSEdgeType1    : EdgeType;
+begin
+writeln(execFile,'PROC:c5x_PATTERNTEST');
+if not (actablename in [TIlofrqACTable..TIsearchlooseACTable]) then
+   begin
+     writeln('not valid actable!');
+     goto 100;
+   end;
+c5x_PATTERNTEST:=true;
+failtiming	 := false;
+failramsequence	 := false;
+failramwalk	 := false;
+failtiming2      := false;
+failtaa    	 := false;
+failrom    	 := false;
+failloospll      := false;
+failpll		 := false;
+if false then
+  begin
+   if (actablename in [TIlofrqACTable,TIlofrqACTable1,TIlofrqACTable2])             then actablename:=TIlofrqACTable;
+   if (actablename in [TIveryhifrqACTable,TIveryhifrqACTable1,TIveryhifrqACTable2]) then actablename:=TIveryhifrqACTable;
+   if (actablename in [TIhifrqACTable,TIhifrqACTable1,TIhifrqACTable2])             then actablename:=TIhifrqACTable;
+   if (actablename in [TIsearchACTable,TIsearchACTable1,TIsearchACTable2])          then actablename:=TIsearchACTable;
+  end else begin
+   if (actablename in [TIlofrqACTable,TIlofrqACTable1,TIlofrqACTable2])             then actablename:=TIlofrqACTable1;
+   if (actablename in [TIveryhifrqACTable,TIveryhifrqACTable1,TIveryhifrqACTable2]) then actablename:=TIveryhifrqACTable1;
+   if (actablename in [TIhifrqACTable,TIhifrqACTable1,TIhifrqACTable2])             then actablename:=TIhifrqACTable1;
+   if (actablename in [TIsearchACTable,TIsearchACTable1,TIsearchACTable2])          then actablename:=TIsearchACTable1;
+  end;
+if not SpecTimings then
+  begin
+   dctablename:=TIlooseDCTable;
+   if (actablename in [TIlofrqACTable,TIlofrqACTable1,TIlofrqACTable2])             then actablename:=TIlofrqlooseACTable;
+   if (actablename in [TIveryhifrqACTable,TIveryhifrqACTable1,TIveryhifrqACTable2]) then actablename:=TIveryhifrqlooseACTable;
+   if (actablename in [TIhifrqACTable,TIhifrqACTable1,TIhifrqACTable2])             then actablename:=TIhifrqlooseACTable;
+   if (actablename in [TIsearchACTable,TIsearchACTable1,TIsearchACTable2])          then actablename:=TIsearchlooseACTable;
+  end;
+if TIScreenPrint then
+    writeln(actablename,ACDataSheets[actablename].t[tper]/1000:7:2,'ns');
+Sync(actablename,dctablename,force_clkin);
+if failspecsync then
+   begin
+    if TIScreenPrint then writeln(' >> FAILED X2CLKIN SPEC SYNC ');
+    c5x_PATTERNTEST:=false;
+    if not TIIgnoreFail then goto 100;
+   end;
+if failsync or failsclksync then
+   begin
+    if TIScreenPrint then writeln(' >> FAILED X2CLKIN SYNC ');
+    c5x_PATTERNTEST:=false;
+    if not TIIgnoreFail then goto 100;
+   end else
+    if TIScreenPrint then writeln(' PASSED X2CLKIN SYNC ');
+if not patterntest(cycletable,actablename,dctablename,firstpatternname, lastpatternname) then
+  begin
+    c5x_PATTERNTEST:=false;
+    failtiming:=true;
+    if TIScreenPrint then writeln(' >> FAILED FIRST PASS SPEC TIMINGS ');
+    if not TIIgnoreFail then goto 100;
+  end else
+    if TIScreenPrint then writeln(' PASSED FIRST PASS SPEC TIMINGS ');
+if (not myTestFunc(self_c5x)) or (not myTestFunc(monit1)) or (not myTestFunc(sport_tdm1) or (not myTestFunc(tdm2)) ) then
+  begin
+    c5x_PATTERNTEST:=false;
+    failtiming:=true;
+    if TIScreenPrint then writeln(' >> FAILED OTHER FUNC TESTS AT SPEC TIMINGS ');
+    if not TIIgnoreFail then goto 100;
+  end;
+if ( not (TITestTemp in [Temp_N40_Degrees_C,Temp_0_Degrees_C,Temp_5_Degrees_C,Temp_25_Degrees_C] ) ) then
+ if (not myTestFunc(sport11)) or (not myTestFunc(tsport11)) then
+  begin
+    c5x_PATTERNTEST:=false;
+    failtiming:=true;
+    if TIScreenPrint then writeln(' >> FAILED (t)sport11 pattern ');
+    if not TIIgnoreFail then goto 100;
+  end;
+if (actablename in [TIlofrqACTable,TIlofrqACTable1,TIlofrqlooseACTable]) then
+  if (not myTestFunc(simple_ev2)) or (not myTestFunc(event_count2))  then
+    begin
+      c5x_PATTERNTEST:=false;
+      failtiming:=true;
+      if TIScreenPrint then writeln(' >> FAILED simple_ev2,event_count2 patterns ');
+      if not TIIgnoreFail then goto 100;
+    end;
+if (actablename in [TIlofrqACTable,TIlofrqACTable1,TIlofrqlooseACTable]) then
+  if (not myTestFunc(idle3)) then
+    begin
+      if TIScreenPrint then writeln(' >> FAILED idle3 pattern ');
+      c5x_PATTERNTEST:=false;
+      failtiming:=true;
+      if not TIIgnoreFail then goto 100;
+    end;
+if (not myTestFunc(ext_dma_all)) then
+   begin
+     if TIScreenPrint then writeln(' >> FAILED ext_dma_all pattern ');
+     c5x_PATTERNTEST:=false;
+     failtiming:=true;
+     if not TIIgnoreFail then goto 100;
+   end;
+if (not (actablename in [TIlofrqACTable,TIlofrqACTable1,TIlofrqlooseACTable])) and true then
+   begin
+     if (not myTestFunc(daram_sequence)) then
+        begin
+          if TIScreenPrint then writeln(' >> FAILED daram_sequence pattern ');
+          c5x_PATTERNTEST:=false;
+          failramsequence:=true;
+          if not TIIgnoreFail then goto 100;
+        end;
+   end;
+if (not (actablename in [TIlofrqACTable,TIlofrqACTable1,TIlofrqlooseACTable])) and true then
+   begin
+     if (not myTestFunc(saram_walk)) or (not myTestFunc(daram_walk)) then
+        begin
+          if TIScreenPrint then writeln(' >> FAILED ram walking data pattern ');
+          c5x_PATTERNTEST:=false;
+          failramwalk:=true;
+          if not TIIgnoreFail then goto 100;
+        end;
+   end;
+if true then begin
+if ( (not myTestFunc(rom_prot_tc)) and false ) then
+   begin
+     c5x_PATTERNTEST:=false;
+     failrom:=true;
+     if TIScreenPrint then writeln(' >> FAILED - Not rom protected and is loaded as such ',romcode);
+     if not TIIgnoreFail then goto 100;
+   end;
+if ( myTestFunc(rom_prot_tc) and (not false) ) then
+   begin
+     c5x_PATTERNTEST:=false;
+     failrom:=true;
+     if TIScreenPrint then writeln(' >> FAILED - It is rom protected and not loaded as such ',romcode);
+     if not TIIgnoreFail then goto 100;
+   end;
+if ( not myTestFunc(romdump) ) then
+   begin
+     c5x_PATTERNTEST:=false;
+     failrom:=true;
+     if TIScreenPrint then writeln(' >> FAILED romdump ROM ',romcode);
+     if not TIIgnoreFail then goto 100;
+   end else if TIScreenPrint then writeln(' PASSED ROM ',romcode);
+if ( (not myTestFunc(bootcode_tc)) and true ) then
+   begin
+     c5x_PATTERNTEST:=false;
+     failrom:=true;
+     if TIScreenPrint then writeln(' >> FAILED - Not a boot code romcode and is loaded as such ',romcode);
+     if not TIIgnoreFail then goto 100;
+   end;
+if not myTestFunc(rom_coupling) then
+   begin
+     c5x_PATTERNTEST:=false;
+     failrom:=true;
+     if TIScreenPrint then writeln(' >> FAILED rom_coupling ROM ',romcode);
+     if not TIIgnoreFail then goto 100;
+   end;
+if not myTestFunc(extrom) then
+   begin
+     c5x_PATTERNTEST:=false;
+     failrom:=true;
+     if TIScreenPrint then writeln(' >> FAILED extrom ROM ',romcode);
+     if not TIIgnoreFail then goto 100;
+   end;
+end;
+if true and (not false) and
+   ( actablename in [TIsearchACTable,TIsearchACTable1,TIhifrqACTable,TIhifrqACTable1,TIveryhifrqACTable,TIveryhifrqACTable1] ) then
+ begin
+  if (actablename in [TIveryhifrqACTable,TIveryhifrqACTable1]) then actablename:=TIveryhifrqACTable2;
+  if (actablename in [TIhifrqACTable,TIhifrqACTable1])         then actablename:=TIhifrqACTable2;
+  if (actablename in [TIsearchACTable,TIsearchACTable1])       then actablename:=TIsearchACTable2;
+  mySetupSet(cycletable,actablename,dctablename);
+  if not patterntest(cycletable,actablename,dctablename,firstpatternname, lastpatternname) then
+    begin
+      c5x_PATTERNTEST:=false;
+      failtiming2:=true;
+      if TIScreenPrint then writeln(' >> FAILED SECOND PASS SPEC TIMINGS');
+      EdgeGet(DBUS_driveSBC,Edge1,DBUSEdgeType1,DBUSEdgeTime1);
+      EdgeSet(DBUS_driveSBC,Edge1,DBUSEdgeType1,DBUSEdgeTime1-3ns);
+      if patterntest(cycletable,actablename,dctablename,firstpatternname, lastpatternname) then
+         begin failtaa:=true;if TIScreenPrint then writeln(' >> ON TAA ONLY ');end
+         else writeln;
+      EdgeSet(DBUS_driveSBC,Edge1,DBUSEdgeType1,DBUSEdgeTime1);
+      if not TIIgnoreFail then goto 100;
+    end else
+      if TIScreenPrint then writeln(' PASSED SECOND PASS SPEC TIMINGS');
+ end;
+if true then begin
+  if ( actablename in [TIveryhifrqACTable,TIveryhifrqACTable1,TIveryhifrqACTable2]) then actablename := TIveryhifrqlooseACTable;
+  if ( actablename in [TIhifrqACTable,TIhifrqACTable1,TIhifrqACTable2] )             then actablename := TIhifrqlooseACTable;
+  if ( actablename in [TIlofrqACTable,TIlofrqACTable1,TIlofrqlooseACTable] )          then actablename := TIlofrqpllACTable;
+  if (vdd=Vddmin) and ((romcode = '17337') or (romcode = '17339')) then powerup(DCDataSheets[TIdataDCTable].v[vdd]-0.03v);
+  if SpecPll and ( actablename <> TIlofrqpllACTable ) then
+    begin
+      Pll(SpecJitter,SpecTP,actablename,dctablename);
+      if failpll then
+        begin
+          Pll(LooseJitter,LooseTP,actablename,dctablename);
+          if failpll then
+            begin
+              failloospll:=true;
+	      if TIScreenPrint then write(' >> FAILED LOOSE PLL TEST ');
+            end else if TIScreenPrint then write(' >> FAILED SPEC PLL TEST ');
+          c5x_PATTERNTEST:=false;
+          failpll:=true;
+        end else
+          if TIScreenPrint then write(' PASSED SPEC PLL TEST ');
+      if TIScreenPrint then writeln(PllString:12,' at ',ACDataSheets[actablename].t[tper]/1000:7:2,'ns');
+    end else begin
+      Pll(LooseJitter,LooseTP,actablename,dctablename);
+      if failpll then
+        begin
+          failloospll:=true;
+          if TIScreenPrint then write(' >> FAILED LOOSE PLL TEST ');
+          c5x_PATTERNTEST:=false;
+        end else
+          if TIScreenPrint then write(' PASSED LOOSE PLL TEST ');
+      if TIScreenPrint then writeln(PllString:12,' at ',ACDataSheets[actablename].t[tper]/1000:7:2,'ns');
+   end;
+end;
+100:
+writeln(execFile,'PROCEND:c5x_PATTERNTEST');
+end;

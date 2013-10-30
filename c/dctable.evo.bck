@@ -1,0 +1,432 @@
+enVision:"bl8:R11.1.0.WW1111:S3.5"; /* 5.7 */
+
+Levels TItimingHVDCTable_new {
+//DCSetInput(TRIGGERINS,v[viltrigger1090HV],v[vihtrigger1090HV],v[vitl],v[vith]);
+  Column[ 0]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "TRIGGERINS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "viltrigger1090HV";}
+    Vih              = Expr { String = "vihtrigger1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetInput(NBIO,v[vil1090HV],v[vih1090HV],v[vitl],v[vith]);
+  Column[ 1]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "NBIO";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vil1090HV";}
+    Vih              = Expr { String = "vih1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetInput(MPNMC,v[vil1090HV],v[vih1090HV],v[vitl],v[vith]);
+  Column[ 2]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "MPNMC";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vil1090HV";}
+    Vih              = Expr { String = "vih1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetInput(READY,v[vil1090HV],v[vih1090HV],v[vitl],v[vith]);
+  Column[ 3]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "READY";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vil1090HV";}
+    Vih              = Expr { String = "vih1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetInput(NHOLD,v[vil1090HV],v[vih1090HV],v[vitl],v[vith]);
+  Column[ 4]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "NHOLD";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vil1090HV";}
+    Vih              = Expr { String = "vih1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetInput(X2CLKIN,v[vilclkin1090HV],v[vihclkin1090HV],v[vitl],v[vith]);
+  Column[ 5]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "X2CLKIN";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vilclkin1090HV";}
+    Vih              = Expr { String = "vihclkin1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetInput(SPINS,v[vil1090HV],v[vih1090HV],v[vitl],v[vith]);
+  Column[ 6]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "SPINS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vil1090HV";}
+    Vih              = Expr { String = "vih1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetInput(HPIINS,v[vil1090HV],v[vih1090HV],v[vitl],v[vith]);
+  Column[ 7]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "HPIINS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vil1090HV";}
+    Vih              = Expr { String = "vih1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetInput(TRST,v[vil1090HV],v[vih1090HV],v[vitl],v[vith]);
+  Column[ 8]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "TRST";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vil1090HV";}
+    Vih              = Expr { String = "vih1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetInput(TMS,v[vil1090HV],v[vih1090HV],v[vitl],v[vith]);
+  Column[ 9]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "TMS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vil1090HV";}
+    Vih              = Expr { String = "vih1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetInput(TCK,v[vil1090HV],v[vih1090HV],v[vitl],v[vith]);
+  Column[10]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "TCK";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vil1090HV";}
+    Vih              = Expr { String = "vih1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetInput(TDI,v[vil1090HV],v[vih1090HV],v[vitl],v[vith]);
+  Column[11]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "TDI";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vil1090HV";}
+    Vih              = Expr { String = "vih1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetOutput(NHOLDA,v[vohabus1090VV],v[voh1090HV],v[vload1090HV],i[iol1090HV],i[ioh1090HV]);
+  Column[12]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "NHOLDA";}
+    ExecSeq          = Expr { String = "0";}
+    Vol              = Expr { String = "vohabus1090VV";}
+    Voh              = Expr { String = "voh1090HV";}
+    Vref             = Expr { String = "vload1090HV";}
+    Iol              = Expr { String = "iol1090HV";}
+    Ioh              = Expr { String = "ioh1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetOutput(X1,v[vol1090HV],v[voh1090HV],v[vload1090HV],i[iol1090HV],i[ioh1090HV]);
+  Column[13]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "X1";}
+    ExecSeq          = Expr { String = "0";}
+    Vol              = Expr { String = "vol1090HV";}
+    Voh              = Expr { String = "voh1090HV";}
+    Vref             = Expr { String = "vload1090HV";}
+    Iol              = Expr { String = "iol1090HV";}
+    Ioh              = Expr { String = "ioh1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetOutput(ABUS,v[volabus1090HV],v[vohabus1090HV],v[vload1090HV],i[iolabus1090HV],i[iohabus1090HV]);
+  Column[14]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "ABUS";}
+    ExecSeq          = Expr { String = "0";}
+    Vol              = Expr { String = "volabus1090HV";}
+    Voh              = Expr { String = "vohabus1090HV";}
+    Vref             = Expr { String = "vload1090HV";}
+    Iol              = Expr { String = "iolabus1090HV";}
+    Ioh              = Expr { String = "iohabus1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetOutput(RNW,v[vohabus1090VV],v[vohctrl1090HV],v[vload1090HV],i[iol1090HV],i[ioh1090HV]);
+  Column[15]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "RNW";}
+    ExecSeq          = Expr { String = "0";}
+    Vol              = Expr { String = "vohabus1090VV";}
+    Voh              = Expr { String = "vohctrl1090HV";}
+    Vref             = Expr { String = "vload1090HV";}
+    Iol              = Expr { String = "iol1090HV";}
+    Ioh              = Expr { String = "ioh1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetOutput(NIOSTRB,v[volctrl1090HV],v[vohctrl1090HV],v[vload1090HV],i[iol1090HV],i[ioh1090HV]);
+  Column[16]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "NIOSTRB";}
+    ExecSeq          = Expr { String = "0";}
+    Vol              = Expr { String = "volctrl1090HV";}
+    Voh              = Expr { String = "vohctrl1090HV";}
+    Vref             = Expr { String = "vload1090HV";}
+    Iol              = Expr { String = "iol1090HV";}
+    Ioh              = Expr { String = "ioh1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetOutput(NIAQ,v[vohabus1090VV],v[vohctrl1090HV],v[vload1090HV],i[iol1090HV],i[ioh1090HV]);
+  Column[17]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "NIAQ";}
+    ExecSeq          = Expr { String = "0";}
+    Vol              = Expr { String = "vohabus1090VV";}
+    Voh              = Expr { String = "vohctrl1090HV";}
+    Vref             = Expr { String = "vload1090HV";}
+    Iol              = Expr { String = "iol1090HV";}
+    Ioh              = Expr { String = "ioh1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetOutput(NIACK,v[vol1090HV],v[voh1090HV],v[vload1090HV],i[iol1090HV],i[ioh1090HV]);
+  Column[18]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "NIACK";}
+    ExecSeq          = Expr { String = "0";}
+    Vol              = Expr { String = "vol1090HV";}
+    Voh              = Expr { String = "voh1090HV";}
+    Vref             = Expr { String = "vload1090HV";}
+    Iol              = Expr { String = "iol1090HV";}
+    Ioh              = Expr { String = "ioh1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetOutput(XF,v[vol1090HV],v[voh1090HV],v[vload1090HV],i[iol1090HV],i[ioh1090HV]);
+  Column[19]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "XF";}
+    ExecSeq          = Expr { String = "0";}
+    Vol              = Expr { String = "vol1090HV";}
+    Voh              = Expr { String = "voh1090HV";}
+    Vref             = Expr { String = "vload1090HV";}
+    Iol              = Expr { String = "iol1090HV";}
+    Ioh              = Expr { String = "ioh1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetOutput(CLKOUT,v[volclkout1090HV],v[vohclkout1090HV],v[vload1090HV],i[iolclkout1090HV],i[ioh1090HV]);
+  Column[20]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "CLKOUT";}
+    ExecSeq          = Expr { String = "0";}
+    Vol              = Expr { String = "volclkout1090HV";}
+    Voh              = Expr { String = "vohclkout1090HV";}
+    Vref             = Expr { String = "vload1090HV";}
+    Iol              = Expr { String = "iolclkout1090HV";}
+    Ioh              = Expr { String = "ioh1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetOutput(NMSTRB,v[volctrl1090HV],v[vohctrl1090HV],v[vload1090HV],i[iol1090HV],i[ioh1090HV]);
+  Column[21]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "NMSTRB";}
+    ExecSeq          = Expr { String = "0";}
+    Vol              = Expr { String = "volctrl1090HV";}
+    Voh              = Expr { String = "vohctrl1090HV";}
+    Vref             = Expr { String = "vload1090HV";}
+    Iol              = Expr { String = "iol1090HV";}
+    Ioh              = Expr { String = "ioh1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetOutput(NMSC,v[vol1090HV],v[voh1090HV],v[vload1090HV],i[iol1090HV],i[ioh1090HV]);
+  Column[22]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "NMSC";}
+    ExecSeq          = Expr { String = "0";}
+    Vol              = Expr { String = "vol1090HV";}
+    Voh              = Expr { String = "voh1090HV";}
+    Vref             = Expr { String = "vload1090HV";}
+    Iol              = Expr { String = "iol1090HV";}
+    Ioh              = Expr { String = "ioh1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetOutput(SPOUTS,v[vol1090HV],v[voh1090HV],v[vload1090HV],i[iol1090HV],i[ioh1090HV]);
+  Column[23]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "SPOUTS";}
+    ExecSeq          = Expr { String = "0";}
+    Vol              = Expr { String = "vol1090HV";}
+    Voh              = Expr { String = "voh1090HV";}
+    Vref             = Expr { String = "vload1090HV";}
+    Iol              = Expr { String = "iol1090HV";}
+    Ioh              = Expr { String = "ioh1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetOutput(HPIOUTS,v[volDX1090HV],v[vohDX1090HV],v[vloadDX1090HV],i[iolDX1090HV],i[iohDX1090HV]);
+  Column[24]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "HPIOUTS";}
+    ExecSeq          = Expr { String = "0";}
+    Vol              = Expr { String = "volDX1090HV";}
+    Voh              = Expr { String = "vohDX1090HV";}
+    Vref             = Expr { String = "vloadDX1090HV";}
+    Iol              = Expr { String = "iolDX1090HV";}
+    Ioh              = Expr { String = "iohDX1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetOutput(TDO,v[vol1090HV],v[voh1090HV],v[vload1090HV],i[iol1090HV],i[ioh1090HV]);
+  Column[25]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "TDO";}
+    ExecSeq          = Expr { String = "0";}
+    Vol              = Expr { String = "vol1090HV";}
+    Voh              = Expr { String = "voh1090HV";}
+    Vref             = Expr { String = "vload1090HV";}
+    Iol              = Expr { String = "iol1090HV";}
+    Ioh              = Expr { String = "ioh1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetOutput(TOUT,v[volrelaxHV2],v[voh1090HV],v[vload1090HV],i[iol1090HV],i[ioh1090HV]);
+  Column[26]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "TOUT";}
+    ExecSeq          = Expr { String = "0";}
+    Vol              = Expr { String = "volrelaxHV2";}
+    Voh              = Expr { String = "voh1090HV";}
+    Vref             = Expr { String = "vload1090HV";}
+    Iol              = Expr { String = "iol1090HV";}
+    Ioh              = Expr { String = "ioh1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetIO(DBUS,v[vil1090HV],v[vih1090HV],v[voldbus1090HV],v[vohdbus1090HV],v[vitl],v[vith],v[vload1090HV],i[ioldbus1090HV],i[iohdbus1090HV]);
+  Column[27]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "DBUS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vil1090HV";}
+    Vih              = Expr { String = "vih1090HV";}
+    Vol              = Expr { String = "voldbus1090HV";}
+    Voh              = Expr { String = "vohdbus1090HV";}
+    Vref             = Expr { String = "vload1090HV";}
+    Iol              = Expr { String = "ioldbus1090HV";}
+    Ioh              = Expr { String = "iohdbus1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetIO(SPIOS,v[vil1090HV],v[vih1090HV],v[vol1090HV],v[voh1090HV],v[vitl],v[vith],v[vload1090HV],i[iol1090HV],i[ioh1090HV]);
+  Column[28]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "SPIOS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vil1090HV";}
+    Vih              = Expr { String = "vih1090HV";}
+    Vol              = Expr { String = "vol1090HV";}
+    Voh              = Expr { String = "voh1090HV";}
+    Vref             = Expr { String = "vload1090HV";}
+    Iol              = Expr { String = "iol1090HV";}
+    Ioh              = Expr { String = "ioh1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetIO(HPIIOS,v[vil1090HV],v[vih1090HV],v[vol1090HV],v[voh1090HV],v[vitl],v[vith],v[vload1090HV],i[iol1090HV],i[ioh1090HV]);
+  Column[29]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "HPIIOS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vil1090HV";}
+    Vih              = Expr { String = "vih1090HV";}
+    Vol              = Expr { String = "vol1090HV";}
+    Voh              = Expr { String = "voh1090HV";}
+    Vref             = Expr { String = "vload1090HV";}
+    Iol              = Expr { String = "iol1090HV";}
+    Ioh              = Expr { String = "ioh1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetIO(EMU1,v[vil1090HV],v[vih1090HV],v[vol1090HV],v[voh1090HV],v[vitl],v[vith],v[vload1090HV],i[iol1090HV],i[ioh1090HV]);
+  Column[30]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "EMU1";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vil1090HV";}
+    Vih              = Expr { String = "vih1090HV";}
+    Vol              = Expr { String = "vol1090HV";}
+    Voh              = Expr { String = "voh1090HV";}
+    Vref             = Expr { String = "vload1090HV";}
+    Iol              = Expr { String = "iol1090HV";}
+    Ioh              = Expr { String = "ioh1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetIO(EMU0,v[vil1090HV],v[vih1090HV],v[vol1090HV],v[voh1090HV],v[vitl],v[vith],v[vload1090HV],i[iol1090HV],i[ioh1090HV]);
+  Column[31]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "EMU0";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "vil1090HV";}
+    Vih              = Expr { String = "vih1090HV";}
+    Vol              = Expr { String = "vol1090HV";}
+    Voh              = Expr { String = "voh1090HV";}
+    Vref             = Expr { String = "vload1090HV";}
+    Iol              = Expr { String = "iol1090HV";}
+    Ioh              = Expr { String = "ioh1090HV";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetInput(NODEVINS,0v,0v,0v,0v);
+  Column[32]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "NODEVINS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0V";}
+    Vih              = Expr { String = "0V";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetOutput(NODEVOUTS,0v,0v,0v,0ma,0ma);
+  Column[33]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "NODEVOUTS";}
+    ExecSeq          = Expr { String = "0";}
+    Vol              = Expr { String = "0V";}
+    Voh              = Expr { String = "0V";}
+    Vref             = Expr { String = "0V";}
+    Iol              = Expr { String = "0mA";}
+    Ioh              = Expr { String = "0mA";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+//DCSetIO(NODEVIOS,0v,0v,0v,0v,0v,0v,0v,0ma,0ma);
+  Column[34]{
+    LevelsColumnType = evDigitalType;
+    Group            = Expr { String = "NODEVIOS";}
+    ExecSeq          = Expr { String = "0";}
+    Vil              = Expr { String = "0V";}
+    Vih              = Expr { String = "0V";}
+    Vol              = Expr { String = "0V";}
+    Voh              = Expr { String = "0V";}
+    Vref             = Expr { String = "0V";}
+    Iol              = Expr { String = "0mA";}
+    Ioh              = Expr { String = "0mA";}
+    ClampLo          = Expr { String = "-2V";}
+    ClampHi          = Expr { String = "6V";}
+  }
+}

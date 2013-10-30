@@ -1,0 +1,641 @@
+//begin category strings
+//ACT+............................................ [actable:ACTable][000]
+//ACT.+........................................... [TIparametricACTable][001]
+//ACT..+.......................................... [TIcrystalACTable][002]
+//ACT...+......................................... [TInomlooseACTable][003]
+//ACT....+........................................ [TIstressminACTable][004]
+//ACT.....+....................................... [TIstressmaxACTable][005]
+//ACT......+...................................... [TIlofrqminACTable][006]
+//ACT.......+..................................... [TIlofrqmaxACTable][007]
+//ACT........+.................................... [TIlofrqlooseACTable][008]
+//ACT.........+................................... [TIlofrqedgeACTable][009]
+//ACT..........+.................................. [TIlofrqmin60ACTable][010]
+//ACT...........+................................. [TIlofrqmax60ACTable][011]
+//ACT............+................................ [TIlofrqloose60ACTable][012]
+//ACT.............+............................... [TIlofrqedge60ACTable][013]
+//ACT..............+.............................. [TIspecsetupmin25ACTable][014]
+//ACT...............+............................. [TIspecholdmin25ACTable][015]
+//ACT................+............................ [TIspecsetupmax25ACTable][016]
+//ACT.................+........................... [TIspecholdmax25ACTable][017]
+//ACT..................+.......................... [TIspecsetupmin33ACTable][018]
+//ACT...................+......................... [TIspecholdmin33ACTable][019]
+//ACT....................+........................ [TIspecsetupmax33ACTable][020]
+//ACT.....................+....................... [TIspecholdmax33ACTable][021]
+//ACT......................+...................... [TIhifrqmin33ACTable][022]
+//ACT.......................+..................... [TIhifrqmax33ACTable][023]
+//ACT........................+.................... [TIhifrqmin40ACTable][024]
+//ACT.........................+................... [TIhifrqmax40ACTable][025]
+//ACT..........................+.................. [TIhifrqloose40ACTable][026]
+//ACT...........................+................. [TIhifrqedge40ACTable][027]
+//ACT............................+................ [TIhifrqmin50ACTable][028]
+//ACT.............................+............... [TIhifrqmax50ACTable][029]
+//ACT..............................+.............. [TIhifrqloose50ACTable][030]
+//ACT...............................+............. [TIhifrqedge50ACTable][031]
+//ACT................................+............ [TIhifrqmin60ACTable][032]
+//ACT.................................+........... [TIhifrqmax60ACTable][033]
+//ACT..................................+.......... [TIhifrqloose60ACTable][034]
+//ACT...................................+......... [TIhifrqedge60ACTable][035]
+//ACT....................................+........ [TIsearchACTable][036]
+//ACT.....................................+....... [TIsearch40ACTable][037]
+//ACT......................................+...... [TIsearch33ACTable][038]
+//ACT.......................................+..... [TIsearchlevelsACTable][039]
+//ACT........................................+.... [TIsearchlevels40ACTable][040]
+//ACT.........................................+... [TIsearchlevels33ACTable][041]
+//ACT..........................................+.. [TIcharACTable][042]
+//ACT...........................................+. [TIchar33ACTable][043]
+//ACT............................................+ [TIchar40ACTable][044]
+//end category strings
+//begin enum strings
+//DEVICE                                             ........++++++++++++++++..........
+//TEMP                                               ++++++++..........................
+//TEST                                               ........................++++++....
+//ENUM                                               +.................................[TEMP_N55_DEG][000]
+//ENUM                                               .+................................[TEMP_N40_DEG][001]
+//ENUM                                               ..+...............................[TEMP_N25_DEG][002]
+//ENUM                                               ...+..............................[TEMP_25_DEG][003]
+//ENUM                                               ....+.............................[TEMP_70_DEG][004]
+//ENUM                                               .....+............................[TEMP_85_DEG][005]
+//ENUM                                               ......+...........................[TEMP_100_DEG][006]
+//ENUM                                               .......+..........................[TEMP_125_DEG][007]
+//ENUM                                               ........+.........................[SMJ320C40GFM_pg3x_40MHz][008]
+//ENUM                                               .........+........................[SMJ320C40GFM_pg5x_40MHz][009]
+//ENUM                                               ..........+.......................[SMJ320C40GFM_pg5x_50MHz][010]
+//ENUM                                               ...........+......................[SMJ320C40GFM_pg5x_60MHz][011]
+//ENUM                                               ............+.....................[SMJ320C40HFHM_pg3x_40MHz][012]
+//ENUM                                               .............+....................[SMJ320C40HFHM_pg5x_40MHz][013]
+//ENUM                                               ..............+...................[SMJ320C40HFHM_pg5x_50MHz][014]
+//ENUM                                               ...............+..................[SMJ320C40HFHM_pg5x_60MHz][015]
+//ENUM                                               ................+.................[SM320C40TAB_pg3x_40MHz][016]
+//ENUM                                               .................+................[SM320C40TAB_pg5x_40MHz][017]
+//ENUM                                               ..................+...............[SM320C40TAB_pg5x_50MHz][018]
+//ENUM                                               ...................+..............[SM320C40TAB_pg5x_60MHz][019]
+//ENUM                                               ....................+.............[TMS320C40TAL_pg3x_50MHz][020]
+//ENUM                                               .....................+............[TMS320C40TAL_pg5x_60MHz][021]
+//ENUM                                               ......................+...........[TMS320C41QFP][022]
+//ENUM                                               .......................+..........[MPM11856KGDC][023]
+//ENUM                                               ........................+.........[Probe][024]
+//ENUM                                               .........................+........[Pre_Burnin][025]
+//ENUM                                               ..........................+.......[Final][026]
+//ENUM                                               ...........................+......[QA][027]
+//ENUM                                               ............................+.....[Final_QA][028]
+//ENUM                                               .............................+....[IDSEngr][029]
+//ENUM                                               ..............................+...[DONT_RUN_SYNC][030]
+//ENUM                                               ...............................+..[RUN_SYNC][031]
+//ENUM                                               ................................+.[schmooloos][032]
+//ENUM                                               .................................+[NOschmooloos][033]
+//end enum strings
+//begin category markers
+//00cat[111111111111111111111111111111111111111111111]
+//01cat[011111111100000000000000000011110000100100100]
+//02cat[000010000000000000000000000000000000000000000]
+//03cat[011101111100000000000000000011110000100100100]
+//04cat[000000000011110000000000000000001111000000000]
+//05cat[000000000000000000000000111100000000010010001]
+//06cat[000000000000000000111111000000000000001001010]
+//07cat[000000000000001111000000000000000000000000000]
+//00dev[........1111111111111111..........]
+//01dev[........0000000000001000..........]
+//02dev[........1111111111110111..........]
+//00tst[........................111111....]
+//01tst[........................100000....]
+//02tst[........................011111....]
+//00tmp[11111111..........................]
+//00rem[..............................1111]
+//b1[111111111111111111111111111111111111111111111]E[1111111111111111111111111111111111]<000>UC[A] P[0012791]L[0000200]STR[START(ALLENUMS,ALLTABLES)]
+//b2[011111111100000000000000000011110000100100100]E[1111111111111111111111111111111111]<001>UC[B] P[0021144]L[0000363]STR[START(ALLENUMS,TIparametricACTable,TIcrystalACTable,TInomlooseACTable,TIstressminACTable,TIstressmaxACTable,TIlofrqminACTable,TIlofrqmaxACTable,TIlofrqlooseACTable,TIlofrqedgeACTable,TIhifrqmin50ACTable,TIhifrqmax50ACTable,TIhifrqloose50ACTable,TIhifrqedge50ACTable,TIsearchACTable,TIsearchlevelsACTable,TIcharACTable)]
+//b3[011111111100000000000000000011110000100100100]E[1111111111111111111111111000001111]<002>UC[C] P[0022555]L[0000381]STR[START(ALLTEMPS,ALLDEVICES,Probe,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIparametricACTable,TIcrystalACTable,TInomlooseACTable,TIstressminACTable,TIstressmaxACTable,TIlofrqminACTable,TIlofrqmaxACTable,TIlofrqlooseACTable,TIlofrqedgeACTable,TIhifrqmin50ACTable,TIhifrqmax50ACTable,TIhifrqloose50ACTable,TIhifrqedge50ACTable,TIsearchACTable,TIsearchlevelsACTable,TIcharACTable)]
+//e3[011111111100000000000000000011110000100100100]E[1111111111111111111111111000001111]<002>UC[C] P[0023107]L[0000384]STR[STOP(ALLTEMPS,ALLDEVICES,Probe,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIparametricACTable,TIcrystalACTable,TInomlooseACTable,TIstressminACTable,TIstressmaxACTable,TIlofrqminACTable,TIlofrqmaxACTable,TIlofrqlooseACTable,TIlofrqedgeACTable,TIhifrqmin50ACTable,TIhifrqmax50ACTable,TIhifrqloose50ACTable,TIhifrqedge50ACTable,TIsearchACTable,TIsearchlevelsACTable,TIcharACTable)]
+//b3[011111111100000000000000000011110000100100100]E[1111111111111111111111110111111111]<003>UC[D] P[0023524]L[0000388]STR[START(ALLTEMPS,ALLDEVICES,ALLTESTS-Probe,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIparametricACTable,TIcrystalACTable,TInomlooseACTable,TIstressminACTable,TIstressmaxACTable,TIlofrqminACTable,TIlofrqmaxACTable,TIlofrqlooseACTable,TIlofrqedgeACTable,TIhifrqmin50ACTable,TIhifrqmax50ACTable,TIhifrqloose50ACTable,TIhifrqedge50ACTable,TIsearchACTable,TIsearchlevelsACTable,TIcharACTable)]
+//e3[011111111100000000000000000011110000100100100]E[1111111111111111111111110111111111]<003>UC[D] P[0024085]L[0000391]STR[STOP(ALLTEMPS,ALLDEVICES,ALLTESTS-Probe,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIparametricACTable,TIcrystalACTable,TInomlooseACTable,TIstressminACTable,TIstressmaxACTable,TIlofrqminACTable,TIlofrqmaxACTable,TIlofrqlooseACTable,TIlofrqedgeACTable,TIhifrqmin50ACTable,TIhifrqmax50ACTable,TIhifrqloose50ACTable,TIhifrqedge50ACTable,TIsearchACTable,TIsearchlevelsACTable,TIcharACTable)]
+//b3[000010000000000000000000000000000000000000000]E[1111111111111111111111111111111111]<004>UC[E] P[0024608]L[0000396]STR[START(ALLTEMPS,ALLDEVICES,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIstressminACTable)]
+//e3[000010000000000000000000000000000000000000000]E[1111111111111111111111111111111111]<004>UC[E] P[0024893]L[0000399]STR[STOP(ALLTEMPS,ALLDEVICES,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIstressminACTable)]
+//b3[011101111100000000000000000011110000100100100]E[1111111111111111111111111111111111]<005>UC[F] P[0025050]L[0000403]STR[START(ALLTEMPS,ALLDEVICES,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIparametricACTable,TIcrystalACTable,TInomlooseACTable,TIstressmaxACTable,TIlofrqminACTable,TIlofrqmaxACTable,TIlofrqlooseACTable,TIlofrqedgeACTable,TIhifrqmin50ACTable,TIhifrqmax50ACTable,TIhifrqloose50ACTable,TIhifrqedge50ACTable,TIsearchACTable,TIsearchlevelsACTable,TIcharACTable)]
+//e3[011101111100000000000000000011110000100100100]E[1111111111111111111111111111111111]<005>UC[F] P[0025586]L[0000406]STR[STOP(ALLTEMPS,ALLDEVICES,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIparametricACTable,TIcrystalACTable,TInomlooseACTable,TIstressmaxACTable,TIlofrqminACTable,TIlofrqmaxACTable,TIlofrqlooseACTable,TIlofrqedgeACTable,TIhifrqmin50ACTable,TIhifrqmax50ACTable,TIhifrqloose50ACTable,TIhifrqedge50ACTable,TIsearchACTable,TIsearchlevelsACTable,TIcharACTable)]
+//e2[011111111100000000000000000011110000100100100]E[1111111111111111111111111111111111]<001>UC[B] P[0035491]L[0000578]STR[STOP(ALLENUMS,TIparametricACTable,TIcrystalACTable,TInomlooseACTable,TIstressminACTable,TIstressmaxACTable,TIlofrqminACTable,TIlofrqmaxACTable,TIlofrqlooseACTable,TIlofrqedgeACTable,TIhifrqmin50ACTable,TIhifrqmax50ACTable,TIhifrqloose50ACTable,TIhifrqedge50ACTable,TIsearchACTable,TIsearchlevelsACTable,TIcharACTable)]
+//b2[000000000011110000000000000000001111000000000]E[1111111111111111111111111111111111]<006>UC[G] P[0036339]L[0000596]STR[START(ALLENUMS,TIhifrqmin60ACTable,TIhifrqmax60ACTable,TIhifrqloose60ACTable,TIhifrqedge60ACTable,TIlofrqmin60ACTable,TIlofrqmax60ACTable,TIlofrqloose60ACTable,TIlofrqedge60ACTable)]
+//e2[000000000011110000000000000000001111000000000]E[1111111111111111111111111111111111]<006>UC[G] P[0047461]L[0000785]STR[STOP(ALLENUMS,TIhifrqmin60ACTable,TIhifrqmax60ACTable,TIhifrqloose60ACTable,TIhifrqedge60ACTable,TIlofrqmin60ACTable,TIlofrqmax60ACTable,TIlofrqloose60ACTable,TIlofrqedge60ACTable)]
+//b2[000000000000000000000000111100000000010010001]E[1111111111111111111111111111111111]<007>UC[H] P[0048105]L[0000800]STR[START(ALLENUMS,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//b3[000000000000000000000000111100000000010010001]E[1111111100000000000010001111111111]<008>UC[I] P[0049917]L[0000826]STR[START(ALLTEMPS,ALLTESTS,TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//e3[000000000000000000000000111100000000010010001]E[1111111100000000000010001111111111]<008>UC[I] P[0050238]L[0000830]STR[STOP(ALLTEMPS,ALLTESTS,TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//b3[000000000000000000000000111100000000010010001]E[1111111111111111111101111111111111]<009>UC[J] P[0050482]L[0000834]STR[START(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//e3[000000000000000000000000111100000000010010001]E[1111111111111111111101111111111111]<009>UC[J] P[0050814]L[0000838]STR[STOP(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//b3[000000000000000000000000111100000000010010001]E[1111111100000000000010001111111111]<008>UC[I] P[0051764]L[0000856]STR[START(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//e3[000000000000000000000000111100000000010010001]E[1111111100000000000010001111111111]<008>UC[I] P[0052083]L[0000858]STR[STOP(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//b3[000000000000000000000000111100000000010010001]E[1111111111111111111101111111111111]<009>UC[J] P[0052325]L[0000860]STR[START(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//e3[000000000000000000000000111100000000010010001]E[1111111111111111111101111111111111]<009>UC[J] P[0052654]L[0000862]STR[STOP(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//b3[000000000000000000000000111100000000010010001]E[1111111100000000000010001111111111]<008>UC[I] P[0053118]L[0000869]STR[START(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//e3[000000000000000000000000111100000000010010001]E[1111111100000000000010001111111111]<008>UC[I] P[0053517]L[0000872]STR[STOP(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//b3[000000000000000000000000111100000000010010001]E[1111111111111111111101111111111111]<009>UC[J] P[0053760]L[0000875]STR[START(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//e3[000000000000000000000000111100000000010010001]E[1111111111111111111101111111111111]<009>UC[J] P[0054169]L[0000878]STR[STOP(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//b3[000000000000000000000000111100000000010010001]E[1111111100000000000010001111111111]<008>UC[I] P[0054470]L[0000881]STR[START(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//e3[000000000000000000000000111100000000010010001]E[1111111100000000000010001111111111]<008>UC[I] P[0054869]L[0000884]STR[STOP(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//b3[000000000000000000000000111100000000010010001]E[1111111111111111111101111111111111]<009>UC[J] P[0055111]L[0000886]STR[START(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//e3[000000000000000000000000111100000000010010001]E[1111111111111111111101111111111111]<009>UC[J] P[0055520]L[0000889]STR[STOP(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//b3[000000000000000000000000111100000000010010001]E[1111111100000000000010001111111111]<008>UC[I] P[0055988]L[0000896]STR[START(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//e3[000000000000000000000000111100000000010010001]E[1111111100000000000010001111111111]<008>UC[I] P[0056386]L[0000899]STR[STOP(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//b3[000000000000000000000000111100000000010010001]E[1111111111111111111101111111111111]<009>UC[J] P[0056639]L[0000903]STR[START(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//e3[000000000000000000000000111100000000010010001]E[1111111111111111111101111111111111]<009>UC[J] P[0057048]L[0000906]STR[STOP(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//b3[000000000000000000000000111100000000010010001]E[1111111100000000000010001111111111]<008>UC[I] P[0057675]L[0000916]STR[START(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//e3[000000000000000000000000111100000000010010001]E[1111111100000000000010001111111111]<008>UC[I] P[0058073]L[0000919]STR[STOP(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//b3[000000000000000000000000111100000000010010001]E[1111111111111111111101111111111111]<009>UC[J] P[0058333]L[0000921]STR[START(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//e3[000000000000000000000000111100000000010010001]E[1111111111111111111101111111111111]<009>UC[J] P[0058734]L[0000924]STR[STOP(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//b3[000000000000000000000000111100000000010010001]E[1111111100000000000010001111111111]<008>UC[I] P[0059275]L[0000931]STR[START(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//e3[000000000000000000000000111100000000010010001]E[1111111100000000000010001111111111]<008>UC[I] P[0059672]L[0000934]STR[STOP(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//b3[000000000000000000000000111100000000010010001]E[1111111111111111111101111111111111]<009>UC[J] P[0059914]L[0000936]STR[START(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//e3[000000000000000000000000111100000000010010001]E[1111111111111111111101111111111111]<009>UC[J] P[0060323]L[0000939]STR[STOP(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//b3[000000000000000000000000111100000000010010001]E[1111111100000000000010001111111111]<008>UC[I] P[0064173]L[0001007]STR[START(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//e3[000000000000000000000000111100000000010010001]E[1111111100000000000010001111111111]<008>UC[I] P[0064491]L[0001009]STR[STOP(TMS320C40TAL_pg3x_50MHz,ALLTEMPS,ALLTESTS,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//b3[000000000000000000000000111100000000010010001]E[1111111111111111111101111111111111]<009>UC[J] P[0064733]L[0001011]STR[START(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//e3[000000000000000000000000111100000000010010001]E[1111111111111111111101111111111111]<009>UC[J] P[0065062]L[0001013]STR[STOP(ALLTEMPS,ALLTESTS,ALLDEVICES-TMS320C40TAL_pg3x_50MHz,DONT_RUN_SYNC,RUN_SYNC,schmooloos,NOschmooloos,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//e2[000000000000000000000000111100000000010010001]E[1111111111111111111111111111111111]<007>UC[H] P[0068534]L[0001076]STR[STOP(ALLENUMS,TIhifrqmin40ACTable,TIhifrqmax40ACTable,TIhifrqloose40ACTable,TIhifrqedge40ACTable,TIsearch40ACTable,TIsearchlevels40ACTable,TIchar40ACTable)]
+//b2[000000000000000000111111000000000000001001010]E[1111111111111111111111111111111111]<010>UC[K] P[0069228]L[0001092]STR[START(ALLENUMS,TIhifrqmin33ACTable,TIhifrqmax33ACTable,TIspecsetupmin33ACTable,TIspecholdmin33ACTable,TIspecsetupmax33ACTable,TIspecholdmax33ACTable,TIsearchlevels33ACTable,TIsearch33ACTable,TIchar33ACTable)]
+//e2[000000000000000000111111000000000000001001010]E[1111111111111111111111111111111111]<010>UC[K] P[0080407]L[0001282]STR[STOP(ALLENUMS,TIhifrqmin33ACTable,TIhifrqmax33ACTable,TIspecsetupmin33ACTable,TIspecholdmin33ACTable,TIspecsetupmax33ACTable,TIspecholdmax33ACTable,TIsearchlevels33ACTable,TIsearch33ACTable,TIchar33ACTable)]
+//b2[000000000000001111000000000000000000000000000]E[1111111111111111111111111111111111]<011>UC[L] P[0080831]L[0001294]STR[START(ALLENUMS,TIspecsetupmin25ACTable,TIspecholdmin25ACTable,TIspecsetupmax25ACTable,TIspecholdmax25ACTable,TIsearch25ACTable,TIchar25ACTable)]
+//e2[000000000000001111000000000000000000000000000]E[1111111111111111111111111111111111]<011>UC[L] P[0091968]L[0001484]STR[STOP(ALLENUMS,TIspecsetupmin25ACTable,TIspecholdmin25ACTable,TIspecsetupmax25ACTable,TIspecholdmax25ACTable,TIsearch25ACTable,TIchar25ACTable)]
+//e1[111111111111111111111111111111111111111111111]E[1111111111111111111111111111111111]<000>UC[A] P[0092221]L[0001496]STR[STOP(ALLENUMS,ALLTABLES)]
+//end category markers
+//begin category grouping
+//A:CAT[actable:ACTable]
+//ABCDF:CAT[TIparametricACTable]
+//ABCDF:CAT[TIcrystalACTable]
+//ABCDF:CAT[TInomlooseACTable]
+//ABCDE:CAT[TIstressminACTable]
+//ABCDF:CAT[TIstressmaxACTable]
+//ABCDF:CAT[TIlofrqminACTable]
+//ABCDF:CAT[TIlofrqmaxACTable]
+//ABCDF:CAT[TIlofrqlooseACTable]
+//ABCDF:CAT[TIlofrqedgeACTable]
+//AG:CAT[TIlofrqmin60ACTable]
+//AG:CAT[TIlofrqmax60ACTable]
+//AG:CAT[TIlofrqloose60ACTable]
+//AG:CAT[TIlofrqedge60ACTable]
+//AL:CAT[TIspecsetupmin25ACTable]
+//AL:CAT[TIspecholdmin25ACTable]
+//AL:CAT[TIspecsetupmax25ACTable]
+//AL:CAT[TIspecholdmax25ACTable]
+//AK:CAT[TIspecsetupmin33ACTable]
+//AK:CAT[TIspecholdmin33ACTable]
+//AK:CAT[TIspecsetupmax33ACTable]
+//AK:CAT[TIspecholdmax33ACTable]
+//AK:CAT[TIhifrqmin33ACTable]
+//AK:CAT[TIhifrqmax33ACTable]
+//AHIJ:CAT[TIhifrqmin40ACTable]
+//AHIJ:CAT[TIhifrqmax40ACTable]
+//AHIJ:CAT[TIhifrqloose40ACTable]
+//AHIJ:CAT[TIhifrqedge40ACTable]
+//ABCDF:CAT[TIhifrqmin50ACTable]
+//ABCDF:CAT[TIhifrqmax50ACTable]
+//ABCDF:CAT[TIhifrqloose50ACTable]
+//ABCDF:CAT[TIhifrqedge50ACTable]
+//AG:CAT[TIhifrqmin60ACTable]
+//AG:CAT[TIhifrqmax60ACTable]
+//AG:CAT[TIhifrqloose60ACTable]
+//AG:CAT[TIhifrqedge60ACTable]
+//ABCDF:CAT[TIsearchACTable]
+//AHIJ:CAT[TIsearch40ACTable]
+//AK:CAT[TIsearch33ACTable]
+//ABCDF:CAT[TIsearchlevelsACTable]
+//AHIJ:CAT[TIsearchlevels40ACTable]
+//AK:CAT[TIsearchlevels33ACTable]
+//ABCDF:CAT[TIcharACTable]
+//AK:CAT[TIchar33ACTable]
+//AHIJ:CAT[TIchar40ACTable]
+//end category grouping
+[C3B]  tdCLKINHH1min ="2ns";\\ 382
+[C3B]  tdCLKINHH3min ="2ns";\\ 383
+[D3B]  tdCLKINHH1min ="2ns";\\ 389
+[D3B]  tdCLKINHH3min ="2ns";\\ 390
+[E3B]  tdCLKINHH1max ="14ns";\\ 397
+[E3B]  tdCLKINHH3max ="14ns";\\ 398
+[F3B]  tdCLKINHH1max ="12ns";\\ 404
+[F3B]  tdCLKINHH3max ="12ns";\\ 405
+[I3H]  tdH1LS ="9ns";\\ 828
+[J3H]  tdH1LS ="10ns";\\ 836
+[I3H]  tdH1LSTAT ="8ns";\\ 857
+[J3H]  tdH1LSTAT ="10ns";\\ 861
+[I3H]  tdH1HA ="9ns";\\ 870
+[J3H]  tdH1HA ="13ns";\\ 876
+[I3H]  tdH1LLOCK ="8ns";\\ 882
+[J3H]  tdH1LLOCK ="9ns";\\ 887
+[I3H]  tdENBDV ="21ns";\\ 897
+[I3H]  tdENBAV ="18ns";\\ 898
+[J3H]  tdENBDV ="22ns";\\ 904
+[J3H]  tdENBAV ="21ns";\\ 905
+[I3H]  tvH1LIF ="14ns";\\ 917
+[J3H]  tvH1LIF ="16ns";\\ 922
+[I3H]  tdH1LIF ="14ns";\\ 932
+[J3H]  tdH1LIF ="16ns";\\ 937
+[I3H]  thCDw ="2ns";\\ 1008
+[J3H]  thCDw ="1ns";\\ 1012
+[B2A]  tfH ="3ns";\\ 364
+[B2A]  tfHmax ="3ns";\\ 365
+[B2A]  twHLmin ="  tcCI -6ns";\\ 366
+[B2A]  twHL ="  tcCI ";\\ 367
+[B2A]  twHLmax ="  tcCI +6ns";\\ 368
+[B2A]  twHHmin ="  tcCI -6ns";\\ 369
+[B2A]  twHH ="  tcCI ";\\ 370
+[B2A]  twHHmax ="  tcCI +6ns";\\ 371
+[B2A]  trH ="4ns";\\ 372
+[B2A]  trHmax ="4ns";\\ 373
+[B2A]  tdHLHHmin ="-1ns";\\ 375
+[B2A]  tdHLHH ="4ns";\\ 376
+[B2A]  tdHLHHmax ="4ns";\\ 377
+[B2A]  tdH1LS ="10ns";\\ 413
+[B2A]  tdH1HRW ="9ns";\\ 414
+[B2A]  tdH1LA ="10ns";\\ 415
+[B2A]  tdH1LAV ="22ns";\\ 416
+[B2A]  tsuDR ="15ns";\\ 418
+[B2A]  thDR ="0ns";\\ 419
+[B2A]  tsuRDY ="25ns";\\ 420
+[B2A]  thRDY ="0ns";\\ 421
+[B2A]  tdH1LSTAT ="10ns";\\ 422
+[B2A]  tvDW ="16ns";\\ 424
+[B2A]  thDW ="0ns";\\ 425
+[B2A]  tdH1HA ="13ns";\\ 427
+[B2A]  tdH1LLOCK ="11ns";\\ 430
+[B2A]  tENB ="0ns";\\ 433
+[B2A]  tdENBZ ="15ns";\\ 434
+[B2A]  tdENBDV ="22ns";\\ 435
+[B2A]  tdENBAV ="21ns";\\ 436
+[B2A]  tdENBCV ="21ns";\\ 437
+[B2A]  tvH1LIF ="18ns";\\ 443
+[B2A]  thIF ="0ns";\\ 447
+[B2A]  tdH1LIF ="16ns";\\ 450
+[B2A]  thH1LIFOI ="0ns";\\ 453
+[B2A]  tsuRESET ="11ns";\\ 461
+[B2A]  tsuRESETH ="13ns";\\ 462
+[B2A]  tdisH1HD ="13ns";\\ 464
+[B2A]  tdisH3HA ="9ns";\\ 465
+[B2A]  tdH3HCTRLH ="9ns";\\ 466
+[B2A]  tdisRESETLAS ="21ns";\\ 468
+[B2A]  tRESETLOC ="0ns";\\ 471
+[B2A]  tsuINT ="11ns";\\ 477
+[B2A]  tsuINTIDLE ="18ns";\\ 479
+[B2A]  twINT ="  tcH ";\\ 482
+[B2A]  tdH1LIACK ="9ns";\\ 489
+[B2A]  tsuCREQ ="10ns";\\ 499
+[B2A]  tsuCACK ="10ns";\\ 500
+[B2A]  tCRDYLO ="  tref +  tcCI ";\\ 502
+[B2A]  tCRDYHI ="  tref +  tcH ";\\ 503
+[B2A]  tCSTRBLO ="  tref +  tCSTRBfhi ";\\ 505
+[B2A]  tCSTRBHI ="  tref +  tCSTRBfhi +  tcCI ";\\ 506
+[B2A]  tdRHSLw ="12ns";\\ 512
+[B2A]  tdRLSHw ="12ns";\\ 514
+[B2A]  tsuCDw ="2ns";\\ 516
+[B2A]  thCDw ="1ns";\\ 518
+[B2A]  tdSLRLr ="10ns";\\ 520
+[B2A]  tdSHRHr ="10ns";\\ 522
+[B2A]  tsuCDr ="0ns";\\ 524
+[B2A]  thCDr ="2ns";\\ 526
+[B2A]  tdH1HRQLt ="28ns";\\ 532
+[B2A]  tdALRQHt ="22ns";\\ 535
+[B2A]  tdRQHRQLt ="8ns";\\ 538
+[B2A]  tdRQHRQOt ="22ns";\\ 541
+[B2A]  tdRQLALt ="22ns";\\ 544
+[B2A]  tsuTCLK ="10ns";\\ 551
+[B2A]  thTCLK ="0ns";\\ 552
+[B2A]  tdTCLK ="13ns";\\ 553
+[B2A]  tROMEN ="0ns";\\ 559
+[B2A]  tNMI ="0ns";\\ 565
+[B2A]  tsuTDITMS ="10ns";\\ 571
+[B2A]  thTDITMS ="5ns";\\ 572
+[B2A]  tdTDO ="15ns";\\ 573
+[B2A]  tJTAG ="7ns";\\ 574
+[B2A]  tdEMU ="20ns";\\ 576
+[B2A]  tEMU ="0ns";\\ 577
+[G2A]  tfH ="3ns";\\ 597
+[G2A]  tfHmax ="3ns";\\ 598
+[G2A]  twHLmin ="  tcCI -6ns";\\ 599
+[G2A]  twHL ="  tcCI ";\\ 600
+[G2A]  twHLmax ="  tcCI +6ns";\\ 601
+[G2A]  twHHmin ="  tcCI -6ns";\\ 602
+[G2A]  twHH ="  tcCI ";\\ 603
+[G2A]  twHHmax ="  tcCI +6ns";\\ 604
+[G2A]  trH ="4ns";\\ 605
+[G2A]  trHmax ="4ns";\\ 606
+[G2A]  tdHLHHmin ="-1ns";\\ 608
+[G2A]  tdHLHH ="4ns";\\ 609
+[G2A]  tdHLHHmax ="4ns";\\ 610
+[G2A]  tdCLKINHH1min ="2ns";\\ 612
+[G2A]  tdCLKINHH1max ="10ns";\\ 613
+[G2A]  tdCLKINHH3min ="2ns";\\ 614
+[G2A]  tdCLKINHH3max ="10ns";\\ 615
+[G2A]  tdH1LS ="10ns";\\ 621
+[G2A]  tdH1HRW ="9ns";\\ 622
+[G2A]  tdH1LA ="10ns";\\ 623
+[G2A]  tdH1LAV ="22ns";\\ 624
+[G2A]  tsuDR ="15ns";\\ 626
+[G2A]  thDR ="0ns";\\ 627
+[G2A]  tsuRDY ="25ns";\\ 628
+[G2A]  thRDY ="0ns";\\ 629
+[G2A]  tdH1LSTAT ="10ns";\\ 630
+[G2A]  tvDW ="16ns";\\ 632
+[G2A]  thDW ="0ns";\\ 633
+[G2A]  tdH1HA ="13ns";\\ 635
+[G2A]  tdH1LLOCK ="11ns";\\ 638
+[G2A]  tENB ="0ns";\\ 641
+[G2A]  tdENBZ ="15ns";\\ 642
+[G2A]  tdENBDV ="22ns";\\ 643
+[G2A]  tdENBAV ="21ns";\\ 644
+[G2A]  tdENBCV ="21ns";\\ 645
+[G2A]  tvH1LIF ="18ns";\\ 650
+[G2A]  tsuIF ="11ns";\\ 653
+[G2A]  thIF ="0ns";\\ 654
+[G2A]  tdH1LIF ="16ns";\\ 657
+[G2A]  thH1LIFOI ="0ns";\\ 660
+[G2A]  tsuRESET ="11ns";\\ 668
+[G2A]  tsuRESETH ="13ns";\\ 669
+[G2A]  tdisH1HD ="13ns";\\ 671
+[G2A]  tdisH3HA ="9ns";\\ 672
+[G2A]  tdH3HCTRLH ="9ns";\\ 673
+[G2A]  tdisRESETLAS ="21ns";\\ 675
+[G2A]  tRESETLOC ="0ns";\\ 678
+[G2A]  tsuINT ="11ns";\\ 684
+[G2A]  tsuINTIDLE ="15ns";\\ 686
+[G2A]  twINT ="  tcH ";\\ 689
+[G2A]  tdH1LIACK ="9ns";\\ 696
+[G2A]  tsuCREQ ="10ns";\\ 706
+[G2A]  tsuCACK ="10ns";\\ 707
+[G2A]  tCRDYLO ="  tref +  tcCI ";\\ 709
+[G2A]  tCRDYHI ="  tref +  tcH ";\\ 710
+[G2A]  tCSTRBLO ="  tref +  tCSTRBfhi ";\\ 712
+[G2A]  tCSTRBHI ="  tref +  tCSTRBfhi +  tcCI ";\\ 713
+[G2A]  tdRHSLw ="12ns";\\ 719
+[G2A]  tdRLSHw ="12ns";\\ 721
+[G2A]  tsuCDw ="2ns";\\ 723
+[G2A]  thCDw ="1ns";\\ 725
+[G2A]  tdSLRLr ="10ns";\\ 727
+[G2A]  tdSHRHr ="10ns";\\ 729
+[G2A]  tsuCDr ="0ns";\\ 731
+[G2A]  thCDr ="2ns";\\ 733
+[G2A]  tdH1HRQLt ="28ns";\\ 739
+[G2A]  tdALRQHt ="25ns";\\ 742
+[G2A]  tdRQHRQLt ="8ns";\\ 745
+[G2A]  tdRQHRQOt ="22ns";\\ 748
+[G2A]  tdRQLALt ="25ns";\\ 751
+[G2A]  tsuTCLK ="10ns";\\ 758
+[G2A]  thTCLK ="0ns";\\ 759
+[G2A]  tdTCLK ="13ns";\\ 760
+[G2A]  tROMEN ="0ns";\\ 766
+[G2A]  tNMI ="0ns";\\ 772
+[G2A]  tsuTDITMS ="10ns";\\ 778
+[G2A]  thTDITMS ="5ns";\\ 779
+[G2A]  tdTDO ="15ns";\\ 780
+[G2A]  tJTAG ="7ns";\\ 781
+[G2A]  tdEMU ="20ns";\\ 783
+[G2A]  tEMU ="0ns";\\ 784
+[H2A]  tfH ="3ns";\\ 801
+[H2A]  tfHmax ="3ns";\\ 802
+[H2A]  twHLmin ="  tcCI -6ns";\\ 803
+[H2A]  twHL ="  tcCI ";\\ 804
+[H2A]  twHLmax ="  tcCI +6ns";\\ 805
+[H2A]  twHHmin ="  tcCI -6ns";\\ 806
+[H2A]  twHH ="  tcCI ";\\ 807
+[H2A]  twHHmax ="  tcCI +6ns";\\ 808
+[H2A]  trH ="4ns";\\ 809
+[H2A]  trHmax ="4ns";\\ 810
+[H2A]  tdHLHHmin ="-1ns";\\ 812
+[H2A]  tdHLHH ="4ns";\\ 813
+[H2A]  tdHLHHmax ="4ns";\\ 814
+[H2A]  tdCLKINHH1min ="2ns";\\ 816
+[H2A]  tdCLKINHH1max ="10ns";\\ 817
+[H2A]  tdCLKINHH3min ="2ns";\\ 818
+[H2A]  tdCLKINHH3max ="10ns";\\ 819
+[H2A]  tdH1HRW ="9ns";\\ 840
+[H2A]  tdH1LA ="9ns";\\ 842
+[H2A]  tdH1LAV ="22ns";\\ 844
+[H2A]  tsuDR ="10ns";\\ 847
+[H2A]  thDR ="0ns";\\ 849
+[H2A]  tsuRDY ="20ns";\\ 851
+[H2A]  thRDY ="0ns";\\ 853
+[H2A]  tvDW ="16ns";\\ 865
+[H2A]  thDW ="0ns";\\ 866
+[H2A]  tENB ="0ns";\\ 891
+[H2A]  tdENBZ ="15ns";\\ 892
+[H2A]  tdENBCV ="21ns";\\ 908
+[H2A]  tsuIF ="11ns";\\ 926
+[H2A]  thIF ="0ns";\\ 927
+[H2A]  thH1LIFOI ="0ns";\\ 941
+[H2A]  tsuRESET ="11ns";\\ 949
+[H2A]  tsuRESETH ="13ns";\\ 950
+[H2A]  tdisH1HD ="13ns";\\ 952
+[H2A]  tdisH3HA ="9ns";\\ 953
+[H2A]  tdH3HCTRLH ="9ns";\\ 954
+[H2A]  tdisRESETLAS ="21ns";\\ 956
+[H2A]  tRESETLOC ="0ns";\\ 959
+[H2A]  tsuINT ="11ns";\\ 965
+[H2A]  tsuINTIDLE ="18ns";\\ 967
+[H2A]  twINT ="  tcH ";\\ 970
+[H2A]  tdH1LIACK ="9ns";\\ 977
+[H2A]  tsuCREQ ="10ns";\\ 987
+[H2A]  tsuCACK ="10ns";\\ 988
+[H2A]  tCRDYLO ="  tref +  tcCI ";\\ 990
+[H2A]  tCRDYHI ="  tref +  tcH ";\\ 991
+[H2A]  tCSTRBLO ="  tref +  tCSTRBfhi ";\\ 993
+[H2A]  tCSTRBHI ="  tref +  tCSTRBfhi +  tcCI ";\\ 994
+[H2A]  tdRHSLw ="12ns";\\ 1000
+[H2A]  tdRLSHw ="12ns";\\ 1002
+[H2A]  tsuCDw ="2ns";\\ 1004
+[H2A]  tdSLRLr ="10ns";\\ 1016
+[H2A]  tdSHRHr ="10ns";\\ 1018
+[H2A]  tsuCDr ="0ns";\\ 1020
+[H2A]  thCDr ="2ns";\\ 1022
+[H2A]  tdH1HRQLt ="28ns";\\ 1028
+[H2A]  tdALRQHt ="22ns";\\ 1031
+[H2A]  tdRQHRQLt ="8ns";\\ 1034
+[H2A]  tdRQHRQOt ="22ns";\\ 1037
+[H2A]  tdRQLALt ="22ns";\\ 1040
+[H2A]  tsuTCLK ="10ns";\\ 1047
+[H2A]  thTCLK ="0ns";\\ 1048
+[H2A]  tdTCLK ="13ns";\\ 1049
+[H2A]  tROMEN ="0ns";\\ 1055
+[H2A]  tNMI ="0ns";\\ 1061
+[H2A]  tsuTDITMS ="10ns";\\ 1067
+[H2A]  thTDITMS ="5ns";\\ 1068
+[H2A]  tdTDO ="15ns";\\ 1069
+[H2A]  tJTAG ="7ns";\\ 1070
+[H2A]  tdEMU ="20ns";\\ 1072
+[H2A]  tEMU ="0ns";\\ 1073
+[K2A]  tfH ="3ns";\\ 1093
+[K2A]  tfHmax ="3ns";\\ 1094
+[K2A]  twHLmin ="  tcCI -6ns";\\ 1095
+[K2A]  twHL ="  tcCI ";\\ 1096
+[K2A]  twHLmax ="  tcCI +6ns";\\ 1097
+[K2A]  twHHmin ="  tcCI -6ns";\\ 1098
+[K2A]  twHH ="  tcCI ";\\ 1099
+[K2A]  twHHmax ="  tcCI +6ns";\\ 1100
+[K2A]  trH ="4ns";\\ 1101
+[K2A]  trHmax ="4ns";\\ 1102
+[K2A]  tdHLHHmin ="-1ns";\\ 1104
+[K2A]  tdHLHH ="4ns";\\ 1105
+[K2A]  tdHLHHmax ="4ns";\\ 1106
+[K2A]  tdCLKINHH1min ="2ns";\\ 1108
+[K2A]  tdCLKINHH1max ="10ns";\\ 1109
+[K2A]  tdCLKINHH3min ="2ns";\\ 1110
+[K2A]  tdCLKINHH3max ="10ns";\\ 1111
+[K2A]  tdH1LS ="8ns";\\ 1117
+[K2A]  tdH1HRW ="8ns";\\ 1118
+[K2A]  tdH1LA ="9ns";\\ 1119
+[K2A]  tdH1LAV ="22ns";\\ 1120
+[K2A]  tsuDR ="9ns";\\ 1122
+[K2A]  thDR ="0ns";\\ 1123
+[K2A]  tsuRDY ="18ns";\\ 1124
+[K2A]  thRDY ="0ns";\\ 1125
+[K2A]  tdH1LSTAT ="8.0ns";\\ 1126
+[K2A]  tvDW ="13ns";\\ 1128
+[K2A]  thDW ="0ns";\\ 1129
+[K2A]  tdH1HA ="8ns";\\ 1131
+[K2A]  tdH1LLOCK ="8ns";\\ 1134
+[K2A]  tENB ="0ns";\\ 1137
+[K2A]  tdENBZ ="15ns";\\ 1138
+[K2A]  tdENBDV ="16ns";\\ 1139
+[K2A]  tdENBAV ="16ns";\\ 1140
+[K2A]  tdENBCV ="16ns";\\ 1141
+[K2A]  tvH1LIF ="14ns";\\ 1147
+[K2A]  tsuIF ="11ns";\\ 1150
+[K2A]  thIF ="0ns";\\ 1151
+[K2A]  tdH1LIF ="14ns";\\ 1154
+[K2A]  thH1LIFOI ="0ns";\\ 1157
+[K2A]  tsuRESET ="11ns";\\ 1165
+[K2A]  tsuRESETH ="13ns";\\ 1166
+[K2A]  tdisH1HD ="13ns";\\ 1168
+[K2A]  tdisH3HA ="9ns";\\ 1169
+[K2A]  tdH3HCTRLH ="9ns";\\ 1170
+[K2A]  tdisRESETLAS ="21ns";\\ 1172
+[K2A]  tRESETLOC ="0ns";\\ 1175
+[K2A]  tsuINT ="11ns";\\ 1181
+[K2A]  tsuINTIDLE ="15ns";\\ 1183
+[K2A]  twINT ="  tcH ";\\ 1186
+[K2A]  tdH1LIACK ="7ns";\\ 1193
+[K2A]  tsuCREQ ="10ns";\\ 1203
+[K2A]  tsuCACK ="10ns";\\ 1204
+[K2A]  tCRDYLO ="  tref +  tcCI ";\\ 1206
+[K2A]  tCRDYHI ="  tref +  tcH ";\\ 1207
+[K2A]  tCSTRBLO ="  tref +  tCSTRBfhi ";\\ 1209
+[K2A]  tCSTRBHI ="  tref +  tCSTRBfhi +  tcCI ";\\ 1210
+[K2A]  tdRHSLw ="12ns";\\ 1216
+[K2A]  tdRLSHw ="12ns";\\ 1218
+[K2A]  tsuCDw ="2ns";\\ 1220
+[K2A]  thCDw ="2ns";\\ 1222
+[K2A]  tdSLRLr ="10ns";\\ 1224
+[K2A]  tdSHRHr ="10ns";\\ 1226
+[K2A]  tsuCDr ="0ns";\\ 1228
+[K2A]  thCDr ="2ns";\\ 1230
+[K2A]  tdH1HRQLt ="28ns";\\ 1236
+[K2A]  tdALRQHt ="22ns";\\ 1239
+[K2A]  tdRQHRQLt ="8ns";\\ 1242
+[K2A]  tdRQHRQOt ="22ns";\\ 1245
+[K2A]  tdRQLALt ="22ns";\\ 1248
+[K2A]  tsuTCLK ="10ns";\\ 1255
+[K2A]  thTCLK ="0ns";\\ 1256
+[K2A]  tdTCLK ="13ns";\\ 1257
+[K2A]  tROMEN ="0ns";\\ 1263
+[K2A]  tNMI ="0ns";\\ 1269
+[K2A]  tsuTDITMS ="10ns";\\ 1275
+[K2A]  thTDITMS ="5ns";\\ 1276
+[K2A]  tdTDO ="12ns";\\ 1277
+[K2A]  tJTAG ="7ns";\\ 1278
+[K2A]  tdEMU ="20ns";\\ 1280
+[K2A]  tEMU ="0ns";\\ 1281
+[L2A]  tfH ="3ns";\\ 1295
+[L2A]  tfHmax ="3ns";\\ 1296
+[L2A]  twHLmin ="  tcCI -6ns";\\ 1297
+[L2A]  twHL ="  tcCI ";\\ 1298
+[L2A]  twHLmax ="  tcCI +6ns";\\ 1299
+[L2A]  twHHmin ="  tcCI -6ns";\\ 1300
+[L2A]  twHH ="  tcCI ";\\ 1301
+[L2A]  twHHmax ="  tcCI +6ns";\\ 1302
+[L2A]  trH ="4ns";\\ 1303
+[L2A]  trHmax ="4ns";\\ 1304
+[L2A]  tdHLHHmin ="-1ns";\\ 1306
+[L2A]  tdHLHH ="4ns";\\ 1307
+[L2A]  tdHLHHmax ="4ns";\\ 1308
+[L2A]  tdCLKINHH1min ="2ns";\\ 1310
+[L2A]  tdCLKINHH1max ="10ns";\\ 1311
+[L2A]  tdCLKINHH3min ="2ns";\\ 1312
+[L2A]  tdCLKINHH3max ="10ns";\\ 1313
+[L2A]  tdH1LS ="8ns";\\ 1319
+[L2A]  tdH1HRW ="8ns";\\ 1320
+[L2A]  tdH1LA ="8ns";\\ 1321
+[L2A]  tdH1LAV ="22ns";\\ 1322
+[L2A]  tsuDR ="9ns";\\ 1324
+[L2A]  thDR ="0ns";\\ 1325
+[L2A]  tsuRDY ="18ns";\\ 1326
+[L2A]  thRDY ="0ns";\\ 1327
+[L2A]  tdH1LSTAT ="8ns";\\ 1328
+[L2A]  tvDW ="13ns";\\ 1330
+[L2A]  thDW ="0ns";\\ 1331
+[L2A]  tdH1HA ="8ns";\\ 1333
+[L2A]  tdH1LLOCK ="8ns";\\ 1336
+[L2A]  tENB ="0ns";\\ 1339
+[L2A]  tdENBZ ="15ns";\\ 1340
+[L2A]  tdENBDV ="16ns";\\ 1341
+[L2A]  tdENBAV ="16ns";\\ 1342
+[L2A]  tdENBCV ="16ns";\\ 1343
+[L2A]  tvH1LIF ="18ns";\\ 1349
+[L2A]  tsuIF ="11ns";\\ 1352
+[L2A]  thIF ="0ns";\\ 1353
+[L2A]  tdH1LIF ="14ns";\\ 1356
+[L2A]  thH1LIFOI ="0ns";\\ 1359
+[L2A]  tsuRESET ="11ns";\\ 1367
+[L2A]  tsuRESETH ="13ns";\\ 1368
+[L2A]  tdisH1HD ="13ns";\\ 1370
+[L2A]  tdisH3HA ="9ns";\\ 1371
+[L2A]  tdH3HCTRLH ="9ns";\\ 1372
+[L2A]  tdisRESETLAS ="21ns";\\ 1374
+[L2A]  tRESETLOC ="0ns";\\ 1377
+[L2A]  tsuINT ="11ns";\\ 1383
+[L2A]  tsuINTIDLE ="15ns";\\ 1385
+[L2A]  twINT ="  tcH ";\\ 1388
+[L2A]  tdH1LIACK ="7ns";\\ 1395
+[L2A]  tsuCREQ ="10ns";\\ 1405
+[L2A]  tsuCACK ="10ns";\\ 1406
+[L2A]  tCRDYLO ="  tref +  tcCI ";\\ 1408
+[L2A]  tCRDYHI ="  tref +  tcH ";\\ 1409
+[L2A]  tCSTRBLO ="  tref +  tCSTRBfhi ";\\ 1411
+[L2A]  tCSTRBHI ="  tref +  tCSTRBfhi +  tcCI ";\\ 1412
+[L2A]  tdRHSLw ="12ns";\\ 1418
+[L2A]  tdRLSHw ="12ns";\\ 1420
+[L2A]  tsuCDw ="2ns";\\ 1422
+[L2A]  thCDw ="2ns";\\ 1424
+[L2A]  tdSLRLr ="10ns";\\ 1426
+[L2A]  tdSHRHr ="10ns";\\ 1428
+[L2A]  tsuCDr ="0ns";\\ 1430
+[L2A]  thCDr ="2ns";\\ 1432
+[L2A]  tdH1HRQLt ="28ns";\\ 1438
+[L2A]  tdALRQHt ="22ns";\\ 1441
+[L2A]  tdRQHRQLt ="8ns";\\ 1444
+[L2A]  tdRQHRQOt ="22ns";\\ 1447
+[L2A]  tdRQLALt ="22ns";\\ 1450
+[L2A]  tsuTCLK ="10ns";\\ 1457
+[L2A]  thTCLK ="0ns";\\ 1458
+[L2A]  tdTCLK ="13ns";\\ 1459
+[L2A]  tROMEN ="0ns";\\ 1465
+[L2A]  tNMI ="0ns";\\ 1471
+[L2A]  tsuTDITMS ="10ns";\\ 1477
+[L2A]  thTDITMS ="5ns";\\ 1478
+[L2A]  tdTDO ="15ns";\\ 1479
+[L2A]  tJTAG ="7ns";\\ 1480
+[L2A]  tdEMU ="20ns";\\ 1482
+[L2A]  tEMU ="0ns";\\ 1483
+[A1?]  tref ="10ns";\\ 304
+[A1?]  tclockdelay ="5ns";\\ 307
+[A1?]  tsyncdelay ="5ns";\\ 308
+[A1?]  tcCI ="period / 2";\\ 310
+[A1?]  twCIH ="(duty*  tcCI  / 100)";\\ 311
+[A1?]  twCIL ="  tcCI -  twCIH ";\\ 312
+[A1?]  tcH ="period";\\ 314
+[A1?]  tper ="period";\\ 315
+[A1?]  toffset ="0ns";\\ 317
+[A1?]  tH1flo ="  tcCI ";\\ 318
+[A1?]  tH3flo ="0ns";\\ 319
+[A1?]  tH3rhi ="  tcCI ";\\ 320
+[A1?]  tCSTRBfhi ="5ns";\\ 321
+[A1?]  tCRDYflo ="10ns";\\ 322
+[A1?]  true_toffset ="0ns";\\ 329
+[A1?]  true_tH1flo ="  tcCI ";\\ 330
+[A1?]  true_tH3flo ="0ns";\\ 331
+[A1?]  true_tH3rhi ="  tcCI ";\\ 332
+[A1?]  true_tCSTRBfhi ="5ns";\\ 333
+[A1?]  true_tCRDYflo ="10ns";\\ 334
+[A1?]  tsuDR2 ="10ns";\\ 335

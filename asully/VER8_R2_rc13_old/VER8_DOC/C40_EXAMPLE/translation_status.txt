@@ -1,0 +1,73 @@
+allocated [8000000] bytes for cyclebuff @0xb76f0008, source[gct_gen_mod8_ggm.c,82,main]
+allocated [8000000] bytes for SCATcycle @0xb6f4e008, source[gct_gen_mod8_ggm.c,93,main]
+allocated [8000000] bytes for SCATcycle @0xb6f4e008, source[gct_gen_mod8_ggm.c,105,main]
+allocated [3405800] bytes for PINLIST @0xb646c008, source[gct_gen_mod8_ggm.c,113,main]
+allocated [163080000] bytes for cycsets @0xac8e5008, source[gct_gen_mod8_ggm.c,121,main]
+allocated [162324000] bytes for CELL_INFO @0xa2e17008, source[gct_gen_mod8_ggm.c,130,main]
+allocated [2240000] bytes for PARAM_INFO @0xa2bf4008, source[gct_gen_mod8_ggm.c,139,main]
+SIZEOF(ACWAVES)=2012, source[parse_actable_ggm.c,135,parse_actable]
+ACTABLELINES=5001, source[parse_actable_ggm.c,136,parse_actable]
+allocated [10062012] bytes for acwaves @0xa2254008, source[parse_actable_ggm.c,143,parse_actable]
+allocated [10062012] bytes for origins @0xa18bb008, source[parse_actable_ggm.c,151,parse_actable]
+allocated [50601] bytes for actablenames @0x87ac498,source[parse_actable_ggm.c,159,parse_actable]
+allocated [112701] bytes for actablein, source[parse_actable_ggm.c,168,parse_actable]
+There are 45 ACcategories
+SSb1 000:  cat:0   dev:0   test:0  cdt=A
+SSb2 001:  cat:1   dev:0   test:0  cdt=B
+SSb3 002:  cat:1   dev:0   test:1  cdt=C
+SSe2 003:  cat:1   dev:0   test:1  cdt=C
+SSb3 004:  cat:1   dev:0   test:2  cdt=D
+SSe2 005:  cat:1   dev:0   test:2  cdt=D
+SSb3 006:  cat:2   dev:0   test:0  cdt=E
+SSe2 007:  cat:2   dev:0   test:0  cdt=E
+SSb3 008:  cat:3   dev:0   test:0  cdt=F
+SSe2 009:  cat:3   dev:0   test:0  cdt=F
+SSe1 010:  cat:1   dev:0   test:0  cdt=B
+SSb2 011:  cat:4   dev:0   test:0  cdt=G
+SSe1 012:  cat:4   dev:0   test:0  cdt=G
+SSb2 013:  cat:5   dev:0   test:0  cdt=H
+SSb3 014:  cat:5   dev:1   test:0  cdt=I
+SSe2 015:  cat:5   dev:1   test:0  cdt=I
+SSb3 016:  cat:5   dev:2   test:0  cdt=J
+SSe2 017:  cat:5   dev:2   test:0  cdt=J
+SSb3 018:  cat:5   dev:1   test:0  cdt=I
+SSe2 019:  cat:5   dev:1   test:0  cdt=I
+SSb3 020:  cat:5   dev:2   test:0  cdt=J
+SSe2 021:  cat:5   dev:2   test:0  cdt=J
+SSb3 022:  cat:5   dev:1   test:0  cdt=I
+SSe2 023:  cat:5   dev:1   test:0  cdt=I
+SSb3 024:  cat:5   dev:2   test:0  cdt=J
+SSe2 025:  cat:5   dev:2   test:0  cdt=J
+SSb3 026:  cat:5   dev:1   test:0  cdt=I
+SSe2 027:  cat:5   dev:1   test:0  cdt=I
+SSb3 028:  cat:5   dev:2   test:0  cdt=J
+SSe2 029:  cat:5   dev:2   test:0  cdt=J
+SSb3 030:  cat:5   dev:1   test:0  cdt=I
+SSe2 031:  cat:5   dev:1   test:0  cdt=I
+SSb3 032:  cat:5   dev:2   test:0  cdt=J
+SSe2 033:  cat:5   dev:2   test:0  cdt=J
+SSb3 034:  cat:5   dev:1   test:0  cdt=I
+SSe2 035:  cat:5   dev:1   test:0  cdt=I
+SSb3 036:  cat:5   dev:2   test:0  cdt=J
+SSe2 037:  cat:5   dev:2   test:0  cdt=J
+SSb3 038:  cat:5   dev:1   test:0  cdt=I
+SSe2 039:  cat:5   dev:1   test:0  cdt=I
+SSb3 040:  cat:5   dev:2   test:0  cdt=J
+SSe2 041:  cat:5   dev:2   test:0  cdt=J
+SSb3 042:  cat:5   dev:1   test:0  cdt=I
+SSe2 043:  cat:5   dev:1   test:0  cdt=I
+SSb3 044:  cat:5   dev:2   test:0  cdt=J
+SSe2 045:  cat:5   dev:2   test:0  cdt=J
+SSe1 046:  cat:5   dev:0   test:0  cdt=H
+SSb2 047:  cat:6   dev:0   test:0  cdt=K
+SSe1 048:  cat:6   dev:0   test:0  cdt=K
+SSb2 049:  cat:7   dev:0   test:0  cdt=L
+SSe1 050:  cat:7   dev:0   test:0  cdt=L
+SSe0 051:  cat:0   dev:0   test:0  cdt=A
+There are 12 unique category/device/temp combinations
+ACWAVES@=0xa2254008, source[gct_gen_mod8_ggm.c,282,main]
+allocated [0] bytes for cyctablein, source[read_cycletbl_ggm.c,46,read_cycletbl]
+allocated [1302400] bytes for CYCTBL @0xa177d008,source[compact_cycletbl_ggm.c,25,compact_cycletbl]
+allocated [60000] bytes for actablebuf @0x87b8a48, source[parse_cyctbl_ggm.c,41,parse_cyctbl]
+allocated [60000] bytes for inheritbuf @0x87c74b0, source[parse_cyctbl_ggm.c,50,parse_cyctbl]
+allocated [60000] bytes for actablelist @0x87d5f18, source[parse_cyctbl_ggm.c,60,parse_cyctbl]

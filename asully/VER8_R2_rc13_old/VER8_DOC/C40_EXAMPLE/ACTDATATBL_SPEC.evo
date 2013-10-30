@@ -1,0 +1,223 @@
+enVision:"bl8:R10.3.2.WW0104:S3.0"; /* 5.7 */
+//UNIQUE CAT:31 TMP:1 DEV:5 TST:3 REM:5
+Spec ENUMCTRL_TBL {
+	ECT_TMP0 = "select(TITestTemp,   TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE)";
+	ECT_DEV0 = "select(TIDeviceType, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE)";
+	ECT_DEV1 = "select(TIDeviceType, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,FALSE, TRUE, TRUE, TRUE, TRUE)";
+	ECT_DEV2 = "select(TIDeviceType,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE, TRUE,FALSE,FALSE,FALSE,FALSE)";
+	ECT_DEV3 = "select(TIDeviceType,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE, TRUE, TRUE, TRUE,FALSE, TRUE,FALSE,FALSE)";
+	ECT_DEV4 = "select(TIDeviceType, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,FALSE,FALSE,FALSE, TRUE,FALSE, TRUE, TRUE)";
+	ECT_TST0 = "select(TITestType,   TRUE, TRUE, TRUE, TRUE, TRUE, TRUE)";
+	ECT_TST1 = "select(TITestType,   TRUE, TRUE,FALSE, TRUE, TRUE, TRUE)";
+	ECT_TST2 = "select(TITestType,  FALSE,FALSE, TRUE,FALSE,FALSE,FALSE)";
+	ECT_REM0 = "(SPECIAL_RUN_SYNC= TRUE) AND (SCHMOO= TRUE)";
+	ECT_REM1 = "(SPECIAL_RUN_SYNC=FALSE) AND (SCHMOO= TRUE)";
+	ECT_REM2 = "(SPECIAL_RUN_SYNC=FALSE) AND (SCHMOO=FALSE)";
+	ECT_REM3 = "(SPECIAL_RUN_SYNC=FALSE) AND (SCHMOO=FALSE)";
+	ECT_REM4 = "(SPECIAL_RUN_SYNC= TRUE) AND (SCHMOO= TRUE)";
+	ParamGlobals {
+		ECT_TMP0 { Type = BOOLEAN; }
+		ECT_DEV0 { Type = BOOLEAN; }
+		ECT_DEV1 { Type = BOOLEAN; }
+		ECT_DEV2 { Type = BOOLEAN; }
+		ECT_DEV3 { Type = BOOLEAN; }
+		ECT_DEV4 { Type = BOOLEAN; }
+		ECT_TST0 { Type = BOOLEAN; }
+		ECT_TST1 { Type = BOOLEAN; }
+		ECT_TST2 { Type = BOOLEAN; }
+		ECT_REM0 { Type = BOOLEAN; }
+		ECT_REM1 { Type = BOOLEAN; }
+		ECT_REM2 { Type = BOOLEAN; }
+		ECT_REM3 { Type = BOOLEAN; }
+		ECT_REM4 { Type = BOOLEAN; }
+	}
+}
+Spec ACTIMING_TBL_30 {
+	Category A2 {\\ 612
+		Inherit A1;
+		dtcf="0ps";\\ECT_TST1  613
+		ctcf="0ps";\\ECT_TST1  614
+		dtcf="300ps";\\ECT_TST2  620
+		ctcf="400ps";\\ECT_TST2  621
+	}\\622
+	Category C2 {\\ 825
+		Inherit A1;
+		  loossetup ="3ns";\\ 826
+		  looshold ="3ns";\\ 827
+		  loosdelay ="2ns";\\ 828
+		  loosdelay4 ="2ns";\\ 829
+		  loosdelay5 ="2ns";\\ 830
+		  loosdelay6 ="2ns";\\ 831
+		  loosdelay7 ="2ns";\\ 832
+		  loosabus ="2ns";\\ 833
+		  looscd ="3ns";\\ 834
+		  tgb ="1ns";\\ 835
+		sp="0ns";\\ 836
+	}\\838
+	Category F2 {\\ 672
+		Inherit A1;
+		  loosclock ="5ns";\\ 673
+	}\\674
+	Category G2 {\\ 677
+		Inherit A1;
+		  loosclock ="14ns";\\ 679
+	}\\680
+	Category H2 {\\ 711
+		Inherit A1;
+		  loossetup ="0ns";\\ 712
+		  looshold ="0ns";\\ 713
+		  loosdelay ="0ns";\\ 714
+		  loosdelay4 ="0ns";\\ 715
+		  loosdelay5 ="0ns";\\ 716
+		  loosdelay6 ="0ns";\\ 717
+		  loosdelay7 ="0ns";\\ 718
+		  loosabus ="0ns";\\ 719
+		  looscd ="3ns";\\ 720
+		  tgb ="1ns";\\ 721
+		sp="0ns";\\ 722
+	}\\723
+	Category I2 {\\ 731
+		Inherit A1;
+		  loossetup ="7ns";\\ 732
+		  looshold ="10ns";\\ 733
+		  loosdelay ="10ns";\\ 734
+		  loosdelay4 ="11ns";\\ 735
+		  loosdelay5 ="12ns";\\ 736
+		  loosdelay6 ="13ns";\\ 737
+		  loosdelay7 ="14ns";\\ 738
+		  loosabus ="0ns";\\ 739
+		  looscd ="0ns";\\ 740
+		  tgb ="0ns";\\ 741
+		sp="15ns";\\ 742
+	}\\743
+	Category J2 {\\ 750
+		Inherit A1;
+		  loossetup ="7ns";\\ 751
+		  looshold ="10ns";\\ 752
+		  loosdelay ="10ns";\\ 753
+		  loosdelay4 ="11ns";\\ 754
+		  loosdelay5 ="12ns";\\ 755
+		  loosdelay6 ="13ns";\\ 756
+		  loosdelay7 ="14ns";\\ 757
+		  loosabus ="15ns";\\ 758
+		  looscd ="0ns";\\ 759
+		  tgb ="0ns";\\ 760
+		sp="15ns";\\ 761
+	}\\762
+	Category K2 {\\ 769
+		Inherit A1;
+		  loossetup ="3ns";\\ 770
+		  looshold ="3ns";\\ 771
+		  loosdelay ="3ns";\\ 772
+		  loosdelay4 ="4ns";\\ 773
+		  loosdelay5 ="5ns";\\ 774
+		  loosdelay6 ="6ns";\\ 775
+		  loosdelay7 ="7ns";\\ 776
+		  loosabus ="8ns";\\ 777
+		  looscd ="0ns";\\ 778
+		  tgb ="0ns";\\ 779
+		sp="10ns";\\ 780
+	}\\781
+	Category L2 {\\ 789
+		Inherit A1;
+		  loossetup ="3ns";\\ECT_REM2  792
+		  looshold ="3ns";\\ECT_REM2  793
+		  loosdelay ="3ns";\\ECT_REM2  794
+		  loosdelay4 ="4ns";\\ECT_REM2  795
+		  loosdelay5 ="5ns";\\ECT_REM2  796
+		  loosdelay6 ="6ns";\\ECT_REM2  797
+		  loosdelay7 ="7ns";\\ECT_REM2  798
+		  loosabus ="2ns";\\ECT_REM2  799
+		  looscd ="0ns";\\ECT_REM2  800
+		  tgb ="0ns";\\ECT_REM2  801
+		sp="0ns";\\ECT_REM2  802
+		  loossetup ="0ns";\\ECT_REM3  808
+		  looshold ="0ns";\\ECT_REM3  809
+		  loosdelay ="0ns";\\ECT_REM3  810
+		  loosdelay4 ="0ns";\\ECT_REM3  811
+		  loosdelay5 ="0ns";\\ECT_REM3  812
+		  loosdelay6 ="0ns";\\ECT_REM3  813
+		  loosdelay7 ="0ns";\\ECT_REM3  814
+		  loosabus ="0ns";\\ECT_REM3  815
+		  looscd ="3ns";\\ECT_REM3  816
+		  tgb ="1ns";\\ECT_REM3  817
+		sp="0ns";\\ECT_REM3  818
+	}\\819
+	Category M2 {\\ 846
+		Inherit A1;
+		  loossetup ="2ns";\\ECT_REM2  848
+		  looshold ="2ns";\\ECT_REM2  849
+		  loosdelay ="2ns";\\ECT_REM2  850
+		  loosdelay4 ="2ns";\\ECT_REM2  851
+		  loosdelay5 ="2ns";\\ECT_REM2  852
+		  loosdelay6 ="2ns";\\ECT_REM2  853
+		  loosdelay7 ="2ns";\\ECT_REM2  854
+		  loosabus ="2ns";\\ECT_REM2  855
+		  looscd ="0ns";\\ECT_REM2  856
+		  tgb ="0ns";\\ECT_REM2  857
+		sp="0ns";\\ECT_REM2  858
+		  loossetup ="0ns";\\ECT_REM3  864
+		  looshold ="0ns";\\ECT_REM3  865
+		  loosdelay ="0ns";\\ECT_REM3  866
+		  loosdelay4 ="0ns";\\ECT_REM3  867
+		  loosdelay5 ="0ns";\\ECT_REM3  868
+		  loosdelay6 ="0ns";\\ECT_REM3  869
+		  loosdelay7 ="0ns";\\ECT_REM3  870
+		  loosabus ="0ns";\\ECT_REM3  871
+		  looscd ="3ns";\\ECT_REM3  872
+		  tgb ="1ns";\\ECT_REM3  873
+		sp="0ns";\\ECT_REM3  874
+	}\\875
+	Category N2 {\\ 880
+		Inherit A1;
+		  loossetup ="3ns";\\ 881
+		  looshold ="3ns";\\ 882
+		  loosdelay ="3ns";\\ 883
+		  loosdelay4 ="4ns";\\ 884
+		  loosdelay5 ="5ns";\\ 885
+		  loosdelay6 ="6ns";\\ 886
+		  loosdelay7 ="7ns";\\ 887
+		  loosabus ="8ns";\\ 888
+		  looscd ="0ns";\\ 889
+		  tgb ="0ns";\\ 890
+		sp="7ns";\\ 891
+	}\\892
+	Category O2 {\\ 959
+		Inherit A1;
+		SparePicoSeconds1="  tref +  tH1flo +  tvDW -  tgb -ctcf";\\ 1148
+		SparePicoSeconds2="(SparePicoSeconds1-  tcH )+4ns;   ";\\ 1154
+		SparePicoSeconds2="4ns";\\ 1154
+	}\\1502
+	Category R2 {\\ 1514
+		Inherit A1;
+		SparePicoSeconds1="  loosdelay7 ";\\ 1650
+		SparePicoSeconds3="  tref +  tH1flo +  tvDW +sp-  tgb -ctcf";\\ 1716
+		SparePicoSeconds2="(SparePicoSeconds3-  tcH )+4ns;   ";\\ 1722
+		SparePicoSeconds2="4ns";\\ 1722
+	}\\2085
+	Category T2 {\\ 2099
+		Inherit A1;
+		SparePicoSeconds1="  tref +  tH1flo +  tvDW -  tgb -ctcf";\\ 2289
+		SparePicoSeconds2="(SparePicoSeconds1-  tcH )+4ns;   ";\\ 2295
+		SparePicoSeconds2="4ns";\\ 2295
+	}\\2720
+	Category Z2 {\\ 2728
+		Inherit A1;
+		SparePicoSeconds1="  loosdelay7 ";\\ 2862
+		  loosdelay7 ="0ns";\\ 2867
+		  loosdelay7 ="SparePicoSeconds1";\\ 2885
+		SparePicoSeconds1="sp";\\ 2895
+		sp="0ns";\\ 2900
+		SparePicoSeconds3="  tref +  tH1flo +  tvDW +sp-  tgb -ctcf";\\ 2917
+		SparePicoSeconds2="(SparePicoSeconds3-  tcH )+4ns;   ";\\ 2923
+		SparePicoSeconds2="4ns";\\ 2923
+		sp="SparePicoSeconds1";\\ 2934
+	}\\3259
+	Category A1 {\\ 1
+		SccsId="'@(#)actable.p1.79/18/9310:08:05cTI'";\\ 291
+		  restrict ="14ns";\\ 661
+	}\\5785
+	ParamGlobals{
+	/* You need to add these yourself! */
+	}
+}

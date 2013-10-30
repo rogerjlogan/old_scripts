@@ -1,0 +1,309 @@
+import sys
+import re
+import pprint
+import os
+#import string
+from string import *
+import time
+
+# This program will split an execution log into different threads. If 2 or more patterns are selected for a thread,
+# then two threads will be created.. one that is contiguous (Enter,Continous,Exit) and the other non-contiguous (EnterExit,EnterExit,EnterExit).
+# 
+# Each "thread" must be delimited by 3 asterisks (***).
+#
+#     >***
+#     >PAT:C8_minifunc
+#     >***
+#     >PAT:C16_minifunc
+#     >PAT:C16_maxifunc
+#     >PAT:C16_reg
+#     >PAT:C16_shift
+#     >***
+
+# In the above example, 3 threads will be created. One for the first pattern, and 2 for the following four.
+# Naming convention will use first pattern follow by the last.
+
+__PROGRAM_NAME__ = "Thread Maker"
+__AUTHOR__ = "AUTHOR: Roger Logan, Anora Solutions, Test Engineer, Houston, TX"
+__DATEMODIFIED__ = "LAST MODIFIED: July 3, 2011"
+__VERSION__ = " v1.0"
+__PROGFILE__ = "thread_maker.py"
+__INPUTFILE__ = "<datalog.txt>" #modify to deliminate threads with 3 asterisks/dashes (***)
+__patMap__ = "<patMap.txt>" #optional file for pattern aliases
+__OUTPUTFILE__ = "patterns.evo"
+
+__DEBUG__ = 0
+
+# used for pattern map, if 2nd argument is passed
+PatternMap = 'DefaultPatternMap'
+DefaultSourcePath = './Evos'
+DefaultBinaryPath = './Evos/Flexes/FX1'
+DefaultPatternGroup = 'PolMod8PatGrp'
+
+#relative path of Evos to polaris directory
+__evospath__ = '../x/Evos/'
+__basepattern__ = 'BasePattern'
+	
+class TextException(Exception): pass
+
+class Ddict(dict):
+    def __init__(self, default=None):
+        self.default = default
+    def __getitem__(self, key):
+        if not self.has_key(key):
+            self[key] = self.default()
+        return dict.__getitem__(self, key)
+#End Ddict()
+
+#-----------------------------------------------------------------------
+#   strip
+#-----------------------------------------------------------------------
+def mystrip(string,delim_st,delim_sp='\n',ignore_st=None,ignore_sp=None):
+  """This will return 'string' stripped of anything between (and including) 'delim_st' and 'delim_sp'\
+  (except when 'delim_sp' is newline) EVEN IF THEY ARE NESTED.  Delimiters can be any string or character\
+  (alphanumerics as well as non-alphanumerics).\
+  'ignore_st' and 'ignore _sp' allow removal of substrings from string before parsing for nested strings."""
+  
+  if ignore_st and ignore_sp:
+    string=strip(string,ignore_st,ignore_sp)
+  
+  es_delim_st=re.escape(delim_st) # returns non-alphanumerics backslashed for regex
+  es_delim_sp=re.escape(delim_sp) # returns non-alphanumerics backslashed for regex
+  
+  if delim_sp!='\n':
+    # THIS IS A MULTILINE STRING SO WE NEED TO CHECK FOR NESTING
+    patrn = re.compile(
+      # This is a regex WITHIN a regex
+      "("+es_delim_st+      # outer regex start
+      "(?:.*?)"+                # inner regex  ?: prevents backreference of inner regex
+                                #              .* searches for any char except '\n'(any # of times)
+                                #              ? before closing makes this 'lazy' (it will grab FIRST occurance of 'delim_sp')
+      es_delim_sp+")",      # outer regex end
+      re.DOTALL|            # re.DOTALL overrides '.*' limitation of '\n' described above
+      re.VERBOSE)           # re.VERBOSE allows these comments (ignores whitespace including newlines)
+    while 1:
+      strObj = patrn.search(string) # search for 1st occurance of backreferenced pattern (from outer regex defined above)
+      if not strObj:break  # no more, we're done
+      # found a substring
+      substring=strObj.group() # get string from RE object
+      if substring.count(delim_st) and delim_st!= delim_sp>1:
+        if delim_sp!='\n':
+          # remove nested substring (two 'delim_st' and one 'delim_sp')
+          strObj = patrn.search(substring,1) # ignore 1st delim_st
+        else:
+          strObj = patrn.search(substring)
+        if strObj:
+          substring = strObj.group() # get string from RE object
+      string=string.replace(substring,'',1) # only remove that one instance
+  else:
+    # THIS IS A SINGLELINE STRING - NO NEED TO CHECK BEYOND NEWLINE
+    patrn = re.compile("("+es_delim_st+"(?:.*))")
+    string = re.sub(patrn,'',string)
+  return string
+#End strip()
+
+#-----------------------------------------------------------------------
+#   main
+#-----------------------------------------------------------------------
+def main():
+    
+    # Get the arguments from the command line, except the first one.
+    args = sys.argv[1:]
+    if len(args) != 1 and len(args) != 2:
+        print "usage: "+__PROGFILE__+" "+__INPUTFILE__+" "+__patMap__
+        sys.exit(-1)
+    
+    if len(args) == 2:buildPatternMap = True;
+    else:buildPatternMap = False;
+    
+    localtime = time.asctime(time.localtime(time.time()))
+    
+    header = "enVision:\"bl8:R15.4.3:S4.1\";\n\n"
+    header += "//This file was generated by: "+__PROGFILE__+__VERSION__+" from a Polaris execution log.\n//"+__AUTHOR__+"\n//CREATION DATE: "+str(localtime)+"\n\n"
+    
+    os.system('clear')
+    print '\n\n'
+    outstr=''
+
+    dpm_pats = []
+    if (buildPatternMap):
+        infile = open(args[1], 'r')
+        content = infile.read()
+        infile.close()
+        content=mystrip(content,'{','}')
+        contents = content.split('\n')
+        aliasMap = Ddict(dict)
+#        namePat=re.compile("\s*(?P<pattern>.*),(?P<alias>.*)\s*")
+        namePat=re.compile("\s*(?P<alias>.*),(?P<pattern>.*).vpl\s*")
+        for line in contents:
+            line=re.sub('\t+',',',line)
+            nameObj=namePat.search(line)
+            if nameObj:
+                pattern=strip(nameObj.group('pattern'))
+                alias=strip(nameObj.group('alias'))
+            else:continue
+            aliasMap[alias]=pattern
+        #End for
+        patMap  = 'PatternMap '+PatternMap+' {\n'
+        patMap += '\tDefaultSourcePath = \"'+DefaultSourcePath+'\";\n'
+        patMap += '\tDefaultBinaryPath = \"'+DefaultBinaryPath+'\";\n'
+        patMap += '\tDefaultPatternGroup = \"'+DefaultPatternGroup+'\";\n'
+        patMap += '\n\t//This pattern was added and therefore must be created.\n'
+        patMap += '\tPattern '+__basepattern__+' { File \"'+__basepattern__+'\"; }\n\n'
+        
+        aliases = aliasMap.keys()
+        aliases.sort()
+        for alias in aliases:
+            patMap += '\tPattern '+alias+' { File \"'+aliasMap[alias]+'\"; }\n'
+            evo = __evospath__+'DPM_'+aliasMap[alias]
+            if os.path.exists(evo+'.evo') or os.path.exists(evo+'.evo.gz'):
+                new_alias = 'DPM_'+alias
+                new_pattern = 'DPM_'+aliasMap[alias]
+                aliasMap[new_alias]=new_pattern
+                patMap += '\tPattern '+new_alias+' { File \"'+aliasMap[new_alias]+'\"; }\n'
+                dpm_pats.append(new_alias)
+        patMap += '}\n'
+        
+        outstr += patMap
+    #End if
+
+    infile = open(args[0], 'r')
+    content = infile.read()
+    infile.close()
+    contents = content.split('***')
+    
+    n=0
+    threadList = []
+    for rawthread in contents:
+        n=n+1
+        lines = rawthread.split('\n')
+        patterns=[]
+        for line in lines:
+            namePat=re.compile("\s*PAT\s*:\s*(?P<name>.*)\s*")
+            nameObj=namePat.search(line)
+            if nameObj:name=strip(nameObj.group('name'))
+            else:continue
+            patterns.append(name)
+            if 'DPM_'+name in dpm_pats:
+                patterns.append('DPM_'+name)
+        #End for
+        if len(patterns)==1:
+            contigThread=''
+            noncontigThread=''
+#            th_name=patterns[0]+'__soloThread'
+            th_name=patterns[0]+'__Thread'
+            if th_name not in threadList:
+                threadList.append(th_name)
+            else:continue
+            soloThread='Thread '+th_name+' {'
+            soloThread+='\tRow { '
+            soloThread+='ThreadAction = Expr { String = \"Seq:EnterExit\"; }\t'
+            soloThread+='Pattern = '+patterns[0]+'; } }\n'
+        else:
+            soloThread=''
+#            contig_th_name=patterns[0]+'__'+patterns[len(patterns)-1]+'__contigThread'
+            contig_th_name=patterns[0]+'__'+patterns[len(patterns)-1]+'__Thread'
+            if contig_th_name not in threadList:
+                threadList.append(contig_th_name)
+            else:continue
+            contigThread='Thread '+contig_th_name+' {\n'
+#            contigThread+='\tExecutionType = Expr { String = \"if (TIScreenPrint, Thr_exec:Serial, Thr_exec:Default)\"; }\n'
+            i=0
+            iter_pat = iter(patterns)
+            next_pat = iter_pat.next()#skip first value
+            for pattern in patterns:
+                try:
+                    next_pat = iter_pat.next()
+                except Exception:
+                    next_pat = ""
+                i+=1
+                if i == 1:
+                    if next_pat[:4] != 'DPM_' or len(patterns)>2:
+                        contigThread+='\tExecutionType = Expr { String = \"if (TIScreenPrint, Thr_exec:Serial, Thr_exec:Default)\"; }\n'
+                        contigThread+='\tRow { '
+                        contigThread+='ThreadAction = Expr { String = \"Seq:Enter\"; }\t\t'
+                        contigThread+='Pattern = '+pattern+'; }\n'
+                    else:
+                        contigThread+='\tRow { '
+                        contigThread+='ThreadAction = Expr { String = \"Seq:Enter\"; }\t\t'
+                        contigThread+='Pattern = '+pattern+'; }\n'
+                elif i == len(patterns):
+                    if next_pat[:4] != 'DPM_' or len(patterns)>2:
+                        contigThread+='\tRow { '
+                        contigThread+='ThreadAction = Expr { String = \"Seq:Exit\"; }\t\t'
+                        contigThread+='Pattern = '+pattern+'; }\n'
+                        contigThread+='\tRow { '
+                        contigThread+='ThreadAction = Expr { String = \"Seq:SetRef\"; }\t'
+                        contigThread+='Pattern = '+__basepattern__+'; }\n'
+                    else:
+                        contigThread+='\tRow { '
+                        contigThread+='ThreadAction = Expr { String = \"Seq:Exit\"; }\t\t'
+                        contigThread+='Pattern = '+pattern+'; }\n'
+                elif next_pat[:4] == 'DPM_':
+                    contigThread+='\tRow { '
+                    contigThread+='ThreadAction = Expr { String = \"Seq:EnterExit\"; }\t'
+                    contigThread+='Pattern = '+pattern+'; }\n'
+                elif pattern[:4] == 'DPM_':
+                    contigThread+='\tRow { '
+                    contigThread+='ThreadAction = Expr { String = \"Seq:SetRef\"; }\t'
+                    contigThread+='Pattern = '+pattern+'; }\n'
+                else:
+                    contigThread+='\tRow { '
+                    contigThread+='ThreadAction = Expr { String = \"Seq:Continue\"; }\t'
+                    contigThread+='Pattern = '+pattern+'; }\n'
+               #End if
+            #End for
+            contigThread+='}\n'
+#             noncontig_th_name=patterns[0]+'__'+patterns[len(patterns)-1]+'__noncontigThread'
+#             if noncontig_th_name not in threadList:
+#                 threadList.append(noncontig_th_name)
+#             else:continue
+#             noncontigThread='Thread '+noncontig_th_name+' {\n'
+#             for pattern in patterns:
+#                 noncontigThread+='\tRow { '
+#                 noncontigThread+='ThreadAction = Expr { String = \"Seq:EnterExit\"; }\t'
+#                 noncontigThread+='Pattern = '+pattern+'; }\n'
+#             #End for
+#             noncontigThread+='\tRow { '
+#             noncontigThread+='ThreadAction = Expr { String = \"Seq:SetRef\"; }\t'
+#             noncontigThread+='Pattern = BasePattern; }\n'
+#             noncontigThread+='}\n'
+        #End if
+#        outstr+=soloThread+contigThread+noncontigThread
+        outstr+=soloThread+contigThread
+    #End for
+
+    patseq = 'PatternSequence AllPatSeq {\n'
+    i=-1
+    threadList.sort()
+    for thread in threadList:
+        i+=1
+        patseq += '\tThread['+str(i)+'] = '+thread+';\n'
+
+    patseq += '\tZipper = Zipper {\n'
+    patseq += '\t\t//WARNING !!! THIS ZIPPER WAS NOT COMPLETED ON PURPOSE.\n'
+    patseq += '\t\t//THE EASIEST WAY TO FILL THIS IN IS TO LOAD IT IN A SIMULATOR AND USE ENVISION TO\n'
+    patseq += '\t\t//FIND THE APPROPRIATE WAVEFORM TABLES.  THEN SAVE THE SEQUENCE OBJECT.\n\t}\n'
+    patseq += '\tevAutoBasePeriod = True;\n}\n'
+
+    outstr += patseq
+
+    outfile = open(__OUTPUTFILE__, "w")
+    outfile.write(header+outstr)
+    outfile.close()
+
+    print '\n\n'
+    print __PROGRAM_NAME__+" "+__VERSION__
+    print __AUTHOR__
+    print __DATEMODIFIED__
+    print "SUCCESS!!! NEW FILE(S) CREATED:\n"+__OUTPUTFILE__+"\n\n"
+    if (buildPatternMap):
+        print "WARNING: Zipper was purposely constructed blank!"
+        print "Load in simulator and complete Zipper and then save."
+
+#End main()
+#-----------------------------------------------------------------------
+#     BEGIN MAIN
+#-----------------------------------------------------------------------
+if __name__ == '__main__':
+    main()
