@@ -10,8 +10,8 @@
 # ...
 # file10
 
-__FIND_STRING__ = "S4.3"
-__REPL_STRING__ = "S4.1"
+__FIND_STRING__ = "(@)"
+__REPL_STRING__ = "(pALL)"
 
 import sys
 import re
@@ -45,7 +45,6 @@ def main():
     print '\n\n'
 
     infile = open(args[0], 'r')
-    __OUTPUTFILE__=args[0]+'.vectors'
     content = infile.read()
     infile.close()
 
@@ -71,7 +70,6 @@ def main():
     print __PROGRAM_NAME__+" "+__VERSION__
     print __AUTHOR__
     print __DATEMODIFIED__
-    print "SUCCESS!!! NEW FILE CREATED: "+__OUTPUTFILE__+"\n\n"
 
 
 #End main()
