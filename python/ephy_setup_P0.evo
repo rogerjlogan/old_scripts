@@ -1,0 +1,13 @@
+enVision:"bl8:R10.8.4.5.WW1003:S3.1"; /* 5.7 */
+Pattern PHY_setup_cpm_pat {
+Type Cpm;
+Default SignalHeader ADC_GAIN_signalheader;
+
+$PHY0_st
+*zZ x x xz x . z. . . xz Z Z 0 0 . z Z 1 1 .. .. . . . . . Z . . . . . . . . . . . . . . . . 0 . . . . . . . . 1100xxxxxxxxxxxxZxxxxxxZxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxzxxxxxxzzzzzzzzzzzzzzzzzzzzzzZZxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxz* WFT_MAIN;
+*zZ x x xx x . 1. . . xz Z Z 0 0 . z Z 1 1 .. .. . . . . . 0 . . . . . . . . . . . . . . . . 0 . . . . . . . . 1100xxxxxxxxxxxxZxxxxxxZxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxzxxxxxxzzzzzzzzzzzzzzzzzzzzzzZZxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxz* WFT_MAIN;
+*zZ x x xx x . 1. . . xz Z Z 0 0 . z Z 1 1 .. .. . . . . . 0 . . . . . . . . . . . . . . . . 0 . . . . . . . . 1100xxxxxxxxxxxxZxxxxxxZxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxzxxxxxxzzzzzzzzzzzzzzzzzzzzzzZZxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxz* WFT_MAIN; <RPT 10>
+*zZ x x xx x . 1. . . xz Z Z 0 0 . Z Z 1 1 .. .. . . . . . 0 . . . . . . . . . . . . . . . . 0 . . . . . . . . 1100xxxxxxxxxxxxZxxxxxxZxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxzxxxxxxzzzzzzzzzzzzzzzzzzzzzzZZxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxz* WFT_MAIN; <RPT 30>
+$PHY0_sp
+*zZ x x xx x . 1. . . xz Z Z 0 0 . Z Z 1 1 .. .. . . . . . 0 . . . . . . . . . . . . . . . . 0 . . . . . . . . 1100xxxxxxxxxxxxZxxxxxxZxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxzxxxxxxzzzzzzzzzzzzzzzzzzzzzzZZxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxz* WFT_MAIN; <RET>
+}
