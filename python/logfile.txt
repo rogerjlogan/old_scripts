@@ -1,8 +1,0 @@
-Script took 00hrs:00mins:01.882secs
-
-Transitions found in File: EVOS/codec_test_init_mod2.evo.gz
-    Drive Pins transitioning     : 125
-    Drive Combinations found     : LHL,HLH
-    Strobe Pins transitioning    : 
-    Strobe Combinations found    : 
-    WaveformTables/SignalHeaders : AC_TS1_codec_WftRef,f751618_MOD_SH

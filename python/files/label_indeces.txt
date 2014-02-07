@@ -1,0 +1,2 @@
+$ephy_adc_gain000_st, 0
+$ephy_adc_gain000_sp, 137

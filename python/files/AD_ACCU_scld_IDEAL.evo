@@ -1,0 +1,65 @@
+enVisionObject:"bl8:R5.7";
+
+Pattern AD_ACCU_scld {
+    Type Cpm;
+" Pattern convertor: ./VCP_NEW REV:18.0:main_vcp.c by Anthony Sully compile_date:Jul  5 2011@16:09:06"
+"      Pattern converted on:Wed Sep 14 16:03:32 2011 by:x0153396 on host:caretaker "
+"      in pwd:/home/x0153396/lf2/dal/p_files_2/Vectors"
+"                                     "
+"See aliasmap.h for alias assignments "
+"                                     "
+//main_vcp 275036889 55647
+//alias_vcpvcs 1506443522 9068
+//aliasmap 3514762989 5354
+//comments_shutdown 3695583049 4795
+//convert_vcp 857922561 7796
+//cpmopt_new 360352113 2714
+//cpmopt_vcp 2313238796 26085
+//global 776077306 1221
+//include 281312576 4288
+//common includes 2345987179 1099
+//outvector 3811073881 14197
+//outvector_evX2 2289300229 16268
+//smallfunc 3729096619 2956
+// pre_proc18 1542703975 48125 
+// expand_vector 1630623993 9159 
+// deal_with_functions 3227637732 18734 
+// globals 3200473234 1200 
+// includes 2168729609 5056 
+// line_parsing 2058639418 18644 
+// out_pats 2405549706 24556 
+" XCTTTTTEEAAAAAAAAAAAAAAAAVVPRMEPTTTTTTTTCCCCCCPPPPPPPPPPPPSSSSSSCCXBXXIRDDDDDDDDDDDDDDDDTWIDPWRRSVAAAAAAAAAAAAAAAALX"
+" TLDDCMRMMDDDDDDDDDDDDDDDDRRDEPNDCC1234DDAAAAAAWWWWWWWWWWWWCCPPPPAAFIIIOS0123456789111111MNSSSEDNTI0123456789111111FT"
+" AKIOKSSUUCCCCCCCCCCCCCCCCEEPANAPLLPPPPIIPPPPPPMMMMMMMMMMMMIIIIIINN_ONNPN          012345SRNNNNNWRS          012345 A"
+" LO    T01IIIIIIIIIIIIIIIIFFIDM1IKKWWWWRR123456123456789111TRSSCSTRBNTTF                 2       BO                 L"
+" 1U    N  NNNNNNNNNNNNNNNNHLNYC4NIIMMMM12               012XXIOLTXXO 126                         NE                 2"
+"  T       0000000000111111IOT  4TNN                        DDMMKE  O                                                 "
+"          0123456789012345  2   112                          OI    T                                                 "
+"                                                                   E                                                 "
+"                                                                   N                                                 "
+$AD_ACCU_scld_begin
+"{-FLAG-preprocessed with PRE_PROC_NEW REV:20.0:pre_proc18_appn.c by Anthony Sully compile_date:Jul  5 2011@16:09:06}"
+* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>* DEF_WFT SH0; <LDA DPM_AD_ACCU_scld_begin>
+* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>* DEF_WFT SH0; <RPT DpmPipeline,SWCDPM>
+* dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd* DEF_WFT SH0; <RPT 16210,SDP> 
+* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>* DEF_WFT SH0; <SWCCPM>
+* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>* DEF_WFT SH0; <LC4 999>
+* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>* DEF_WFT SH0; <MODE(IFAIL ON,TCI ON)>
+$AD_ACCU_scld_M16893 "03CC8"
+* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>* DEF_WFT SH0; <FLAG(SEQF OFF)>
+* HxHxHLHxxLLLLLLLLLLLLLLLLHLHHHHHxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0xxxxHxxxxxxxxxxxxxxxxLxxxxxxxxxxxxxxxxxxxxxxxxxxX* GCT3 SH0; "VNIR7=1 (6,6,1)CPM calling DPM 04CC10"
+* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>* GCT3 SH0; <COND NZC4>"1A"
+* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>* GCT3 SH0; <DC4,CJMP .+4>"2A"
+* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>* GCT3 SH0; <MODE(IFAIL OFF,TCI OFF)>"3A"
+* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>* GCT3 SH0; <STOP FAIL>"4A ADDED BY CONVERSION for pass/fail test "
+* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>* GCT3 SH0; <JMP .+4>"5A After failing strobe vector"
+* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>* GCT3 SH0; <RPT MatchPipeline>"6A"
+* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>* GCT3 SH0; <COND SEQF>"7A"
+* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>* GCT3 SH0; <CJMP AD_ACCU_scld_M16893>"8A"
+* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>* GCT3 SH0; <MODE(IFAIL OFF,TCI OFF)>"9A"
+ "13CC19"
+$AD_ACCU_scld_end "15CC19"
+* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> * GCT3 SH0;<RET>"REMAP DEF_WFT to GCT3 16CC19"
+* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> * GCT3 SH0;<RPT 127>"pad vector VNIR4=1 18CC19"
+"VNIR5=130 19CC19"
+}

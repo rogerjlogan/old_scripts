@@ -1,6 +1,0 @@
-a.evo
-b.evo
-c.evo
-IDDQPattern.evo.gz
-ram_pmt_init_flowbyte.evo
-ram_pmt_init_flowbyte_orig.evo

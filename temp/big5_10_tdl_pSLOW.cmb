@@ -1,0 +1,800 @@
+
+DDC WFT14 WFT14 WFT14 WFT14 WFT14 WFT14
+
+PINS EJTAG_DINT EJTAG_TCK EJTAG_TDI EJTAG_TRST0_N EJTAG_TRST1_N EM_HIZ JTAG_TDI MBSP_RD PHY_EXRES PHY_TSTA TEST UART_CTS UART_RD VLYNQ3_RXD0 VLYNQ5_RXD0 VLYNQ5_RXD1  # numCombos=1
+0 0 0 0 0 0
+
+PINS JTAG_TCK  # numCombos=12
+0 0 0 0 0 0
+0 0 0 0 0 1
+0 0 0 0 1 1
+0 0 0 1 1 1
+0 0 1 1 1 1
+0 1 1 1 1 1
+1 0 0 0 0 0
+1 1 0 0 0 0
+1 1 1 0 0 0
+1 1 1 1 0 0
+1 1 1 1 1 0
+1 1 1 1 1 1
+
+PINS EM_D02 EM_D03 EM_D04 EM_D05 EM_D06 EM_D07 EM_D08 EM_D09 EM_D10 EM_D11 EM_D12 EM_D13 EM_D14 EM_D15 EM_D16 EM_D17 EM_D18 EM_D19 EM_D20 EM_D21 EM_D22 EM_D23 EM_D24 EM_D25 EM_D26 EM_D27 EM_D28 EM_D29 EM_D31  # numCombos=34
+0 0 0 0 0 0
+0 0 0 0 0 X
+0 0 0 0 X X
+0 0 0 X X X
+0 0 1 1 1 1
+0 0 X X X X
+0 1 1 1 1 1
+0 X X X X X
+1 0 0 0 X X
+1 1 0 0 0 X
+1 1 1 0 0 0
+1 1 1 1 0 0
+1 1 1 1 1 0
+1 1 1 1 1 1
+1 1 1 1 1 X
+1 1 1 1 X X
+1 1 1 X X X
+1 1 X X X X
+1 X X X X X
+X 0 0 0 0 0
+X 0 0 1 1 1
+X 1 1 1 1 1
+X X 0 0 0 0
+X X 0 0 1 1
+X X 1 1 1 1
+X X X 0 0 0
+X X X 0 0 1
+X X X 1 1 1
+X X X L L X
+X X X X 0 0
+X X X X 1 1
+X X X X X 0
+X X X X X 1
+X X X X X X
+
+PINS EM_D00 EM_D01  # numCombos=32
+0 0 0 0 0 0
+0 0 0 0 0 X
+0 0 0 0 X X
+0 0 0 X X X
+0 0 1 1 1 1
+0 0 X X X X
+0 1 1 1 1 1
+0 X X X X X
+1 0 0 0 X X
+1 1 1 0 0 0
+1 1 1 1 0 0
+1 1 1 1 1 0
+1 1 1 1 1 1
+1 1 1 1 1 X
+1 1 1 1 X X
+1 1 1 X X X
+1 1 X X X X
+1 X X X X X
+X 0 0 0 0 0
+X 1 1 1 1 1
+X X 0 0 0 0
+X X 0 0 1 1
+X X 1 1 1 1
+X X X 0 0 0
+X X X 0 0 1
+X X X 1 1 1
+X X X L L X
+X X X X 0 0
+X X X X 1 1
+X X X X X 0
+X X X X X 1
+X X X X X X
+
+PINS EM_D30  # numCombos=30
+0 0 0 0 0 0
+0 0 0 0 0 X
+0 0 0 0 X X
+0 0 0 X X X
+0 0 1 1 1 1
+0 0 X X X X
+0 X X X X X
+1 0 0 0 X X
+1 1 1 0 0 0
+1 1 1 1 0 0
+1 1 1 1 1 0
+1 1 1 1 1 1
+1 1 1 1 1 X
+1 1 1 1 X X
+1 1 1 X X X
+1 1 X X X X
+1 X X X X X
+X 0 0 0 0 0
+X 1 1 1 1 1
+X X 0 0 0 0
+X X 0 0 1 1
+X X X 0 0 0
+X X X 0 0 1
+X X X 1 1 1
+X X X L L X
+X X X X 0 0
+X X X X 1 1
+X X X X X 0
+X X X X X 1
+X X X X X X
+
+PINS JTAG_TRST_N  # numCombos=3
+0 0 0 0 0 0
+0 0 0 0 1 1
+1 1 1 1 1 1
+
+PINS RST_N  # numCombos=3
+0 0 0 0 0 0
+0 0 0 1 1 1
+1 1 1 1 1 1
+
+PINS EM_A22  # numCombos=29
+0 0 0 0 0 0
+0 0 X X X X
+H H H H H H
+H H H H H X
+H H H H X X
+H H H X X X
+H H X X X X
+H X X X X X
+L L L L L L
+L L L L L X
+L L L L X X
+L L L X X X
+L L X X X X
+L X X X X X
+X H H H H H
+X H H H H X
+X L L L L L
+X L L L X X
+X X 0 0 0 0
+X X H H H H
+X X L L L L
+X X X H H H
+X X X L L L
+X X X L L X
+X X X X H H
+X X X X L L
+X X X X X H
+X X X X X L
+X X X X X X
+
+PINS EM_A01 EM_A10  # numCombos=34
+0 0 0 0 0 0
+0 0 X X X X
+H H H H H H
+H H H H H X
+H H H H X X
+H H H X X X
+H H X X X X
+H X X X X X
+L L L L L L
+L L L L L X
+L L L L X X
+L L L X X X
+L L X X X X
+L X X X X X
+X H H H H H
+X H X X X X
+X L L L L L
+X L X X X X
+X X 0 0 0 0
+X X H H H H
+X X H X X X
+X X L L L L
+X X L X X X
+X X X H H H
+X X X H X X
+X X X L L L
+X X X L X X
+X X X X H H
+X X X X H X
+X X X X L L
+X X X X L X
+X X X X X H
+X X X X X L
+X X X X X X
+
+PINS EM_A03  # numCombos=32
+0 0 0 0 0 0
+0 0 X X X X
+H H H H H H
+H H H H H X
+H H H H X X
+H H H X X X
+H H X X X X
+H X X X X X
+L L L L L L
+L L L L L X
+L L L L X X
+L L L X X X
+L L X X X X
+L X X X X X
+X H H H H H
+X H X X X X
+X L L L L L
+X L X X X X
+X X 0 0 0 0
+X X H H H H
+X X H X X X
+X X L L L L
+X X L X X X
+X X X H H H
+X X X H X X
+X X X L L L
+X X X X H H
+X X X X H X
+X X X X L L
+X X X X X H
+X X X X X L
+X X X X X X
+
+PINS EM_A06 EM_A07 EM_A15 EM_A16  # numCombos=30
+0 0 0 0 0 0
+0 0 X X X X
+H H H H H H
+H H H H H X
+H H H H X X
+H H H X X X
+H H X X X X
+H X X X X X
+L L L L L L
+L L L L L X
+L L L L X X
+L L L X X X
+L L X X X X
+L X X X X X
+X H H H H H
+X H X X X X
+X L L L L L
+X X 0 0 0 0
+X X H H H H
+X X H X X X
+X X L L L L
+X X X H H H
+X X X H X X
+X X X L L L
+X X X X H H
+X X X X H X
+X X X X L L
+X X X X X H
+X X X X X L
+X X X X X X
+
+PINS EM_A00  # numCombos=26
+0 0 0 0 0 0
+0 0 X X X X
+H H H H H H
+H H H H H X
+H H H H X X
+H H H X X X
+H H X X X X
+H X X X X X
+L L L L L L
+L L L L L X
+L L L L X X
+L L L X X X
+L L X X X X
+L X X X X X
+X H H H H H
+X L L L L L
+X X 0 0 0 0
+X X H H H H
+X X L L L L
+X X X H H H
+X X X L L L
+X X X X H H
+X X X X L L
+X X X X X H
+X X X X X L
+X X X X X X
+
+PINS EM_A19 EM_A20  # numCombos=26
+0 0 0 0 0 0
+0 0 X X X X
+H H H H H H
+H H H H H X
+H H H X X X
+H X X X X X
+L L L L L L
+L L L L L X
+L L L L X X
+L L L X X X
+L L X X X X
+L X X X X X
+X H X X X X
+X L L L L L
+X X 0 0 0 0
+X X H H H H
+X X H X X X
+X X L L L L
+X X L X X X
+X X X H X X
+X X X L L L
+X X X X H X
+X X X X L L
+X X X X X H
+X X X X X L
+X X X X X X
+
+PINS EM_A12 EM_A13  # numCombos=21
+0 0 0 0 0 0
+0 0 X X X X
+H X X X X X
+L L L L L L
+L L L L L X
+L L L L X X
+L L L X X X
+L L X X X X
+L X X X X X
+X H X X X X
+X L L L L L
+X X 0 0 0 0
+X X H X X X
+X X L L L L
+X X X H X X
+X X X L L L
+X X X X H X
+X X X X L L
+X X X X X H
+X X X X X L
+X X X X X X
+
+PINS USB_DM  # numCombos=4
+0 0 0 0 0 0
+0 X X X X X
+X X X X X 0
+X X X X X X
+
+PINS JTAG_TMS  # numCombos=3
+0 0 0 0 0 0
+1 1 1 1 0 0
+1 1 1 1 1 1
+
+PINS JTAG_EMU0 JTAG_EMU1  # numCombos=3
+0 0 0 0 0 0
+X X X X 0 0
+X X X X X X
+
+PINS EJTAG_SYS_RST_N EJTAG_TMS EM_WAIT VR_ENZ  # numCombos=1
+1 1 1 1 1 1
+
+PINS GPIO5  # numCombos=7
+1 1 1 1 1 1
+1 1 1 X X X
+L L L L L L
+L L L L L X
+X X 1 1 1 1
+X X L L L L
+X X X X X X
+
+PINS EM_A23  # numCombos=31
+1 1 1 1 1 1
+1 1 X X X X
+H H H H H H
+H H H H H X
+H H H H X X
+H H H X X X
+H H X X X X
+H X X X X X
+L L L L L L
+L L L L L X
+L L L L X X
+L L L X X X
+L L X X X X
+L X X X X X
+X H H H H H
+X H H H H X
+X H X X X X
+X L L L L L
+X X 1 1 1 1
+X X H H H H
+X X H X X X
+X X L L L L
+X X X H H H
+X X X H X X
+X X X L L L
+X X X X H H
+X X X X H X
+X X X X L L
+X X X X X H
+X X X X X L
+X X X X X X
+
+PINS EM_A02 EM_A09  # numCombos=34
+1 1 1 1 1 1
+1 1 X X X X
+H H H H H H
+H H H H H X
+H H H H X X
+H H H X X X
+H H X X X X
+H X X X X X
+L L L L L L
+L L L L L X
+L L L L X X
+L L L X X X
+L L X X X X
+L X X X X X
+X H H H H H
+X H X X X X
+X L L L L L
+X L X X X X
+X X 1 1 1 1
+X X H H H H
+X X H X X X
+X X L L L L
+X X L X X X
+X X X H H H
+X X X H X X
+X X X L L L
+X X X L X X
+X X X X H H
+X X X X H X
+X X X X L L
+X X X X L X
+X X X X X H
+X X X X X L
+X X X X X X
+
+PINS EM_A11  # numCombos=33
+1 1 1 1 1 1
+1 1 X X X X
+H H H H H H
+H H H H H X
+H H H H X X
+H H H X X X
+H H X X X X
+H X X X X X
+L L L L L L
+L L L L L X
+L L L L X X
+L L L X X X
+L L X X X X
+L X X X X X
+X H H H H H
+X H X X X X
+X L L L L L
+X X 1 1 1 1
+X X H H H H
+X X H X X X
+X X L L L L
+X X L X X X
+X X X H H H
+X X X H X X
+X X X L L L
+X X X L X X
+X X X X H H
+X X X X H X
+X X X X L L
+X X X X L X
+X X X X X H
+X X X X X L
+X X X X X X
+
+PINS EM_A04  # numCombos=32
+1 1 1 1 1 1
+1 1 X X X X
+H H H H H H
+H H H H H X
+H H H H X X
+H H H X X X
+H H X X X X
+H X X X X X
+L L L L L L
+L L L L L X
+L L L L X X
+L L L X X X
+L L X X X X
+L X X X X X
+X H H H H H
+X H X X X X
+X L L L L L
+X X 1 1 1 1
+X X H H H H
+X X H X X X
+X X L L L L
+X X L X X X
+X X X H H H
+X X X H X X
+X X X L L L
+X X X L X X
+X X X X H H
+X X X X H X
+X X X X L L
+X X X X X H
+X X X X X L
+X X X X X X
+
+PINS EM_A05 EM_A08 EM_A17  # numCombos=30
+1 1 1 1 1 1
+1 1 X X X X
+H H H H H H
+H H H H H X
+H H H H X X
+H H H X X X
+H H X X X X
+H X X X X X
+L L L L L L
+L L L L L X
+L L L L X X
+L L L X X X
+L L X X X X
+L X X X X X
+X H H H H H
+X H X X X X
+X L L L L L
+X X 1 1 1 1
+X X H H H H
+X X H X X X
+X X L L L L
+X X X H H H
+X X X H X X
+X X X L L L
+X X X X H H
+X X X X H X
+X X X X L L
+X X X X X H
+X X X X X L
+X X X X X X
+
+PINS EM_A14  # numCombos=18
+1 1 1 1 1 1
+1 1 X X X X
+H H H H H H
+H H H H H X
+H H H H X X
+H H H X X X
+H H X X X X
+L L L L L L
+L L L L L X
+L L L X X X
+X L L L L L
+X X 1 1 1 1
+X X H H H H
+X X H X X X
+X X L L L L
+X X X H H H
+X X X X X L
+X X X X X X
+
+PINS EM_A18 EM_A21  # numCombos=26
+1 1 1 1 1 1
+1 1 X X X X
+H H H H H H
+H H H H H X
+H H H X X X
+H X X X X X
+L L L L L L
+L L L L L X
+L L L L X X
+L L L X X X
+L L X X X X
+L X X X X X
+X H X X X X
+X L L L L L
+X X 1 1 1 1
+X X H H H H
+X X H X X X
+X X L L L L
+X X L X X X
+X X X H X X
+X X X L L L
+X X X X H X
+X X X X L L
+X X X X X H
+X X X X X L
+X X X X X X
+
+PINS USB_DP  # numCombos=4
+1 1 1 1 1 1
+1 X X X X X
+X X X X X 1
+X X X X X X
+
+PINS LCD_HSYNC_RnW SSP0 SSP1 SSP2 SSP3  # numCombos=2
+1 1 1 1 1 1
+X X 1 1 1 1
+
+PINS EM_CS0  # numCombos=30
+H H H H H H
+H H H H H X
+H H H H X X
+H H H X X X
+H H X X X X
+H X X X X X
+L L L L L L
+L L L L L X
+L L L L X X
+L L L X X X
+L L X X X X
+L X X X X X
+X H H H H H
+X H H H H X
+X H H H X X
+X H X X X X
+X L L L L L
+X X H H H H
+X X H H H X
+X X H X X X
+X X L L L L
+X X X H H H
+X X X H X X
+X X X L L L
+X X X X H H
+X X X X H X
+X X X X L L
+X X X X X H
+X X X X X L
+X X X X X X
+
+PINS EM_OE  # numCombos=32
+H H H H H H
+H H H H H X
+H H H H X X
+H H H X X X
+H H X X X X
+H X X X X X
+L L L L L L
+L L L L L X
+L L L L X X
+L L L X X X
+L L X X X X
+L X X X X X
+X H H H H H
+X H H H H X
+X H H X X X
+X L L L L L
+X L X X X X
+X X H H H H
+X X H H H X
+X X H H X X
+X X L L L L
+X X L X X X
+X X X H H H
+X X X H H X
+X X X L L L
+X X X L X X
+X X X X H H
+X X X X L L
+X X X X L X
+X X X X X H
+X X X X X L
+X X X X X X
+
+PINS EM_CS1 EM_CS2  # numCombos=25
+H H H H H H
+H H H H H X
+H H H H X X
+H H H X X X
+H H X X X X
+H X X X X X
+L L L L L L
+L L L L L X
+L L L L X X
+L L L X X X
+L L X X X X
+L X X X X X
+X H H H H H
+X H H H H X
+X L L L L L
+X L L X X X
+X X H H H H
+X X L L L L
+X X X H H H
+X X X L L L
+X X X X H H
+X X X X L L
+X X X X X H
+X X X X X L
+X X X X X X
+
+PINS EM_CS5  # numCombos=24
+H H H H H H
+H H H H H X
+H H H H X X
+H H H X X X
+H H X X X X
+H X X X X X
+L L L L L L
+L L L L L X
+L L L L X X
+L L L X X X
+L L X X X X
+L X X X X X
+X H H H H H
+X L L L L L
+X X H H H H
+X X L L L L
+X X X H H H
+X X X L L L
+X X X L L X
+X X X X H H
+X X X X L L
+X X X X X H
+X X X X X L
+X X X X X X
+
+PINS EM_RNW  # numCombos=21
+H H H H H H
+H H H H H X
+H H H H X X
+H H H X X X
+H H X X X X
+H X X X X X
+L L L L L L
+L L L L L X
+L X X X X X
+X H H H H H
+X L L L L L
+X L X X X X
+X X H H H H
+X X L X X X
+X X X H H H
+X X X L X X
+X X X X H H
+X X X X L X
+X X X X X H
+X X X X X L
+X X X X X X
+
+PINS EM_CAS EM_RAS EM_WE EM_WE_DQM0 EM_WE_DQM1 EM_WE_DQM2 EM_WE_DQM3  # numCombos=12
+H H H H H H
+H H H H H X
+H H H H X X
+H H H X X X
+H H X X X X
+H X X X X X
+X H H H H H
+X X H H H H
+X X X H H H
+X X X X H H
+X X X X X H
+X X X X X X
+
+PINS GPIO6  # numCombos=7
+H H H H H H
+H H H H H X
+L L L L L L
+L L L L L X
+X X H H H H
+X X L L L L
+X X X X X X
+
+PINS EM_SDCKE  # numCombos=6
+H H H H H H
+H H H H H X
+L L L L L L
+X L L L L L
+X X X H H H
+X X X X X X
+
+PINS EM_CS3 EM_CS4  # numCombos=4
+H H H H H H
+H H H H H X
+X H H H H H
+X X X X X X
+
+PINS UART_RTS UART_TD  # numCombos=4
+H H H H H H
+H H H H H X
+X X X X X H
+X X X X X X
+
+PINS GPIO0 GPIO1 GPIO2 GPIO3 GPIO4 GPIO7  # numCombos=4
+L L L L L L
+L L L L L X
+X X L L L L
+X X X X X X
+
+PINS RST_N_OUT  # numCombos=4
+L L L L L L
+L L L L L X
+X X X X X L
+X X X X X X
+
+PINS AIC_LCD AIC_MICBIAS AIC_OSC_RTN AIC_OUTM1_150 AIC_OUTM2_150 AIC_OUTM_600 AIC_OUTM_8 AIC_OUTP1_150 AIC_OUTP2_150 AIC_OUTP_600 AIC_OUTP_8 AIC_XTALO CODEC_CLKIN CODEC_CLKOUT CODEC_CS_N CODEC_DCLK CODEC_DIN CODEC_DOUT CODEC_FS CODEC_INT CODEC_RESET_N CODEC_RINGIN1 CODEC_RINGIN2 CODEC_RINGIN3 CODEC_RINGIN4 EJTAG_TDO EM_SDCLK JTAG_TDO KEYPAD00 KEYPAD01 KEYPAD02 KEYPAD03 KEYPAD04 KEYPAD05 KEYPAD06 KEYPAD07 KEYPAD08 KEYPAD09 KEYPAD10 KEYPAD11 KEYPAD12 KEYPAD13 KEYPAD14 KEYPAD15 LAN_ACTIVITY LAN_FDUPLEX LAN_LINKON LAN_SPEED100 LCD_AC_nCS LCD_MCLK LCD_PCLK_E LCD_PD00 LCD_PD01 LCD_PD02 LCD_PD03 LCD_PD04 LCD_PD05 LCD_PD06 LCD_PD07 LCD_PD08 LCD_PD09 LCD_PD10 LCD_PD11 LCD_PD12 LCD_PD13 LCD_PD14 LCD_PD15 LCD_VSYNC_A0 MBSP_RCLK MBSP_RFS MBSP_TCLK MBSP_TD MBSP_TFS PC_ACTIVITY PC_FDUPLEX PC_LINKON PC_SPEED100 PHY_EXRES_RTN REFCLKO REF_OSC_RTN USB_PULLE VLYNQ3_TXD0 VLYNQ5_TXD0 VLYNQ5_TXD1  # numCombos=1
+X X X X X X
+

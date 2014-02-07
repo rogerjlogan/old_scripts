@@ -1,0 +1,49 @@
+ephy_pat.evo: $Reset_st, 0
+ephy_pat.evo: <RPT 2000>, 1
+ephy_pat.evo: <RPT 1000>, 2
+ephy_pat.evo: <RPT 100>, 3
+ephy_pat.evo: $Reset_sp, 4
+ephy_pat.evo: $Adc_dv_2a_st, 5
+ephy_pat.evo: <RPT 10>, 6
+ephy_pat.evo: <RPT 10>, 141
+ephy_pat.evo: $Adc_dv_2a_sp, 142
+ephy_pat.evo: $Adc_dv_1a_st, 143
+ephy_pat.evo: <RPT 10>, 144
+ephy_pat.evo: <RPT 10>, 279
+ephy_pat.evo: $Adc_dv_1a_sp, 280
+ephy_pat.evo: $tx_100_dv_1a_st, 281
+ephy_pat.evo: <RPT 10>, 282
+ephy_pat.evo: <RPT 10>, 417
+ephy_pat.evo: $tx_100_dv_1a_sp, 418
+ephy_pat.evo: $tx_10_dv_1a_st, 419
+ephy_pat.evo: <RPT 10>, 420
+ephy_pat.evo: <RPT 10>, 555
+ephy_pat.evo: $tx_10_dv_1a_sp, 556
+ephy_pat.evo: $sqlpf_dv_1a_st, 557
+ephy_pat.evo: <RPT 10>, 558
+ephy_pat.evo: <RPT 10>, 693
+ephy_pat.evo: $sqlpf_dv_1a_sp, 694
+ephy_pat.evo: $pll10_xmt_dv_1a_st, 695
+ephy_pat.evo: <RPT 10>, 696
+ephy_pat.evo: <RPT 10>, 831
+ephy_pat.evo: $pll10_xmt_dv_1a_sp, 832
+ephy_pat.evo: $pll10_rcv_dv_1a_st, 833
+ephy_pat.evo: <RPT 10>, 834
+ephy_pat.evo: <RPT 10>, 969
+ephy_pat.evo: $pll10_rcv_dv_1a_sp, 970
+ephy_pat.evo: $pll100_dv_1a_st, 971
+ephy_pat.evo: <RPT 10>, 972
+ephy_pat.evo: <RPT 10>, 1107
+ephy_pat.evo: $pll100_dv_1a_sp, 1108
+ephy_pat.evo: $pll100_dv_1a_psrc_st, 1109
+ephy_pat.evo: <RPT 10>, 1110
+ephy_pat.evo: <RPT 10>, 1251
+ephy_pat.evo: $pll100_dv_1a_psrc_sp, 1252
+ephy_pat.evo: $dc_1a_st, 1253
+ephy_pat.evo: <RPT 10>, 1254
+ephy_pat.evo: <RPT 10>, 1389
+ephy_pat.evo: $dc_1a_sp, 1390
+ephy_pat.evo: $VCO_st, 1391
+ephy_pat.evo: <RPT 128>, 1392
+ephy_pat.evo: <RPT 10>, 1540
+ephy_pat.evo: $VCO_sp, 1541

@@ -1,0 +1,6 @@
+Transitions found in File: mbist_mips_all.evo
+    Drive Pins transitioning     : 47
+    Drive Combinations found     : LHL
+    Strobe Pins transitioning    : 16
+    Strobe Combinations found    : 010
+    WaveformTables/SignalHeaders : AC_TS27_WftRef,f751618_SH

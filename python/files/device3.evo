@@ -1,0 +1,106 @@
+enVision:"bl8:R11.1.0.WW1111:S3.5"; /* 5.7 */
+
+AdapterBoard Titan_338_Quad_Fusion_EX_144pin__EXTtoHF {
+Pin { Name = SCI2_TXD;                 Ppid = " 33";  XCoord = (1200,2640); Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 344;   TesterCh[4] = 408;  }}
+Pin { Name = GIOA4;                    Ppid = " 25";  XCoord = (480,2640);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 320;   TesterCh[4] = 384;  }}
+Pin { Name = SCI2_RXD;                 Ppid = " 32";  XCoord = (1080,2640); Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 345;   TesterCh[4] = 409;  }}
+Pin { Name = GIOA7;                    Ppid = " 22";  XCoord = (120,2640);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 323;   TesterCh[4] = 387;  }}
+Pin { Name = GIOA6;                    Ppid = " 23";  XCoord = (240,2640);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 322;   TesterCh[4] = 386;  }}
+Pin { Name = HET16;                    Ppid = " 14";  XCoord = (120,1680);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 333;   TesterCh[4] = 397;  }}
+Pin { Name = GIOA5;                    Ppid = " 24";  XCoord = (360,2640);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 321;   TesterCh[4] = 385;  }}
+Pin { Name = GIOA1;                    Ppid = " 29";  XCoord = (960,2640);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 348;   TesterCh[4] = 412;  }}
+Pin { Name = SCI1_RXD;                 Ppid = " 67";  XCoord = (2640,240);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 259;   TesterCh[4] = 450;  }}
+Pin { Name = SCI1_CLK;                 Ppid = " 65";  XCoord = (2640,480);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 257;   TesterCh[4] = 448;  }}
+Pin { Name = HET8;                     Ppid = " 58";  XCoord = (2640,1320); Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 505;   TesterCh[4] = 439;  }}
+Pin { Name = CANSTX;                   Ppid = " 64";  XCoord = (2640,600);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 256;   TesterCh[4] = 432;  }}
+Pin { Name = SCI1_TXD;                 Ppid = " 66";  XCoord = (2640,360);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 258;   TesterCh[4] = 449;  }}
+Pin { Name = HET20;                    Ppid = " 40";  XCoord = (2640,2280); Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 496;   TesterCh[4] = 417;  }}
+Pin { Name = TDO;                      Ppid = " 56";  XCoord = (2640,1560); Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 501;   TesterCh[4] = 416;  }}
+Pin { Name = HET19;                    Ppid = " 51";  XCoord = (2640,2160); Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 497;   TesterCh[4] = 447;  }}
+Pin { Name = AWD;                      Ppid = " 53";  XCoord = (2640,1920); Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 499;   TesterCh[4] = 445;  }}
+Pin { Name = HET21;                    Ppid = " 49";  XCoord = (2640,2400); Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 481;   TesterCh[4] = 418;  }}
+Pin { Name = HET9;                     Ppid = " 59";  XCoord = (2640,1200); Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 506;   TesterCh[4] = 438;  }}
+Pin { Name = AIN10;                    Ppid = " 82";  XCoord = (9360,120);  Shape = 16; PinType = I;              Connection[0] { TesterCh[3] = 277;   TesterCh[4] = 468;  }}
+Pin { Name = VREFHI0;                  Ppid = " 87";  XCoord = (9000,120);  Shape = 16; PinType = I;              Connection[0] { TesterCh[3] = 282;   TesterCh[4] = 473;  }}
+Pin { Name = AIN9;                     Ppid = " 84";  XCoord = (9240,120);  Shape = 16; PinType = I;              Connection[0] { TesterCh[3] = 279;   TesterCh[4] = 470;  }}
+Pin { Name = AIN8;                     Ppid = " 86";  XCoord = (9120,120);  Shape = 16; PinType = I;              Connection[0] { TesterCh[3] = 281;   TesterCh[4] = 472;  }}
+Pin { Name = AIN0;                     Ppid = " 79";  XCoord = (9600,120);  Shape = 16; PinType = I;              Connection[0] { TesterCh[3] = 274;   TesterCh[4] = 465;  }}
+Pin { Name = AIN11;                    Ppid = " 80";  XCoord = (9480,120);  Shape = 16; PinType = I;              Connection[0] { TesterCh[3] = 275;   TesterCh[4] = 466;  }}
+Pin { Name = VREFLO0;                  Ppid = " 88";  XCoord = (8880,120);  Shape = 16; PinType = I;              Connection[0] { TesterCh[3] = 508;   TesterCh[4] = 509;  }}
+Pin { Name = AIN1;                     Ppid = " 78";  XCoord = (9720,120);  Shape = 16; PinType = I;              Connection[0] { TesterCh[3] = 273;   TesterCh[4] = 464;  }}
+Pin { Name = AIN6;                     Ppid = " 72";  XCoord = (10320,120); Shape = 16; PinType = I;              Connection[0] { TesterCh[3] = 267;   TesterCh[4] = 458;  }}
+Pin { Name = AIN7;                     Ppid = " 71";  XCoord = (10440,120); Shape = 16; PinType = I;              Connection[0] { TesterCh[3] = 266;   TesterCh[4] = 457;  }}
+Pin { Name = AIN5;                     Ppid = " 73";  XCoord = (10200,120); Shape = 16; PinType = I;              Connection[0] { TesterCh[3] = 268;   TesterCh[4] = 459;  }}
+Pin { Name = ADEVT;                    Ppid = " 70";  XCoord = (10560,120); Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 265;   TesterCh[4] = 456;  }}
+Pin { Name = AIN2;                     Ppid = " 77";  XCoord = (9840,120);  Shape = 16; PinType = I;              Connection[0] { TesterCh[3] = 272;   TesterCh[4] = 463;  }}
+Pin { Name = AIN3;                     Ppid = " 76";  XCoord = (9960,120);  Shape = 16; PinType = I;              Connection[0] { TesterCh[3] = 271;   TesterCh[4] = 462;  }}
+Pin { Name = AIN4;                     Ppid = " 75";  XCoord = (10080,120); Shape = 16; PinType = I;              Connection[0] { TesterCh[3] = 270;   TesterCh[4] = 461;  }}
+Pin { Name = SPI1_SIMO;                Ppid = "  3";  XCoord = (120,360);   Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 306;   TesterCh[4] = 381;  }}
+Pin { Name = SPI1_NENA;                Ppid = "  1";  XCoord = (120,120);   Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 304;   TesterCh[4] = 383;  }}
+Pin { Name = SPI1_NSCS;                Ppid = "  2";  XCoord = (120,240);   Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 305;   TesterCh[4] = 382;  }}
+Pin { Name = SPI1_SOMI;                Ppid = "  4";  XCoord = (120,480);   Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 307;   TesterCh[4] = 380;  }}
+Pin { Name = SPI1_CLK;                 Ppid = "  5";  XCoord = (120,600);   Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 308;   TesterCh[4] = 379;  }}
+Pin { Name = NRST;                     Ppid = " 10";  XCoord = (120,1200);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 316;   TesterCh[4] = 371;  }}
+Pin { Name = OSCOUT;                   Ppid = "  7";  XCoord = (120,840);   Shape = 16; PinType = O;              Connection[0] { TesterCh[3] = 314;   TesterCh[4] = 373;  }}
+Pin { Name = HET12;                    Ppid = " 18";  XCoord = (120,2160);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 329;   TesterCh[4] = 393;  }}
+Pin { Name = OSCIN;                    Ppid = "  8";  XCoord = (120,960);   Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 315;   TesterCh[4] = 372;  }}
+Pin { Name = HET10;                    Ppid = " 20";  XCoord = (120,2400);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 327;   TesterCh[4] = 391;  }}
+Pin { Name = HET11;                    Ppid = " 19";  XCoord = (120,2280);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 328;   TesterCh[4] = 392;  }}
+Pin { Name = HET15;                    Ppid = " 15";  XCoord = (120,1800);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 332;   TesterCh[4] = 396;  }}
+Pin { Name = HET14;                    Ppid = " 16";  XCoord = (120,1920);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 331;   TesterCh[4] = 395;  }}
+Pin { Name = HET13;                    Ppid = " 17";  XCoord = (120,2040);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 330;   TesterCh[4] = 394;  }}
+Pin { Name = C2SI_LPN;                 Ppid = " 38";  XCoord = (1800,2640); Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 337;   TesterCh[4] = 401;  }}
+Pin { Name = HET31;                    Ppid = " 36";  XCoord = (1560,2640); Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 339;   TesterCh[4] = 403;  }}
+Pin { Name = NTRST;                    Ppid = " 26";  XCoord = (600,2640);  Shape = 16; PinType = I;              Connection[0] { TesterCh[3] = 351;   TesterCh[4] = 415;  }}
+Pin { Name = GIOA0;                    Ppid = " 28";  XCoord = (840,2640);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 349;   TesterCh[4] = 413;  }}
+Pin { Name = HET30;                    Ppid = " 35";  XCoord = (1440,2640); Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 340;   TesterCh[4] = 404;  }}
+Pin { Name = NPORRST;                  Ppid = " 21";  XCoord = (120,2520);  Shape = 16; PinType = I;              Connection[0] { TesterCh[3] = 324;   TesterCh[4] = 388;  }}
+Pin { Name = PMT_IN;                   Ppid = " 27";  XCoord = (720,2640);  Shape = 16; PinType = I;              Connection[0] { TesterCh[3] = 350;   TesterCh[4] = 414;  }}
+Pin { Name = HET29;                    Ppid = " 34";  XCoord = (1320,2640); Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 341;   TesterCh[4] = 405;  }}
+Pin { Name = HET22;                    Ppid = " 48";  XCoord = (2640,2520); Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 482;   TesterCh[4] = 419;  }}
+Pin { Name = SPI2_SIMO;                Ppid = " 44";  XCoord = (2520,2640); Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 486;   TesterCh[4] = 423;  }}
+Pin { Name = SPI2_CLK;                 Ppid = " 43";  XCoord = (2400,2640); Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 487;   TesterCh[4] = 424;  }}
+Pin { Name = C2SI_RXD;                 Ppid = " 40";  XCoord = (2040,2640); Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 494;   TesterCh[4] = 431;  }}
+Pin { Name = HET24;                    Ppid = " 37";  XCoord = (1680,2640); Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 338;   TesterCh[4] = 402;  }}
+Pin { Name = SPI2_NENA;                Ppid = " 46";  XCoord = (2640,2640); Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 484;   TesterCh[4] = 421;  }}
+Pin { Name = C2SI_TXD;                 Ppid = " 39";  XCoord = (1920,2640); Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 495;   TesterCh[4] = 400;  }}
+Pin { Name = SPI2_SOMI;                Ppid = " 45";  XCoord = (2640,2640); Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 485;   TesterCh[4] = 422;  }}
+Pin { Name = HET18;                    Ppid = " 52";  XCoord = (2640,2040); Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 498;   TesterCh[4] = 446;  }}
+Pin { Name = TDI;                      Ppid = " 55";  XCoord = (2640,1680); Shape = 16; PinType = I;              Connection[0] { TesterCh[3] = 480;   TesterCh[4] = 443;  }}
+Pin { Name = TCK;                      Ppid = " 57";  XCoord = (2640,1440); Shape = 16; PinType = I;              Connection[0] { TesterCh[3] = 502;   TesterCh[4] = 442;  }}
+Pin { Name = CANSRX;                   Ppid = " 63";  XCoord = (2640,720);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 511;   TesterCh[4] = 433;  }}
+Pin { Name = BYPASS;                   Ppid = " 54";  XCoord = (2640,1800); Shape = 16; PinType = I;              Connection[0] { TesterCh[3] = 500;   TesterCh[4] = 444;  }}
+Pin { Name = CLKOUT;                   Ppid = " 62";  XCoord = (2640,840);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 507;   TesterCh[4] = 437;  }}
+Pin { Name = HET7;                     Ppid = "107";  XCoord = (6600,120);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 301;   TesterCh[4] = 365;  }}
+Pin { Name = HET4;                     Ppid = "104";  XCoord = (6960,120);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 298;   TesterCh[4] = 362;  }}
+Pin { Name = TMS;                      Ppid = " 91";  XCoord = (8520,120);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 284;   TesterCh[4] = 475;  }}
+Pin { Name = HET3;                     Ppid = "103";  XCoord = (7080,120);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 297;   TesterCh[4] = 361;  }}
+Pin { Name = HET5;                     Ppid = "105";  XCoord = (6840,120);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 299;   TesterCh[4] = 363;  }}
+Pin { Name = HET0;                     Ppid = " 95";  XCoord = (8040,120);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 291;   TesterCh[4] = 355;  }}
+Pin { Name = TMS2;                     Ppid = " 92";  XCoord = (8400,120);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 285;   TesterCh[4] = 476;  }}
+Pin { Name = HET1;                     Ppid = " 96";  XCoord = (7920,120);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 292;   TesterCh[4] = 356;  }}
+Pin { Name = HET2;                     Ppid = "102";  XCoord = (7200,120);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 296;   TesterCh[4] = 360;  }}
+Pin { Name = HET6;                     Ppid = "106";  XCoord = (6720,120);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 300;   TesterCh[4] = 364;  }}
+Pin { Name = AIN12;                    Ppid = "85";   XCoord = (5640,120);  Shape = 16; PinType = I;              Connection[0] { TesterCh[3] = 280;   TesterCh[4] = 471;  }}
+Pin { Name = AIN13;                    Ppid = "83";   XCoord = (5760,120);  Shape = 16; PinType = I;              Connection[0] { TesterCh[3] = 278;   TesterCh[4] = 469;  }}
+Pin { Name = AIN14;                    Ppid = "81";   XCoord = (5880,120);  Shape = 16; PinType = I;              Connection[0] { TesterCh[3] = 276;   TesterCh[4] = 467;  }}
+Pin { Name = SPI2_NSCS;                Ppid = "47";   XCoord = (6120,120);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 483;   TesterCh[4] = 420;  }}
+Pin { Name = AIN15;                    Ppid = "74";   XCoord = (6000,120);  Shape = 16; PinType = I;              Connection[0] { TesterCh[3] = 269;   TesterCh[4] = 460;  }}
+Pin { Name = GIOA3;                    Ppid = "31";   XCoord = (6360,120);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 346;   TesterCh[4] = 410;  }}
+Pin { Name = GIOA2;                    Ppid = "30";   XCoord = (6480,120);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 347;   TesterCh[4] = 411;  }}
+Pin { Name = VSS;                      Ppid = " 11";  XCoord = (2640,1800); Shape = 16; PinType = PWR_EX;         Connection[0] { TesterCh[3] = GND;   TesterCh[4] = GND;  }}
+Pin { Name = VDD;                      Ppid = " 42";  XCoord = (480,2760);  Shape = 16; PinType = PWR_EX_VDD;     Connection[0] { TesterCh[3] = CPS13; TesterCh[4] = CPS15;}}
+Pin { Name = VDDSFL;                   Ppid = " 12";  XCoord = (120,2760);  Shape = 16; PinType = PWR_EX_VDDSFL;  Connection[0] { TesterCh[3] = CPS10; TesterCh[4] = CPS9; }}
+Pin { Name = VDDAFL;                   Ppid = " 89";  XCoord = (240,2760);  Shape = 16; PinType = PWR_EX_VDDAFL;  Connection[0] { TesterCh[3] = CPS11; TesterCh[4] = CPS12;}}
+Pin { Name = VDD3VFL;                  Ppid = "101";  XCoord = (360,2760);  Shape = 16; PinType = PWR_EX_VDD3VFL; Connection[0] { TesterCh[3] = CPS14; TesterCh[4] = CPS16;}}
+Pin { Name = TP2PAD;                   Ppid = "99";   XCoord = (360,120);   Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 293;   TesterCh[4] = 357;  }}
+Pin { Name = TP1PAD;                   Ppid = "100";  XCoord = (480,120);   Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 294;   TesterCh[4] = 358;  }}
+Pin { Name = GIOB3;                    Ppid = "13";   XCoord = (1080,2760); Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 317;   TesterCh[4] = 370;  }}
+Pin { Name = GIOB0;                    Ppid = "109";  XCoord = (720,2760);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 62;    TesterCh[4] = 72;   }}
+Pin { Name = GIOB1;                    Ppid = "110";  XCoord = (840,2760);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 63;    TesterCh[4] = 73;   }}
+Pin { Name = GIOB2;                    Ppid = "111";  XCoord = (960,2760);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 64;    TesterCh[4] = 74;   }}
+Pin { Name = HET17;                    Ppid = " 112"; XCoord = (120,1560);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 61;    TesterCh[4] = 71;   }}
+Pin { Name = HET28;                    Ppid = "113";  XCoord = (599,2760);  Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 36;    TesterCh[4] = 70;   }}
+Pin { Name = DUMMY;                    Ppid = "114";  XCoord = (1200,2760); Shape = 16; PinType = IO;             Connection[0] { TesterCh[3] = 65;    TesterCh[4] = 510;  }}
+MaxSite = 4;
+}
