@@ -41,6 +41,18 @@ big5_wavemap = {\
                    '-' :'\x0f',\
                }
 
+specio_wavemap = {\
+                   '0' :'\x00',\
+                   '1' :'\x01',\
+                   'L' :'\x02',\
+                   'H' :'\x03',\
+                   'M' :'\x04',\
+                   'C' :'\x05',\
+                   'X' :'\x06',\
+                   'Y' :'\x07',\
+                   'f' :'\x0f',\
+               }
+
 #THESE ARE THE ONES ACTUALLY USED
 #__orig_sh__ = fus_f751618_SH
 __orig_sh__ = fus_ADC_GAIN_signalheader
