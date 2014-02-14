@@ -61,6 +61,8 @@ def getPinGroups(content,fileN):
 #End getPinGroups()
 
 cellhdrPtrn = re.compile(r'\"\s*(?P<pins>\S+)\s*"\s+(?P<chars>\S+)\s+(?P<cellname>\w+)')
+cellPtrn = re.compile(r'\bCell\b')
+drivePtrn = re.compile(r'\bDrive\b')
 def getWaves(content,fileN):
     global _waves_
     def getDelimContents(string,st_delim='{',sp_delim='}'):
@@ -84,7 +86,6 @@ def getWaves(content,fileN):
     #End getDelimContents()
     def getAll(objname,string,named=True):
         _string=string
-        header=''
         items={}
         while True:
             i = _string.find(objname)
@@ -94,38 +95,38 @@ def getWaves(content,fileN):
             if not len(itemname) and named:break
             elif not named:itemname=objname
             items[itemname]=itemcontent
-            if not len(header):header=''
             _string=_string[stopi:]
-#        print 'header:<'+header+'>'
-#        sys.exit()
-        return header.strip(),items
+        return items
     #End getAll()
-    wavetop,waves = getAll('WaveformTable',content)
+    waves = getAll('WaveformTable',content)
     for wvt in waves:
-        celltop,cells = getAll('Cell',waves[wvt])
+        wavebody=waves[wvt]
+        wavetopObj = cellPtrn.search(wavebody)
+        wavetop=wavebody[1:wavetopObj.start()].strip()
+        cells = getAll('Cell',waves[wvt])
         for cellhdr in cells:
+            cellbody = cells[cellhdr]
+            celltopObj = drivePtrn.search(cellbody)
             cellhdrObj = cellhdrPtrn.search(cellhdr)
             if not cellhdrObj:
                 sys.exit("\n\nERROR !!! Unknown syntax in WaveformTable: "+wvt+" ! Exiting ...")
-            drive = getAll('Drive',cells[cellhdr],False)
-            strobe = getAll('Compare',cells[cellhdr],False)
+            celltop=cellbody[1:celltopObj.start()].strip()
+            drive = getAll('Drive',cellbody,False)
+            compare = getAll('Compare',cellbody,False)
             if _debug_:
                 print '-----------------------------------------------'
-                print 'wavename       :',wvt
-                print 'wavetop        :',wavetop
-                print 'cellhdr        :',cellhdr
-                print 'celltop        :',celltop
-                print 'cellname       :',cellhdrObj.group('cellname')
-                print 'pins           :',cellhdrObj.group('pins')
-                print 'chars          :',cellhdrObj.group('chars')
-                print 'drive          :',drive
-                print 'strbe          :',strobe
-                print 'cells[cellhdr] :',cells[cellhdr]
+                print 'wavename :',wvt
+                print 'wavetop  :',wavetop
+                print 'cellhdr  :',cellhdr
+                print 'cellname :',cellhdrObj.group('cellname')
+                print 'pins     :',cellhdrObj.group('pins')
+                print 'chars    :',cellhdrObj.group('chars')
+                print 'celltop  :',celltop
+                print 'drive    :',drive
+                print 'compare  :',compare
+                print 'cellbody :',cellbody
                 print '-----------------------------------------------'
-            
-            
-            
-            
+#End getWaves()
 
 def main(argv):
     global _debug_
