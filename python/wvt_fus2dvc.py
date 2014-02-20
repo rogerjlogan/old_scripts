@@ -16,16 +16,74 @@ import string
 import sys
 import getopt
 import commands
-from pprint import pprint as pp
+from pprint import pprint as pprint
 import inspect
 def lineno():
     """Returns the current line number in our program."""
     return inspect.currentframe().f_back.f_lineno
 
+
+#this is needs to be dynamic, but this will do for now
+_char_switch_={}
+_char_switch_['L']='0'
+_char_switch_['H']='1'
+_char_switch_['0']='L'
+_char_switch_['1']='H'
+_char_switch_['M']='X'
+_char_switch_['Y']='0'
+
+_93k_chars_={}
+_93k_chars_['DriveOff']     = 'Z'
+_93k_chars_['DriveLow']     = '0'
+_93k_chars_['DriveHigh']    = '1'
+_93k_chars_['CompareLow']   = 'L'
+_93k_chars_['CompareHigh']  = 'H'
+_93k_chars_['CompareFloat'] = 'M'
+_93k_chars_['NoAction']     = '{}'
+
+
+_data_key_={}
+_data_key_['DriveData']       ={};_data_key_['DriveData']       ['6']='DriveLow'   ;_data_key_['DriveData']       ['7']='DriveHigh'
+_data_key_['DriveDataNot']    ={};_data_key_['DriveDataNot']    ['6']='DriveHigh'  ;_data_key_['DriveDataNot']    ['7']='DriveLow'
+_data_key_['DriveHighIfOne']  ={};_data_key_['DriveHighIfOne']  ['6']='NoAction'   ;_data_key_['DriveHighIfOne']  ['7']='DriveHigh'
+_data_key_['DriveLowIfZero']  ={};_data_key_['DriveLowIfZero']  ['6']='DriveLow'   ;_data_key_['DriveLowIfZero']  ['7']='NoAction'
+_data_key_['CompareData']     ={};_data_key_['CompareData']     ['0']='CompareLow' ;_data_key_['CompareData']     ['1']='CompareHigh'
+_data_key_['CompareDataNot']  ={};_data_key_['CompareDataNot']  ['0']='CompareHigh';_data_key_['CompareDataNot']  ['1']='CompareLow'
+_data_key_['CompareHighIfOne']={};_data_key_['CompareHighIfOne']['0']='NoAction'   ;_data_key_['CompareHighIfOne']['1']='CompareHigh'
+_data_key_['CompareLowIfZero']={};_data_key_['CompareLowIfZero']['0']='CompareLow' ;_data_key_['CompareLowIfZero']['1']='NoAction'
+_data_key_['CompareOpenData'] ={};_data_key_['CompareOpenData'] ['0']='CompareLow' ;_data_key_['CompareOpenData'] ['1']='CompareHigh'
+_data_key_['CompareClose']    ={};_data_key_['CompareClose']    ['0']='NoAction'   ;_data_key_['CompareClose']    ['1']='NoAction'
+_valid_edgenames_ = [\
+    'NoAction',\
+    'DriveData',\
+    'DriveDataNot',\
+    'DriveHigh',\
+    'DriveLow',\
+    'DriveOff',\
+    'DriveOn',\
+    'DriveHighIfOne',\
+    'DriveLowIfZero',\
+    'CompareData',\
+    'CompareDataNot',\
+    'CompareFloat',\
+    'CompareLow',\
+    'CompareHigh',\
+    'CompareWindowOpen',\
+    'CompareClose',\
+    'CompareOpenFloat',\
+    'CompareOpenFloatNot',\
+    'CompareOpenHigh',\
+    'CompareOpenLow',\
+    'CompareOpenData',\
+    'CompareHighIfOne',\
+    'CompareLowIfZero']
+
 _debug_ = False
-_pins_      = [] # list of all pins from adapterboard
-_pingroups_ = {} # dict of pingroups and their pins (all elements reduced to pins.. not other pingroups)
-_waves_     = {} # all wavetables to be converted and their elements (include default waveformtable, if necessary)
+_pins_         = [] # list of all pins from adapterboard
+_pingroups_    = {} # dict of pingroups and their pins (all elements reduced to pins.. not other pingroups)
+_defwvt_name_ = '' # name of default waveformtable if found
+_defwvt_       = {} # default waveformtable (denoted by double name)
+_wvts_        = {} # all nondefault-wavetables to be converted and their elements
 
 pinPtrn = re.compile("Pin\s*\{\s*Name\s*=\s*(?P<pin>\w+)\s*;")
 def getPins(content,fileN):
@@ -60,11 +118,28 @@ def getPinGroups(content,fileN):
                 _pingroups_[pg].append(elem)
 #End getPinGroups()
 
+def getPinsFromGroups(pg):
+    """
+    this is pretty rudimentary... need a recursive algorithm here
+    """
+    if pg in _pingroups_:
+        return ' '.join(_pingroups_[pg])
+    else:
+        return pg
+#End getPinsFromGroups()
+
 cellhdrPtrn = re.compile(r'\"\s*(?P<pins>\S+)\s*"\s+(?P<chars>\S+)\s+(?P<cellname>\w+)')
 cellPtrn = re.compile(r'\bCell\b')
 drivePtrn = re.compile(r'\bDrive\b')
+commPtrn = re.compile(r'\bComment\b\s*=\s*\"(?P<comment>.*?)\"\s*;',re.DOTALL)
+drvcmpPtrn = re.compile(r'(?P<edgetype>Drive|Compare)\s*\{\s*Waveform\s*\{(?P<edgedata>.*?)\}',re.DOTALL)
+edgePtrn = re.compile(r'(?P<edgename>\w+)\s*@\s*\"\s*(?P<edgetime>.*?)\s*\"',re.DOTALL)
+perPtrn = re.compile(r'\bPeriod\b\s+\"(?P<period>.*?)\"\s*;',re.DOTALL)
+dataPtrn = re.compile(r'\bData\b\s+(?P<data>\S+)\s*;')
+inheritPtrn = re.compile(r'\bInherit\b\s+(?P<inherit>\S+)\s*;')
+celldataPtrn = re.compile(r'(?P<cellname>\S+)\s*\{\s*Data\s*(?P<data>\S+)\s*;',re.DOTALL)
 def getWaves(content,fileN):
-    global _waves_
+    global _wvts_
     def getDelimContents(string,st_delim='{',sp_delim='}'):
         """Get contents of delimiters even if nested"""
         stack = []
@@ -85,6 +160,7 @@ def getWaves(content,fileN):
         return itemname.strip(),i,string.strip()[start-1:i] # let's include delims in return
     #End getDelimContents()
     def getAll(objname,string,named=True):
+        global _defwvt_name_
         _string=string
         items={}
         while True:
@@ -94,15 +170,83 @@ def getWaves(content,fileN):
             itemname,stopi,itemcontent = getDelimContents(str2chk)
             if not len(itemname) and named:break
             elif not named:itemname=objname
+            if objname == 'WaveformTable' and ' ' in itemname:
+                name1,name2 = itemname.split()
+                name1,name2 = name1.strip(),name2.strip()
+                if name1 == name2:
+                    _defwvt_name_ = name1+'__'+name2
+                    itemname = _defwvt_name_
+                else:
+                    sys.exit("\n\nERROR !!! Bad WaveformTable name found ! \""+itemname+"\" Exiting ...")
             items[itemname]=itemcontent
             _string=_string[stopi:]
         return items
     #End getAll()
+    def getData(celltop):
+        data = ''
+        dataObj = dataPtrn.search(celltop)
+        inheritObj = inheritPtrn.search(celltop)
+        if dataObj:
+            data = dataObj.group('data')
+        elif inheritObj and len(_defwvt_name_):
+            name,cell = inheritObj.group('inherit').split('.')
+            if name != _defwvt_name_:
+                sys.exit("\n\nERRROR !!! Unknown inherit statement ! Currently only supports inherits of Default WaveformTable ! Exiting ...")
+            data = _defwvt_[cell]
+        return data
+    #End getData()
+    def parseWaveTop(wavetop):
+        comment,period = '',''
+        commObj = commPtrn.search(wavetop)
+        if commObj:
+            comment = commObj.group('comment')
+        perObj = perPtrn.search(wavetop)
+        if perObj:
+            period = perObj.group('period')
+        return comment,period.strip()
+    #End parseWaveTop()
+    def parseDefWvt(wvt):
+        global _defwvt_
+        dataObj = celldataPtrn.findall(wvt)
+        for name,data in dataObj:
+            _defwvt_[name] = data
+    #End parseDefWvt()
+    def getEdges(string):
+        edges={}
+        drvcmpObj = drvcmpPtrn.findall(string)
+        for edgetype,edgecontent in drvcmpObj:
+            edges[edgetype]=[]
+            for edge in edgecontent.split(';'):
+                edgeObj = edgePtrn.search(edge)
+                if edgeObj:
+                    edgename = edgeObj.group('edgename').strip()
+                    edgetime = edgeObj.group('edgetime').strip()
+                    if edgename not in _valid_edgenames_:
+                        sys.exit("\n\nERROR !!! Unknown edgetype found:"+edgetype+" ! Exiting ...")
+                    elif edgename == 'DriveOn':continue
+                    edges[edgetype].append((edgename,edgetime))
+        return edges
+    #Emd getEdges()
+    
+    ######################
+    #   getWaves() START
+    ######################
+    
     waves = getAll('WaveformTable',content)
+    if len(_defwvt_name_):
+        parseDefWvt(waves[_defwvt_name_])
     for wvt in waves:
+        if wvt == _defwvt_name_:continue
+        _wvts_[wvt]={}
         wavebody=waves[wvt]
         wavetopObj = cellPtrn.search(wavebody)
         wavetop=wavebody[1:wavetopObj.start()].strip()
+        comment,period = parseWaveTop(wavetop)
+        _wvts_[wvt]['comment']=comment
+        _wvts_[wvt]['period']=period
+        _wvts_[wvt]['cells']={}
+        if not len(period) and wvt != _defwvt_name_:
+            sys.exit("\n\nERROR !!! No \"Period\" found in WaveformTable: "+wvt+" ! Exiting ...")
         cells = getAll('Cell',waves[wvt])
         for cellhdr in cells:
             cellbody = cells[cellhdr]
@@ -111,22 +255,73 @@ def getWaves(content,fileN):
             if not cellhdrObj:
                 sys.exit("\n\nERROR !!! Unknown syntax in WaveformTable: "+wvt+" ! Exiting ...")
             celltop=cellbody[1:celltopObj.start()].strip()
-            drive = getAll('Drive',cellbody,False)
-            compare = getAll('Compare',cellbody,False)
-            if _debug_:
-                print '-----------------------------------------------'
-                print 'wavename :',wvt
-                print 'wavetop  :',wavetop
-                print 'cellhdr  :',cellhdr
-                print 'cellname :',cellhdrObj.group('cellname')
-                print 'pins     :',cellhdrObj.group('pins')
-                print 'chars    :',cellhdrObj.group('chars')
-                print 'celltop  :',celltop
-                print 'drive    :',drive
-                print 'compare  :',compare
-                print 'cellbody :',cellbody
-                print '-----------------------------------------------'
+            data = getData(celltop)
+#            drivebody = getAll('Drive',cellbody,False)
+#            comparebody = getAll('Compare',cellbody,False)
+            edges = getEdges(cellbody)
+            pins = cellhdrObj.group('pins').strip()
+            chars = cellhdrObj.group('chars').strip()
+            
+            if pins not in _wvts_[wvt]['cells']:
+                _wvts_[wvt]['cells'][pins]={}
+            
+            for i,char in enumerate(chars.split('/')):
+                char=char.strip()
+                if char not in _wvts_[wvt]['cells'][pins]:
+                    _wvts_[wvt]['cells'][pins][char]={}
+                thisdata=data.split('/')[i]
+                _wvts_[wvt]['cells'][pins][char]['data']=thisdata
+                assert 'Drive' in edges
+                _wvts_[wvt]['cells'][pins][char]['action']={}
+                newedge={}
+                for d,edge in enumerate(edges['Drive']):
+                    numdrives=d+1
+                    newedge={}
+                    if edge[0] in _data_key_:
+                        newedge=(_data_key_[edge[0]][thisdata],edge[1])
+                    else:
+                        newedge=edge
+                    _wvts_[wvt]['cells'][pins][char]['action'][d]=newedge
+                if 'Compare' in edges:
+                    if numdrives != 1:
+                        sys.exit("\n\nERROR !!! Unknown syntax in WaveformTable: "+wvt+" ! Exiting ...")
+                    for r,edge in enumerate(edges['Compare']):
+                        if edge[0] in _data_key_:
+                            newedge=(_data_key_[edge[0]][thisdata],edge[1])
+                        else:
+                            newedge=edge
+                        _wvts_[wvt]['cells'][pins][char]['action'][r+numdrives]=newedge
+                        #data_that_needs_convert
+    if _debug_:pprint(_wvts_)
 #End getWaves()
+
+def createDVCs():
+    for wvt in _wvts_:
+        dvcfile = open(wvt+'.dvc','w')
+        dvcfile.write('SPECS \"spec_'+wvt+'\"\n')
+        dvcfile.write('per    '+_wvts_[wvt]['period']+'\n')
+        dvcfile.write('########################################################\n')
+        dvcfile.write('DVC wvt_'+wvt+'\n')
+        dvcfile.write('########################################################\n')
+        dvcfile.write('#'+_wvts_[wvt]['comment'].replace('\n','\n#')+'\n')
+        dvcfile.write('period = per\n')
+        for pins in _wvts_[wvt]['cells']:
+             dvcfile.write('\n# '+pins+'\n')
+             dvcfile.write('PINS '+getPinsFromGroups(pins)+'\n')
+             for char in _wvts_[wvt]['cells'][pins]:
+                comment = ' # '+char
+                if char in _char_switch_:
+                    string='    '+_char_switch_[char]+' '
+                else:
+                    string='    '+char+' '
+                for i in _wvts_[wvt]['cells'][pins][char]['action']:
+                    event = _wvts_[wvt]['cells'][pins][char]['action'][i][0]
+                    time = _wvts_[wvt]['cells'][pins][char]['action'][i][1]
+                    comment+=' '+event+':'+time
+                    string+=_93k_chars_[event]+':'+time+' '
+                dvcfile.write(string+comment+'\n')
+        dvcfile.close()
+#End createDVCs()
 
 def main(argv):
     global _debug_
@@ -186,8 +381,8 @@ def main(argv):
         elif opt in ('-p', '--pinlist'):
             getPinGroups(getContents(arg),arg)  # populate _pingroups_
         elif opt in ('-a', '--actable'):
-            getWaves(getContents(arg),arg)      # populate _waves_
-
+            getWaves(getContents(arg),arg)      # populate _wvts_ and _defwvt_/_defwvt_name_  if found
+    createDVCs()
 #End main()
 
 if __name__ == "__main__":
