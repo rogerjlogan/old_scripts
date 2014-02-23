@@ -4,20 +4,20 @@
     Function:
         Used to convert A5-80 patterns to Fusion Patterns
 """
-__progfile__ = "v580pat.py"
-__version__ = "v2.0"
-__author__ = "AUTHOR: Roger Logan, Anora, Test Engineer, Dallas, TX"
-__date__ = "LAST MODIFIED: August 20, 2013"
+_progfile_ = "v580pat.py"
+_version_ = "v2.0"
+_author_ = "AUTHOR: Roger Logan, Anora, Test Engineer, Dallas, TX"
+_date_ = "LAST MODIFIED: August 20, 2013"
 
-__delims__ = ['(*','*)','{','}','/*','*/','\"',';'] #delimiters for occasional removal
+_delims_ = ['(*','*)','{','}','/*','*/','\"',';'] #delimiters for occasional removal
 
-__a580chars__ = "LHXMV-01"#all possible characters for A5-80
-__fusion_chars__ = "01XFV-LH"#translated characters for fusion
-__dummy_char__ = 'X'#character to fill dummy vector at end of pattern
-__default_tset__ = "TSET_default"
-__cycleEvo__ = "cycletbl.evo"
+_a580chars_ = "LHXMV-01"#all possible characters for A5-80
+_fusion_chars_ = "01XFV-LH"#translated characters for fusion
+_dummy_char_ = 'X'#character to fill dummy vector at end of pattern
+_default_tset_ = "TSET_default"
+_cycleEvo_ = "cycletbl.evo"
 
-__D_D_dict__ = {'LL':'c','HH':'C','HL':'k','LH':'K','XX':'X','--':'-'}#double drive dictionary
+_D_D_dict_ = {'LL':'c','HH':'C','HL':'k','LH':'K','XX':'X','--':'-'}#double drive dictionary
 
 import sys
 import re
@@ -29,17 +29,17 @@ from string import whitespace as ws
 import time
 import inspect
 
-__EVHDR__ = "enVision:\"bl8:R11.1.0.WW1111:S3.5\"; /* 5.7 */\n\n"
-__RD_ERROR__ = "Make sure you have permissions to READ files in this directory."
-__WR_ERROR__ = "Make sure you have permissions to WRITE files in this directory."
+_EVHDR_ = "enVision:\"bl8:R11.1.0.WW1111:S3.5\"; /* 5.7 */\n\n"
+_RD_ERROR_ = "Make sure you have permissions to READ files in this directory."
+_WR_ERROR_ = "Make sure you have permissions to WRITE files in this directory."
 
 class Ddict(dict):
-    def __init__(self, default=None):
+    def _init_(self, default=None):
         self.default = default
-    def __getitem__(self, key):
+    def _getitem_(self, key):
         if not self.has_key(key):
             self[key] = self.default()
-        return dict.__getitem__(self, key)
+        return dict._getitem_(self, key)
 #End Ddict()
 
 def lineno():
@@ -48,15 +48,15 @@ def lineno():
 #End lineno()
 
 def getAllPinsAllGroups(content):
-    global __pinlist__,__pingroups__
+    global _pinlist_,_pingroups_
     pinsPat = re.compile("\s*\d+\s*\"(\w+?)\"(?:.*?)hsd50_\w+:\d+,")
-    __pinlist__ = pinsPat.findall(content)
-    if not len(__pinlist__):
+    _pinlist_ = pinsPat.findall(content)
+    if not len(_pinlist_):
         exit("\n\n ERROR!!! No pins found in progfile.tl !!!\nLine: "+str(lineno())+"\n\n")
     donePat = re.compile("\"\s*(?P<pingroup>\w+)\s*\"\s*field\s*")
     found,done=False,False
     string=''
-    __pingroups__ = Ddict( dict )
+    _pingroups_ = Ddict( dict )
     for line in content.split('\n'):
         beg = line.rfind('(')+1
         end = line.find(')')
@@ -76,7 +76,7 @@ def getAllPinsAllGroups(content):
             doneObj=donePat.search(line[end:].strip())
             if doneObj:
                 pins = map(lambda p: p.strip(), string.split(',')) #strip ws from each element
-                __pingroups__[doneObj.group('pingroup')] = pins
+                _pingroups_[doneObj.group('pingroup')] = pins
 #End getAllPinsAllGroups()
 
 def buildPinlistHdr(sighdr):
@@ -108,8 +108,8 @@ def translate(vectorStr):
      '0' => cmp:mask                            ,drv:low   ,loads:off   
      '1' => cmp:mask                            ,drv:high  ,loads:off   
     """
-    intab = __a580chars__
-    outtab = __fusion_chars__
+    intab = _a580chars_
+    outtab = _fusion_chars_
     trantab = maketrans(intab,outtab)
     vectorStr = vectorStr.translate(trantab,ws);#translate characters and remove ws
     return vectorStr
@@ -138,11 +138,11 @@ def getVectHdr(rawvectHdr):
             err+="\n Currrently, only D_D is supported !"
             exit(err)
         vectHdr[i]["modifier"] = modifier
-        if pin not in __pinlist__:
-            if pin not in __pingroups__:
+        if pin not in _pinlist_:
+            if pin not in _pingroups_:
                 exit("\n\n ERROR!!! Unknown pin element: "+pin+"\nLine: "+str(lineno())+"\n\n")
             else:#this must be a pingroup
-                vectHdr[i]["pinLst"]=__pingroups__[pin]
+                vectHdr[i]["pinLst"]=_pingroups_[pin]
         else:#this must be a pin
             vectHdr[i]["pinLst"]=pin.split(',')#make a single element list
         vectHdr[i]["name"]=pin
@@ -159,7 +159,7 @@ def getNonData(string):
     globflag=False
     string = re.sub('\n','',string).strip()
     comments = ''.join(comm1Pat.findall(string)) + ''.join(comm2Pat.findall(string))
-    for s in __delims__:
+    for s in _delims_:
         comments = comments.replace(s,' ')
     the_rest = re.sub(comm1Pat,'',string).strip()
     the_rest = re.sub(comm2Pat,'',the_rest).strip()
@@ -203,26 +203,26 @@ def formatVector(comments,call,label,data,tset,micro):
     return comments+call+label+data+tset+';'+micro
 #End formatVector()
 
-__sighdr__,__sighdrStrs__ = [],[]
+_sighdr_,_sighdrStrs_ = [],[]
 def getSigHdr(vectHdr):
-    global __sighdr__,__sighdrStrs__
+    global _sighdr_,_sighdrStrs_
     notused,pinlist = [],[]
     sighdrStr = ''
     for i in range(0,len(vectHdr)):
         pinlist += vectHdr[i]['pinLst']
         sighdrStr += '\n        %'+' '.join(vectHdr[i]['pinLst'])
-    notused = [p for p in __pinlist__ if p not in pinlist]
+    notused = [p for p in _pinlist_ if p not in pinlist]
     sighdrStr += '\n        %'+' '.join(notused)
     sighdr = pinlist+notused
-    if sighdr not in __sighdr__:
-        __sighdr__.append(sighdr)
-        __sighdrStrs__.append(sighdrStr.strip())
-    return __sighdr__.index(sighdr)
+    if sighdr not in _sighdr_:
+        _sighdr_.append(sighdr)
+        _sighdrStrs_.append(sighdrStr.strip())
+    return _sighdr_.index(sighdr)
 #End getVectHdr()
 
 def reOrgData(vectHdr,data,sighdrNum):
     data = translate(data)
-    try:sighdr = __sighdr__[sighdrNum]
+    try:sighdr = _sighdr_[sighdrNum]
     except:exit("\n\n ERROR !!! Signal order out of range !\nLine: "+str(lineno())+"\n\n")
     vector=''
     end=0
@@ -233,7 +233,7 @@ def reOrgData(vectHdr,data,sighdrNum):
         if vectHdr[i]['modifier']=='D_D':
             dd_data = ''
             for ii in range(beg,beg+offset):
-                vector += __D_D_dict__[data[ii]+data[ii+offset]]
+                vector += _D_D_dict_[data[ii]+data[ii+offset]]
             beg+=offset
             end+=offset
         else:
@@ -246,9 +246,9 @@ def getVectData(patname,rawvectData,vectHdr):
     #build regex pattern from vectHdr
     data=''
     for i in range(0,len(vectHdr)):
-        data+='['+re.escape(__a580chars__)+']{'+str(len(vectHdr[i]["pinLst"]))+'}\s*'
+        data+='['+re.escape(_a580chars_)+']{'+str(len(vectHdr[i]["pinLst"]))+'}\s*'
         if vectHdr[i]["modifier"] == "D_D":
-            data+='['+re.escape(__a580chars__)+']{'+str(len(vectHdr[i]["pinLst"]))+'}\s*'
+            data+='['+re.escape(_a580chars_)+']{'+str(len(vectHdr[i]["pinLst"]))+'}\s*'
     data += "$"
     data = data.strip()
     vectPat = re.compile("(?P<front>.*?)\s*(?P<data>"+data+")\s*",re.DOTALL)
@@ -274,49 +274,49 @@ def getVectData(patname,rawvectData,vectHdr):
             vectData+=vector
     beg_label = '\n$'+patname+'_begin\n'
     end_label = '\n$'+patname+'_end\n'
-    dummyvect = '* '+__dummy_char__*len(__sighdr__[sighdrNum])+' *;'
+    dummyvect = '* '+_dummy_char_*len(_sighdr_[sighdrNum])+' *;'
     vectData = beg_label+vectData+end_label+dummyvect
     return vectData,sighdrNum
 #End getVectData()
 
 def build_ostr(hdrcomm,patname,sighdrNum,pinlistHdr,vectData):
-    ostr=__EVHDR__
+    ostr=_EVHDR_
     ostr+=hdrcomm
     ostr+="Pattern "+patname+' {\n'
     ostr+="Type Cpm;\n"
-    ostr+=__CREATION_MSG__
+    ostr+="Default WaveformTable "+_default_tset_+";\n"
+    ostr+="Default SignalHeader SH"+str(sighdrNum)+";\n"
+    ostr+=_CREATION_MSG_
     ostr+="\"############################################################################################\"\n"
     ostr+="\"#WARNINGS....                                                                              #\"\n"
     ostr+="\"#           -You must manually convert micro-instructions between < and > below            #\"\n"
     ostr+="\"#           -The last vector is denoted by <HALT>                                          #\"\n"
     ostr+="\"#            Vectors below <HALT> are subroutines and must be placed where there is a CALL #\"\n"
     ostr+="\"############################################################################################\"\n\n"
-    ostr+="Default WaveformTable "+__default_tset__+";\n"
-    ostr+="Default SignalHeader SH"+str(sighdrNum)+";\n"
     ostr+=pinlistHdr+'\n'
     ostr+=vectData+'\n}'
     return ostr
 #End build_ostr()
 
-__pats_created__=[]
+_pats_created_=[]
 def createPatEvo(tp_path,patname,ostr):
-    global __pats_created__
+    global _pats_created_
     evo_path = tp_path+"EvosRaw"
     if not os.path.exists(evo_path):
         try:
             os.makedirs(evo_path)    
-        except:exit("Directory WRITE/CREATE Error !!!: "+evo_path+"\n"+__WR_ERROR__+"\nLine: "+str(lineno())+"\n\n")
+        except:exit("Directory WRITE/CREATE Error !!!: "+evo_path+"\n"+_WR_ERROR_+"\nLine: "+str(lineno())+"\n\n")
     try:
         pathfn = os.path.join(evo_path,patname+'.evo')
         patfile = open(pathfn, "w")
         patfile.write(ostr)
         patfile.close()
-    except:exit("Directory WRITE/CREATE Error !!!: "+patname+".evo\n"+__WR_ERROR__+"\nLine: "+str(lineno())+"\n\n")
-    __pats_created__.append(pathfn)
+    except:exit("Directory WRITE/CREATE Error !!!: "+patname+".evo\n"+_WR_ERROR_+"\nLine: "+str(lineno())+"\n\n")
+    _pats_created_.append(pathfn)
 #End createPatEvo()
 
 def processPat(pathfn):
-    global __vectHdrs__
+    global _vectHdrs_
     tp_path, fn = os.path.split(pathfn)
     patname = os.path.splitext(fn)[0]
     print "Processing",fn,"..."
@@ -331,21 +331,21 @@ def processPat(pathfn):
     except:
         exit("\n\n ERROR !!! VECTOR DATA NOT FOUND !!!\nLine: "+str(lineno())+"\n\n")
         fp.close()
-    for s in __delims__:
+    for s in _delims_:
         hdrcomm=hdrcomm.replace(s,' ')
     hdrcomm = hdrcomm.strip()
     if len(hdrcomm):
         hdrcomm = '/*'+hdrcomm+'*/\n\n'
     vectHdr = getVectHdr(rawvectHdr)
     vectData,sighdrNum = getVectData(patname,rawvectData,vectHdr)
-    pinlistHdr = buildPinlistHdr(__sighdr__[sighdrNum])
+    pinlistHdr = buildPinlistHdr(_sighdr_[sighdrNum])
     ostr = build_ostr(hdrcomm,patname,sighdrNum,pinlistHdr,vectData)
     createPatEvo(tp_path,patname,ostr)
 #End processPat()
 
 def createCycEvo():
     sigHdrStr = ""
-    cycStr =__EVHDR__
+    cycStr =_EVHDR_
     cycStr+="WaveformTable A580PatGrp A580PatGrp {\n"
     cycStr+="    Cell \"A580PatGrp.Pins\" S   ScanOut              { Data 6 Serial; Color 6;  }\n"
     cycStr+="    Cell \"A580PatGrp.Pins\" D   ScanIn               { Data 6 Serial; Color 6;  }\n"
@@ -365,42 +365,42 @@ def createCycEvo():
     cycStr+="\n"
     cycStr+="PatternGroup A580PatGrp {\n"
     cycStr+="    SignalHeader"
-    for i,sighdr in enumerate(__sighdrStrs__):
+    for i,sighdr in enumerate(_sighdrStrs_):
         cycStr+=" SH"+str(i)+""
         sigHdrStr+="SignalHeader SH"+str(i)+" {\n"
         sigHdrStr+="    Signals {\n"
-        sigHdrStr+="        "+__sighdrStrs__[i]+"\n"
+        sigHdrStr+="        "+_sighdrStrs_[i]+"\n"
         sigHdrStr+="    }\n"
         sigHdrStr+="}\n"
     cycStr+=";\n}\n\n"
     ostr = cycStr+sigHdrStr
     try:
-        cycfile = open(__cycleEvo__, "w")
+        cycfile = open(_cycleEvo_, "w")
         cycfile.write(ostr)
         cycfile.close()
-    except:exit("Directory WRITE/CREATE Error !!!: "+__cycleEvo__+"\n"+__WR_ERROR__+"\nLine: "+str(lineno())+"\n\n")
+    except:exit("Directory WRITE/CREATE Error !!!: "+_cycleEvo_+"\n"+_WR_ERROR_+"\nLine: "+str(lineno())+"\n\n")
 #End createCycEvo()
 
 #-----------------------------------------------------------------------
 #   main
 #-----------------------------------------------------------------------
 def main():
-    global __CREATION_MSG__
-#    __PATTERN__=args[0][0:len(args[0])-3]
+    global _CREATION_MSG_
+#    _PATTERN_=args[0][0:len(args[0])-3]
     
     # Get the arguments from the command line, except the first one.
     args = sys.argv[1:]
     if not (len(args)>1 and args[0][-3:]==".tl" and (args[1][-3:]==".tp" or args[1][-6:]==".tp.gz")):
-        err="\nusage: python "+__progfile__+" progfile.tl *.tp"
+        err="\nusage: python "+_progfile_+" progfile.tl *.tp"
         exit(err)
     try:
         infile = file(args[0], 'r')
         content = infile.read()
         infile.close()
     except:
-        exit("File READ Error !!!: "+args[0]+"\n"+__RD_ERROR__+"\nLine: "+str(lineno())+"\n\n")
+        exit("File READ Error !!!: "+args[0]+"\n"+_RD_ERROR_+"\nLine: "+str(lineno())+"\n\n")
     localtime = time.asctime(time.localtime(time.time()))
-    __CREATION_MSG__ = "\"Pattern generated by: "+__progfile__+" "+__version__+"\"\n\""+__author__+"\"\n\"PATTERN CREATION DATE: "+str(localtime)+"\"\n\n"
+    _CREATION_MSG_ = "\"Pattern generated by: "+_progfile_+" "+_version_+"\"\n\""+_author_+"\"\n\"PATTERN CREATION DATE: "+str(localtime)+"\"\n\n"
     
     getAllPinsAllGroups(content)
     
@@ -409,19 +409,19 @@ def main():
     
     createCycEvo()
 
-    print "\nSUCCESS !!! Files created:"+"\n\n"+__cycleEvo__+"\n\n"+'\n'.join(__pats_created__)+"\n\n"
+    print "\nSUCCESS !!! Files created:"+"\n\n"+_cycleEvo_+"\n\n"+'\n'.join(_pats_created_)+"\n\n"
     print "WARNING !!! \"EvosRaw\" need lots of hand edits due the following:"
     print "     - Micro-instructions were preserved between \'<\' and \'>\' but not converted."
     print "     - Subroutines may exist as vectors below <HALT> micro-instruction, but must be placed where CALL exits."
     print "     - Patterns over 4k vectors will need to be modified as Cpm calling Dpm. pushCPMintoDPM.py may be an option.\n\n"
     
-    print __progfile__+" "+__version__
-    print __author__
-    print __date__+"\n\n"
+    print _progfile_+" "+_version_
+    print _author_
+    print _date_+"\n\n"
 
 #End main()
 #-----------------------------------------------------------------------
 #     BEGIN MAIN
 #-----------------------------------------------------------------------
-if __name__ == '__main__':
+if _name_ == '_main_':
     main()
