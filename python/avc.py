@@ -16,8 +16,25 @@ def lineno():
 _RD_ERROR_ = "Make sure you have permissions to READ files in this directory."
 _WR_ERROR_ = "Make sure you have permissions to WRITE files in this directory."
 
+_pincombos_={}
+def getPinCombos(cyc_cnt):
+    global _pincombos_
+    #undeveloped... need to collect and populate _pincombos_
+    if int(cyc_cnt)%2==0:
+        assert True
+    if int(cyc_cnt)%3==0:
+        assert True
+    if int(cyc_cnt)%4==0:
+        assert True
+    if int(cyc_cnt)%6==0:
+        assert True
+    if int(cyc_cnt)%8==0:
+        assert True
+    return
+#End getPinCombos()
+
+
 _pats_created_=[]
-_pincombos_=[]
 fmtPtrn = re.compile(r'\bFORMAT\b\s+(?P<pins>.*?)\s*;',re.DOTALL)
 vecPtrn = re.compile(r'^\s*R(?P<rpt>\d+?)\s*(?P<wvt>\w+?)\s+(?P<vec>\w+?)\s+(?:%.*?)?\s*;\s*$')
 def main(inpathfn):
@@ -34,7 +51,6 @@ def main(inpathfn):
         ofile = open(pathfn, "w")
     except:exit("Directory WRITE/CREATE Error !!!: "+patname+".evo\n"+_WR_ERROR_+"\nLine: "+str(lineno())+"\n\n")
     _pats_created_.append(pathfn)
-    prev_vec=''
     content=open(inpathfn).read()
     fmtObj=fmtPtrn.search(content)
     if not fmtObj:
@@ -42,25 +58,46 @@ def main(inpathfn):
     for pin in fmtObj.group('pins').split():
         if pin not in _pincombos_:
             _pincombos_[pin]=''
-    cyc_cnt=0
-    vec_cnt=0
+    prev_wvt,prev_vec,prev_comm='','',''
+    prev_rpt,cyc_cnt,vec_cnt=0,1,0
     for line in content.split('\n'):
+        line=line.strip()
         vecObj=vecPtrn.search(line)
         if not vecObj:
-            ofile.write(line+'\n')
+            if prev_rpt>0 and not len(line):
+                new_vec='R'+str(prev_rpt).ljust(4)
+                if len(new_vec)>5:new_vec+='\n     '
+                new_vec+=" std "+prev_vec
+                if prev_rpt==1:
+                    new_vec+=' %'+str(cyc_cnt)+';\n'
+                else:
+                    new_vec+=' %'+str(cyc_cnt)+'-'+str(cyc_cnt+prev_rpt-1)+';\n'
+                ofile.write(new_vec)
+            else:
+                ofile.write(line+'\n')
         else:
-            vec_vnt+=1
-            rpt = vecObj.group('rpt')
+            vec_cnt+=1
+            rpt = int(vecObj.group('rpt'))
             wvt = vecObj.group('wvt')
             vec = vecObj.group('vec')
             if len(vec) != len(_pincombos_):
                 sys.exit("\n\nERROR !!! Length of vector does not match length of format: "+fn+" Exiting ...\n\n")
-            if rpt>1:
-                
-            
-            
-            
-            cyc_cnt+=rpt
+            if prev_wvt==wvt and prev_vec==vec:
+                prev_rpt=prev_rpt+rpt
+                continue
+            if prev_rpt>0:
+                new_vec='R'+str(prev_rpt).ljust(4)
+                if len(new_vec)>5:new_vec+='\n     '
+                new_vec+=" std "+prev_vec
+                if prev_rpt==1:
+                    new_vec+=' %'+str(cyc_cnt)+';\n'
+                else:
+                    new_vec+=' %'+str(cyc_cnt)+'-'+str(cyc_cnt+prev_rpt-1)+';\n'
+                ofile.write(new_vec)
+            cyc_cnt+=prev_rpt
+            getPinCombos(cyc_cnt)
+            prev_rpt=rpt
+            prev_wvt=wvt
             prev_vec=vec
     ofile.close()
     return
