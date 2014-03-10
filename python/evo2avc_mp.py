@@ -193,7 +193,7 @@ def getPins(sighdr_content):
     return
 #End getPins()
 
-vectPat = re.compile(r'^\s*\*\s*(?P<vector>.*?)\s*\*\s*(?P<sh>\w+?)?\s*(?P<wft>\w+?)?\s*;\s*(?P<uInst>\<.*?\>)?')
+vectPat = re.compile(r'^\s*\*\s*(?P<vector>.*?)\s*\*\s*(?P<sh>\w+?)?\s*(?P<wft>\w+?)?\s*;\s*(?:"(?:.*?)")?\s*(?P<uInst>\<.*?\>)?')
 repPat = re.compile(r'\<\s*RPT\s+(?P<count>\d+)\s*\>')
 def main(fileN,port,sighdr,inds=None):
     global _v_cnt_,_c_cnt_,_chars_used_,_files_converted_

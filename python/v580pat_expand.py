@@ -6,10 +6,13 @@ import os
 from pprint import pprint
 import inspect
 
+_debug_ = True
+
 _muxchar_ = '-'
 _maskchar_ = 'X'
 _maskpins_ = ['REFCLK','DIN_RXN','DIN_RXP','DOUT_TXN','DOUT_TXP','TC1','TC0','RC0','RC1']
-_expand_rpts_ = True
+_expand_rpts_ = False
+_outdir_ = "EvosRaw_notexpanded"
 
 _muxpins_ = {\
     'TD0':'MTD0',\
@@ -77,8 +80,6 @@ _muxkey_ = {\
     'HX':'H-XX',\
     '--':'----'}
 
-_outdir_ = "EvosRaw_expanded"
-
 def lineno():
     """Returns the current line number in our program."""
     return inspect.currentframe().f_back.f_lineno
@@ -97,6 +98,7 @@ def parsevect(sh,data,tset,instr,comm):
     #mask designated masked pins
     data = ''.join([c if _sighdrs_[sh][i] not in _maskpins_ else _maskchar_ for i,c in enumerate(data)])
     data4x = [data for i in range(4)]
+    if _debug_:pprint(data)
     for pin in _muxpins_:
         i1=_sighdrs_[sh].index(pin)
         i2=_sighdrs_[sh].index(_muxpins_[pin])
@@ -108,6 +110,7 @@ def parsevect(sh,data,tset,instr,comm):
             if i<3:
                 thisdata=re.sub(r'[01]','X',thisdata)
             data4x[i]=str(thisdata)
+    if _debug_:pprint(data4x)
     _4lines=''
     for i in range(4):
         _4lines+='* '+data4x[i]+' * '+tset+'; '+instr+'\"'+str(i+1)+' of 4\"'+comm+'\n'
