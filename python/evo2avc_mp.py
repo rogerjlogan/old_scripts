@@ -1,3 +1,5 @@
+#!/usr/local/bin/python2.6-2.6.4
+
 import time
 localtime = time.asctime(time.localtime(time.time()))
 start_time = time.time()
@@ -243,7 +245,7 @@ def main(fileN,port,sighdr,inds=None):
                     repeat=int(repObj.group('count'))
                     uInst = ''
                 else:
-                    sys.exit("ERROR !!! Unknow micro-instruction. Only RPT is translated at this time. Exiting ...")
+                    sys.exit("ERROR !!! Unknown micro-instruction. Only RPT is translated at this time. Exiting ...")
             previous_cycle=_c_cnt_
             _c_cnt_+=repeat
             orig_vect = vecObj.group('vector')
@@ -285,9 +287,9 @@ if __name__ == "__main__":
     getfileHdr()
     if len(sys.argv) <3:
         if len(sys.argv) <2 or sys.argv[1] != '-h':
-            print "\nUsage: python "+sys.argv[0]+" sighdrs_ports.txt *evo[.gz]"
-            print "       python "+sys.argv[0]+" -m sighdrs_ports.txt *evo[.gz]"
-            print "       python "+sys.argv[0]+" -h\n"
+            print "\nUsage: [python] "+sys.argv[0]+" sighdrs_ports.txt *evo[.gz]"
+            print   "       [python] "+sys.argv[0]+" -m sighdrs_ports.txt *evo[.gz]"
+            print   "       [python] "+sys.argv[0]+" -h\n"
         else:
             if sys.argv[1] == '-h':
                 print _file_header_+_requirements_
