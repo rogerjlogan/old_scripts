@@ -3,32 +3,9 @@
 import time
 localtime = time.asctime(time.localtime(time.time()))
 start_time = time.time()
-
-_file_header_=''
-_absmaxlen_=0
-_fuschars_=''
-_93k_chars_=''
-_xp_msg_=''
-_mp_msg_=''
-_noports_msg_=''
-_nocharmap_msg_=''
-_chars_used_={}
 _logfile_="log.txt"
-_files_converted_ = {}
-
-import re
-import gzip
-import string
-import sys
-from string import maketrans
-from string import whitespace as ws
-
-__RD_ERROR__ = "Make sure you have permissions to READ files in this directory."
-__WR_ERROR__ = "Make sure you have permissions to WRITE files in this directory."
-
-def getfileHdr():
-    global _file_header_,_requirements_
-    _file_header_=\
+_padchar_ = '-'
+_file_header_=\
     """
     #   Script File Name: evo2avc.py
     #   Author: Roger Logan
@@ -40,26 +17,29 @@ def getfileHdr():
     #                Currently only supports DPM pattterns...
     #                (or CPM's with just RPT micro-instructions ONLY)
     #   Output: *.avc, """+_logfile_
-    _requirements_ = \
-    """
-    #   Required file:sighdrs_ports.txt
-    #   These are settings in sighdrs_ports.txt:
-    #       1) AVC_SIG_HDR - required
-    #           - This must be a superset of all pins used in every signal header
-    #       3) CHAR_MAP - optional
-    #           - Use this to replace characters in target avc
-    #           - If omitted no conversion will take place .. only reformatted
-    #           - The example below will switch 'L'to'0','H'to'1','0'to'L', and '1'to'H'
-    #       Example Syntax: 
-    #           AVC_SIG_HDR:RST_N TEST SSPO TDO;
-    #           CHAR_MAP:(L0),(H1),(0L),(1H);
-    #       Note:
-    #           - AVC_SIG_HDR and CHAR_MAP must have ':' and ';' delimiters
-    #           - If a pin is in AVC_SIG_HDR but not in SignalHeader for that pattern, then is will be PADDED with '-' (do nothing).
-    #           - Padded pins will be marked with '*' at top of column in avc
-    #           - You can comment out options with '#' at beginning of line
-    """
-    return
+
+__RD_ERROR__ = "Make sure you have permissions to READ files in this directory."
+__WR_ERROR__ = "Make sure you have permissions to WRITE files in this directory."
+
+_debug_ = False
+
+_absmaxlen_=0
+_fuschars_=''
+_93k_chars_=''
+_xp_msg_=''
+_mp_msg_=''
+_noports_msg_=''
+_nocharmap_msg_=''
+_chars_used_={}
+_files_converted_ = {}
+
+import re
+import gzip
+import string
+import sys
+from string import maketrans
+from string import whitespace as ws
+
 def translate(vectorStr):
     """
     requirement:from string import maketrans
@@ -70,7 +50,7 @@ def translate(vectorStr):
     trantab = maketrans(intab,outtab)
     vectorStr = vectorStr.translate(trantab,ws);#translate characters and remove ws
     return vectorStr
-def getheader(pinlist,ignore_pins):
+def mkPinHdr(pinlist,ignore_pins):
     global _absmaxlen_
     hdr_offset = "#         "
     padpinstr = hdr_offset
@@ -114,32 +94,36 @@ def getPins(sighdr_content):
         sys.exit("ERROR !!! AVC_SIG_HDR not found! Make sure to delimit pins with ';' Exiting ...")
     _evo_sh_ = evoObj.group('evo_sh').split()
     _avc_sh_ = avcObj.group('avc_sh').split()
-    _extra_pins_ = list(set(_evo_sh_)-set(_avc_sh_))#in pattern to be converted but not in desired avc signal header
-    _missing_pins_ = list(set(_avc_sh_)-set(_evo_sh_))#in desired avc signal header but not in pattern to be converted
-    if len(_extra_pins_):
-        _xp_msg_ = "\n# WARNING ! Found Extra pins   (unwanted data in patterns ???)\n# Ignoring these pins from EVO_SIG_HDR and their data\n#\t"+' '.join(_extra_pins_)+'\n'
-        print _xp_msg_
-    if len(_missing_pins_):
-        _mp_msg_ = "\n# WARNING ! Found Missing pins (no data is availabe for these pins in patterns)\n# Padding these pins with 'X' to match AVC_SIG_HDR"
-        _mp_msg_ += "\n# These will be denoted with '*' at top of column\n#\t"+' '.join(_missing_pins_)+'\n\n'
-        print _mp_msg_
-    _out_sh_ = [x for x in _avc_sh_ if x not in _extra_pins_]# new sigheader preserving order (padding missing pins and deleting extra pins))
-    _chars_used_ = dict.fromkeys(_out_sh_, '')
-    #prtObj is list of tuple pairs but each pair is backwards and each element of those tuples could contain ws
-    #so we are...
-    #      (1) reversing pair
-    #      (2) splitting the now 2nd element on comma and stripping each of those pins of ws
-    #      (3) repacking pins into comma separated string
-    #      (4) return a dictionary
-#        _ports_ = dict([[port.strip(),','.join([p.strip() for p in pinlist.split(',')])] for pinlist,port in prtObj])
-        _ports_['_allpins_'] = ','.join(_out_sh_)
-    if not chrObj:
-        _nocharmap_msg_="\n# Warning !!! No CHAR_MAP found.  Characters will not be changed!\n\n"
-        print _nocharmap_msg_
-    else:
-        for pair in chrObj.group('char_map').split(','):
-            _fuschars_ += pair[1]
-            _93k_chars_ += pair[2]
+
+
+
+#
+#    _extra_pins_ = list(set(_evo_sh_)-set(_avc_sh_))#in pattern to be converted but not in desired avc signal header
+#    _missing_pins_ = list(set(_avc_sh_)-set(_evo_sh_))#in desired avc signal header but not in pattern to be converted
+#    if len(_extra_pins_):
+#        _xp_msg_ = "\n# WARNING ! Found Extra pins   (unwanted data in patterns ???)\n# Ignoring these pins from EVO_SIG_HDR and their data\n#\t"+' '.join(_extra_pins_)+'\n'
+#        print _xp_msg_
+#    if len(_missing_pins_):
+#        _mp_msg_ = "\n# WARNING ! Found Missing pins (no data is availabe for these pins in patterns)\n# Padding these pins with '"+_padchar_+"' to match AVC_SIG_HDR"
+#        _mp_msg_ += "\n# These will be denoted with '*' at top of column\n#\t"+' '.join(_missing_pins_)+'\n\n'
+#        print _mp_msg_
+#    _out_sh_ = [x for x in _avc_sh_ if x not in _extra_pins_]# new sigheader preserving order (padding missing pins and deleting extra pins))
+#    _chars_used_ = dict.fromkeys(_out_sh_, '')
+#    #prtObj is list of tuple pairs but each pair is backwards and each element of those tuples could contain ws
+#    #so we are...
+#    #      (1) reversing pair
+#    #      (2) splitting the now 2nd element on comma and stripping each of those pins of ws
+#    #      (3) repacking pins into comma separated string
+#    #      (4) return a dictionary
+##        _ports_ = dict([[port.strip(),','.join([p.strip() for p in pinlist.split(',')])] for pinlist,port in prtObj])
+#        _ports_['_allpins_'] = ','.join(_out_sh_)
+#    if not chrObj:
+#        _nocharmap_msg_="\n# Warning !!! No CHAR_MAP found.  Characters will not be changed!\n\n"
+#        print _nocharmap_msg_
+#    else:
+#        for pair in chrObj.group('char_map').split(','):
+#            _fuschars_ += pair[1]
+#            _93k_chars_ += pair[2]
     return
 vectPat = re.compile(r'^\s*\*\s*(?P<vector>.*?)\s*\*\s*(?P<sh>\w+?)?\s*(?P<wft>\w+?)?\s*;\s*(?:"(?:.*?)")?\s*(?P<uInst>\<.*?\>)?')
 repPat = re.compile(r'\<\s*RPT\s+(?P<count>\d+)\s*\>')
@@ -157,7 +141,7 @@ def main(fileN,port,sighdr,inds=None):
     if len(_xp_msg_):outFile.write(_xp_msg_)
     if len(_mp_msg_):outFile.write(_mp_msg_)
     if len(_nocharmap_msg_):outFile.write(_nocharmap_msg_)
-    outFile.write(getheader(sighdr,_extra_pins_))
+    outFile.write(mkPinHdr(sighdr,_extra_pins_))
     _v_cnt_=0
     _c_cnt_=0
     for line in myOpen(fileN):
@@ -216,65 +200,92 @@ def main(fileN,port,sighdr,inds=None):
     return
 
 if __name__ == "__main__":
-    getfileHdr()
-    if len(sys.argv) <3:
-        if len(sys.argv) <2 or sys.argv[1] != '-h':
-            print "\nUsage: [python] "+sys.argv[0]+" sighdrs_ports.txt *evo[.gz]"
-            print   "       [python] "+sys.argv[0]+" -m sighdrs_ports.txt *evo[.gz]"
-            print   "       [python] "+sys.argv[0]+" -h\n"
-        else:
-            if sys.argv[1] == '-h':
-                print _file_header_+_requirements_
-        sys.exit()
-    else:
-        print _file_header_
-    if sys.argv[1] == '-m':
-        _multiport_=True
-        arg1 = sys.argv[2]
-        args2plus = sys.argv[3:]
-        n=3
-    else:
-        _multiport_=False
-        arg1 = sys.argv[1]
-        args2plus = sys.argv[2:]
-        n=2
-    try:
-        infile = file(arg1, 'r')
-        sighdr_content = infile.read()
-    except IOError:
-       print "\nFile READ Error !!!: "+arg1+"\n"+__RD_ERROR__+"\n"
-    finally:
-        infile.close()
-    getPins(sighdr_content)
-    inds=[]
-    for ii,x in enumerate(args2plus):
-        try:
-            inds.append(int(x))
-        except ValueError:
-            break
-    
-    for fileN in sys.argv[ii+n:]:
-        print "Processing "+ fileN
-        for port,sighdr in _ports_.items():
-            main(fileN,port,sighdr.split(','),inds)
-        print '\tSuccess ! vectors='+str(_v_cnt_)+' cycles='+str(_c_cnt_)+'\n'
-    try:
-        print "\nCreating",_logfile_
-        logFile=open(_logfile_,'w')
-        if len(_nocharmap_msg_):
-            logFile.write(_nocharmap_msg_)
-        else:
-            logFile.write("\nCharacters that were converted (fusion:93k)\n")
-        for i,f in enumerate(_fuschars_):
-            logFile.write('\t'+f+':'+_93k_chars_[i]+'\n')
-        logFile.write("\nComplete list of characters used in all avc files generated\n")
-        for pin in _chars_used_:
-            logFile.write(pin.ljust(_absmaxlen_+2)+': '+_chars_used_[pin]+'\n')
-        logFile.write("\nList of patterns converted\n\n")
-        for f in _files_converted_:
-            logFile.write(f+' => '+_files_converted_[f]+'\n')
-    except IOError:
-        print "\nFile WRITE Error !!!: "+_logfile_+"\n"+__WR_ERROR__+"\n"
-    finally:
-        logFile.close()
+    print _file_header_
+    main(sys.argv[1:])
     print "\nScript took",time.time() - start_time, "seconds"
+
+#--------------------------------------------------------------------------------------------------------
+# EOF
+#--------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#    if len(sys.argv) <3:
+#        if len(sys.argv) <2 or sys.argv[1] != '-h':
+#            print "\nUsage: [python] "+sys.argv[0]+" sighdrs_ports.txt *evo[.gz]"
+#            print   "       [python] "+sys.argv[0]+" -m sighdrs_ports.txt *evo[.gz]"
+#            print   "       [python] "+sys.argv[0]+" -h\n"
+#        else:
+#            if sys.argv[1] == '-h':
+#                print _file_header_+_requirements_
+#        sys.exit()
+#    else:
+#        print _file_header_
+#    if sys.argv[1] == '-m':
+#        _multiport_=True
+#        arg1 = sys.argv[2]
+#        args2plus = sys.argv[3:]
+#        n=3
+#    else:
+#        _multiport_=False
+#        arg1 = sys.argv[1]
+#        args2plus = sys.argv[2:]
+#        n=2
+#    try:
+#        infile = file(arg1, 'r')
+#        sighdr_content = infile.read()
+#    except IOError:
+#       print "\nFile READ Error !!!: "+arg1+"\n"+__RD_ERROR__+"\n"
+#    finally:
+#        infile.close()
+#    getPins(sighdr_content)
+#    inds=[]
+#    for ii,x in enumerate(args2plus):
+#        try:
+#            inds.append(int(x))
+#        except ValueError:
+#            break
+#    
+#    for fileN in sys.argv[ii+n:]:
+#        print "Processing "+ fileN
+#        for port,sighdr in _ports_.items():
+#            main(fileN,port,sighdr.split(','),inds)
+#        print '\tSuccess ! vectors='+str(_v_cnt_)+' cycles='+str(_c_cnt_)+'\n'
+#    try:
+#        print "\nCreating",_logfile_
+#        logFile=open(_logfile_,'w')
+#        if len(_nocharmap_msg_):
+#            logFile.write(_nocharmap_msg_)
+#        else:
+#            logFile.write("\nCharacters that were converted (fusion:93k)\n")
+#        for i,f in enumerate(_fuschars_):
+#            logFile.write('\t'+f+':'+_93k_chars_[i]+'\n')
+#        logFile.write("\nComplete list of characters used in all avc files generated\n")
+#        for pin in _chars_used_:
+#            logFile.write(pin.ljust(_absmaxlen_+2)+': '+_chars_used_[pin]+'\n')
+#        logFile.write("\nList of patterns converted\n\n")
+#        for f in _files_converted_:
+#            logFile.write(f+' => '+_files_converted_[f]+'\n')
+#    except IOError:
+#        print "\nFile WRITE Error !!!: "+_logfile_+"\n"+__WR_ERROR__+"\n"
+#    finally:
+#        logFile.close()
+#    print "\nScript took",time.time() - start_time, "seconds"
